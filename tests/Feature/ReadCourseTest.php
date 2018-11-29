@@ -15,7 +15,7 @@ class ReadCourseTest extends TestCase
     {
         parent::setUp();
 
-        $this->course = factory('App\Course')->create();
+        $this->course = create('App\Course');
     }
     
     /** @test */
@@ -36,7 +36,7 @@ class ReadCourseTest extends TestCase
     /** @test */
     public function a_user_can_view_children_courses_assign_to_track()
     {
-        $courseChildren = factory('App\Course')->create();
+        $courseChildren = create('App\Course');
         $relationship = factory('App\Course_Track')->create(['course_id' => $courseChildren->id, 'track_id' => $this->course->id]);
 
         $response = $this->assertCount(1, $this->course->childrenCourses);
