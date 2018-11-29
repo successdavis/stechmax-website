@@ -1,0 +1,23 @@
+html,
+body {
+  height: 100vh;
+}
+
+#app,
+.off-canvas-wrapper {
+  height: 100%;
+}
+
+.profile-card-avater {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid white;
+}
+
+
+.menu a.no-padding {
+  padding-top: 0;
+  padding-bottom: 0;
+}

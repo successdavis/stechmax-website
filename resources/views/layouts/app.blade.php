@@ -10,70 +10,103 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/foundation.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/master.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
+<body>
+
+<div id="app">
+    <div class="off-canvas-wrapper">
+        <div class="off-canvas position-left" id="offCanvasLeftOverlap" data-off-canvas data-transition="overlap">
+            <button class="close-button" aria-label="Close menu" type="button" data-close>
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+
+          <!-- Your menu or Off-canvas content goes here -->
+        </div>
+        <div class="off-canvas-content" data-off-canvas-content>
+              
+            <div class="title-bar" data-responsive-toggle="responsive-menu" data-hide-for="medium">
+              {{-- <button class="menu-icon" type="button" data-toggle="responsive-menu"></button> --}}
+              <button type="button" class="menu-icon" data-toggle="offCanvasLeftOverlap"></button>
+              <div class="title-bar-title">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'STECHMAX') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+              </div>
             </div>
-        </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+            <div class="top-bar" id="responsive-menu">
+              <div class="top-bar-left">
+                <ul class="dropdown menu" data-dropdown-menu>
+                  <li>
+                    <a class="menu-text" href="{{ url('/') }}">
+                      {{ config('app.name', 'STECHMAX') }}
+                    </a>
+                  </li>
+                  <li><a href="{{ url('/courses') }}">COURSES</a></li>
+                  <li><a href="{{ url('/threads') }}">FORUM</a></li>
+                </ul>
+              </div>
+              <div class="top-bar-right">
+                <ul class="menu">
+                @guest
+                  <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                  <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                </ul>
+                @else
+                <li><a class="no-padding">
+                    <div class="profile-card-avater">
+                        <img src="{{asset('storage/avaters/default_avater.png')}}" class="avater-image"  data-toggle="user_profile-menu">
+                    </div>
+                    <div class="dropdown-pane" id="user_profile-menu" data-position="bottom" data-alignment="right" data-dropdown>
+                        <ul>
+                            <li><a href="#">{{ Auth::user()->name }}</a></li>
+                            <li><a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a></li>
+                        </ul>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </a></li>
+                @endguest
+              </div>
+            </div>
+            
+            <main class="py-4">
+                @yield('content')
+            </main>
+
+        </div> {{-- closing off canvas content --}}
+    </div> {{-- closing wrapper div --}}
+
+</div>
+
+</body>
+
+<!-- Scripts -->
+<script src="/js/vendor/jquery.js"></script>
+<script src="/js/vendor/what-input.js"></script>
+<script src="/js/vendor/foundation.js"></script>
+<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ asset('js/laravel.js') }}" defer></script>
+{{-- <script src="/js/app.js"></script> --}}
+<script src="/js/ajax.js"></script>
+<script src="/js/application.js"></script>
+
+<script type="text/javascript">
+    $(document).foundation();20
+</script>
 </body>
 </html>
