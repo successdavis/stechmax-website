@@ -22,8 +22,23 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
+
+
+$factory->define(App\Subject::class, function (Faker $faker) {
+    $name = $faker->word;
+    return [
+        'name' => $name,
+        'slug'  => $name
+    ];
+});
+
+
+
 $factory->define(App\Course::class, function (Faker $faker) {
     return [
+        'subject_id' => function() {
+            return factory('App\Subject')->create()->id;
+        },
         'title' => $faker->sentence,
         'img' => 'course/zT0t57KV33SwqOF9FB0eKZklb1FLmBntv0mIgJ8C.jpeg',
         'duration' => '3',
@@ -45,13 +60,11 @@ $factory->define(App\Course_Track::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(App\Thread::class, function (Faker $faker) {
+$factory->define(App\Channel::class, function (Faker $faker) {
+    $name = $faker->word;
     return [
-        'user_id' => function() {
-            return factory('App\User')->create()->id;
-        },
-        'title' => $faker->sentence,
-        'body'  => $faker->paragraph
+        'name' => $name,
+        'slug'  => $name
     ];
 });
 
@@ -59,6 +72,9 @@ $factory->define(App\Thread::class, function (Faker $faker) {
     return [
         'user_id' => function() {
             return factory('App\User')->create()->id;
+        },
+        'channel_id' => function() {
+            return factory('App\Channel')->create();
         },
         'title' => $faker->sentence,
         'body'  => $faker->paragraph

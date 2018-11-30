@@ -3,23 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Thread;
+use App\Channel;
 use Illuminate\Http\Request;
 
 class ThreadController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only('store');
+        $this->middleware('auth')->except(['index','show']);
         
     }
 
-    public function index()
+    public function index(Channel $channel)
     {
-        $threads = Thread::latest()->get();
+        if ($channel->exists) {
+            $threads = $channel->threads()->latest()->get();
+        }else {
+            $threads = Thread::latest()->get();
+        }
+
         return view('forum.index', compact('threads'));
     }
 
-    public function show(Thread $thread)
+    public function show($channelId, Thread $thread)
     {
         return view('forum.show', compact('thread'));
     }
@@ -27,9 +33,16 @@ class ThreadController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required',
+            'channel_id' => 'required|exists:channels,id'
+        ]); 
+        
         $thread = Thread::create([
             'user_id' => auth()->id(),
             'title' => request('title'),
+            'channel_id' => request('channel_id'),
             'body' => request('body')
         ]);
 

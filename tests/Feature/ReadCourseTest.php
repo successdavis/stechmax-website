@@ -43,4 +43,16 @@ class ReadCourseTest extends TestCase
         $this->get($this->course->path())
             ->assertSee($courseChildren->title); 
     }
+
+    /** @test */
+    public function a_user_can_browse_courses_by_subjects()
+    {
+        $subject = create('App\Subject');
+        $courseInSubject = create('App\Course', ['subject_id' => $subject->id]);
+        $courseNotInSubject = create('App\Course');
+
+        $this->get('/courses/' . $subject->slug)
+            ->assertSee($courseInSubject->title)
+            ->assertDontSee($courseNotInSubject->title);
+    }
 }

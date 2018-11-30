@@ -27,7 +27,7 @@
             </div>
             @endforeach
             @if (auth()->check())
-                <form method="post" action="/threads/{{$thread->id}}/replies">
+                <form method="post" action="/threads/channel/{{$thread->id}}/replies">
                     @csrf
                     <label>
                         <textarea placeholder="Have something to say" name="body" rows="5"></textarea>

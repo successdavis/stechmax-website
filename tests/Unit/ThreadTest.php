@@ -1,46 +1,60 @@
 <?php
 
-namespace Tests;
-use App\Exceptions\Handler;
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+namespace Tests\Unit;
 
-abstract class ThreadTest extends BaseTestCase
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
+class ThreadTest extends TestCase
 {
-    use CreatesApplication;
-
-    protected function setUp()
+    use DatabaseMigrations;
+    public function setUp()
     {
         parent::setUp();
-        $this->disableExceptionHandling();
-    }
 
-    protected function disableExceptionHandling()
+        $this->thread = create('App\Thread');
+    }
+    /** @test */
+    public function a_thread_has_replies()
     {
-        $this->oldExceptionHandler = $this->app->make(ExceptionHandler::class);
+        $thread = create('App\Thread');
 
-        $this->app->instance(ExceptionHandler::class, new class extends Handler {
-            public function __construct() {}
-            public function report(\Exception $e) {}
-            public function render($request, \Exception $e) {
-                throw $e;
-            }
-        });
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $thread->replies);   
     }
 
-    protected function withExceptionHandling()
+    /** @test */
+    public function a_thread_has_a_creator()
     {
-        $this->app->instance(ExceptionHandler::class, $this->oldExceptionHandler);
+        $thread = create('App\Thread');
 
-        return $this;
+        $this->assertInstanceOf('App\User', $thread->creator);
     }
 
-    protected function signIn($user = null)
+    /** @test */
+    public function a_thread_can_add_a_reply()
     {
-        $user = $user ?: create('App\User');
-        $this->actingAs($user);
+        $this->thread->addReply([
+            'body' => 'Foobar',
+            'user_id' => 1
+        ]);
 
-        return $this;
+        $this->assertCount(1, $this->thread->replies);
     }
 
+     /** @test */
+    public function it_belongs_to_a_channel()
+    {
+        $thread = create('App\Thread');
+
+        $this->assertInstanceOf('App\Channel', $thread->channel);        
+    }
+
+    /** @test */
+    public function it__can_generate_a_string_path()
+    {
+        $thread = create('App\Thread');
+        $this->assertEquals("/threads/{$thread->channel->slug}/{$thread->id}", $thread->path());
+    }
 }

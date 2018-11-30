@@ -7,15 +7,17 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class ReplyTest extends TestCase
+class ChannelTest extends TestCase
 {
     use DatabaseMigrations;
     
     /** @test */
-    public function it_has_an_owner()
+    public function it_consist_of_threads()
     {
-        $reply = create('App\Reply');
+        $channel = create('App\Channel');
+        $thread = create('App\Thread', ['channel_id' => $channel->id]);
 
-        $this->assertInstanceOf('App\User', $reply->owner);
+        $this->assertTrue($channel->threads->contains($thread));
+
     }
 }

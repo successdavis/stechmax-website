@@ -7,15 +7,16 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class ReplyTest extends TestCase
+class SubjectTest extends TestCase
 {
     use DatabaseMigrations;
-    
-    /** @test */
-    public function it_has_an_owner()
-    {
-        $reply = create('App\Reply');
 
-        $this->assertInstanceOf('App\User', $reply->owner);
+    /** @test */
+    public function it_consist_of_courses()
+    {
+        $subject = create('App\Subject');
+        $course = create('App\Course', ['subject_id' => $subject->id]);
+
+        $this->assertTrue($subject->courses->contains($course));
     }
 }

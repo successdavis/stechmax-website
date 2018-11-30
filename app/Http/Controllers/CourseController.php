@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Subject;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -12,9 +13,13 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Subject $subject)
     {
-        $courses = Course::latest()->get();
+        if ($subject->exists) {
+            $courses = $subject->courses()->latest()->get();
+        }else{
+            $courses = Course::latest()->get();
+        }
         return view('courses.index', compact('courses'));
     }
 
@@ -45,7 +50,7 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function show(Course $course)
+    public function show($subjectId, Course $course)
     {
         return view('courses.show', compact('course'));
     }
