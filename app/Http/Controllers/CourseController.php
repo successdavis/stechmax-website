@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Subject;
 use Illuminate\Http\Request;
+use App\Filters\CourseFilters;
 
 class CourseController extends Controller
 {
@@ -13,13 +14,14 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Subject $subject)
+    public function index(Subject $subject, CourseFilters $filters)
     {
-        if ($subject->exists) {
-            $courses = $subject->courses()->latest()->get();
-        }else{
-            $courses = Course::latest()->get();
+        $courses = $this->getCourses($subject, $filters);
+
+        if (request()->wantsJson()) {
+            return $courses;
         }
+
         return view('courses.index', compact('courses'));
     }
 
@@ -87,5 +89,16 @@ class CourseController extends Controller
     public function destroy(Course $course)
     {
         //
+    }
+
+    public function getCourses($subject, $filters)
+    {
+        $courses = Course::latest()->filter($filters);
+
+        if ($subject->exists) {
+            $courses->where('subject_id', $subject->id);
+        }
+
+        return $courses = $courses->get();
     }
 }

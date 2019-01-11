@@ -6,7 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
+    use RecordsActivity;
+
     protected $fillable = ['user_id', 'title', 'body','channel_id'];
+
+    protected $with = ['creator','channel'];
+
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('replyCount', function($builder) {
+            $builder->withCount('replies');
+        });
+
+        static::deleting(function ($thread) {
+            $thread->replies->each->delete();
+        });
+    }
 
     public function path()
     {
@@ -31,5 +49,10 @@ class Thread extends Model
     public function channel()
     {
         return $this->belongsTo(Channel::class);
+    }
+
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
     }
 }

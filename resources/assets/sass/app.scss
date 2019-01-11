@@ -3,10 +3,15 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
+@import 'base';
 @import 'variables';
+@import 'mixins';
+@import 'spacing';
+@import 'position';
+@import 'components';
+@import 'course';
+@import 'course_details';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
 
 .navbar-laravel {
   background-color: #fff;

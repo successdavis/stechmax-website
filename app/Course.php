@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+
     public function path()
     {
         return '/courses/' . $this->subject->slug . '/' . $this->id;
@@ -23,6 +24,26 @@ class Course extends Model
 
     public function subject()
     {
-       return $this->belongsTo(Subject::class);
+       return $this->belongsTo(Subject::class); // This is the category in which each course falls
+    }
+
+    public function learns()
+    {
+        return $this->hasMany('App\Learn');
+    }
+
+    public function requirements()
+    {
+        return $this->hasMany('App\Requirement');
+    }
+
+    public function sections()
+    {
+        return $this->hasMany('App\Section');
+    }
+
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
     }
 }

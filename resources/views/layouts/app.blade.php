@@ -14,9 +14,17 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
     <!-- Styles -->
     <link href="{{ asset('css/foundation.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/master.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Foundation Icons -->
+    <link rel="stylesheet" href="/css/foundation-icons.css">
+    <link rel="stylesheet" href="/foundation-icons/foundation-icons.css">
+    
 </head>
 <body>
 <body>
@@ -31,6 +39,7 @@
 
           <!-- Your menu or Off-canvas content goes here -->
         </div>
+
         <div class="off-canvas-content" data-off-canvas-content>
               
             <div class="title-bar" data-responsive-toggle="responsive-menu" data-hide-for="medium">
@@ -43,7 +52,7 @@
               </div>
             </div>
 
-            <div class="top-bar" id="responsive-menu">
+            <div class="top-bar mb-3" id="responsive-menu">
               <div class="top-bar-left">
                 <ul class="dropdown menu" data-dropdown-menu>
                   <li>
@@ -68,7 +77,7 @@
                     </div>
                     <div class="dropdown-pane" id="user_profile-menu" data-position="bottom" data-alignment="right" data-dropdown>
                         <ul>
-                            <li><a href="#">{{ Auth::user()->name }}</a></li>
+                            <li><a href="/profiles/{{Auth::user()->name}}">{{ Auth::user()->name }}</a></li>
                             <li><a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
@@ -84,8 +93,10 @@
               </div>
             </div>
             
-            <main class="py-4">
+            <main class="py-4 margin-top-large">
                 @yield('content')
+
+                <flash message="{{session('flash')}}"></flash>
             </main>
 
         </div> {{-- closing off canvas content --}}
@@ -99,14 +110,10 @@
 <script src="/js/vendor/jquery.js"></script>
 <script src="/js/vendor/what-input.js"></script>
 <script src="/js/vendor/foundation.js"></script>
-<script src="{{ asset('js/app.js') }}" defer></script>
-<script src="{{ asset('js/laravel.js') }}" defer></script>
-{{-- <script src="/js/app.js"></script> --}}
-<script src="/js/ajax.js"></script>
-<script src="/js/application.js"></script>
+<script src="{{ asset('js/app.js') }}" ></script>
 
 <script type="text/javascript">
-    $(document).foundation();20
+    $(document).foundation();
 </script>
 </body>
 </html>

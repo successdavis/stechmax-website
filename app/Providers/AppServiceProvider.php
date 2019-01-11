@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Channel;
+use App\Subject;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \View::composer(['forum.create', 'forum.index', 'forum.show'], function ($view) {
+            $channels = \Cache::rememberForever('channels', function() {
+                return Channel::all();
+            });
+            $view->with('channels', $channels);
+        });
+
+        \View::composer('*', function ($view) {
+            $subjects = \Cache::rememberForever('subjects', function() {
+                return Subject::all();
+            });
+            $view->with('subjects', $subjects);
+        });
     }
 
     /**
@@ -23,6 +37,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->isLocal()) {
+            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
+        }
     }
 }

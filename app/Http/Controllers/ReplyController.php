@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Reply;
 use App\Thread;
 use Illuminate\Http\Request;
 
@@ -43,7 +44,8 @@ class Replycontroller extends Controller
             'user_id'   => auth()->id()
         ]);
 
-        return back();
+        return back()
+            ->with('flash', 'Reply successfully added');
     }
 
     /**
@@ -75,9 +77,11 @@ class Replycontroller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Reply $reply)
     {
-        //
+        $this->authorize('update', $reply);
+        
+        $reply->update(request(['body']));
     }
 
     /**
@@ -86,8 +90,17 @@ class Replycontroller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Reply $reply)
     {
-        //
+        $this->authorize('update', $reply);
+
+        $reply->delete();
+
+        if (request()->expectsJson()) {
+            return response(['status' => 'Reply Deleted']);
+        }
+
+        return back()
+            ->with('flash', 'Reply Deleted');   
     }
 }
