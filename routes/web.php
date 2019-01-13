@@ -22,6 +22,8 @@ Route::get('/courses', 'CourseController@index');
 Route::get('/courses/{subject}', 'CourseController@index');
 Route::get('/courses/{subject}/{course}', 'CourseController@show');
 
+Route::get('/courses/{subject}/{course}/plans', 'PlansController@index');
+
 Route::get('/threads/new', 'ThreadController@create');
 Route::get('/threads', 'ThreadController@index');
 Route::get('/threads/{channel}', 'ThreadController@index');

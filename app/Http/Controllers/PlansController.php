@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Reply;
-use App\Thread;
+use App\Course;
+use App\Subject;
 use Illuminate\Http\Request;
 
-class Replycontroller extends Controller
+class PlansController extends Controller
 {
-    public function __construct()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Subject $subject, Course $course)
     {
-        $this->middleware('auth');
-    }
+        $plans = $course->getPlans();
         
-    public function index()
-    {
-        ///
+        return view('subscription.plans', compact('plans', 'course'));
     }
 
     /**
@@ -34,18 +36,9 @@ class Replycontroller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($ChannelId, Thread $thread)
+    public function store(Request $request)
     {
-        $this->validate(request(), [
-            'body' => 'required'
-        ]); 
-        $thread->addReply([
-            'body'      => request('body'),
-            'user_id'   => auth()->id()
-        ]);
-
-        return back()
-            ->with('flash', 'Reply successfully added');
+        //
     }
 
     /**
@@ -77,11 +70,9 @@ class Replycontroller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Reply $reply)
+    public function update(Request $request, $id)
     {
-        $this->authorize('update', $reply);
-        
-        $reply->update(request(['body']));
+        //
     }
 
     /**
@@ -90,17 +81,8 @@ class Replycontroller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Reply $reply)
+    public function destroy($id)
     {
-        $this->authorize('update', $reply);
-
-        $reply->delete();
-
-        if (request()->expectsJson()) {
-            return response(['status' => 'Reply Deleted']);
-        }
-
-        return back()
-            ->with('flash', 'Reply Deleted');   
+        //
     }
 }

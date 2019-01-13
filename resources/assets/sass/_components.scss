@@ -27,5 +27,44 @@ a {
 }
 
 .text-info p {
-        color: #fff;
+    color: #fff;
+}
+
+
+.bg-white {
+    background-color: white;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.plans-card {
+    box-shadow: 3px 2px 2px black;
+    padding-top: 1.2rem;
+}
+
+.plans-card .grid-container {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.plans--card--btn {
+    margin-top: auto;
+}
+
+.plans-card--header {
+    color: sky-blue;
+    text-align: center;
+    color: blue;
+}
+
+.plans-card--header h4 {
+    text-align: center;
+    color: blue;
+}
+
+.plans--card--btn {
+    width: 100%;
 }

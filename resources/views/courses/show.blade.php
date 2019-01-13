@@ -5,8 +5,20 @@
     <div id="grid-container">
         <div class="course-big-banner--content grid-container">
             <h2>{{$course->title}}</h2>
-            <div>{{$course->sypnosis}} </div>
-            <a class="medium button">Enroll Now</a>
+            <div class="grid-x grid-padding-x">
+                <div class="medium-6">
+                    <div class="grid-container">
+                        <div>Study remotely at the comfort of your home with a smart phone or PC, One-on-One with your tutor</div>
+                        <a href="{{$course->path()}}/plans" class="medium button">STUDY ONLINE</a>
+                    </div>
+                </div>
+                <div class="medium-6">
+                    <div class="grid-container">
+                        <div>Study online and also share physical interactions with tutors at the esteemed institute.</div>
+                        <a href="{{$course->path()}}/plans/classroom" class="medium button">STUDY IN CLASSROOM</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

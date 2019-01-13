@@ -31,9 +31,8 @@ class SubscriptionController extends Controller
                 "amount" => $course->fee,
                 "reference" => request()->reference,
                 "email" => auth()->user()->email,
-                // "plan" => request()->plan,
-                "first_name" => auth()->user()->name,
-                // "last_name" => auth()
+                "plan" => request()->plan_code,
+                "name" => auth()->user()->name,
                 "callback_url" => request()->callback_url
             ];
 

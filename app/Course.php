@@ -22,6 +22,11 @@ class Course extends Model
         return $this->belongsToMany('App\Course', 'track_courses','course_id','track_id');
     }
 
+    public function plans()
+    {
+        return $this->belongsToMany('App\Plan', 'course_plans', 'course_id', 'plan_id');
+    }
+
     public function subject()
     {
        return $this->belongsTo(Subject::class); // This is the category in which each course falls
@@ -45,5 +50,10 @@ class Course extends Model
     public function scopeFilter($query, $filters)
     {
         return $filters->apply($query);
+    }
+
+    public function getPlans()
+    {
+        return $this->plans;
     }
 }
