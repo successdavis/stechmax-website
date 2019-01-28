@@ -16,4 +16,10 @@ class ProfileController extends Controller
             'activities' => Activity::feed($user)
         ]);
     }
+
+    public function getInvoices()
+    {
+        $invoice = Invoice::all()->latest();
+        return view ('profiles.payments', compact('invoice'));
+    }
 }

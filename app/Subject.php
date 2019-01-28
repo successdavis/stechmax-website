@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
+    protected $with = ['courses']; 
     public function getRouteKeyName()
     {
         return 'slug';
@@ -15,4 +16,14 @@ class Subject extends Model
     {
         return $this->hasMany(Course::class);
     }
+
+    public function getSubjectCourses()
+    {
+        return $this->courses->where('type_id', 1);
+    }
+
+    // public function getSubjectTracks()
+    // {
+    //     return $this->courses->where('type_id', 2);
+    // }
 }

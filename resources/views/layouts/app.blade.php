@@ -52,7 +52,7 @@
               </div>
             </div>
 
-            <div class="top-bar mb-3" id="responsive-menu">
+            <div class="top-bar" id="responsive-menu">
               <div class="top-bar-left">
                 <ul class="dropdown menu" data-dropdown-menu>
                   <li>
@@ -60,7 +60,26 @@
                       {{ config('app.name', 'STECHMAX') }}
                     </a>
                   </li>
-                  <li><a href="{{ url('/courses') }}">COURSES</a></li>
+                  <li><a href="{{ url('/courses') }}" data-toggle="library-dropdown">LIBRARY</a></li>
+                  <div class="dropdown-pane overlap-all" id="library-dropdown" data-dropdown data-auto-focus="true" data-hover="true" data-hover-pane="true" style="width: 100%">
+                    <div class="grid-x grid-padding-x">
+                      <div class="cell">
+                        <ul class="vertical dropdown menu" data-dropdown-menu style="max-width: 250px;">
+                           @foreach ($subjects as $subject)
+                             <li>
+                               <a href="/courses/{{$subject->slug}}">{{$subject->name}}</a>
+                               <ul class="vertical menu nested">
+                                @foreach ($subject->courses as $course)
+                                 <li><a href="#">{{$course->title}}</a></li>
+                                @endforeach
+                               </ul>
+                             </li>
+                           @endforeach
+                          
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                   <li><a href="{{ url('/threads') }}">FORUM</a></li>
                 </ul>
               </div>
@@ -77,7 +96,7 @@
                     </div>
                     <div class="dropdown-pane" id="user_profile-menu" data-position="bottom" data-alignment="right" data-dropdown>
                         <ul>
-                            <li><a href="/profiles/{{Auth::user()->name}}">{{ Auth::user()->name }}</a></li>
+                            <li><a href="/profiles/{{Auth::user()->name}}">{{ Auth::user()->f_name . ' ' . Auth::user()->l_name }}</a></li>
                             <li><a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
@@ -103,6 +122,8 @@
     </div> {{-- closing wrapper div --}}
 
 </div>
+@include('layouts.footer')
+
 
 </body>
 
@@ -111,6 +132,7 @@
 <script src="/js/vendor/what-input.js"></script>
 <script src="/js/vendor/foundation.js"></script>
 <script src="{{ asset('js/app.js') }}" ></script>
+<script src="{{ asset('js/remita-pay-inline.bundle.js') }}" ></script>
 
 <script type="text/javascript">
     $(document).foundation();

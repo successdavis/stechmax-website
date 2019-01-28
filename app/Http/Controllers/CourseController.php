@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Type;
 use App\Course;
 use App\Subject;
 use Illuminate\Http\Request;
@@ -9,6 +10,10 @@ use App\Filters\CourseFilters;
 
 class CourseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index','show']);  
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,13 +21,13 @@ class CourseController extends Controller
      */
     public function index(Subject $subject, CourseFilters $filters)
     {
-        $courses = $this->getCourses($subject, $filters);
-
+        $courses = $this->getCourses($subject, $filters)->take('10');
+        $tracks = Type::getCourseByType('track')->get()->take('10');
         if (request()->wantsJson()) {
             return $courses;
         }
 
-        return view('courses.index', compact('courses'));
+        return view('courses.index', compact('courses','tracks'));
     }
 
     /**

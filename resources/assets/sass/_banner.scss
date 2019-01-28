@@ -1,0 +1,45 @@
+
+.banner {
+    background-image: url(/../images/banner.jpg);
+    background-size: cover;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: calc(100vh - 56px);
+}
+
+
+.banner:before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(46,43,43,.6);
+}
+
+
+#reg-form {
+    background-color: rgba(0,0,0,.2);
+    color: red;
+    font-weight: bold;
+    -webkit-box-shadow: 5px 8px 29px -1px rgba(0,0,0,0.81); 
+    box-shadow: 5px 8px 29px -1px rgba(0,0,0,0.81); 
+}
+
+label {
+    color: white;
+}
+
+.float-text {
+    color: #fff;
+    /*-webkit-text-shadow: 5px 8px 29px -1px rgba(0,0,0,0.81); */
+    text-shadow: 3px 3px 9px rgba(0, 0, 0, 1);
+
+}
+
+#reg-form input[type="submit"] {
+    background: red;
+}

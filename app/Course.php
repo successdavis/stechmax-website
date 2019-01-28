@@ -27,6 +27,10 @@ class Course extends Model
         return $this->belongsToMany('App\Plan', 'course_plans', 'course_id', 'plan_id');
     }
 
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
     public function subject()
     {
        return $this->belongsTo(Subject::class); // This is the category in which each course falls
@@ -47,6 +51,11 @@ class Course extends Model
         return $this->hasMany('App\Section');
     }
 
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
     public function scopeFilter($query, $filters)
     {
         return $filters->apply($query);
@@ -55,5 +64,10 @@ class Course extends Model
     public function getPlans()
     {
         return $this->plans;
+    }
+
+    public function getFirstInstallment($course = null)
+    {
+        return !empty($course) ? $course->fee * 60 / 100 : $this->fee * 60 / 100;
     }
 }

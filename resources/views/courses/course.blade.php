@@ -5,8 +5,7 @@
             <img src="{{asset('storage/course/' . $course->img)}}">
           </div>
           <div class="card-section course__meta-information grid-x">
-            <span class="small-6">{{$course->duration}} Months</span>
-            <span class="small-6">Type: Course</span>
+            <span class="cell">Type: Course</span>
           </div>
           <div class="card-section course__title">
             {{$course->title}}

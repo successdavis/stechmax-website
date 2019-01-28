@@ -33,16 +33,16 @@ class ReadCourseTest extends TestCase
             ->assertSee($this->course->title);
     }
 
-    /** @test */
-    public function a_user_can_view_children_courses_assign_to_track()
-    {
-        $courseChildren = create('App\Course');
-        $relationship = factory('App\Course_Track')->create(['course_id' => $courseChildren->id, 'track_id' => $this->course->id]);
+    // /** @test */
+    // public function a_user_can_view_children_courses_assign_to_track()
+    // {
+    //     $courseChildren = create('App\Course');
+    //     $relationship = factory('App\Course_Track')->create(['course_id' => $courseChildren->id, 'track_id' => $this->course->id]);
 
-        $response = $this->assertCount(1, $this->course->childrenCourses);
-        $this->get($this->course->path())
-            ->assertSee($courseChildren->title); 
-    }
+    //     $response = $this->assertCount(1, $this->course->childrenCourses);
+    //     $this->get($this->course->path())
+    //         ->assertSee($courseChildren->title); 
+    // }
 
     /** @test */
     public function a_user_can_browse_courses_by_subjects()

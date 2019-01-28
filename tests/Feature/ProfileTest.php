@@ -32,3 +32,4 @@ class ProfileTest extends TestCase
             ->assertSee($thread->body);
     }
 }
+

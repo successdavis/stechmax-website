@@ -68,3 +68,28 @@ a {
 .plans--card--btn {
     width: 100%;
 }
+
+
+.blue-bg {
+    background: blue;
+    color: #fff;
+}
+
+#library-dropdown {
+    z-index: 1000;
+}
+
+.overlap-all {
+    z-index: 1001;
+}
+
+
+.join-mailer {
+    text-align: center;
+}
+
+@media (min-width: 50em) {
+    .join-mailer {
+        max-width: 50%;
+    }
+}

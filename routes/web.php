@@ -22,8 +22,6 @@ Route::get('/courses', 'CourseController@index');
 Route::get('/courses/{subject}', 'CourseController@index');
 Route::get('/courses/{subject}/{course}', 'CourseController@show');
 
-Route::get('/courses/{subject}/{course}/plans', 'PlansController@index');
-
 Route::get('/threads/new', 'ThreadController@create');
 Route::get('/threads', 'ThreadController@index');
 Route::get('/threads/{channel}', 'ThreadController@index');
@@ -39,8 +37,12 @@ Route::post('/replies/{reply}/favorites', 'FavoriteController@store');
 Route::delete('/replies/{reply}/favorites', 'FavoriteController@destroy');
 
 Route::get('/profiles/{user}', 'ProfileController@show');
- 
-Route::get('/products', 'SubscriptionController@index'); 
+Route::get('/profiles/{user}/courses', 'SubscriptionController@index');
+Route::get('/profiles/{user}/payments', 'ProfileController@getInvoices');
 
-Route::post('/pay/{course}', 'SubscriptionController@redirectToGateway')->name('pay'); 
-Route::get('/payment/callback', 'SubscriptionController@handleGatewayCallback');
+ 
+Route::get('/courses/{subject}/{course}/medium', 'PaymentController@index');
+
+Route::post('/pay/{course}', 'PaymentController@redirectToGateway')->name('pay'); 
+Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
+// Route::post('/webhook', 'WebhookController@handle');

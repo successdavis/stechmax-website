@@ -119,4 +119,13 @@ class CourseTest extends TestCase
 
         $this->assertInstanceOf('App\Course', $section->course);
     }
+
+    /** @test */
+    public function a_course_can_have_children_courses_call_tracks()
+    {
+        $type = create('App\Type');
+        $course = create('App\Course', ['type_id' => $type->id]);
+
+        $this->assertInstanceOf('App\Type', $course->type);
+    }
 }

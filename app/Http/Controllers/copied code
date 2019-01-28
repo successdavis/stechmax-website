@@ -1,0 +1,73 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Carbon\Carbon;
+use Paystack;
+use App\Course;
+use App\Http\Requests;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class SubscriptionController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Redirect the User to Paystack Payment Page
+     * @return Url
+     */
+
+    public function index()
+    {
+        $date = Carbon::now()->yesterday();
+        return view('courses.product', compact('date'));
+    }
+
+    public function redirectToGateway(Course $course)
+    {
+        if (!request()->invoice_id) {
+            $invoice_id = request()->user()->invoices()->create([
+                'amount' => $course->fee,
+                'course_id' => $course->id
+            ]);
+        }
+
+        $data = [
+                "amount" => $course->fee,
+                "reference" => request()->reference,
+                "email" => auth()->user()->email,
+                "name" => auth()->user()->name,
+                "callback_url" => request()->callback_url,
+                "metadata" => [
+                    'course_id' => $course->id,
+                    'invoice_id' => isset(request()->invoice_id) ? request()->invoice_id : $invoice_id->id,
+                    'purpose' => 'Course Subscription'
+                ],
+            ];
+
+        return Paystack::getAuthorizationUrl($data)->redirectNow();
+    }
+
+    /**
+     * Obtain Paystack payment information
+     * @return void
+     */
+    public function handleGatewayCallback()
+    {
+        $paymentDetails = Paystack::getPaymentData();
+
+        request()->user()->payments->create([
+            'invoice_id' => $paymentDetails['data']['metadata']['invoice_id'],
+            'amount' => $paymentDetails['data']['amount'],
+            'method' => 'paystack',
+            'purpose' => $paymentDetails['data']['metadata']['purpose'],
+            'status' => 1,
+            'transaction_ref' => $paymentDetails['data']['reference'],
+            'paid_at' => $paymentDetails['data']['paidAat']
+        ]);
+    }
+}

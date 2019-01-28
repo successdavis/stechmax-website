@@ -109,7 +109,7 @@ class CreateThreadTest extends TestCase
         $this->withExceptionHandling()->signIn();
 
         $thread = make('App\Thread', $overrides);
-        return $this->post('/threads', $thread->toArray());
+              return $this->post('/threads', $thread->toArray());
     }
 
 }

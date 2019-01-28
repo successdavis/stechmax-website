@@ -5,27 +5,37 @@
     <div id="grid-container">
         <div class="course-big-banner--content grid-container">
             <h2>{{$course->title}}</h2>
-            <div class="grid-x grid-padding-x">
-                <div class="medium-6">
-                    <div class="grid-container">
-                        <div>Study remotely at the comfort of your home with a smart phone or PC, One-on-One with your tutor</div>
-                        <a href="{{$course->path()}}/plans" class="medium button">STUDY ONLINE</a>
+            @if (! auth()->check() || !auth()->user()->isSubscribe($course))
+                <div class="grid-x grid-padding-x">
+                    <div class="medium-6">
+                        <div class="grid-container">
+                            <div>Study remotely at the comfort of your home with a smart phone or PC, One-on-One with your tutor</div>
+                            <a href="{{$course->path()}}/medium?class=false" class="medium button">STUDY ONLINE</a>
+                        </div>
+                    </div>
+                    <div class="medium-6">
+                        <div class="grid-container">
+                            <div>Study online and also share physical interactions with tutors at the esteemed institute.</div>
+                            <a href="{{$course->path()}}/medium?class=true" class="medium button">STUDY IN CLASSROOM</a>
+                        </div>
                     </div>
                 </div>
-                <div class="medium-6">
-                    <div class="grid-container">
-                        <div>Study online and also share physical interactions with tutors at the esteemed institute.</div>
-                        <a href="{{$course->path()}}/plans/classroom" class="medium button">STUDY IN CLASSROOM</a>
-                    </div>
-                </div>
+            @else (auth()->user()->isSubscribe($course))
+            <div class="center-align">
+                <a href="" class="medium button">Play Lesson</a>
             </div>
+            @endif
         </div>
     </div>
 </div>
     <ul class="tabs" data-tabs id="example-tabs">
         <div class="grid-container">
-              <li class="tabs-title is-active"><a href="#course_content_tab" aria-selected="true">Content</a></li>
-              <li class="tabs-title disable"><a data-tabs-target="Course_instructors_tab" href="#Course_instructors_tab">Instructors</a></li>
+            <li class="tabs-title is-active"><a href="#course_content_tab" aria-selected="true">Content</a></li>
+            <li class="tabs-title disable"><a data-tabs-target="Course_instructors_tab" href="#Course_instructors_tab">Instructors</a></li>
+            @if (auth()->check() && auth()->user()->isSubscribe($course))
+                <li class="tabs-title"><a data-tabs-target="Course_materials_tab" href="#Course_materials_tab">Course Materials</a></li>
+                <li class="tabs-title"><a data-tabs-target="Course_questions_tab" href="#Course_questions_tab">Questions</a></li>
+            @endif
         </div>
     </ul>
 
@@ -90,6 +100,14 @@
           <div class="tabs-panel" id="Course_instructors_tab">
             <p>Suspendisse dictum feugiat nisl ut dapibus.  Vivamus hendrerit arcu sed erat molestie vehicula. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor.  Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
           </div>
+            @if (auth()->check() && auth()->user()->isSubscribe($course))
+                <div class="tabs-panel" id="Course_materials_tab">
+                    <p>In here you will find PDF materials to this course</p>
+                </div>
+                <div class="tabs-panel" id="Course_questions_tab">
+                    <p>There are no questions at the moment</p>
+                </div>
+            @endif
         </div>
     </div>
 

@@ -4,3 +4,8 @@
     flex-grow: 1;
     align-items: center;
 }
+
+.top {
+    position: relative;
+    z-index: 100;
+}

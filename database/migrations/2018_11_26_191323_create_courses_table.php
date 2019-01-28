@@ -18,10 +18,10 @@ class CreateCoursesTable extends Migration
             $table->string('title')->unique();
             $table->string('img')->nullable();
             $table->string('difficulty')->nullable();
-            $table->unsignedInteger('duration');
+            $table->Integer('duration');
             $table->unsignedInteger('subject_id')->index();
+            $table->unsignedInteger('type_id')->index();
             $table->unsignedInteger('fee');
-            $table->integer('type_id')->default('1');
             $table->text('description');
             $table->text('sypnosis');
             $table->timestamps();
