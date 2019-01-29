@@ -33206,7 +33206,7 @@ exports = module.exports = __webpack_require__(41)(false);
 
 
 // module
-exports.push([module.i, "\n.alert-flash {\n        position: fixed;\n        right: 25px;\n        bottom: 25px;\n}\n\n", ""]);
+exports.push([module.i, "\n.alert-flash {\n        position: fixed;\n        right: 25px;\n        background: blue;\n        bottom: 25px;\n}\n\n", ""]);
 
 // exports
 

@@ -12,8 +12,7 @@ class deactivateSubscription extends Command
      *
      * @var string
      */
-    protected $signature = 'deactivate:subscription {subscription?
-    }';
+    protected $signature = 'stechmax:deactivate-due-subscription {subscription?}';
 
     /**
      * The console command description.

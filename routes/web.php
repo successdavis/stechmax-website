@@ -40,6 +40,8 @@ Route::get('/profiles/{user}', 'ProfileController@show');
 Route::get('/profiles/{user}/courses', 'SubscriptionController@index');
 Route::get('/profiles/{user}/payments', 'ProfileController@getInvoices');
 
+Route::post('/follow', 'FollowersController@store');
+
  
 Route::get('/courses/{subject}/{course}/medium', 'PaymentController@index');
 
