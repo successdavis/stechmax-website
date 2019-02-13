@@ -3,8 +3,9 @@
     <ul>
         <li><a class="gray-20" href="/threads">All Threads</a></li>
         @if (auth()->check())
-        <li><a href="/threads?by={{auth()->user()->name}}">My Threads</a></li>
+        <li><a href="/threads?by={{auth()->user()->email}}">My Threads</a></li>
         @endif
+        <li><a href="/threads?unanswered=1">Unanswered</a></li>
         <li><a href="/threads?popular=1">Popular All time</a></li>
     </ul>
 </div>

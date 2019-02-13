@@ -25,7 +25,7 @@ class SubscriptionTest extends TestCase
 
         $this->user->subscribeToCourse($course, 1);
 
-        $this->assertCount(1, $this->user->getSubscribedCourses());
+        $this->assertCount(1, $this->user->getSubscribedCourses);
     }
 
     /** @test */

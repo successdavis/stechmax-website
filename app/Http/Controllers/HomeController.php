@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home', [
+            'pageTitle' => 'Dashboard - Stechmax']);
+    }
+
+    public function subscribedCourses(User $user)
+    {
+        $courses = $user->getSubscribedCourses()->get();
+        return view('Dashboard.courses', [
+            'pageTitle' => 'Dashboard - Stechmax',
+            'subscribedCourses' => $courses
+        ]);
     }
 }

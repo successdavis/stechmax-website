@@ -18,7 +18,6 @@ class SubscriptionController extends Controller
 
         return view('profiles.courses', [
             'profileUser' => $user,
-            'subscriptions' => $Subscriptions
         ]);
     }
 }

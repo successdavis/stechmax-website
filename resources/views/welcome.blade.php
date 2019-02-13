@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('content')
-@include('layouts.banner')
+@if (!Auth::check())
+    @include('layouts.regFormBanner')
+@else 
+    @include('layouts.banner')
+@endif
 <div class="grid-container">
     @include('layouts.what')
 </div>

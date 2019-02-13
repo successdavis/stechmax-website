@@ -10,12 +10,12 @@ class Replycontroller extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => 'index']);
     }
         
-    public function index()
+    public function index($ChannelId, Thread $thread)
     {
-        ///
+        return $thread->replies()->paginate(15 );
     }
 
     /**
@@ -39,10 +39,15 @@ class Replycontroller extends Controller
         $this->validate(request(), [
             'body' => 'required'
         ]); 
-        $thread->addReply([
+
+        $reply = $thread->addReply([
             'body'      => request('body'),
             'user_id'   => auth()->id()
         ]);
+
+        if (request()->expectsJson()) {
+            return $reply->load('owner');
+        }
 
         return back()
             ->with('flash', 'Reply successfully added');

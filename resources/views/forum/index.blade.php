@@ -4,7 +4,7 @@
 
 <div class="grid-container">
 
-<div class="grid-x grid-margin-x grid-padding-x">
+<div class="grid-x grid-margin-x grid-padding-x mt-3">
     <div class="hide-for-small-only">
         @include('forum.leftSideBar')
     </div>

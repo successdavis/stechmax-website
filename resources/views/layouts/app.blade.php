@@ -1,3 +1,8 @@
+<?php
+  
+  $pageTitle = isset($pageTitle) ? $pageTitle : 'Welcome Stechmax';
+
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -8,7 +13,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{$pageTitle}}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -25,21 +30,33 @@
     <link rel="stylesheet" href="/css/foundation-icons.css">
     <link rel="stylesheet" href="/foundation-icons/foundation-icons.css">
     
+    <script>
+        window.App = {!! json_encode([
+            'csrfToken' => csrf_token(),
+            'user' => Auth::user(),
+            'signedIn'  => Auth::check()      
+        ]) !!};
+    </script>
+
 </head>
 <body>
 <body>
 
 <div id="app">
     <div class="off-canvas-wrapper">
-        <div class="off-canvas position-left" id="offCanvasLeftOverlap" data-off-canvas data-transition="overlap">
+        <div class="off-canvas position-left @if ($pageTitle === 'Dashboard - Stechmax')
+          {{"reveal-for-medium"}}
+        @endif" id="offCanvasLeftOverlap" data-off-canvas data-transition="overlap">
             <button class="close-button" aria-label="Close menu" type="button" data-close>
               <span aria-hidden="true">&times;</span>
             </button>
-
-
           <!-- Your menu or Off-canvas content goes here -->
+          @guest
+            @include('layouts.off-canvas-content-guest')
+          @else
+            @include('layouts.off-canvas-content')
+          @endguest
         </div>
-
         <div class="off-canvas-content" data-off-canvas-content>
               
             <div class="title-bar" data-responsive-toggle="responsive-menu" data-hide-for="medium">
@@ -60,7 +77,7 @@
                       {{ config('app.name', 'STECHMAX') }}
                     </a>
                   </li>
-                  <li><a href="{{ url('/courses') }}" data-toggle="library-dropdown">LIBRARY</a></li>
+                  <li><a href="{{ url('/courses') }}" data-toggle="library-dropdown">LIBRARY  <i class="fas fa-angle-double-down"></i></a></li>
                   <div class="dropdown-pane overlap-all" id="library-dropdown" data-dropdown data-auto-focus="true" data-hover="true" data-hover-pane="true" style="width: 100%">
                     <div class="grid-x grid-padding-x">
                       <div class="cell">
@@ -86,17 +103,20 @@
               <div class="top-bar-right">
                 <ul class="menu">
                 @guest
-                  <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                  <li><a class="nav-link" href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> {{ __(' Login') }}</a></li>
                   <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                 </ul>
                 @else
+                <li><a><i class="far fa-envelope"></i></a></li>
+                <user-notifications></user-notifications>
                 <li><a class="no-padding">
                     <div class="profile-card-avater">
                         <img src="{{asset('storage/avaters/default_avater.png')}}" class="avater-image"  data-toggle="user_profile-menu">
                     </div>
                     <div class="dropdown-pane" id="user_profile-menu" data-position="bottom" data-alignment="right" data-dropdown>
                         <ul>
-                            <li><a href="/profiles/{{Auth::user()->name}}">{{ Auth::user()->f_name . ' ' . Auth::user()->l_name }}</a></li>
+                            <li><a href="/profiles/{{Auth::user()->email}}">{{ Auth::user()->f_name . ' ' . Auth::user()->l_name }}</a></li>
+                            <li><a href="/home">Dashboard</a></li>
                             <li><a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
@@ -112,7 +132,7 @@
               </div>
             </div>
             
-            <main class="py-4 margin-top-large">
+            <main class="py-4 margin-top-large" id="site-body">
                 @yield('content')
 
                 <flash message="{{session('flash')}}"></flash>
@@ -122,7 +142,9 @@
     </div> {{-- closing wrapper div --}}
 
 </div>
-@include('layouts.footer')
+@if ($pageTitle !== 'Dashboard - Stechmax')
+    @include('layouts.footer')
+@endif
 
 
 </body>

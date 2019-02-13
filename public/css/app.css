@@ -12,6 +12,10 @@ body {
   min-height: 100%;
 }
 
+#site-body {
+  min-height: 100vh;
+}
+
 [v-cloak] {
   display: none;
 }
@@ -125,6 +129,10 @@ THEME COLOR SETUP
   background-color: #fff;
 }
 
+.mb-reset {
+  margin-bottom: 0;
+}
+
 .mb-2 {
   margin-bottom: 1em;
 }
@@ -147,6 +155,10 @@ THEME COLOR SETUP
 
 .mt-4 {
   margin-top: 4em;
+}
+
+.inline {
+  display: inline;
 }
 
 .center-elements {
@@ -262,9 +274,22 @@ a {
   text-align: center;
 }
 
+.rounded {
+  border-radius: 50%;
+}
+
 @media (min-width: 50em) {
   .join-mailer {
     max-width: 50%;
+  }
+
+  .medium-div {
+    max-width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: .75em;
+    -webkit-box-shadow: 7px 9px 19px -5px rgba(0, 0, 0, 0.47);
+            box-shadow: 7px 9px 19px -5px rgba(0, 0, 0, 0.47);
   }
 }
 
@@ -366,7 +391,7 @@ a {
   box-shadow: 5px 8px 29px -1px rgba(0, 0, 0, 0.81);
 }
 
-label {
+#reg-form label {
   color: white;
 }
 
@@ -617,6 +642,20 @@ label {
 
 .footer ul li a {
   color: #e1e5ed;
+}
+
+.thread-header {
+  background: #3c4c70;
+  color: white;
+  font-weight: bolder;
+  margin-top: .75em;
+  margin-bottom: .75em;
+  padding: .15em .75em;
+  border-radius: 5px;
+}
+
+.blue {
+  color: blue;
 }
 
 .navbar-laravel {

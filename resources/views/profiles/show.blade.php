@@ -1,3 +1,4 @@
+
 @extends('profiles.layouts.profile')
 
 @section('profile_content')

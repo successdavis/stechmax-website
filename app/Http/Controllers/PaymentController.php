@@ -64,8 +64,12 @@ class PaymentController extends Controller
         request()->user()->subscribeToCourse($course, $class);
         $Invoice->makeValid();       
         $Invoice->recordPayment($paymentDetails['data']);
-        return view('payments.success', compact('course'))
+        return redirect('/paid/' . $course->id)
             ->with('flash', 'Payment Successful');
     }
+
+    public function paymentSuccessful(Course $course)
+    {
+        return view('payments.success', compact('course'));
+    }
 }
-0

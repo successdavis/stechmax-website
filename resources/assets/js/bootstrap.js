@@ -8,6 +8,12 @@ window._ = require('lodash'); window.Popper = require('popper.js').default;
 
 window.Vue = require('vue');
 
+window.Vue.prototype.authorize = function (handler) {
+    let user = window.App.user;
+
+    return user ? handler(user) : false;
+    
+};
 
 window.axios = require('axios');
 
@@ -25,6 +31,11 @@ if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+};
+
+window.axios.defaults.headers.common = {
+    // 'X-CSRF-TOKEN': window.App.crsfToken,
+    'X-Requested-With': 'XMLHttpRequest'
 };
 
 window.events = new Vue();

@@ -4,26 +4,43 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
+            <div class="card medium-div mt-4">
+                <h4 class="card-header text-center">{{ __('Register') }}</h4>
+                <ul>
+                    @if (count($errors))
+                        @foreach ($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    @endif
+                </ul>
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="f_name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="f_name" type="text" class="form-control{{ $errors->has('f_name') ? ' is-invalid' : '' }}" name="f_name" value="{{ old('f_name') }}" required autofocus>
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('f_name'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('f_name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <label for="f_name" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
+                            <div class="col-md-6">
+                                <input id="l_name" type="text" class="form-control{{ $errors->has('l_name') ? ' is-invalid' : '' }}" name="l_name" value="{{ old('f_name') }}" required autofocus>
+
+                                @if ($errors->has('l_name'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('l_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
+                        
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -32,13 +49,24 @@
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="medium-6">
+                                <label for="phone">Phone</label>
+                                <input type="text" name="phone" id="phone">
+                            </div>
+                            <div class="medium-6">
+                                <select name="gender">
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
@@ -63,7 +91,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="medium button">
                                     {{ __('Register') }}
                                 </button>
                             </div>
