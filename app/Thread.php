@@ -2,18 +2,26 @@
 
 namespace App;
 
+use Laravel\Scout\Searchable;
+use App\Events\ThreadHasNewReply;
 use App\Notifications\ThreadWasUpdated;
 use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
-    use RecordsActivity;
+    use RecordsActivity, Searchable;
 
-    protected $fillable = ['user_id', 'title', 'body','channel_id'];
+    // protected $fillable = ['user_id', 'title', 'body','channel_id'];
+
+    protected $guarded = [];
 
     protected $with = ['creator','channel'];
 
     protected $appends = ['isSubscribedTo'];
+
+    protected $casts = [
+        'locked' => 'boolean'
+    ];
 
     protected static function boot()
     {
@@ -26,11 +34,15 @@ class Thread extends Model
         static::deleting(function ($thread) {
             $thread->replies->each->delete();
         });
+
+        static::created(function ($thread) {
+            $thread->update(['slug' => $thread->title]);
+        });
     }
 
     public function path()
     {
-        return '/threads/' . $this->channel->slug .'/' . $this->id;
+        return '/threads/' . $this->channel->slug .'/' . $this->slug;
     }
 
     public function replies()
@@ -47,14 +59,28 @@ class Thread extends Model
     {
         $reply = $this->replies()->create($reply);
 
-        //prepare notifications for all subscriberes
-        $this->subscriptions->filter(function($sub) use ($reply) {
-            return $sub->user_id != $reply->user_id; 
-        })
-
-        ->each->notify($reply); 
+        $this->notifySubscribers($reply);
+        // event(new ThreadHasNewReply($this, $reply));
 
         return $reply;
+    }
+
+    public function lock()
+    {
+        $this->update(['locked' => true]);
+    }
+
+    public function unlock()
+    {
+        $this->update(['locked' => false]);
+    }
+
+    public function notifySubscribers($reply)
+    {
+        $this->subscriptions
+            ->where('user_id', '!=', $reply->user_id)
+            ->each
+            ->notify($reply); 
     }
 
     public function channel()
@@ -92,6 +118,27 @@ class Thread extends Model
         return $this->subscriptions()
             ->where('user_id', auth()->id())
             ->exists();
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public function setSlugAttribute($value)
+    {
+        $slug = str_slug($value);
+
+        if (static::whereSlug($slug)->exists()) {
+            $slug = "{$slug}-" . $this->id;
+        }
+
+        $this->attributes['slug'] = $slug;
+    }
+
+    public function markBestReply($reply)
+    {
+        $this->update(['best_reply_id' => $reply->id]);
     }
 
 }

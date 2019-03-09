@@ -1,8 +1,8 @@
 <?php
 
-
 namespace Tests\Feature;
 
+use App\Thread;
 use App\Activity;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -27,11 +27,25 @@ class CreateThreadTest extends TestCase
     }
 
     /** @test */
+    public function new_users_must_first_confirm_their_email_address_before_creating_threads()
+    {
+        $user = factory('App\User')->states('unconfirmed')->create();
+
+        $this->signIn($user);
+
+        $thread = make('App\Thread');
+
+        $this->post(route('threads'), $thread->toArray())
+            ->assertRedirect(route('threads'))
+            ->assertSessionHas('flash', 'You must first confirm your email addresss');
+    }
+
+    /** @test */
     public function guest_may_not_create_thread()
     {
        $this->withExceptionHandling()
-        ->post('/threads')
-        ->assertRedirect('/login');
+        ->post(route('threads'))
+        ->assertRedirect(route('login'));
     }
 
     /** @test */
@@ -61,13 +75,42 @@ class CreateThreadTest extends TestCase
     }
 
     /** @test */
+    public function a_thread_requires_a_unique_slug()
+    {
+
+        $this->signIn();
+
+        $thread = create('App\Thread', ['title' => 'Foo Title']);
+
+        $this->assertEquals($thread->fresh()->slug, 'foo-title');
+
+        $thread = $this->postJson(route('threads'), $thread->toArray())->json();
+
+        $this->assertEquals("foo-title-{$thread['id']}", $thread['slug']);
+
+    }
+
+    /** @test */
+    public function a_thread_with_a_title_that_ends_in_a_number_should_generate_the_proper_slug()
+    {
+        $this->signIn();
+
+        $thread = create('App\Thread', ['title' => 'Some Title 24']);
+
+        $thread = $this->postJson(route('threads'), $thread->toArray())->json();
+
+        $this->assertEquals("some-title-24-{$thread['id']}", $thread['slug']);
+       
+    }
+
+    /** @test */
     function unauthorized_users_may_not_delete_threads()
     {
         $this->withExceptionHandling();
 
         $thread = create('App\Thread');
 
-        $this->delete($thread->path())->assertRedirect('/login');
+        $this->delete($thread->path())->assertRedirect(route('login'));
 
         $this->signIn();
         $this->delete($thread->path())->assertStatus(403);
@@ -91,8 +134,8 @@ class CreateThreadTest extends TestCase
             'activities', [
                 'subject_id' => $thread->id,
                 'subject_type' => get_class($thread)
-            ]
-        );
+            
+        ]);
 
         $this->assertDatabaseMissing(
             'activities', [
@@ -109,7 +152,13 @@ class CreateThreadTest extends TestCase
         $this->withExceptionHandling()->signIn();
 
         $thread = make('App\Thread', $overrides);
-              return $this->post('/threads', $thread->toArray());
+
+        return $this->post('/threads', $thread->toArray());
+
     }
 
 }
+
+
+
+

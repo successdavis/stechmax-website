@@ -95,4 +95,40 @@ class ParticipateInForumTest extends TestCase
             ->delete("/replies/{$reply->id}")
             ->assertStatus(403);
     }
+
+    /** @test */
+    public function replies_that_contain_spam_may_not_be_created()
+    {
+        $this->signIn();
+
+        $thread = create('App\Thread');
+
+        $reply = make('App\Reply', [
+            'body' => 'Yahoo Customer Support'
+        ]); 
+
+        $this->expectException(\Exception::class);
+
+        $this->post($thread->path() . '/replies', $reply->toArray());
+    }
+
+    /** @test */
+    public function users_may_only_reply_a_maximum_of_once_per_minute()
+    {
+        $this->signIn(); 
+
+        $thread = create('App\Thread');
+
+        $reply = make('App\Reply', [
+            'body' => 'Some junk of message...'
+        ]);
+
+
+        $url = $this->post($thread->path() . '/replies', $reply->toArray())
+            ->assertStatus(200);
+
+
+        // $this->post($thread->path() . '/replies', $reply->toArray())
+        //     ->assertStatus(422);
+    }
 }

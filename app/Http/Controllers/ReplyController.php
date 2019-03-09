@@ -36,21 +36,25 @@ class Replycontroller extends Controller
      */
     public function store($ChannelId, Thread $thread)
     {
-        $this->validate(request(), [
-            'body' => 'required'
-        ]); 
+        if ($thread->locked) {
+            return response('Thread is locked', 422);
+        }
 
-        $reply = $thread->addReply([
-            'body'      => request('body'),
-            'user_id'   => auth()->id()
-        ]);
+        try {
+            $this->authorize('create', new Reply);
+            $this->validate(request(), ['body' => 'required|spamfree']); 
+
+            $reply = $thread->addReply([
+                'body'      => request('body'),
+                'user_id'   => auth()->id()
+            ]);
+        } catch (Exception $e) {
+            return response('Sorry, your reply could not be saved at this time.', 422);
+        }
 
         if (request()->expectsJson()) {
             return $reply->load('owner');
         }
-
-        return back()
-            ->with('flash', 'Reply successfully added');
     }
 
     /**
@@ -85,8 +89,16 @@ class Replycontroller extends Controller
     public function update(Reply $reply)
     {
         $this->authorize('update', $reply);
-        
-        $reply->update(request(['body']));
+
+        try {
+            $this->validate(request(), ['body' => 'required|spamfree']);
+            $reply->update(request(['body']));
+        } catch (Exception $e) {
+            return $response (
+                'Sorry your reply could not be saved at this time', 422
+            );
+        }
+
     }
 
     /**

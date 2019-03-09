@@ -1,10 +1,10 @@
 <template>
-
-    <div class="callout alert-flash" v-show="show">
-        <h5>Success</h5>
-        <p>{{ body }}</p>
+    <div class="alert alert-flash"
+         :class="'alert-'+level"
+         role="alert"
+         v-show="show"
+         v-text="body">
     </div>
-    
 </template>
 
 <script>
@@ -12,26 +12,33 @@
         props: ['message'],
 
         data() {
-            return{
+            return {
                 body: this.message,
+                level: 'success',
                 show: false
             }
         },
 
         created() {
             if (this.message) {
-                this.flash(this.message);
+                this.flash();
             }
 
-            window.events.$on('flash', messsage => this.flash(message));
+            window.events.$on(
+                'flash', data => this.flash(data)
+            );
         },
 
         methods: {
-            flash(message) {
-                this.body = message;
+            flash(data) {
+                if (data) {
+                    this.body = data.message;
+                    this.level = data.level;
+                }
+
                 this.show = true;
 
-                 this.hide();
+                this.hide();
             },
 
             hide() {
@@ -40,16 +47,13 @@
                 }, 3000);
             }
         }
-    }
+    };
 </script>
 
-<style type="text/css">
-    
+<style>
     .alert-flash {
         position: fixed;
         right: 25px;
-        background: blue;
         bottom: 25px;
     }
-
 </style>

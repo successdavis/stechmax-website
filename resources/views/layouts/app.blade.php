@@ -111,7 +111,7 @@
                 <user-notifications></user-notifications>
                 <li><a class="no-padding">
                     <div class="profile-card-avater">
-                        <img src="{{asset('storage/avaters/default_avater.png')}}" class="avater-image"  data-toggle="user_profile-menu">
+                        <img src="{{auth()->user()->avatar_path}}" class="avater-image"  data-toggle="user_profile-menu">
                     </div>
                     <div class="dropdown-pane" id="user_profile-menu" data-position="bottom" data-alignment="right" data-dropdown>
                         <ul>
@@ -135,7 +135,7 @@
             <main class="py-4 margin-top-large" id="site-body">
                 @yield('content')
 
-                <flash message="{{session('flash')}}"></flash>
+                <flash message="{{ session('flash') }}"></flash>
             </main>
 
         </div> {{-- closing off canvas content --}}

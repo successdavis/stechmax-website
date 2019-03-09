@@ -20,12 +20,23 @@ $factory->define(App\User::class, function (Faker $faker) {
         'gender' => $faker->name,
         'phone' => '09061260072',
         'email' => $faker->unique()->safeEmail,
+        'confirmed' => true,
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'remember_token' => str_random(10),
     ];
 });
 
+$factory->state(App\User::class, 'unconfirmed', function () {
+    return [
+        'confirmed' => false 
+    ];
+});
 
+$factory->state(App\User::class, 'administrator', function () {
+    return [
+        'admin' => true 
+    ];
+});
 
 $factory->define(App\Subject::class, function (Faker $faker) {
     $name = $faker->word;
@@ -76,6 +87,8 @@ $factory->define(App\Channel::class, function (Faker $faker) {
 });
 
 $factory->define(App\Thread::class, function (Faker $faker) {
+    $title = $faker->sentence;
+
     return [
         'user_id' => function() {
             return factory('App\User')->create()->id;
@@ -83,8 +96,11 @@ $factory->define(App\Thread::class, function (Faker $faker) {
         'channel_id' => function() {
             return factory('App\Channel')->create();
         },
-        'title' => $faker->sentence,
-        'body'  => $faker->paragraph
+        'title' => $title,
+        'body'  => $faker->paragraph,
+        'visits' => 0,
+        'slug' => str_slug($title),
+        'locked' => false
     ];
 });
 
@@ -97,7 +113,7 @@ $factory->define(App\Reply::class, function (Faker $faker) {
         'thread_id' => function() {
             return factory('App\Thread')->create()->id;
         },
-        'body'  => $faker->paragraph
+        'body'  => '$faker->paragraph'
     ];
 });
 

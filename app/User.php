@@ -15,8 +15,15 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'f_name', 'l_name', 'email', 'password', 'paystack_id', 'phone', 'gender',
+    // protected $fillable = [
+    //     'f_name', 'l_name', 'email', 'password', 'paystack_id', 'phone', 'gender', 'avatar_path', ''
+    // ];
+
+    protected $guarded = [];
+
+    protected $casts = [
+        'confirmed' => 'boolean',
+        'admin' => 'boolean'
     ];
 
     /**
@@ -38,9 +45,22 @@ class User extends Authenticatable
         return $this->hasMany(Thread::class)->latest();
     }
 
+    public function lastReply()
+    {
+        return $this->hasOne(Reply::class)->latest();
+    }
+
      public function activity()
     {
         return $this->hasMany(Activity::class);
+    }
+
+    public function confirm()
+    {
+        $this->confirmed = true; 
+        $this->confirmation_token = null;
+
+        $this->save();
     }
 
     public function subscriptions()
@@ -71,7 +91,7 @@ class User extends Authenticatable
     public function getSubscribedCourses()
     {
         return $this->subscriptions();
-    }
+    } 
 
     public function deactivate($course)
     {
@@ -100,6 +120,21 @@ class User extends Authenticatable
         return $this->update([
             'paystack_id' => $paystackId
         ]);
+    }
+
+    public function getAvatarPathAttribute($avatar)
+    {
+        if ($avatar) {
+            return asset('storage/' . $avatar);
+        }else {
+            return asset('storage/avatars/default.png');
+        }
+    }
+
+    public function isAdmin()
+    {
+        // return in_array($this->f_name, ['JohnDoe', 'JaneDoe']);
+        return $this->admin;
     }
 }
  

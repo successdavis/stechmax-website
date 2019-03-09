@@ -21,11 +21,11 @@
             </div>
             
             <div v-else v-text="body"></div>
-            {{-- @can ('update', $reply) --}}
+            @can ('update', $reply)
                 <div>
                     <button class="small button" @click="editing = true">Edit</button>
                 </div>
-            {{-- @endcan --}}
+            @endcan
         </div>
     </div>
 </reply>

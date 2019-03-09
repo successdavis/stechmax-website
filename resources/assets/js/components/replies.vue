@@ -1,10 +1,13 @@
-<template>
+<template>  
     <div>
         <div v-for="(reply, index) in items" :key="reply.id">
-            <reply :data="reply" @deleted="remove(index)"></reply>
+            <reply :reply="reply" @deleted="remove(index)"></reply>
         </div>
         <paginator :dataSet="dataSet" @changed="fetch"></paginator>
-        <new-reply @created="add"></new-reply>
+        <p v-if="$parent.locked">
+            This thread has been locked. No more replies are allowed.
+        </p>
+        <new-reply @created="add" v-else></new-reply>
     </div>
 </template>
 
@@ -20,9 +23,7 @@
         mixins: [collection],
 
         data() {
-            return {
-                dataSet: false
-            }
+            return { dataSet: false };
         },
 
         created() {
@@ -31,7 +32,7 @@
 
         methods: {
             fetch(page) {
-                axios.get(this.url(page)) .then(this.refresh);
+                axios.get(this.url(page)).then(this.refresh);
             },
 
             url(page) {

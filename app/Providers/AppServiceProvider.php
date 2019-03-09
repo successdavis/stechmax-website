@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Channel;
 use App\Subject;
+use App\Rules\SpamFree;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
             });
             $view->with('subjects', $subjects);
         });
+
+        \Validator::extend('spamfree', 'App\Rules\SpamFree@passes');
     }
 
     /**

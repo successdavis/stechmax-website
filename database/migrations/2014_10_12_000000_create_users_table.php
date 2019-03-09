@@ -19,7 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('l_name');
             $table->string('gender');
             $table->string('phone');
+            $table->string('avatar_path')->nullable();
             $table->string('email')->unique();
+            $table->boolean('confirmed')->default(false);
+            $table->boolean('admin')->default(false);
+            $table->string('confirmation_token', 25)->nullable()->unique();
             $table->string('password');
             $table->string('paystack_id')
                 ->unique()

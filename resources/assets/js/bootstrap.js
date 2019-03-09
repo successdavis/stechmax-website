@@ -8,12 +8,19 @@ window._ = require('lodash'); window.Popper = require('popper.js').default;
 
 window.Vue = require('vue');
 
-window.Vue.prototype.authorize = function (handler) {
-    let user = window.App.user;
+let authorizations = require('./authorizations');
 
-    return user ? handler(user) : false;
-    
+window.Vue.prototype.authorize = function (...params) {
+    if (! window.App.signedIn) return false;
+
+    if (typeof params[0] === 'string') {
+        return authorizations[params[0]](params[1]);
+    }
+
+    return params[0](window.App.user);
 };
+
+Vue.prototype.signedIn = window.App.signedIn;
 
 window.axios = require('axios');
 
@@ -40,6 +47,6 @@ window.axios.defaults.headers.common = {
 
 window.events = new Vue();
 
-window.flash = function (message) {
-    window.events.$emit('flash', message);
+window.flash = function (message, level = 'success') {
+    window.events.$emit('flash', {message, level});
 };

@@ -5,14 +5,11 @@
     <div class="grid-container profile__container">
         <div class="grid-x grid-margin-x">
             <div class="shrink user_image">
-                <div class="square-box thumbnail">
-                    <img src="{{asset('storage/avaters/default_avater.png')}}">
-                </div>
+                <avatar-form :user="{{$profileUser}}"></avatar-form>
             </div>
             <div class="auto user_information">
                 <h5 class="user_name">{{$profileUser->f_name . ' ' . $profileUser->l_name}}</h5>
                 <p>member since {{$profileUser->created_at->diffForHUmans()}}</p>
-                <a class="button" href="#">Edit Profile</a>     
             </div>
         </div>
     </div>  

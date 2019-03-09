@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Filters\ThreadFilters;
 use App\Thread;
 use App\Channel;
 use Illuminate\Http\Request;
+use App\Filters\ThreadFilters;
 
 class ThreadController extends Controller
 {
@@ -33,17 +33,21 @@ class ThreadController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required',
-            'body' => 'required',
+            'title' => 'required|spamfree',
+            'body' => 'required|spamfree',
             'channel_id' => 'required|exists:channels,id'
         ]); 
-        
+
         $thread = Thread::create([
             'user_id' => auth()->id(),
             'title' => request('title'),
             'channel_id' => request('channel_id'),
-            'body' => request('body')
+            'body' => request('body'),
         ]);
+
+        if (request()->wantsJson()) {
+            return response($thread, 201);
+        }
 
         return redirect($thread->path())
             ->with('flash', 'Your Question has been published!');
@@ -51,9 +55,21 @@ class ThreadController extends Controller
 
     public function show($channelId, Thread $thread)
     {
+        $thread->increment('visits');
         return view('forum.show', compact('thread'));
     }
 
+    public function update($channel, Thread $thread)
+    {
+        $this->authorize('update', $thread);
+        
+        $thread->update(request()->validate([
+            'title' => 'required|spamfree',
+            'body' => 'required|spamfree'
+        ]));
+
+        return $thread;
+    }
 
      public function destroy($channel, Thread $thread)
     {
@@ -72,11 +88,10 @@ class ThreadController extends Controller
     public function getThreads($channel, $filters)
     {
         $threads = Thread::latest()->filter($filters);
-
         if ($channel->exists) {
             $threads->where('channel_id', $channel->id);
         }
 
-        return $threads = $threads->get();
+        return $threads = $threads->paginate(25);
     }
 }

@@ -71,17 +71,19 @@ class ReadThreadTest extends TestCase
          
         $response = $this->getJson('threads?popular=1')->json();
         // Then
-        $this->assertEquals([3, 2, 0], array_column($response, 'replies_count'));
+        $this->assertEquals([3, 2, 0], array_column($response['data'], 'replies_count'));
     }
 
-    /** @test */
-    public function a_user_can_filter_threads_by_those_that_are_unaswered()
-    {
-        $thread = create('App\Thread');
-        create('App\Reply', ['thread_id' => $thread->id]);
+    // /** @test */
+    // public function a_user_can_filter_threads_by_those_that_are_unaswered()
+    // {
+    //     $thread = create('App\Thread');
+    //     create('App\Reply', ['thread_id' => $thread->id]);
 
-        $response = $this->getJson('threads?unanswered=2')->json();
-    }
+    //     $response = $this->getJson('threads?unanswered=2')->json();
+
+            // $this->assertCount(1, $response['data']);
+    // }
 
     /** @test */
     public function a_user_can_request_all_reply_for_a_given_thread()
@@ -91,7 +93,19 @@ class ReadThreadTest extends TestCase
         
         $response = $this->getJson($thread->path() . '/replies')->json();
 
-        $this->assertCount(1, $response['data']);
+        $this->assertCount(2, $response['data']);
         $this->assertEquals(2, $response['total']);
+    }
+
+    /** @test */
+    public function it_record_a_new_visit_each_time_the_thread_is_read()
+    {
+        $thread = create('App\Thread');
+
+        $this->assertSame(0, $thread->visits);
+
+        $this->call('GET', $thread->path());
+
+        $this->assertEquals(1, $thread->fresh()->visits);
     }
 }
