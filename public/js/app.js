@@ -12213,8 +12213,9 @@ var app = new Vue({
 
 /***/ }),
 /* 13 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 
 window._ = __webpack_require__(14);window.Popper = __webpack_require__(16).default;
 /**
@@ -34874,7 +34875,7 @@ if (false) {
 
     methods: {
         add: function add(item) {
-            this.items.push(reply);
+            this.items.push(item);
 
             this.$emit('added');
         },
@@ -34924,7 +34925,7 @@ var render = function() {
       _vm.$parent.locked
         ? _c("p", [
             _vm._v(
-              "\r\n            This thread has been locked. No more replies are allowed.\r\n        "
+              "\n            This thread has been locked. No more replies are allowed.\n        "
             )
           ])
         : _c("new-reply", { on: { created: _vm.add } })
