@@ -37,19 +37,21 @@
             'signedIn'  => Auth::check()      
         ]) !!};
     </script>
-
 </head>
 <body>
 <body>
 
 <div id="app">
+
     <div class="off-canvas-wrapper">
         <div class="off-canvas position-left @if ($pageTitle === 'Dashboard - Stechmax')
-          {{"reveal-for-medium"}}
-        @endif" id="offCanvasLeftOverlap" data-off-canvas data-transition="overlap">
+          {{"reveal-for-medium"}} @endif" id="offCanvasLeftOverlap" data-off-canvas data-transition="overlap">
+
+            {{-- button to toggle off canvas --}}
             <button class="close-button" aria-label="Close menu" type="button" data-close>
               <span aria-hidden="true">&times;</span>
             </button>
+
           <!-- Your menu or Off-canvas content goes here -->
           @guest
             @include('layouts.off-canvas-content-guest')
@@ -57,80 +59,13 @@
             @include('layouts.off-canvas-content')
           @endguest
         </div>
+
+
+        {{-- Offcanvas page content goes here --}}
         <div class="off-canvas-content" data-off-canvas-content>
               
-            <div class="title-bar" data-responsive-toggle="responsive-menu" data-hide-for="medium">
-              {{-- <button class="menu-icon" type="button" data-toggle="responsive-menu"></button> --}}
-              <button type="button" class="menu-icon" data-toggle="offCanvasLeftOverlap"></button>
-              <div class="title-bar-title">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'STECHMAX') }}
-                </a>
-              </div>
-            </div>
-
-            <div class="top-bar" id="responsive-menu">
-              <div class="top-bar-left">
-                <ul class="dropdown menu" data-dropdown-menu>
-                  <li>
-                    <a class="menu-text" href="{{ url('/') }}">
-                      {{ config('app.name', 'STECHMAX') }}
-                    </a>
-                  </li>
-                  <li><a href="{{ url('/courses') }}" data-toggle="library-dropdown">LIBRARY  <i class="fas fa-angle-double-down"></i></a></li>
-                  <div class="dropdown-pane overlap-all" id="library-dropdown" data-dropdown data-auto-focus="true" data-hover="true" data-hover-pane="true" style="width: 100%">
-                    <div class="grid-x grid-padding-x">
-                      <div class="cell">
-                        <ul class="vertical dropdown menu" data-dropdown-menu style="max-width: 250px;">
-                           @foreach ($subjects as $subject)
-                             <li>
-                               <a href="/courses/{{$subject->slug}}">{{$subject->name}}</a>
-                               <ul class="vertical menu nested">
-                                @foreach ($subject->courses as $course)
-                                 <li><a href="#">{{$course->title}}</a></li>
-                                @endforeach
-                               </ul>
-                             </li>
-                           @endforeach
-                          
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <li><a href="{{ url('/threads') }}">FORUM</a></li>
-                </ul>
-              </div>
-              <div class="top-bar-right">
-                <ul class="menu">
-                @guest
-                  <li><a class="nav-link" href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> {{ __(' Login') }}</a></li>
-                  <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
-                </ul>
-                @else
-                <li><a><i class="far fa-envelope"></i></a></li>
-                <user-notifications></user-notifications>
-                <li><a class="no-padding">
-                    <div class="profile-card-avater">
-                        <img src="{{auth()->user()->avatar_path}}" class="avater-image"  data-toggle="user_profile-menu">
-                    </div>
-                    <div class="dropdown-pane" id="user_profile-menu" data-position="bottom" data-alignment="right" data-dropdown>
-                        <ul>
-                            <li><a href="/profiles/{{Auth::user()->email}}">{{ Auth::user()->f_name . ' ' . Auth::user()->l_name }}</a></li>
-                            <li><a href="/home">Dashboard</a></li>
-                            <li><a href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a></li>
-                        </ul>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
-                </a></li>
-                @endguest
-              </div>
-            </div>
+           {{-- Include the title bar --}}
+           @include('layouts.title-bar')
             
             <main class="py-4 margin-top-large" id="site-body">
                 @yield('content')
