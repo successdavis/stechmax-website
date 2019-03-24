@@ -20,6 +20,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/threads/search', 'SearchController@show');
 
+Route::get('api/courses', 'Api\CoursesController@getSubjects');
+
 Route::get('/courses', 'CourseController@index')->name('courses');
 Route::get('/courses/{subject}', 'CourseController@index');
 Route::get('/courses/{subject}/{course}', 'CourseController@show');
@@ -65,5 +67,3 @@ Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 Route::get('/paid/{course}', 'PaymentController@paymentSuccessful');
 
 Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth')->name('avatar');
-
-

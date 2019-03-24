@@ -658,6 +658,75 @@ a {
   color: blue;
 }
 
+.mega-menu {
+  background: #1f1533;
+  position: absolute;
+  width: 920px;
+  z-index: 200;
+}
+
+.mega-menu ul {
+  background: none;
+  margin-left: 0;
+}
+
+.mega-menu ul li {
+  list-style: none;
+  font-color: white;
+  padding-left: .25em;
+  border-bottom: 2px solid #1f1533;
+  -webkit-transition: background .5s;
+  transition: background .5s;
+}
+
+.mega-menu ul li a {
+  color: #f2f4f7;
+  display: inline-block;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+}
+
+.mega-menu .subject-container {
+  background: #293d50;
+}
+
+.subject-container ul li:hover {
+  background: aqua;
+  border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-color: dimgray;
+  border-bottom-width: 4px;
+  -webkit-transition: background .7s;
+  transition: background .7s;
+}
+
+.subject-container ul li:hover a {
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  color: #293d50;
+  font-weight: bolder;
+  letter-spacing: 2px;
+}
+
+.is-active {
+  background: aqua;
+  border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-color: dimgray;
+  border-bottom-width: 4px;
+  -webkit-transition: background .7s;
+  transition: background .7s;
+}
+
+.subject-container__header {
+  display: inline-block;
+  color: #f2f4f7;
+  font-weight: bolder;
+  padding-left: 1.2em;
+  padding-top: .5em;
+  letter-spacing: 1px;
+}
+
 .navbar-laravel {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

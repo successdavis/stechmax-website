@@ -29,13 +29,8 @@
 
       {{-- courses menu button --}}
       <li>
-        <a href="{{ url('/courses') }}" data-toggle="library-dropdown">LIBRARY  <i class="fas fa-angle-double-down"></i></a>
+        <mega-menu></mega-menu>
       </li>
-      <div>
-        
-      </div>
-      
-      </div>
 
       <li><a href="{{ url('/threads') }}">FORUM</a></li>
       <li>
@@ -77,4 +72,4 @@
     @endguest
   </div>
 </div>
-
+{{-- <portal-target name="mega-menu-content"></portal-target> --}}

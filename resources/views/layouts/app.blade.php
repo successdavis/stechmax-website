@@ -67,6 +67,7 @@
            {{-- Include the title bar --}}
            @include('layouts.title-bar')
             
+            
             <main class="py-4 margin-top-large" id="site-body">
                 @yield('content')
 

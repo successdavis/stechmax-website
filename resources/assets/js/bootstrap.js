@@ -20,11 +20,18 @@ window.Vue.prototype.authorize = function (...params) {
     return params[0](window.App.user);
 };
 
+
+
 Vue.prototype.signedIn = window.App.signedIn;
 
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+import PortalVue from 'portal-vue'
+
+Vue.use(PortalVue)
+
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that

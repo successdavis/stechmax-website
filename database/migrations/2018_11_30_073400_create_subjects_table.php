@@ -17,6 +17,7 @@ class CreateSubjectsTable extends Migration
             $table->increments('id');
             $table->string('name', 50);
             $table->string('slug', 50);
+            $table->string('icon_path');
             $table->timestamps();
         });
     }
