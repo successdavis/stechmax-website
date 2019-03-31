@@ -44,7 +44,7 @@ class ThreadTest extends TestCase
 
         $this->assertCount(1, $this->thread->replies);
     }
-
+ 
      /** @test */
     public function it_belongs_to_a_channel()
     {

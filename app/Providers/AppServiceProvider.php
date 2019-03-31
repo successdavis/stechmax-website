@@ -23,12 +23,12 @@ class AppServiceProvider extends ServiceProvider
             $view->with('channels', $channels);
         });
 
-        \View::composer('*', function ($view) {
-            $subjects = \Cache::rememberForever('subjects', function() {
-                return Subject::all();
-            });
-            $view->with('subjects', $subjects);
-        });
+        // \View::composer('*', function ($view) {
+        //     $subjects = \Cache::rememberForever('subjects', function() {
+        //         return Subject::all();
+        //     });
+        //     $view->with('subjects', $subjects);
+        // });
 
         \Validator::extend('spamfree', 'App\Rules\SpamFree@passes');
     }

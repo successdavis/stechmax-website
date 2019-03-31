@@ -6,19 +6,27 @@
         <div class="course-big-banner--content grid-container">
             <h2>{{$course->title}}</h2>
             @if (! auth()->check() || !auth()->user()->isSubscribe($course))
+
+            {{-- Subscribe for online training only  --}}
                 <div class="grid-x grid-padding-x">
-                    <div class="medium-6">
+                    <div class="cell">
                         <div class="grid-container">
-                            <div>Study remotely at the comfort of your home with a smart phone or PC, One-on-One with your tutor</div>
-                            <a href="{{$course->path()}}/medium?class=false" class="medium button">STUDY ONLINE</a>
+                            <div>Study and share physical interactions with tutors at the esteemed institute.</div>
+                            <a href="{{$course->path()}}/medium?class=true" class="medium button">ENROLL FOR THIS COURSE</a>
                         </div>
                     </div>
-                    <div class="medium-6">
+
+
+{{-- Study remotely at the comfort of your home with a smart phone or PC, One-on-One with your tutor --}}
+
+            {{-- Subscribe for classroom training --}}
+
+                    {{-- <div class="medium-6">
                         <div class="grid-container">
                             <div>Study online and also share physical interactions with tutors at the esteemed institute.</div>
                             <a href="{{$course->path()}}/medium?class=true" class="medium button">STUDY IN CLASSROOM</a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             @else (auth()->user()->isSubscribe($course))
             <div class="center-align">

@@ -36207,7 +36207,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "a",
-      { attrs: { href: "#", "data-toggle": "library-dropdown" } },
+      { attrs: { href: "/courses", "data-toggle": "library-dropdown" } },
       [
         _vm._v("LIBRARY  "),
         _c("i", { staticClass: "fas fa-angle-double-down" })

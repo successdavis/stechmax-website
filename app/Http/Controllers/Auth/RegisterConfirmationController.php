@@ -27,10 +27,6 @@ class RegisterConfirmationController extends Controller
 
     public function create()
     {
-        if (auth()->user()->confirmed) {
-            dd(request()->all());
-            // return redirect('/courses');
-        }
         return view('auth.confirmEmailMessage');
     }
 

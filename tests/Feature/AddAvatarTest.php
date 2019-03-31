@@ -14,7 +14,7 @@ class AddAvatarTest extends TestCase
     use DatabaseMigrations;
     
     /** @test */
-    public function an_aunthenticated_users_cannot_upload_avatars()
+    public function an_unathenticated_users_cannot_upload_avatars()
     {
         $this->withExceptionHandling();
 

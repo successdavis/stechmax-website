@@ -3,14 +3,10 @@
 @section('content')
 <div class="grid-container ">
     <div class="row mb-3">
-  @if (session()->has('newUser') && $session = session()->pull('newUser'))
-    <div>
-      <p>Thank you for registering with Stechmax, we are happy you have decide to join us</p>
-      <p>To begin your training, Please subscribe to a course below</p>
-    </div>
-  @endif
+
         <div class="search-form grid-x grid-padding-x mb-4 mt-4">
         <div class="text-info">
+          
           <h3>Here is a list of courses offered</h3>
           <p>You can sort or search this page for precise courses</p>
         </div>

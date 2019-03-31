@@ -25,9 +25,14 @@ Route::get('/threads/search', 'SearchController@show');
 
 Route::get('api/courses', 'Api\CoursesController@getSubjects');
 
+Route::post('/courses', 'CourseController@store')->name('courses.store');
+
 Route::get('/courses', 'CourseController@index')->name('courses');
 Route::get('/courses/{subject}', 'CourseController@index');
 Route::get('/courses/{subject}/{course}', 'CourseController@show');
+
+Route::post('/subjects', 'SubjectController@store')->middleware('admin')->name('subjects.new');
+
 
 Route::get('/threads/new', 'ThreadController@create');
 Route::get('/threads', 'ThreadController@index')->name('threads');

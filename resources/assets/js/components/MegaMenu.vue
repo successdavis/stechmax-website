@@ -1,6 +1,6 @@
 <template>
     <span @mouseover="active = true" @mouseout="active = false">
-        <a href="#" data-toggle="library-dropdown">LIBRARY  <i class="fas fa-angle-double-down"></i></a>
+        <a href="/courses" data-toggle="library-dropdown">LIBRARY  <i class="fas fa-angle-double-down"></i></a>
 
         <!-- <portal to="mega-menu-content"> -->
             <div class="mega-menu" @mouseover="active = true" @mouseout="active = false" v-if="active">
