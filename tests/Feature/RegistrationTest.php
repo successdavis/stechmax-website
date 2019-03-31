@@ -68,5 +68,29 @@ class RegistrationTest extends TestCase
             ->assertRedirect(route('threads'))
             ->assertSessionHas('flash', 'unknown token.');
     }
+
+    /** @test */
+    public function a_user_can_resend_their_confirmation_email()
+    {
+        Mail::fake();
+        
+        $this->post('/register', [
+            'f_name' => 'John',
+            'l_name' => 'doe',
+            'email' => 'john@example.com',
+            'gender' => 'male',
+            'phone' => '09061260072',
+            'password' => 'foobar000',
+            'password_confirmation' => 'foobar000'
+        ]);
+
+        Mail::assertQueued(PleaseConfirmYourEmail::class);
+
+        $user = User::where('f_name', 'John')->first();
+            
+        $this->get('/register/resend');
+
+        Mail::assertQueued(PleaseConfirmYourEmail::class, 2);
+    }
 }
  

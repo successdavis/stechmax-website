@@ -283,6 +283,12 @@ a {
     max-width: 50%;
   }
 
+  .content-area {
+    max-width: 850px;
+    background: fff;
+    padding: 10px;
+  }
+
   .medium-div {
     max-width: 30%;
     margin-left: auto;
@@ -658,11 +664,16 @@ a {
   color: blue;
 }
 
+.white-bg {
+  background: white;
+}
+
 .mega-menu {
   background: #1f1533;
   position: absolute;
   width: 920px;
   z-index: 200;
+  opacity: .98;
 }
 
 .mega-menu ul {

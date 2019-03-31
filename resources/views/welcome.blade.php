@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content')
-@if (!Auth::check())
-    @include('layouts.regFormBanner')
-@else 
-    @include('layouts.banner')
-@endif
-<div class="grid-container">
-    @include('layouts.what')
-</div>
-    @include('layouts.advertBanner')
+    @if (!Auth::check())
+        @include('layouts.regFormStreamer')
+    @else 
+        @include('layouts.noticeStreamer')
+    @endif
+    <div class="grid-container">
+        @include('layouts.what')
+    </div>
+        @include('layouts.advertBanner')
 @endsection

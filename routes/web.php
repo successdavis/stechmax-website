@@ -18,6 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/completeregistration', 'Auth\CompleteRegistrationController@create');
+Route::post('/completeregistration', 'Auth\CompleteRegistrationController@update');
+
 Route::get('/threads/search', 'SearchController@show');
 
 Route::get('api/courses', 'Api\CoursesController@getSubjects');
@@ -56,6 +59,10 @@ Route::get('/profiles/{user}/notifications', 'UserNotificationController@index')
 Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotificationController@destroy');
 
 Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->name('register.comfirm');
+Route::get('/register/resend', 'Auth\RegisterConfirmationController@resend')->name('register.resend_comfirmation');
+Route::get('/register/comfirm_email', 'Auth\RegisterConfirmationController@create')->middleware('cannot-see-resend-link-page')->name('register.confirm_email');
+
+// Route::get('/register/confirm/register', 'Auth\RegisterConfirmationController@create')->name('register.recomfirm');
 
 Route::get('/home/{user}/courses', 'HomeController@subscribedCourses');
 

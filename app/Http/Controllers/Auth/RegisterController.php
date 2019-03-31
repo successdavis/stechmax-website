@@ -31,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/courses';
+    protected $redirectTo = '/register/comfirm_email';
 
     /**
      * Create a new controller instance.
