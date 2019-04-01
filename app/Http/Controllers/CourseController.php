@@ -50,7 +50,30 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $this->validate(request(), [
+            'title' => 'required',
+            'difficulty' => 'required',
+            'duration' => 'required',
+            'fee' => 'required',
+            'description' => 'required',
+            'sypnosis' => 'required',
+            'subject_id' => 'required|exists:subjects',
+            'type_id' => 'required|exists:types'
+        ]);
+
+        $course = Course::create([
+            'title' => request('title'),
+            'difficulty' => request('difficulty'),
+            'duration' => request('duration'),
+            'subject_id' => request('subject_id'),
+            'type_id' => request('type_id'),
+            'fee' => request('fee'),
+            'description' => request('description'),
+            'sypnosis' => request('sypnosis')
+        ]);
+
+        return redirect($course->path())
+            ->with('flash', 'New Course Created Successfully');
     }
 
     /**

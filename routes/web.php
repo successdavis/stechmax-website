@@ -25,7 +25,7 @@ Route::get('/threads/search', 'SearchController@show');
 
 Route::get('api/courses', 'Api\CoursesController@getSubjects');
 
-Route::post('/courses', 'CourseController@store')->name('courses.store');
+Route::post('/courses', 'CourseController@store')->middleware('admin')->name('courses.store');
 
 Route::get('/courses', 'CourseController@index')->name('courses');
 Route::get('/courses/{subject}', 'CourseController@index');
