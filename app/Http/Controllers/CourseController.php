@@ -39,7 +39,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.create');
     }
 
     /**
@@ -51,21 +51,21 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'title' => 'required',
-            'difficulty' => 'required',
+            'title' => 'required|spamfree',
             'duration' => 'required',
             'fee' => 'required',
             'description' => 'required',
             'sypnosis' => 'required',
-            'subject_id' => 'required|exists:subjects',
-            'type_id' => 'required|exists:types'
+            'subject_id' => 'required|exists:subjects,id',
+            'type_id' => 'required|exists:types,id',
+            'difficulty_id' => 'required|exists:difficulties,id'
         ]);
 
         $course = Course::create([
             'title' => request('title'),
-            'difficulty' => request('difficulty'),
             'duration' => request('duration'),
             'subject_id' => request('subject_id'),
+            'difficulty_id' => request('difficulty_id'),
             'type_id' => request('type_id'),
             'fee' => request('fee'),
             'description' => request('description'),
@@ -84,7 +84,8 @@ class CourseController extends Controller
      */
     public function show($subjectId, Course $course)
     {
-        return view('courses.show', compact('course'));
+        $is_Dashboard = true;
+        return view('dashboard.create', compact('is_Dashboard'));
     }
 
     /**

@@ -8,7 +8,7 @@
                     <!-- Subjects Container  -->
                     <div class="subject-container small-3">
                         <ul>
-                            <li v-for="subject in subjects" @mouseover="selectCourse(subject)" :class="selected.id === subject.id ? 'is-active' : 'classname' ">
+                            <li v-for="subject in subjects" @mouseover="selectCourse(subject)" :class="selected.id === subject.id ? 'subject-is-active' : 'classname' ">
                                 <a :href="'/courses/'+subject.slug" v-text="subject.name"></a>
                             </li>
                         </ul>
@@ -53,7 +53,6 @@ export default {
 
     created() {
         axios.get('/api/courses').then(response => this.setSelected(response.data));
-
     },
 
     computed: {
@@ -73,7 +72,7 @@ export default {
         },
 
         setSelected(response) {
-            console.log(response);
+            // console.log(response);
             this.subjects = response;
             this.selected = this.subjects[0];
         }

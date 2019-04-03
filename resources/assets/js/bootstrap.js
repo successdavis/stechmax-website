@@ -28,7 +28,10 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-import PortalVue from 'portal-vue'
+import PortalVue from 'portal-vue';
+import Form from './utilities/Form';
+
+window.Form = Form;
 
 Vue.use(PortalVue)
 

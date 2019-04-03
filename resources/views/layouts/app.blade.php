@@ -44,7 +44,7 @@
 <div id="app">
 
     <div class="off-canvas-wrapper">
-        <div class="off-canvas position-left @if ($pageTitle === 'Dashboard - Stechmax')
+        <div class="off-canvas off-canvas_panel position-left bg--dark-blue @if ($pageTitle === 'go')
           {{"reveal-for-medium"}} @endif" id="offCanvasLeftOverlap" data-off-canvas data-transition="overlap">
 
             {{-- button to toggle off canvas --}}
@@ -70,7 +70,7 @@
             
             <main class="py-4 margin-top-large" id="site-body">
                 @yield('content')
-
+                
                 <flash message="{{ session('flash') }}"></flash>
             </main>
 

@@ -29322,6 +29322,7 @@ Vue.component('user-notifications', __webpack_require__(51));
 Vue.component('thread-view', __webpack_require__(54));
 Vue.component('avatar-form', __webpack_require__(72));
 Vue.component('mega-menu', __webpack_require__(78));
+Vue.component('course-registration', __webpack_require__(87));
 
 var app = new Vue({
   el: '#app'
@@ -29335,6 +29336,7 @@ var app = new Vue({
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_portal_vue__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_portal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_portal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_Form__ = __webpack_require__(85);
 
 window._ = __webpack_require__(5);window.Popper = __webpack_require__(16).default;
 /**
@@ -29367,6 +29369,9 @@ window.axios = __webpack_require__(20);
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
+
+
+window.Form = __WEBPACK_IMPORTED_MODULE_1__utilities_Form__["a" /* default */];
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_portal_vue___default.a);
 
@@ -36066,7 +36071,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.selected = subject;
         },
         setSelected: function setSelected(response) {
-            console.log(response);
+            // console.log(response);
             this.subjects = response;
             this.selected = this.subjects[0];
         }
@@ -36121,7 +36126,7 @@ var render = function() {
                         {
                           class:
                             _vm.selected.id === subject.id
-                              ? "is-active"
+                              ? "subject-is-active"
                               : "classname",
                           on: {
                             mouseover: function($event) {
@@ -36229,6 +36234,884 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Errors__ = __webpack_require__(86);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var Form = function () {
+    /**
+     * Create a new Form instance.
+     *
+     * @param {object} data
+     */
+    function Form(data) {
+        _classCallCheck(this, Form);
+
+        this.originalData = data;
+
+        for (var field in data) {
+            this[field] = data[field];
+        }
+
+        this.errors = new __WEBPACK_IMPORTED_MODULE_0__Errors__["a" /* default */]();
+    }
+
+    /**
+     * Fetch all relevant data for the form.
+     */
+
+
+    _createClass(Form, [{
+        key: 'data',
+        value: function data() {
+            var data = {};
+
+            for (var property in this.originalData) {
+                data[property] = this[property];
+            }
+
+            return data;
+        }
+
+        /**
+         * Reset the form fields.
+         */
+
+    }, {
+        key: 'reset',
+        value: function reset() {
+            for (var field in this.originalData) {
+                this[field] = '';
+            }
+
+            this.errors.clear();
+        }
+
+        /**
+         * Send a POST request to the given URL.
+         * .
+         * @param {string} url
+         */
+
+    }, {
+        key: 'post',
+        value: function post(url) {
+            return this.submit('post', url);
+        }
+
+        /**
+         * Send a PUT request to the given URL.
+         * .
+         * @param {string} url
+         */
+
+    }, {
+        key: 'put',
+        value: function put(url) {
+            return this.submit('put', url);
+        }
+
+        /**
+         * Send a PATCH request to the given URL.
+         * .
+         * @param {string} url
+         */
+
+    }, {
+        key: 'patch',
+        value: function patch(url) {
+            return this.submit('patch', url);
+        }
+
+        /**
+         * Send a DELETE request to the given URL.
+         * .
+         * @param {string} url
+         */
+
+    }, {
+        key: 'delete',
+        value: function _delete(url) {
+            return this.submit('delete', url);
+        }
+
+        /**
+         * Submit the form.
+         *
+         * @param {string} requestType
+         * @param {string} url
+         */
+
+    }, {
+        key: 'submit',
+        value: function submit(requestType, url) {
+            var _this = this;
+
+            return new Promise(function (resolve, reject) {
+                axios[requestType](url, _this.data()).then(function (response) {
+                    _this.onSuccess(response.data);
+
+                    resolve(response.data);
+                }).catch(function (error) {
+                    _this.onFail(error.response.data);
+
+                    reject(error.response.data);
+                });
+            });
+        }
+
+        /**
+         * Handle a successful form submission.
+         *
+         * @param {object} data
+         */
+
+    }, {
+        key: 'onSuccess',
+        value: function onSuccess(data) {
+            this.reset();
+        }
+
+        /**
+         * Handle a failed form submission.
+         *
+         * @param {object} errors
+         */
+
+    }, {
+        key: 'onFail',
+        value: function onFail(errors) {
+            this.errors.record(errors);
+        }
+    }]);
+
+    return Form;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Form);
+
+/***/ }),
+/* 86 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Errors = function () {
+    /**
+     * Create a new Errors instance.
+     */
+    function Errors() {
+        _classCallCheck(this, Errors);
+
+        this.errors = {};
+    }
+
+    /**
+     * Determine if an errors exists for the given field.
+     *
+     * @param {string} field
+     */
+
+
+    _createClass(Errors, [{
+        key: "has",
+        value: function has(field) {
+            return this.errors.hasOwnProperty(field);
+        }
+
+        /**
+         * Determine if we have any errors.
+         */
+
+    }, {
+        key: "any",
+        value: function any() {
+            return Object.keys(this.errors).length > 0;
+        }
+
+        /**
+         * Retrieve the error message for a field.
+         *
+         * @param {string} field
+         */
+
+    }, {
+        key: "get",
+        value: function get(field) {
+            if (this.errors[field]) {
+                return this.errors[field][0];
+            }
+        }
+
+        /**
+         * Record the new errors.
+         *
+         * @param {object} errors
+         */
+
+    }, {
+        key: "record",
+        value: function record(errors) {
+            this.errors = errors.errors;
+        }
+
+        /**
+         * Clear one or all error fields.
+         *
+         * @param {string|null} field
+         */
+
+    }, {
+        key: "clear",
+        value: function clear(field) {
+            if (field) {
+                delete this.errors[field];
+
+                return;
+            }
+
+            this.errors = {};
+        }
+    }]);
+
+    return Errors;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Errors);
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(89)
+/* template */
+var __vue_template__ = __webpack_require__(88)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/CourseRegistration.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1b2f1e2a", Component.options)
+  } else {
+    hotAPI.reload("data-v-1b2f1e2a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      staticClass: "course_registration",
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.addCourse($event)
+        },
+        keydown: function($event) {
+          _vm.Form.errors.clear()
+        }
+      }
+    },
+    [
+      _c("div", { staticClass: "grid-container" }, [
+        _c("h5", { staticClass: "center-text mt-2" }, [
+          _vm._v("Course Registration")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x grid-padding-x" }, [
+          _c("div", { staticClass: "cell" }, [
+            _c("label", [
+              _vm._v("Select Subject\r\n                    "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.Form.subject_id,
+                      expression: "Form.subject_id"
+                    }
+                  ],
+                  attrs: {
+                    "aria-describedby": "subjectHelpText",
+                    required: ""
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.Form,
+                        "subject_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { disabled: "", selected: "" } }, [
+                    _vm._v("Select Subject Type")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.Data.subjects, function(subject) {
+                    return _c("option", {
+                      attrs: { "aria-describedby": "subjectHelpText" },
+                      domProps: {
+                        value: subject.id,
+                        textContent: _vm._s(subject.name)
+                      }
+                    })
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _vm.Form.errors.has("subject_id")
+              ? _c("p", {
+                  staticClass: "help-text",
+                  attrs: { id: "subjectHelpText" },
+                  domProps: {
+                    textContent: _vm._s(_vm.Form.errors.get("subject_id"))
+                  }
+                })
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "cell" }, [
+            _c("label", [
+              _vm._v("Course Title\r\n                   "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.Form.title,
+                    expression: "Form.title"
+                  }
+                ],
+                attrs: {
+                  type: "text",
+                  "aria-describedby": "courseTitleHelpText",
+                  required: ""
+                },
+                domProps: { value: _vm.Form.title },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.Form, "title", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _vm.Form.errors.has("title")
+              ? _c("p", {
+                  staticClass: "help-text",
+                  attrs: { id: "courseTitleHelpText" },
+                  domProps: {
+                    textContent: _vm._s(_vm.Form.errors.get("title"))
+                  }
+                })
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "medium-6 cell" }, [
+            _c("label", [
+              _vm._v("Course Type\r\n                    "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.Form.type_id,
+                      expression: "Form.type_id"
+                    }
+                  ],
+                  attrs: { "aria-describedby": "typeHelpText", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.Form,
+                        "type_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { disabled: "", selected: "" } }, [
+                    _vm._v("Select Course Type")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.Data.types, function(type) {
+                    return _c("option", {
+                      domProps: {
+                        value: type.id,
+                        textContent: _vm._s(type.name)
+                      }
+                    })
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _vm.Form.errors.has("type_id")
+              ? _c("p", {
+                  staticClass: "help-text",
+                  attrs: { id: "typeHelpText" },
+                  domProps: {
+                    textContent: _vm._s(_vm.Form.errors.get("type_id"))
+                  }
+                })
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "medium-6 cell" }, [
+            _c("label", [
+              _vm._v("Difficulty\r\n                    "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.Form.difficulty_id,
+                      expression: "Form.difficulty_id"
+                    }
+                  ],
+                  attrs: {
+                    "aria-describedby": "difficultyHelpText",
+                    required: ""
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.Form,
+                        "difficulty_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { disabled: "", selected: "" } }, [
+                    _vm._v("Select difficulty level")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.Data.difficulties, function(difficulty) {
+                    return _c("option", {
+                      domProps: {
+                        value: difficulty.id,
+                        textContent: _vm._s(difficulty.level)
+                      }
+                    })
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _vm.Form.errors.has("difficulty")
+              ? _c("p", {
+                  staticClass: "help-text",
+                  attrs: { id: "difficultyHelpText" },
+                  domProps: {
+                    textContent: _vm._s(_vm.Form.errors.get("difficulty"))
+                  }
+                })
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "medium-6 cell" }, [
+            _c("label", [
+              _vm._v("Duration\r\n                   "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.Form.duration,
+                    expression: "Form.duration"
+                  }
+                ],
+                attrs: {
+                  type: "number",
+                  "aria-describedby": "durationHelpText",
+                  required: ""
+                },
+                domProps: { value: _vm.Form.duration },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.Form, "duration", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _vm.Form.errors.has("duration")
+              ? _c("p", {
+                  staticClass: "help-text",
+                  attrs: { id: "durationHelpText" },
+                  domProps: {
+                    textContent: _vm._s(_vm.Form.errors.get("duration"))
+                  }
+                })
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "medium-6 cell" }, [
+            _c("label", [
+              _vm._v("Fee\r\n                   "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.Form.fee,
+                    expression: "Form.fee"
+                  }
+                ],
+                attrs: {
+                  type: "number",
+                  "aria-describedby": "durationHelpText",
+                  required: ""
+                },
+                domProps: { value: _vm.Form.fee },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.Form, "fee", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _vm.Form.errors.has("fee")
+              ? _c("p", {
+                  staticClass: "help-text",
+                  attrs: { id: "durationHelpText" },
+                  domProps: { textContent: _vm._s(_vm.Form.errors.get("fee")) }
+                })
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "cell" }, [
+            _c("label", [
+              _vm._v("Description\r\n                   "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.Form.description,
+                    expression: "Form.description"
+                  }
+                ],
+                attrs: { rows: "6", id: "descriptionHelpText" },
+                domProps: { value: _vm.Form.description },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.Form, "description", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _vm.Form.errors.has("description")
+              ? _c("p", {
+                  staticClass: "help-text",
+                  attrs: { id: "courseTitleHelpText", required: "" },
+                  domProps: {
+                    textContent: _vm._s(_vm.Form.errors.get("description"))
+                  }
+                })
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "cell" }, [
+            _c("label", [
+              _vm._v("Sypnosis\r\n                   "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.Form.sypnosis,
+                    expression: "Form.sypnosis"
+                  }
+                ],
+                attrs: { rows: "4", id: "descriptionHelpText", required: "" },
+                domProps: { value: _vm.Form.sypnosis },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.Form, "sypnosis", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _vm.Form.errors.has("sypnosis")
+              ? _c("p", {
+                  staticClass: "help-text",
+                  attrs: { id: "courseTitleHelpText" },
+                  domProps: {
+                    textContent: _vm._s(_vm.Form.errors.get("sypnosis"))
+                  }
+                })
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "medium button",
+            attrs: {
+              type: "submit",
+              value: "submit",
+              disabled: _vm.Form.errors.any()
+            }
+          })
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1b2f1e2a", module.exports)
+  }
+}
+
+/***/ }),
+/* 89 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            Form: new Form({
+                subject_id: '',
+                type_id: '',
+                difficulty_id: '',
+                title: '',
+                duration: '',
+                fee: '',
+                description: '',
+                sypnosis: ''
+            }),
+            Data: {
+                subjects: {},
+                types: {},
+                difficulties: {}
+            }
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        axios.get('/api/courses').then(function (response) {
+            return _this.Data.subjects = response.data;
+        });
+
+        axios.get('/api/difficulties').then(function (response) {
+            return _this.Data.difficulties = response.data;
+        });
+
+        axios.get('/api/types').then(function (response) {
+            return _this.Data.types = response.data;
+        });
+    },
+
+
+    methods: {
+        addCourse: function addCourse() {
+            this.Form.post('/courses').then(function () {
+                return flash('Your course has been created.');
+            });
+        }
+    }
+});
 
 /***/ })
 /******/ ]);

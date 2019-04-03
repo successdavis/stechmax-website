@@ -2,6 +2,30 @@
     color: blue;
 }
 
-.white-bg {
+.white-bg,
+.bg-white {
     background: white;
+}
+
+
+
+.bg--dark-blue {
+    background-color: #222a38;
+    color: white;
+}
+
+.bd--ash {
+    border-color: #9fabbd;
+}
+
+.white {
+    color: white;
+}
+
+.dark-gray {
+    background: #0d131e;
+}
+
+.help-text {
+    color: red;
 }

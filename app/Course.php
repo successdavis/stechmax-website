@@ -58,6 +58,11 @@ class Course extends Model
         return $this->hasMany(Subscription::class);
     }
 
+    public function difficulties()
+    {
+        return $this->belongsTo(Difficulty::class);
+    }
+
     public function scopeFilter($query, $filters)
     {
         return $filters->apply($query);

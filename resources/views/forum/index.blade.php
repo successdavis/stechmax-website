@@ -9,43 +9,39 @@
         @include('forum.leftSideBar')
     </div>
     <div class="cell medium-8 large-8">
-        <div class="">
-            <div class="grid-x grid-padding-x">
-                <form method="GET" action="/threads/search">
-                    <div class=" cell medium-6">
-                        <div class="input-group">
-                              <input class="input-group-field" name="q" type="text" placeholder="Watcha Looking for?">
-                              <div class="input-group-button">
-                                <input type="submit" class="button" value="Submit">
-                              </div>
+        <div class="grid-x grid-padding-x">
+            <form method="GET" action="/threads/search">
+                <div class="cell">
+                    <div class="input-group">
+                          <input class="input-group-field" name="q" type="text" placeholder="Watcha Looking for?">
+                          <div class="input-group-button">
+                            <input type="submit" class="button" value="Submit">
+                          </div>
+                    </div>
+                </div> 
+            </form>
+            {{-- <div class="cell medium-6">
+                <div class="grid-container">
+                    <div class="grid-x grid-padding-x">
+                        <div class="small-6">
+                              <select>
+                                @foreach ($channels as $channel)
+                                    <option><a href="/threads/">{{$channel->name}}</a></option>
+                                @endforeach
+                              </select>
                         </div>
-                    </div> 
-                </form>
-                <div class="cell medium-6">
-                    <div class="grid-container">
-                        <div class="grid-x grid-padding-x">
-                            <div class="small-6">
-                                  <select>
-                                    <option value="husker">Husker</option>
-                                    <option value="starbuck">Starbuck</option>
-                                    <option value="hotdog">Hot Dog</option>
-                                    <option value="apollo">Apollo</option>
-                                  </select>
-                            </div>
-                            <div class="small-6">
-                                  <select>
-                                    <option value="husker">Husker</option>
-                                    <option value="starbuck">Starbuck</option>
-                                    <option value="hotdog">Hot Dog</option>
-                                    <option value="apollo">Apollo</option>
-                                  </select>
-                            </div>
+                        <div class="small-6">
+                              <select>
+                                <option value="husker">Husker</option>
+                                <option value="starbuck">Starbuck</option>
+                                <option value="hotdog">Hot Dog</option>
+                                <option value="apollo">Apollo</option>
+                              </select>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
-
         @forelse ($threads as $thread)
         <div class="grid-x grid-padding-x mb-2">
 

@@ -30,7 +30,7 @@
             onLoad(avatar) {
                 this.avatar = avatar.src;
 
-                this.persist(avatar.file);  
+                this.persist(avatar.file);
             },
         persist(avatar) {
                 let data = new FormData();

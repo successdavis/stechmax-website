@@ -26,6 +26,7 @@ Route::get('/threads/search', 'SearchController@show');
 Route::get('api/courses', 'Api\CoursesController@getSubjects');
 
 Route::post('/courses', 'CourseController@store')->middleware('admin')->name('courses.store');
+Route::get('/courses/create', 'CourseController@create')->middleware('admin')->name('courses.create');
 
 Route::get('/courses', 'CourseController@index')->name('courses');
 Route::get('/courses/{subject}', 'CourseController@index');
@@ -33,6 +34,8 @@ Route::get('/courses/{subject}/{course}', 'CourseController@show');
 
 Route::post('/subjects', 'SubjectController@store')->middleware('admin')->name('subjects.new');
 
+Route::get('api/difficulties', 'Api\DifficultyController@index');
+Route::get('api/types', 'Api\TypeController@index'); // Course Type
 
 Route::get('/threads/new', 'ThreadController@create');
 Route::get('/threads', 'ThreadController@index')->name('threads');
@@ -41,6 +44,9 @@ Route::post('/threads', 'ThreadController@store')->middleware('must-be-confirmed
 Route::get('/threads/{channel}/{thread}', 'ThreadController@show');
 Route::patch('/threads/{channel}/{thread}', 'ThreadController@update')->name('threads.update');
 Route::delete('threads/{channel}/{thread}', 'ThreadController@destroy');
+
+Route::post('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionController@store')->middleware('auth');
+Route::delete('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionController@destroy')->middleware('auth');
 
 Route::post('locked-threads/{thread}', 'lockedThreadController@store')->name('locked-threads.store')->middleware('admin');
 Route::delete('locked-threads/{thread}', 'lockedThreadController@destroy')->name('locked-threads.destroy')->middleware('admin');
@@ -52,8 +58,7 @@ Route::post('/threads/{channel}/{thread}/replies', 'ReplyController@store');
 
 Route::post('/replies/{reply}/best', 'BestReplyController@store')->name('best-replies.store');
 
-Route::post('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionController@store')->middleware('auth');
-Route::delete('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionController@destroy')->middleware('auth');
+
 
 Route::post('/replies/{reply}/favorites', 'FavoriteController@store');
 Route::delete('/replies/{reply}/favorites', 'FavoriteController@destroy');

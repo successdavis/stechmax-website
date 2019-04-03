@@ -49,7 +49,7 @@ class CreateCourseTest extends TestCase
         $this->publishCourse(['subject_id' => 999])
             ->assertSessionHasErrors('subject_id');
     }
-
+    
     /** @test */
     public function a_course_requires_a_valid_type_id()
     {
@@ -62,6 +62,20 @@ class CreateCourseTest extends TestCase
 
         $this->publishCourse(['type_id' => 889])
             ->assertSessionHasErrors('type_id');
+    }
+
+    /** @test */
+    public function a_course_requires_a_valid_difficulty_id()
+    {
+        $this->withExceptionHandling();
+
+        $this->signIn(factory('App\User')->states('administrator')->create());
+        
+        $this->publishCourse(['difficulty_id' => null])
+            ->assertSessionHasErrors('difficulty_id');
+
+        $this->publishCourse(['difficulty_id' => 889])
+            ->assertSessionHasErrors('difficulty_id');
     }
 
     public function publishCourse($overrides = [])
