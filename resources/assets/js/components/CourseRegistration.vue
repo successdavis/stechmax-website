@@ -70,8 +70,9 @@
                  </label>
                <p class="help-text" id="courseTitleHelpText" v-if="Form.errors.has('sypnosis')" v-text="Form.errors.get('sypnosis')"></p>
                </div>
-               <input type="submit" value="submit" class="medium button" :disabled="Form.errors.any()" >
              </div>
+             <button type="submit" class="expanded medium button success" :disabled="Form.errors.any()">Create Course</button>
+             <button type="submit" class="expanded medium button success" :disabled="Form.errors.any()" v-if=(next)>Next</button>
            </div>
          </form>
 </template>
@@ -80,6 +81,7 @@
     export default {
         data () {
             return {
+                next: false,
                 Form: new Form({
                     subject_id: '',
                     type_id: '',

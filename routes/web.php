@@ -26,7 +26,7 @@ Route::get('/threads/search', 'SearchController@show');
 Route::get('api/courses', 'Api\CoursesController@getSubjects');
 
 Route::post('/courses', 'CourseController@store')->middleware('admin')->name('courses.store');
-Route::get('/courses/create', 'CourseController@create')->middleware('admin')->name('courses.create');
+Route::get('/dashboard/courses/create', 'CourseController@create')->middleware('admin')->name('courses.create');
 
 Route::get('/courses', 'CourseController@index')->name('courses');
 Route::get('/courses/{subject}', 'CourseController@index');
@@ -63,7 +63,7 @@ Route::post('/replies/{reply}/best', 'BestReplyController@store')->name('best-re
 Route::post('/replies/{reply}/favorites', 'FavoriteController@store');
 Route::delete('/replies/{reply}/favorites', 'FavoriteController@destroy');
 
-Route::get('/profiles/{user}', 'ProfileController@show');
+Route::get('/profiles/{user}', 'ProfileController@show')->name('profile.show');
 
 Route::get('/profiles/{user}/notifications', 'UserNotificationController@index');
 Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotificationController@destroy');

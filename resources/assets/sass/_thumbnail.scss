@@ -16,6 +16,12 @@
     align-items: center;
 }
 
+.thumbnail a,
+.thumbnail--icon,
+.thumbnail--small {
+    color: white;
+}
+
 .thumbnail,
 .thumbnail--small,
 .thumbnail--medium,

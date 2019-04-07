@@ -1,7 +1,6 @@
 <?php
-  
-  $pageTitle = isset($pageTitle) ? $pageTitle : 'Welcome Stechmax';
-
+    $displayMenu = isset($displayMenu) ? $displayMenu : false;  
+    $pageTitle = isset($pageTitle) ? $pageTitle : 'Welcome Stechmax';
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -44,7 +43,7 @@
 <div id="app">
 
     <div class="off-canvas-wrapper">
-        <div class="off-canvas off-canvas_panel position-left bg--dark-blue @if ($pageTitle === 'go')
+        <div class="off-canvas off-canvas_panel position-left bg--dark-blue @if ($displayMenu)
           {{"reveal-for-medium"}} @endif" id="offCanvasLeftOverlap" data-off-canvas data-transition="overlap">
 
             {{-- button to toggle off canvas --}}
@@ -78,8 +77,10 @@
     </div> {{-- closing wrapper div --}}
 
 </div>
-@if ($pageTitle !== 'Dashboard - Stechmax')
+@if ($displayMenu !== true)
     @include('layouts.footer')
+@else
+    <div class="mb-4"></div>
 @endif
 
 

@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         return view('Dashboard.home', [
-            'pageTitle' => 'Dashboard - Stechmax']);
+            'displayMenu' => true]);
     }
 
     public function subscribedCourses(User $user)
@@ -33,6 +33,7 @@ class HomeController extends Controller
         $courses = $user->getSubscribedCourses()->get();
         return view('Dashboard.courses', [
             'pageTitle' => 'Dashboard - Stechmax',
+            'displayMenu' => 'Gansters School',
             'subscribedCourses' => $courses
         ]);
     }

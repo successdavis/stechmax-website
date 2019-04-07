@@ -13,11 +13,11 @@ class CoursesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getSubjects()
+   public function getSubjects()
     {
         $subjects = Subject::all();
         return $subjects;
-    }
+    } 
 
     /**
      * Show the form for creating a new resource.
@@ -26,7 +26,7 @@ class CoursesController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**

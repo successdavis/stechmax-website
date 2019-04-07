@@ -2,9 +2,11 @@
     <img src="{{auth()->user()->avatar_path}}" class="thumbnail--medium mt-2">
     <p class="mt-1">Hello {{auth()->user()->f_name . ' ' . auth()->user()->l_name}}</p>
     <div class="mb-2">
-      <span class="thumbnail--icon dark-gray">
-        <i class="fas fa-user-tie" ></i>
-      </span>
+        <span class="thumbnail--icon dark-gray">
+          <a href="{{route('profile.show', ['user' => auth()->user()->email])}}">
+            <i class="fas fa-user-tie" title="Access your profile here"></i>
+          </a>
+        </span>
       <span class="thumbnail--icon dark-gray">
         <i class="fas fa-cogs"></i>
       </span>
