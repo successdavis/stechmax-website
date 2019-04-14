@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     protected $guarded = [];
-    protected $appends = ['path'];
+//    protected $appends = ['path'];
 
 
     public function path()

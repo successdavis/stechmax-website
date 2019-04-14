@@ -57,7 +57,7 @@
 
         methods: {
             addLearn () {
-                this.learnForm.post(`/courses/${this.data.id}/learn`)
+                this.learnForm.post(`/courses/${this.data.course.id}/learn`)
                     .then(data => {
                             this.learns.unshift(data);
                             flash('Data Added Successfully')
@@ -65,7 +65,7 @@
                     );
             },
             addRequirement () {
-                this.requirementForm.post(`/courses/${this.data.id}/requirement`)
+                this.requirementForm.post(`/courses/${this.data.course.id}/requirement`)
                     .then(data => {
                             this.requirements.unshift(data);
                             flash('Data Added Successfully')

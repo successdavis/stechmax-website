@@ -37,7 +37,7 @@
 
         computed: {
             course_id() {
-                return this.data.id
+                return this.data.course.id
             }
         },
 

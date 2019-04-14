@@ -1,10 +1,9 @@
 <template>
-    <span @mouseover="active = true" @mouseout="active = false">
+    <div @mouseover="active = true" @mouseout="active = false">
         <a href="/courses" data-toggle="library-dropdown">LIBRARY  <i class="fas fa-angle-double-down"></i></a>
 
-        <!-- <portal to="mega-menu-content"> -->
-            <div class="mega-menu" @mouseover="active = true" @mouseout="active = false" v-if="active">
-                <div class="grid-x">              
+            <div class="mega-menu" @mouseover="active = true" @mouseout="active = false"  v-show="active">
+                <div class="grid-x">
                     <!-- Subjects Container  -->
                     <div class="subject-container small-3">
                         <ul>
@@ -22,7 +21,7 @@
                                 <li v-for="course in courses">
                                     <a :href="'/courses/'+selected.name + '/' +course.id" v-text="course.title" v-if="course.type_id == 1"></a>
                                 </li>
-                            </ul>      
+                            </ul>
                         </div>
 
                         <div class="small-6">
@@ -31,16 +30,15 @@
                                 <li v-for="course in courses">
                                     <a :href="'/courses/'+selected.name + '/' +course.id" v-text="course.title" v-if="course.type_id == 2"></a>
                                 </li>
-                            </ul> 
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        <!-- </portal> -->
-    </span>
+    </div>
 </template>
 
-<script>    
+<script>
 import _ from 'lodash';
 export default {
     data () {

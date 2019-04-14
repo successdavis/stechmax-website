@@ -8,6 +8,8 @@ class Subject extends Model
 {
     protected $guarded = [];
 
+    protected $with = ['courses'];
+
 
     public function getRouteKeyName()
     {

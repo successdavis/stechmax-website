@@ -37179,8 +37179,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -37232,7 +37230,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "span",
+    "div",
     {
       on: {
         mouseover: function($event) {
@@ -37246,110 +37244,116 @@ var render = function() {
     [
       _vm._m(0),
       _vm._v(" "),
-      _vm.active
-        ? _c(
-            "div",
+      _c(
+        "div",
+        {
+          directives: [
             {
-              staticClass: "mega-menu",
-              on: {
-                mouseover: function($event) {
-                  _vm.active = true
-                },
-                mouseout: function($event) {
-                  _vm.active = false
-                }
-              }
+              name: "show",
+              rawName: "v-show",
+              value: _vm.active,
+              expression: "active"
+            }
+          ],
+          staticClass: "mega-menu",
+          on: {
+            mouseover: function($event) {
+              _vm.active = true
             },
-            [
-              _c("div", { staticClass: "grid-x" }, [
-                _c("div", { staticClass: "subject-container small-3" }, [
-                  _c(
-                    "ul",
-                    _vm._l(_vm.subjects, function(subject) {
-                      return _c(
-                        "li",
-                        {
-                          class:
-                            _vm.selected.id === subject.id
-                              ? "subject-is-active"
-                              : "classname",
-                          on: {
-                            mouseover: function($event) {
-                              return _vm.selectCourse(subject)
-                            }
-                          }
-                        },
-                        [
-                          _c("a", {
-                            attrs: { href: "/courses/" + subject.slug },
-                            domProps: { textContent: _vm._s(subject.name) }
-                          })
-                        ]
-                      )
-                    }),
-                    0
+            mouseout: function($event) {
+              _vm.active = false
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "grid-x" }, [
+            _c("div", { staticClass: "subject-container small-3" }, [
+              _c(
+                "ul",
+                _vm._l(_vm.subjects, function(subject) {
+                  return _c(
+                    "li",
+                    {
+                      class:
+                        _vm.selected.id === subject.id
+                          ? "subject-is-active"
+                          : "classname",
+                      on: {
+                        mouseover: function($event) {
+                          return _vm.selectCourse(subject)
+                        }
+                      }
+                    },
+                    [
+                      _c("a", {
+                        attrs: { href: "/courses/" + subject.slug },
+                        domProps: { textContent: _vm._s(subject.name) }
+                      })
+                    ]
                   )
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "small-9 grid-x" }, [
+              _c("div", { staticClass: "small-6" }, [
+                _c("span", { staticClass: "subject-container__header" }, [
+                  _vm._v("Course")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "small-9 grid-x" }, [
-                  _c("div", { staticClass: "small-6" }, [
-                    _c("span", { staticClass: "subject-container__header" }, [
-                      _vm._v("Course")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "ul",
-                      _vm._l(_vm.courses, function(course) {
-                        return _c("li", [
-                          course.type_id == 1
-                            ? _c("a", {
-                                attrs: {
-                                  href:
-                                    "/courses/" +
-                                    _vm.selected.name +
-                                    "/" +
-                                    course.id
-                                },
-                                domProps: { textContent: _vm._s(course.title) }
-                              })
-                            : _vm._e()
-                        ])
-                      }),
-                      0
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "small-6" }, [
-                    _c("span", { staticClass: "subject-container__header" }, [
-                      _vm._v("Learning Path")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "ul",
-                      _vm._l(_vm.courses, function(course) {
-                        return _c("li", [
-                          course.type_id == 2
-                            ? _c("a", {
-                                attrs: {
-                                  href:
-                                    "/courses/" +
-                                    _vm.selected.name +
-                                    "/" +
-                                    course.id
-                                },
-                                domProps: { textContent: _vm._s(course.title) }
-                              })
-                            : _vm._e()
-                        ])
-                      }),
-                      0
-                    )
-                  ])
-                ])
+                _c(
+                  "ul",
+                  _vm._l(_vm.courses, function(course) {
+                    return _c("li", [
+                      course.type_id == 1
+                        ? _c("a", {
+                            attrs: {
+                              href:
+                                "/courses/" +
+                                _vm.selected.name +
+                                "/" +
+                                course.id
+                            },
+                            domProps: { textContent: _vm._s(course.title) }
+                          })
+                        : _vm._e()
+                    ])
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "small-6" }, [
+                _c("span", { staticClass: "subject-container__header" }, [
+                  _vm._v("Learning Path")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  _vm._l(_vm.courses, function(course) {
+                    return _c("li", [
+                      course.type_id == 2
+                        ? _c("a", {
+                            attrs: {
+                              href:
+                                "/courses/" +
+                                _vm.selected.name +
+                                "/" +
+                                course.id
+                            },
+                            domProps: { textContent: _vm._s(course.title) }
+                          })
+                        : _vm._e()
+                    ])
+                  }),
+                  0
+                )
               ])
-            ]
-          )
-        : _vm._e()
+            ])
+          ])
+        ]
+      )
     ]
   )
 }
@@ -37877,7 +37881,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addLearn: function addLearn() {
             var _this = this;
 
-            this.learnForm.post('/courses/' + this.data.id + '/learn').then(function (data) {
+            this.learnForm.post('/courses/' + this.data.course.id + '/learn').then(function (data) {
                 _this.learns.unshift(data);
                 flash('Data Added Successfully');
             });
@@ -37885,7 +37889,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addRequirement: function addRequirement() {
             var _this2 = this;
 
-            this.requirementForm.post('/courses/' + this.data.id + '/requirement').then(function (data) {
+            this.requirementForm.post('/courses/' + this.data.course.id + '/requirement').then(function (data) {
                 _this2.requirements.unshift(data);
                 flash('Data Added Successfully');
             });
@@ -38143,7 +38147,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         course_id: function course_id() {
-            return this.data.id;
+            return this.data.course.id;
         }
     },
 

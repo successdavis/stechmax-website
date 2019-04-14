@@ -74,8 +74,10 @@ class CourseController extends Controller
             'sypnosis' => request('sypnosis')
         ]);
 
+        $path = $course->path();
+
         if (request()->expectsJson()) {
-            return $course;
+            return ['course' => $course, 'path' => $path];
         }
 
         return redirect($course->path())
