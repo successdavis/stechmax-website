@@ -1,23 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Course;
-use App\Section;
+use App\Subject;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class SectionController extends Controller
+class CourseImageController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Course $course)
+    public function index()
     {
-        $sections = $course->sections;
-
-        return $sections;
+        //
     }
 
     /**
@@ -36,26 +35,26 @@ class SectionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Course $course)
+    public function store(Subject $subject, Course $course)
     {
         $this->validate(request(), [
-           'title' => 'required|spamfree'
+           'thumbnail' => ['required', 'image']
         ]);
 
-        $section = $course->addSection([
-            'title' => request('title')
+        $course->update([
+            'thumbnail_path' => request()->file('thumbnail')->store('thumbnails', 'public')
         ]);
 
-        return $section;
+        return response([], 204);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Section  $section
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Section $section)
+    public function show($id)
     {
         //
     }
@@ -63,10 +62,10 @@ class SectionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Section  $section
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Section $section)
+    public function edit($id)
     {
         //
     }
@@ -75,10 +74,10 @@ class SectionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Section  $section
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Section $section)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -86,10 +85,10 @@ class SectionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Section  $section
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Section $section)
+    public function destroy($id)
     {
         //
     }

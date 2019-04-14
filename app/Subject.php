@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Subject extends Model
 {
     protected $guarded = [];
-    protected $with = ['courses']; 
+
+
     public function getRouteKeyName()
     {
         return 'slug';

@@ -4,20 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use App\Section;
+use App\topic;
 use Illuminate\Http\Request;
 
-class SectionController extends Controller
+class TopicController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Course $course)
+    public function index(Course $course, Section $section)
     {
-        $sections = $course->sections;
+        $topics = $section->topics;
 
-        return $sections;
+        return $topics;
     }
 
     /**
@@ -36,26 +37,26 @@ class SectionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Course $course)
+    public function store(Course $course, Section $section)
     {
         $this->validate(request(), [
-           'title' => 'required|spamfree'
+            'title' => 'required|spamfree'
         ]);
 
-        $section = $course->addSection([
+        $topic = $section->addTopic([
             'title' => request('title')
         ]);
 
-        return $section;
+        return $topic;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Section  $section
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Section $section)
+    public function show($id)
     {
         //
     }
@@ -63,10 +64,10 @@ class SectionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Section  $section
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Section $section)
+    public function edit($id)
     {
         //
     }
@@ -75,10 +76,10 @@ class SectionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Section  $section
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Section $section)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -86,10 +87,10 @@ class SectionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Section  $section
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Section $section)
+    public function destroy($id)
     {
         //
     }

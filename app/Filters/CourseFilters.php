@@ -2,6 +2,7 @@
 
 namespace App\Filters;
 
+use App\Difficulty;
 use App\User;
 
 class CourseFilters extends Filters
@@ -28,7 +29,8 @@ class CourseFilters extends Filters
     protected function difficulty($difficulty)
     {
         $this->builder->getQuery()->orders = [];
-        return $this->builder->where('difficulty', $difficulty);    
+        $difficulty = Difficulty::firstOrFail()->where('level', $difficulty)->get();
+        return $this->builder->where('difficulty_id', $difficulty[0]['id']);
     }
 
 }

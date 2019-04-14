@@ -16,7 +16,6 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->unique();
-            $table->string('img')->nullable();
             $table->string('difficulty_id')->nullable();
             $table->Integer('duration');
             $table->unsignedInteger('subject_id')->index();
@@ -24,6 +23,7 @@ class CreateCoursesTable extends Migration
             $table->unsignedInteger('fee');
             $table->text('description');
             $table->text('sypnosis');
+            $table->string('thumbnail_path')->nullable();
             $table->timestamps();
         });
     }

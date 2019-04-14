@@ -7,10 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     protected $guarded = [];
+    protected $appends = ['path'];
+
 
     public function path()
     {
         return '/courses/' . $this->subject->slug . '/' . $this->id;
+    }
+
+    public function getPathAttribute()
+    {
+        return $this->path();
+    }
+
+
+    public function getThumbnailPathAttribute($course) {
+        if ($course) {
+            return asset('storage/' . $course);
+        }else {
+            return asset('storage/thumbnails/default.png');
+        }
     }
 
     public function childrenCourses()
@@ -43,14 +59,35 @@ class Course extends Model
         return $this->hasMany('App\Learn');
     }
 
+    public function addLearn($learn)
+    {
+        $learn = $this->requirements()->create($learn);
+
+        return $learn;
+    }
+
     public function requirements()
     {
         return $this->hasMany('App\Requirement');
     }
 
+    public function addRequirement($requirement)
+    {
+        $requirement = $this->requirements()->create($requirement);
+
+        return $requirement;
+    }
+
     public function sections()
     {
         return $this->hasMany('App\Section');
+    }
+
+    public function addSection($section)
+    {
+        $section = $this->sections()->create($section);
+
+        return $section;
     }
 
     public function subscriptions()

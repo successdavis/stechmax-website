@@ -78,13 +78,18 @@ class CourseTest extends TestCase
     // }
 
     /** @test */
-    public function it_can_be_browse_difficulty()
+    public function it_can_be_browse_by_difficulty()
     {
-        $firstCourse = create('App\Course', ['difficulty' => 'intermediate']);
-        $secondCourse = create('App\Course', ['difficulty' => 'beginner']); 
-        $thirdCourse = create('App\Course', ['difficulty' => 'advance']); 
+        $beginner = create('App\Difficulty', ['level' => 'beginner']);
+        $intermediate = create('App\Difficulty', ['level' => 'intermediate']);
+        $advance = create('App\Difficulty', ['level' => 'advance']);
 
-        $response = $this->get('/courses?difficulty=beginner')
+        $firstCourse = create('App\Course', ['difficulty_id' => $intermediate->id]);
+        $secondCourse = create('App\Course', ['difficulty_id' => $beginner->id]);
+        $thirdCourse = create('App\Course', ['difficulty_id' => $advance->id]);
+
+
+        $this->get('/courses?difficulty=beginner')
             ->assertSee($secondCourse->title);
             // ->assertDontSee($firstCourse->title)
             // ->assertDontSee($thirdCourse->title);

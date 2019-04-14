@@ -74,6 +74,10 @@ class CourseController extends Controller
             'sypnosis' => request('sypnosis')
         ]);
 
+        if (request()->expectsJson()) {
+            return $course;
+        }
+
         return redirect($course->path())
             ->with('flash', 'New Course Created Successfully');
     }
@@ -86,8 +90,7 @@ class CourseController extends Controller
      */
     public function show($subjectId, Course $course)
     {
-        $is_Dashboard = true;
-        return view('dashboard.create', compact('is_Dashboard'));
+        return view('courses.show', compact('course'));
     }
 
     /**

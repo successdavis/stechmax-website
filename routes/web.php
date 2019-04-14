@@ -24,6 +24,14 @@ Route::post('/completeregistration', 'Auth\CompleteRegistrationController@update
 Route::get('/threads/search', 'SearchController@show');
 
 Route::get('api/courses', 'Api\CoursesController@getSubjects');
+Route::post('api/courses/{subject}/{course}', 'Api\CourseImageController@store')->middleware(['auth', 'admin']);
+
+Route::post('courses/{course}/learn', 'LearnController@store')->middleware(['auth', 'admin'])->name('learn.store');
+Route::post('courses/{course}/requirement', 'RequirementController@store')->middleware(['auth', 'admin'])->name('requirement.store');
+Route::post('courses/{course}/section', 'SectionController@store')->middleware(['auth', 'admin'])->name('section.store');
+Route::get('courses/{course}/section', 'SectionController@index')->middleware(['auth', 'admin'])->name('section.index');
+Route::post('courses/{course}/{section}/topic', 'TopicController@store')->middleware(['auth', 'admin'])->name('topic.store');
+Route::get('courses/{course}/{section}/topic', 'TopicController@index')->middleware(['auth', 'admin'])->name('topic.store');
 
 Route::post('/courses', 'CourseController@store')->middleware('admin')->name('courses.store');
 Route::get('/dashboard/courses/create', 'CourseController@create')->middleware('admin')->name('courses.create');
@@ -31,6 +39,7 @@ Route::get('/dashboard/courses/create', 'CourseController@create')->middleware('
 Route::get('/courses', 'CourseController@index')->name('courses');
 Route::get('/courses/{subject}', 'CourseController@index');
 Route::get('/courses/{subject}/{course}', 'CourseController@show');
+
 
 Route::post('/subjects', 'SubjectController@store')->middleware('admin')->name('subjects.new');
 

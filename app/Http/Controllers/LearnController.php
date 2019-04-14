@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use App\Learn;
 use Illuminate\Http\Request;
 
@@ -33,9 +34,17 @@ class LearnController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Course $course, Request $request)
     {
-        //
+        $this->validate(request(), [
+            'body' => 'required|spamfree'
+        ]);
+
+        $learn = $course->addLearn([
+            'body' => request('body')
+        ]);
+
+        return $learn;
     }
 
     /**

@@ -42,7 +42,7 @@ $factory->define(App\Subject::class, function (Faker $faker) {
     $name = $faker->unique()->word;
     return [
         'name' => $name,
-        'slug'  => $faker->unique()->word,
+        'slug'  => $name,
         'icon_path'  => 'subject_icon.png',
     ];
 });
@@ -65,7 +65,6 @@ $factory->define(App\Course::class, function (Faker $faker) {
             return factory('App\Subject')->create()->id;
         },
         'title' => $faker->unique()->sentence,
-        'img' => 'default_course.jpg',
         'difficulty_id' => factory('App\Difficulty')->create(),
         'duration' => '3',
         'type_id' => factory('App\Type')->create(),
