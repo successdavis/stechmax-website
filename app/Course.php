@@ -12,7 +12,7 @@ class Course extends Model
 
     public function path()
     {
-        return '/courses/' . $this->subject->slug . '/' . $this->id;
+        return '/courses/' . $this->subject->slug . '/' . $this->id . '/' . $this->title;
     }
 
     public function getPathAttribute()

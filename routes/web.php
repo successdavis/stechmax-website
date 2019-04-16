@@ -38,7 +38,7 @@ Route::get('/dashboard/courses/create', 'CourseController@create')->middleware('
 
 Route::get('/courses', 'CourseController@index')->name('courses');
 Route::get('/courses/{subject}', 'CourseController@index');
-Route::get('/courses/{subject}/{course}', 'CourseController@show');
+Route::get('/courses/{subject}/{course}/{title?}', 'CourseController@show');
 
 
 Route::post('/subjects', 'SubjectController@store')->middleware('admin')->name('subjects.new');
@@ -87,7 +87,7 @@ Route::get('/home/{user}/courses', 'HomeController@subscribedCourses');
 
 Route::post('/follow', 'FollowersController@store');
 
-Route::get('/courses/{subject}/{course}/medium', 'PaymentController@index');
+Route::get('/courses/{subject}/{course}/{title?}/medium', 'PaymentController@index');
 Route::post('/pay/{course}', 'PaymentController@redirectToGateway')->name('pay'); 
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 Route::get('/paid/{course}', 'PaymentController@paymentSuccessful');

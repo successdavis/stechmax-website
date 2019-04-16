@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Payments\CoursePayment;
-use App\Http\Controllers\Controller;
+//use App\Http\Controllers\Controller;
 
 class PaymentController extends Controller
 {

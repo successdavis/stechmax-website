@@ -31,7 +31,7 @@ class CourseTest extends TestCase
     public function it_can_generate_a_string_path()
     {
         $course = create('App\Course');
-        $this->assertEquals("/courses/{$course->subject->slug}/{$course->id}", $course->path());
+        $this->assertEquals("/courses/{$course->subject->slug}/{$course->id}/{$course->title}", $course->path());
     }
 
     /** @test */

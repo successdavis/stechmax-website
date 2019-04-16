@@ -714,6 +714,10 @@ a {
   color: red;
 }
 
+.bg-primary {
+  background-color: #222a38;
+}
+
 .align-content__center {
   display: -webkit-box;
   display: -ms-flexbox;
