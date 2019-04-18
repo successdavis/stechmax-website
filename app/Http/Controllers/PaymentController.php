@@ -44,7 +44,9 @@ class PaymentController extends Controller
         $payment = new CoursePayment($request);
         $data = $payment->generatePayData($course, $invoice_Id);
 
-        return Paystack::getAuthorizationUrl($data)->redirectNow();
+
+        dd(Paystack::getAuthorizationUrl($data)->redirectNow());
+//        return Paystack::getAuthorizationUrl($data)->redirectNow();
     }
 
     /**

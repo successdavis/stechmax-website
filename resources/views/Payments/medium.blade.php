@@ -7,14 +7,19 @@
     <div class="grid-x grid-margin-x grid-padding-x">
         <div class="medium-6">
           <div class="grid-container">
+
             @if ($class == false)
-              Pay <strong>N{{$course->fee}}</strong> for  <strong>{{$course->title}}</strong>.
-              Your Training will base online
-               <form method="post" action="/pay/{{$course->id}}">
-                    @csrf
-                    <input type="hidden" name="fullPayment" value="Please Ignore this field if displayed">
-                    <button type="submit" class="medium button">Make Payment Now</button>
-                </form>
+                <p>Sorry! At the moment we dont offer online training</p>
+                <p>Please check back later</p>
+                  {{--<followers></followers>--}}
+                            {{--Pay <strong>N{{$course->fee}}</strong> for  <strong>{{$course->title}}</strong>.--}}
+              {{--Your Training will base online--}}
+               {{--<form method="post" action="/pay/{{$course->id}}">--}}
+                    {{--@csrf--}}
+                    {{--<input type="hidden" name="fullPayment" value="Please Ignore this field if displayed">--}}
+                    {{--<button type="submit" class="medium button">Make Payment Now</button>--}}
+                {{--</form>--}}
+
             @else
               Pay <strong>N{{$course->fee}}</strong> for  <strong>{{$course->title}}</strong>.
               Your Training will base offline
