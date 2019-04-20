@@ -6,21 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
-    protected $guarded = [];
-    
-    static public function validateInvoice($id)
-    {
-        return !! static::find($id);
-    }
-
-    static public function createInvoice($data)
-    {
-        return static::create([
-            'amount' => $data->fee,
-            'user_id' => auth()->user()->id,
-            'course_id' => $data->id
-        ]);
-    }
+    protected $fillable = ['user_id', 'amount'];
 
     public function payments()
     {
@@ -29,18 +15,11 @@ class Invoice extends Model
 
     public function recordPayment($data)
     {
-     return $this->payments()->create([
+        return $this->payments()->create([
             'amount' => $data['amount'],
             'method' => $data['metadata']['method'],
             'purpose' => $data['metadata']['purpose'],
             'transaction_ref' => $data['reference']
-        ]);
-    }
-
-    public function makeValid()
-    {
-        return $this->update([
-            'valid' => true
         ]);
     }
 }

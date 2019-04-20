@@ -20,7 +20,7 @@ class CreateCoursesTable extends Migration
             $table->Integer('duration');
             $table->unsignedInteger('subject_id')->index();
             $table->unsignedInteger('type_id')->index();
-            $table->unsignedInteger('fee');
+            $table->unsignedInteger('amount');
             $table->text('description');
             $table->text('sypnosis');
             $table->string('thumbnail_path')->nullable();

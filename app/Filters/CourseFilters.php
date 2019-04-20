@@ -12,12 +12,12 @@ class CourseFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['fee', 'alphabet', 'difficulty'];
+    protected $filters = ['amount', 'alphabet', 'difficulty'];
 
-    protected function fee($fee = 'desc')
+    protected function amount($amount = 'desc')
     {
         $this->builder->getQuery()->orders = [];
-        return $this->builder->orderBy('fee', $fee);
+        return $this->builder->orderBy('amount', $amount);
     }
 
     protected function alphabet($alphabet)

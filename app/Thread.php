@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
-    use RecordsActivity, Searchable;
+    use RecordsActivity;
 
     // protected $fillable = ['user_id', 'title', 'body','channel_id'];
 

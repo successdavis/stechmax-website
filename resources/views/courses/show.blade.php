@@ -1,26 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="course-big-banner">
         <div id="grid-container">
             <div class="course-big-banner--content grid-container">
                 <h2>{{$course->title}}</h2>
-                @if (! auth()->check() || !auth()->user()->isSubscribe($course))
+                @if (! auth()->check() || ! $course->isSubscribedBy(auth()->user()))
                     <div class="grid-x grid-padding-x">
                         <div class="medium-6">
                             <div class="grid-container">
                                 <div>Study remotely at the comfort of your home with a smart phone or PC, One-on-One with your tutor</div>
-                                <a href="{{$course->path()}}/medium?class=false" class="medium button">STUDY ONLINE</a>
+                                <a href="{{$course->path()}}/subscription?class=false" class="medium button">STUDY ONLINE</a>
                             </div>
                         </div>
                         <div class="medium-6">
                             <div class="grid-container">
                                 <div>Study online and also share physical interactions with tutors at the esteemed institute.</div>
-                                <a href="{{$course->path()}}/medium?class=true" class="medium button">STUDY IN CLASSROOM</a>
+                                <a href="{{$course->path()}}/subscription?class=true" class="medium button">STUDY IN CLASSROOM</a>
                             </div>
                         </div>
                     </div>
-                @else (auth()->user()->isSubscribe($course))
+                @else ()
                     <div class="center-align">
                         <a href="" class="medium button">You are subscribe to this course</a>
                     </div>
@@ -32,7 +33,7 @@
         <div class="grid-container">
             <li class="tabs-title is-active"><a href="#course_content_tab" aria-selected="true">Content</a></li>
             <li class="tabs-title disable"><a data-tabs-target="Course_instructors_tab" href="#Course_instructors_tab">Instructors</a></li>
-            @if (auth()->check() && auth()->user()->isSubscribe($course))
+            @if (auth()->check() && $course->isSubscribedBy(auth()->user()))
                 <li class="tabs-title"><a data-tabs-target="Course_materials_tab" href="#Course_materials_tab">Course Materials</a></li>
                 <li class="tabs-title"><a data-tabs-target="Course_questions_tab" href="#Course_questions_tab">Questions</a></li>
             @endif
@@ -100,7 +101,7 @@
             <div class="tabs-panel" id="Course_instructors_tab">
                 <p>Suspendisse dictum feugiat nisl ut dapibus.  Vivamus hendrerit arcu sed erat molestie vehicula. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor.  Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
             </div>
-            @if (auth()->check() && auth()->user()->isSubscribe($course))
+            @if (auth()->check() && $course->isSubscribedBY(auth()->user()))
                 <div class="tabs-panel" id="Course_materials_tab">
                     <p>In here you will find PDF materials to this course</p>
                 </div>

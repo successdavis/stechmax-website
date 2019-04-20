@@ -2,7 +2,7 @@
     <a href="{{$course->path()}}">
         <div class="card course">
           <div class="course__image">
-            <img src="{{asset('storage/course/' . $course->img)}}">
+            <img src="{{$course->thumbnail_path}}">
           </div>
           <div class="card-section course__meta-information grid-x">
             <span class="cell">Type: Course</span>
@@ -14,7 +14,7 @@
               {{$course->difficulty}}
           </div>
           <div class="card-section course__fee">
-            N{{$course->fee}}
+            N{{$course->amount}}
           </div>
         </div>
     </a>

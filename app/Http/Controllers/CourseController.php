@@ -55,7 +55,7 @@ class CourseController extends Controller
         $this->validate(request(), [
             'title' => 'required|spamfree',
             'duration' => 'required',
-            'fee' => 'required',
+            'amount' => 'required',
             'description' => 'required',
             'sypnosis' => 'required',
             'subject_id' => 'required|exists:subjects,id',
@@ -69,7 +69,7 @@ class CourseController extends Controller
             'subject_id' => request('subject_id'),
             'difficulty_id' => request('difficulty_id'),
             'type_id' => request('type_id'),
-            'fee' => request('fee'),
+            'amount' => request('amount'),
             'description' => request('description'),
             'sypnosis' => request('sypnosis')
         ]);

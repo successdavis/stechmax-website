@@ -38,7 +38,13 @@ Route::get('/dashboard/courses/create', 'CourseController@create')->middleware('
 
 Route::get('/courses', 'CourseController@index')->name('courses');
 Route::get('/courses/{subject}', 'CourseController@index');
-Route::get('/courses/{subject}/{course}/{title?}', 'CourseController@show');
+Route::get('/courses/{subject}/{course}', 'CourseController@show');
+
+
+
+Route::get('/courses/{subject}/{course}/subscription', 'Payment\CourseSubscriptionController@index')->name('course_subscription.index')->middleware('auth')->middleware('auth', 'must-be-confirmed');
+Route::post('/courses/{subject}/{course}/subscription', 'Payment\CourseSubscriptionController@store')->name('course_subscription.store')->middleware('auth', 'must-be-confirmed');
+//Route::get('/courses/{subject}/{course}/callback', 'Payment\CourseSubscriptionController@update')->name('course_subscription.update')->middleware('auth');
 
 
 Route::post('/subjects', 'SubjectController@store')->middleware('admin')->name('subjects.new');
@@ -63,7 +69,7 @@ Route::delete('locked-threads/{thread}', 'lockedThreadController@destroy')->name
 Route::patch('/replies/{reply}', 'ReplyController@update');
 Route::delete('/replies/{reply}', 'ReplyController@destroy')->name('reply.destroy');
 Route::get('/threads/{channel}/{thread}/replies', 'ReplyController@index');
-Route::post('/threads/{channel}/{thread}/replies', 'ReplyController@store');
+Route::post('/threads/{channel}/{thread}/replies', 'ReplyController@store')->middleware('must-be-confirmed');
 
 Route::post('/replies/{reply}/best', 'BestReplyController@store')->name('best-replies.store');
 
@@ -77,18 +83,17 @@ Route::get('/profiles/{user}', 'ProfileController@show')->name('profile.show');
 Route::get('/profiles/{user}/notifications', 'UserNotificationController@index');
 Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotificationController@destroy');
 
-Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->name('register.comfirm');
+Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->name('register.confirm');
 Route::get('/register/resend', 'Auth\RegisterConfirmationController@resend')->name('register.resend_comfirmation');
 Route::get('/register/comfirm_email', 'Auth\RegisterConfirmationController@create')->middleware('cannot-see-resend-link-page')->name('register.confirm_email');
 
-// Route::get('/register/confirm/register', 'Auth\RegisterConfirmationController@create')->name('register.recomfirm');
 
 Route::get('/home/{user}/courses', 'HomeController@subscribedCourses');
 
 Route::post('/follow', 'FollowersController@store');
 
-Route::get('/courses/{subject}/{course}/{title?}/medium', 'PaymentController@index');
-Route::post('/pay/{course}', 'PaymentController@redirectToGateway')->name('pay'); 
+
+//Route::post('/pay/{course}', 'PaymentController@redirectToGateway')->name('pay');
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 Route::get('/paid/{course}', 'PaymentController@paymentSuccessful');
 

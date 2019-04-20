@@ -8,7 +8,7 @@
         <div class="medium-6">
           <div class="grid-container">
 
-            @if ($class == false)
+            @if ($class === false)
                 <p>Sorry! At the moment we dont offer online training</p>
                 <p>Please check back later</p>
                   {{--<followers></followers>--}}
@@ -21,20 +21,20 @@
                 {{--</form>--}}
 
             @else
-              Pay <strong>N{{$course->fee}}</strong> for  <strong>{{$course->title}}</strong>.
+              Pay <strong>N{{$course->amount}}</strong> for  <strong>{{$course->title}}</strong>.
               Your Training will base offline
-              <form method="post" action="/pay/{{$course->id}}">
+              <form method="post" action="{{$course->path()}}/subscription">
                   @csrf
                   <input type="hidden" name="class" value="true" >
-                  <input type="hidden" name="fullPayment" value="Please Ignore this field if displayed">
+                  <input type="hidden" name="pay_module" value="full" placeholder="Please Ignore this field if displayed">
                   <button type="submit" class="medium button">Make Payment Now</button>
               </form>
               <p>You can choose to make your payments installmental, First Installment takes 60% of the total fee and second installment takes 40%.</p>
-              <p>60% of N{{$course->fee}} is N{{$course->getFirstInstallment()}} </p>
-              <form method="post" action="/pay/{{$course->id}}">
+              <p>60% of N{{$course->amount}} is N{{$course->getFirstInstallment()}} </p>
+              <form method="post" action="{{$course->path()}}/subscription">
                   @csrf
-                  <input type="hidden" name="class" value="true" >
-                  <input type="hidden" name="partPayment" value="Please Ignore this field if displayed">
+                  <input type="hidden" name="class" value="true" placeholder="Please Ignore this field if displayed">
+                  <input type="hidden" name="pay_module" value="part">
                   <button type="submit" class="medium button">Pay 60% Fee Now</button>
               </form>
             @endif

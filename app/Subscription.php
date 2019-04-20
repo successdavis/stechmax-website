@@ -9,26 +9,26 @@ class Subscription extends Model
 {
     protected $guarded = [];
 
-    protected $with = ['courses'];
+//    protected $with = ['courses'];
 
-    public function courses()
-    {
-        return $this->belongsTo(Course::class, 'course_id');
-    }
-
-    public function activate($subscription = null)
-    {
-        if ($subscription) {
-            return $subscription->update([
-                'active' => true,
-            ]);
-        }
-        return $this->update([
-            'active' => true,
-        ]);
-    }
-
-
+//    public function courses()
+//    {
+//        return $this->belongsTo(Course::class, 'course_id');
+//    }
+//
+//    public function activate($subscription = null)
+//    {
+//        if ($subscription) {
+//            return $subscription->update([
+//                'active' => true,
+//            ]);
+//        }
+//        return $this->update([
+//            'active' => true,
+//        ]);
+//    }
+//
+//
     public function deactivate()
     {
         return $this->update([
@@ -36,22 +36,27 @@ class Subscription extends Model
             'subscription_end_at' => Carbon::now()
         ]);
     }
+//
+//    static public function activeSubscriptions()
+//    {
+//        return static::where('active', 1);
+//    }
+//
+//    static public function activeClassRoomStudents()
+//    {
+//        return static::where('active', 1)
+//            ->where('class', true);
+//    }
 
-    static public function activeSubscriptions()
+    public function scopeActiveSubscriptions()
     {
         return static::where('active', 1);
     }
 
-    static public function activeClassRoomStudents()
-    {
-        return static::where('active', 1)
-            ->where('class', true);
-    }
-
     static public function deactivateDueSubscriptions()
     {
-        $activeClassRoomStudents = static::activeClassRoomStudents()->get();
-        foreach ($activeClassRoomStudents as $subscription) {
+        $activeSubscriptions = static::activeSubscriptions()->get();
+        foreach ($activeSubscriptions as $subscription) {
             if ((new self)->durationSpent($subscription) >= $subscription->duration) {
                 $subscription->deactivate();
             }

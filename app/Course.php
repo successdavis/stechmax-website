@@ -9,10 +9,12 @@ class Course extends Model
     protected $guarded = [];
 //    protected $appends = ['path'];
 
+    use Billable;
+    use Subscriber;
 
     public function path()
     {
-        return '/courses/' . $this->subject->slug . '/' . $this->id . '/' . $this->title;
+        return '/courses/' . $this->subject->slug . '/' . $this->id;
     }
 
     public function getPathAttribute()
@@ -25,7 +27,7 @@ class Course extends Model
         if ($course) {
             return asset('storage/' . $course);
         }else {
-            return asset('storage/thumbnails/default.png');
+            return asset('storage/thumbnails/default.jpg');
         }
     }
 
@@ -90,12 +92,7 @@ class Course extends Model
         return $section;
     }
 
-    public function subscriptions()
-    {
-        return $this->hasMany(Subscription::class);
-    }
-
-    public function difficulties()
+     public function difficulties()
     {
         return $this->belongsTo(Difficulty::class);
     }
@@ -112,6 +109,6 @@ class Course extends Model
 
     public function getFirstInstallment($course = null)
     {
-        return !empty($course) ? $course->fee * 60 / 100 : $this->fee * 60 / 100;
+        return !empty($course) ? $course->amount * 60 / 100 : $this->amount * 60 / 100;
     }
 }

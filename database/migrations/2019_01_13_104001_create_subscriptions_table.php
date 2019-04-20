@@ -16,12 +16,16 @@ class CreateSubscriptionsTable extends Migration
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('course_id');
+            $table->integer('subscriber_id');
+            $table->string('subscriber_type');
             $table->integer('duration');
             $table->boolean('class')->default(false);
-            $table->boolean('active')->default(false);
+            $table->boolean('active')->default(true);
+            $table->unsignedInteger('invoice_id')->nullable();
             $table->string('subscription_end_at')->nullable();
             $table->timestamps();
+
+            $table->unique(['user_id', 'subscriber_id', 'subscriber_type', 'active'], 'only_one_active_course');
         });
     }
 

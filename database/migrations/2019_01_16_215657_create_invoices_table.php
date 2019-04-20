@@ -17,9 +17,9 @@ class CreateInvoicesTable extends Migration
             $table->increments('id');
             $table->integer('amount');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('course_id');
-            $table->boolean('active')->default(true); // if active then invoice can still receive payment
-            $table->boolean('valid')->default(false); // no payment is associated but was not abandoned.
+            $table->integer('billable_id');
+            $table->string('billable_type');
+            $table->boolean('active')->default(false); // if active then invoice can still receive payment else invoice was created and abandoned
             $table->timestamps();
         });
     }

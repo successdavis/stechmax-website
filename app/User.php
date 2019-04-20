@@ -37,7 +37,7 @@ class User extends Authenticatable
 
     public function getRouteKeyName()
     {
-        return 'email';
+        return 'username';
     }
 
     public function threads()
@@ -78,48 +78,14 @@ class User extends Authenticatable
         return $this->hasMany(Payments::class);
     }
 
-    public function subscribeToCourse($course, $class = false)
-    {
-        $this->subscriptions()->create([
-            'course_id' => $course->id,
-            'duration' => $course->duration,
-            'class' => $class,
-            'active' => true
-        ]);
-    }
-
-    public function getSubscribedCourses()
-    {
-        return $this->subscriptions();
-    } 
-
-    public function deactivate($course)
-    {
-       return $this->subscriptions()
-        ->where('course_id', $course->id)
-        ->update([
-            'active' => false,
-            'subscription_end_at' => Carbon::now()
-        ]);
-    }
-
-    public function activeCourses()
-    {
-        return $this->subscriptions()
-            ->where('active', true);
-    }
-
-    public function isSubscribe($course)
-    {
-        return !! $this->subscriptions()->where('course_id', $course->id)
-            ->where('active', true)->count();
-    }
-
     public function updatePaystackId($paystackId)
     {
-        return $this->update([
-            'paystack_id' => $paystackId
-        ]);
+        if (empty($this->paystack_id)) {
+            return $this->update([
+                'paystack_id' => $paystackId
+            ]);
+        }
+        return true;
     }
 
     public function getAvatarPathAttribute($avatar)

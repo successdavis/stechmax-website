@@ -36,7 +36,7 @@ class CreateThreadTest extends TestCase
         $thread = make('App\Thread');
 
         $this->post(route('threads'), $thread->toArray())
-            ->assertRedirect(route('threads'))
+            ->assertRedirect(route('register.confirm_email'))
             ->assertSessionHas('flash', 'You must first confirm your email addresss');
     }
 

@@ -18,7 +18,6 @@ class RedirectIfEmailAlreadyConfirm
     {
         if (! Auth::guard($guard)->check() || $request->user()->confirmed) {
             return redirect('/courses')->with('flash', 'Your account is already confirmed');
-            exit;
         }
         return $next($request);
     }

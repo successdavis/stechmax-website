@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('f_name');
             $table->string('l_name');
+            $table->string('username');
             $table->string('gender');
             $table->string('phone');
             $table->string('avatar_path')->nullable();

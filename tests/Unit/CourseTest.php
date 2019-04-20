@@ -31,7 +31,7 @@ class CourseTest extends TestCase
     public function it_can_generate_a_string_path()
     {
         $course = create('App\Course');
-        $this->assertEquals("/courses/{$course->subject->slug}/{$course->id}/{$course->title}", $course->path());
+        $this->assertEquals("/courses/{$course->subject->slug}/{$course->id}", $course->path());
     }
 
     /** @test */
@@ -49,21 +49,21 @@ class CourseTest extends TestCase
     /** @test */
     public function it_can_be_browse_by_price_lowest_to_highess()
     {
-        $firstCourse = create('App\Course', ['fee' => '3000', 'created_at' => Carbon::now()->subWeek()]);
+        $firstCourse = create('App\Course', ['amount' => '3000', 'created_at' => Carbon::now()->subWeek()]);
         $secondCourse = $this->course; 
 
-        $response = $this->getJson('/courses?fee=asc')->json();
-        $this->assertEquals([3000, 145000], array_column($response, 'fee'));
+        $response = $this->getJson('/courses?amount=asc')->json();
+        $this->assertEquals([3000, 145000], array_column($response, 'amount'));
     }
 
     /** @test */
     public function it_can_be_browse_by_price_highest_to_lowest()
     {
-        $firstCourse = create('App\Course', ['fee' => '3000', 'created_at' => Carbon::now()->subWeek()]);
+        $firstCourse = create('App\Course', ['amount' => '3000', 'created_at' => Carbon::now()->subWeek()]);
         $secondCourse = $this->course; 
 
-        $response = $this->getJson('/courses?fee=desc')->json();
-        $this->assertEquals([145000, 3000], array_column($response, 'fee'));
+        $response = $this->getJson('/courses?amount=desc')->json();
+        $this->assertEquals([145000, 3000], array_column($response, 'amount'));
     }
 
     // /** @test */
