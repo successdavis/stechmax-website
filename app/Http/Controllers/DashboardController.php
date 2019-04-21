@@ -25,6 +25,6 @@ class DashboardController extends Controller
     public function index()
     {
         $displayMenu = true;
-        return view('Dashboard.home', compact('displayMenu'));
+        return view('dashboard.index', compact('displayMenu'));
     }
 }
