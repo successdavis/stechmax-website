@@ -57,7 +57,7 @@
         <div class="dropdown-pane" id="user_profile-menu" data-position="bottom" data-alignment="right" data-dropdown>
             <ul>
                 <li><a href="/profiles/{{Auth::user()->username}}">{{ Auth::user()->f_name . ' ' . Auth::user()->l_name }}</a></li>
-                <li><a href="/home">Dashboard</a></li>
+                <li><a href="{{route('dashboard')}}">Dashboard</a></li>
                 <li><a href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
