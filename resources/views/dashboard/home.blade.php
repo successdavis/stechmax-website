@@ -10,7 +10,7 @@
           <li><a href="#">Registration</a></li>
           {{-- <li class="disabled">Gene Splicing</li> --}}
           <li>
-            <span class="show-for-sr">Course Registration: </span> Course REgistration
+            <span class="show-for-sr">Course Registration: </span> Course Registration
           </li>
         </ul>
       </nav>

@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Route::get('/completeregistration', 'Auth\CompleteRegistrationController@create');
 Route::post('/completeregistration', 'Auth\CompleteRegistrationController@update');
@@ -87,8 +87,6 @@ Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->na
 Route::get('/register/resend', 'Auth\RegisterConfirmationController@resend')->name('register.resend_comfirmation');
 Route::get('/register/comfirm_email', 'Auth\RegisterConfirmationController@create')->middleware('cannot-see-resend-link-page')->name('register.confirm_email');
 
-
-Route::get('/home/{user}/courses', 'HomeController@subscribedCourses');
 
 Route::post('/follow', 'FollowersController@store');
 

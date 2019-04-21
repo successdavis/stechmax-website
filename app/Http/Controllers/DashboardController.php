@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,15 +26,5 @@ class HomeController extends Controller
     {
         return view('Dashboard.home', [
             'displayMenu' => true]);
-    }
-
-    public function subscribedCourses(User $user)
-    {
-        $courses = $user->getSubscribedCourses()->get();
-        return view('Dashboard.courses', [
-            'pageTitle' => 'Dashboard - Stechmax',
-            'displayMenu' => 'Gansters School',
-            'subscribedCourses' => $courses
-        ]);
     }
 }
