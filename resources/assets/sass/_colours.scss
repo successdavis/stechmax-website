@@ -18,12 +18,17 @@
     border-color: #9fabbd;
 }
 
-.white {
+.white,
+.text-white{
     color: white;
 }
 
 .dark-gray {
     background: #0d131e;
+}
+
+span.v-stepper__step__step.primary {
+    background: red;
 }
 
 .help-text {

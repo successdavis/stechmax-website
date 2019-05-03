@@ -92,5 +92,28 @@ class RegistrationTest extends TestCase
 
         Mail::assertQueued(PleaseConfirmYourEmail::class, 2);
     }
+
+    /** @test */
+    public function a_non_administrator_cannot_register_new_students()
+    {
+
+        $this->signIn()->withExceptionHandling();
+
+        $response = $this->post(route('manage_user.store'), [])
+            ->assertStatus(403);
+    }
+
+    /** @test */
+    public function an_administrator_can_register_a_new_user ()
+    {
+        $this->signIn(factory('App\User')->states('administrator')->create(['phone' => 80612688888]));
+
+        $user = make('App\User', ['email' => null]);
+
+        $this->post(route('manage_user.store'), $user->toArray());
+
+        $this->assertDatabaseHas('users',['email' => $user->email]);
+    }
+
 }
  

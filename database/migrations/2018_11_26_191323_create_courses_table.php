@@ -23,6 +23,7 @@ class CreateCoursesTable extends Migration
             $table->unsignedInteger('amount');
             $table->text('description');
             $table->text('sypnosis');
+            $table->boolean('custom_course')->default(false);
             $table->string('thumbnail_path')->nullable();
             $table->timestamps();
         });

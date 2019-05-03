@@ -112,7 +112,7 @@ class Form {
      * @param {object} data
      */
     onSuccess(data) {
-        this.reset();
+        // this.reset();
     }
 
 

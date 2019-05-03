@@ -8,5 +8,6 @@
     <div class="grid-container">
         @include('layouts.what')
     </div>
-        @include('layouts.advertBanner')
+    @include('layouts.program')
+    @include('layouts.advertBanner')
 @endsection

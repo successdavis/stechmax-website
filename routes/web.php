@@ -12,8 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $type = \App\Type::find(3);
+    $programs = $type->courses()->get();
+    return view('welcome', compact('programs'));
 });
+
 
 Auth::routes();
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
@@ -36,10 +39,14 @@ Route::get('courses/{course}/{section}/topic', 'TopicController@index')->middlew
 Route::post('/courses', 'CourseController@store')->middleware('admin')->name('courses.store');
 Route::get('/dashboard/courses/create', 'CourseController@create')->middleware('admin')->name('courses.create');
 
+Route::get('/dashboard/users', 'ManageUserController@index')->middleware('admin')->name('manage_user.index');
+Route::get('/dashboard/get_users', 'ManageUserController@get_users')->middleware('admin');
+
 Route::get('/courses', 'CourseController@index')->name('courses');
 Route::get('/courses/{subject}', 'CourseController@index');
 Route::get('/courses/{subject}/{course}', 'CourseController@show');
 
+Route::get('/courses/{subject}/{course}/register', 'ProgramController@create');
 
 
 Route::get('/courses/{subject}/{course}/subscription', 'Payment\CourseSubscriptionController@index')->name('course_subscription.index')->middleware('auth')->middleware('auth', 'must-be-confirmed');
@@ -87,8 +94,12 @@ Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->na
 Route::get('/register/resend', 'Auth\RegisterConfirmationController@resend')->name('register.resend_comfirmation');
 Route::get('/register/comfirm_email', 'Auth\RegisterConfirmationController@create')->middleware('cannot-see-resend-link-page')->name('register.confirm_email');
 
+Route::post('/register/new_user', 'ManageUserController@store')->middleware('admin')->name('manage_user.store');
 
 Route::post('/follow', 'FollowersController@store');
+
+
+Route::get('/testing', 'TestingController@index'); // will be here temporary
 
 
 //Route::post('/pay/{course}', 'PaymentController@redirectToGateway')->name('pay');

@@ -27,7 +27,7 @@
   </div>
 </div> --}}
 
-<ul class="white vertical menu accordion-menu" data-accordion-menu>
+<ul class="white vertical menu accordion-menu" id="off-canvas_panel-links" data-accordion-menu>
     <li class="dark-gray"><a href="/home">Dashboard</a></li>
     <li><a href="/home/{{Auth::user()->email}}/courses">My Courses</a></li>
    
@@ -38,6 +38,14 @@
         <ul class="menu vertical nested">
           <li><a href="{{route('courses.create')}}">Create Course</a></li>
           <li><a href="#">Manage Course</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#">Manage Student</a>
+        <ul class="menu vertical nested">
+            <li><user-registration :modal="'regModal'"></user-registration></li>
+          <li><a href="{{route('manage_user.index')}}">View Users</a></li>
         </ul>
       </li>
 

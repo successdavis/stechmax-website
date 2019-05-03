@@ -93,8 +93,23 @@ a {
     border-radius: 50%;
 }
 
+.card-recommended {
+    border: 10px solid blue;
+    position: relative;
+}
+
+.card__recommended--text{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
 .off-canvas_panel{
     color: #9FABBD;
+}
+
+ul#off-canvas_panel-links {
+    background-color: #222a38 !important;
 }
 
 .off-canvas_panel p,
@@ -103,10 +118,10 @@ a {
     font-weight: 600;
     line-height: 1;
 }
+
 .off-canvas_panel li a {
     font-size: 15px;
 }
-
 
 
 @media (min-width: 50em) {

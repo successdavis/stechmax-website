@@ -1,10 +1,11 @@
-<template>
-    $END$
-</template>
 
 <script>
     export default {
-        name: "ProgramRegistration"
+        data () {
+            return {
+                e6: 1
+            }
+        }
     }
 </script>
 

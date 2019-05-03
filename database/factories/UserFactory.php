@@ -54,6 +54,7 @@ $factory->define(App\Difficulty::class, function (Faker $faker) {
     ];
 });
 
+
 $factory->define(App\Type::class, function (Faker $faker) {
     return [
         'name' => $faker->word
@@ -78,6 +79,12 @@ $factory->define(App\Course::class, function (Faker $faker) {
 $factory->state(App\Course::class, 'track', function () {
     return [
         'type_id' => 2 
+    ];
+});
+
+$factory->state(App\Course::class, 'program', function () {
+    return [
+        'type_id' => 3
     ];
 });
 

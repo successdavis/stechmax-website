@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('gender');
             $table->string('phone');
             $table->string('avatar_path')->nullable();
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->boolean('confirmed')->default(false);
             $table->boolean('admin')->default(false);
             $table->string('confirmation_token', 25)->nullable()->unique();

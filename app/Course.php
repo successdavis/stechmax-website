@@ -31,6 +31,11 @@ class Course extends Model
         }
     }
 
+    public function checkCustomCourse()
+    {
+        return !! $this->custom_course;
+    }
+
     public function childrenCourses()
     {
         return $this->belongsToMany('App\Course', 'course_tracks','track_id','course_id');
