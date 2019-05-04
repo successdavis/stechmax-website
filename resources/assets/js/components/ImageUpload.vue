@@ -1,5 +1,8 @@
 <template>
-    <input type="file" accept="image/*" @change="onChange">
+    <div>
+        <label for="avater" class="button small">Upload File</label>
+        <input type="file" id="avater" class="show-for-sr" accept="image/*" @change="onChange">
+    </div>
 </template>
 
 <script>

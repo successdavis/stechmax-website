@@ -22,7 +22,7 @@ class ManageUserController extends Controller
             'l_name'    => 'required',
             'gender'    => 'required',
             'phone'     => 'required',
-            'email'     => 'email|unique'
+            'email'     => 'email|unique:users,email'
         ]);
 
         return User::create([

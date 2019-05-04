@@ -4,6 +4,7 @@
         <form v-if="canUpdate" method="POST" enctype="multipart/form-data">
             <image-upload name="avatar" class="none" @loaded="onLoad"></image-upload>
         </form>
+
     </div>
 </template>
 
@@ -22,7 +23,7 @@
 
         computed: {
             canUpdate() {
-                return this.authorize(user => user.id === this.user.id)
+                return this.authorize('isAdmin', user => user.id === this.user.id)
             }
         },
 

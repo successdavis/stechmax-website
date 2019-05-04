@@ -3,13 +3,11 @@
         <v-card-title>
             All Users Records
             <v-spacer></v-spacer>
-            <v-dialog v-model="dialog" max-width="500px">
                 <template v-slot:activator="{ on }">
                     <!--<button class="button small"><user-registration ></user-registration></button>-->
-                    <v-btn color="primary" class="mb-2" v-on="on"><user-registration :modal="'regModal2'"></user-registration></v-btn>
+                    <v-btn color="primary" class="mb-2" v-on="on"><new-user :modal="'regModal2'"></new-user></v-btn>
                 </template>
 
-            </v-dialog>
 
             <v-text-field
                     v-model="search"
@@ -35,19 +33,10 @@
                 <td class="text-xs-right">{{ props.item.phone }}</td>
                 <td class="text-xs-right">{{ props.item.email }}
                 <td class="justify-center layout px-0">
-                    <v-icon
-                            small
-                            class="mr-2"
-                            @click="$modal.show('register-user-modal')"
-                    >
-                        edit
-                    </v-icon>
-                    <v-icon
-                            small
-                            @click="deleteItem(props.item)"
-                    >
-                        delete
-                    </v-icon>
+                    <button class="button small" >
+                        View User
+                        <!--<user-registration :selectedUser="props.item"  :modal="props.item.email" :displayName="'View User'"></user-registration>-->
+                    </button>
                 </td>
             </template>
         </v-data-table>

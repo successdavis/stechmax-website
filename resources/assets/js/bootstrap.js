@@ -31,13 +31,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import PortalVue from 'portal-vue';
 import Form from './utilities/Form';
 import VModal from 'vue-js-modal';
-import Vuetify from 'vuetify'
+import Vuetify from 'vuetify';
 
 window.Form = Form;
 
 Vue.use(PortalVue);
 Vue.use(VModal);
-Vue.use(Vuetify)
+Vue.use(Vuetify);
 
 
 

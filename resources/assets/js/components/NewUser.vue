@@ -13,15 +13,11 @@
                 <div>
                     <p class="center-text mt-2">USER FORM</p>
                 </div>
-                <div class="grid-x align-center">
-                    <avatar-form :user="user" v-if="showPassport"></avatar-form>
+                <div class="grid-x align-center ">
+                    <avatar-form :user="user" v-if="update"></avatar-form>
                 </div>
-                <div class="grid-x grid-padding-x">
-                    <div>
 
-                    </div>
-                </div>
-                <form method="post" @submit.prevent="registerStudent" @keydown="Form.errors.clear()">
+                <form method="post" @submit.prevent="registerUser" @keydown="Form.errors.clear()">
                         <div class="grid-x grid-padding-x">
 
                             <div class="medium-6 cell">
@@ -93,7 +89,7 @@
                         </div>
                     <div class="grid-x grid-padding-x mb-2 mt-2">
                         <div class="medium-6">
-                            <button type="submit" class="expanded medium button success" >Register</button>
+                            <button type="submit" class="expanded medium button success" v-text="update ? 'Update' : 'Register User'"></button>
                         </div>
                         <div class="medium-6">
                             <button type="reset" class="expanded medium button danger">Reset</button>
@@ -114,29 +110,41 @@
         components: {avatarForm},
         data () {
             return {
-                showPassport: false,
+                update: false,
+                user: {},
                 Form: new Form({
                     f_name: '',
                     l_name: '',
                     m_name: '',
-                    email: '',
                     phone: '',
                     alternative_phone: '',
+                    email: '',
                     gender: '',
-                    date_of_birth: '',
+                    date_of_birth: '' ,
                     r_address: ''
                 })
             }
         },
 
         methods: {
-            registerStudent () {
+
+
+            registerUser () {
                 this.Form.post('/register/new_user')
                     .then(data => {
                             // this.Form.reset();
                             this.user = data;
-                            this.showPassport = true;
+                            this.update = true;
                             flash('New User Created.');
+                        }
+                    );
+            },
+
+            updateUser () {
+                this.Form.patch(`/register/${user.username}`)
+                    .then(data => {
+                            // this.Form.reset();
+                            flash('User Credentials Updated Successfully');
                         }
                     );
             },

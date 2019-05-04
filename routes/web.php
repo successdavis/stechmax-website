@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     $type = \App\Type::find(3);
-    $programs = $type->courses()->get();
+    $programs = !empty($type) ? $type->courses()->get() : [];
     return view('welcome', compact('programs'));
 });
 
@@ -95,6 +95,8 @@ Route::get('/register/resend', 'Auth\RegisterConfirmationController@resend')->na
 Route::get('/register/comfirm_email', 'Auth\RegisterConfirmationController@create')->middleware('cannot-see-resend-link-page')->name('register.confirm_email');
 
 Route::post('/register/new_user', 'ManageUserController@store')->middleware('admin')->name('manage_user.store');
+
+//Route::patch('/users/{user}', 'ManageUserController@store')->middleware('admin')->name('manage_user.store');
 
 Route::post('/follow', 'FollowersController@store');
 

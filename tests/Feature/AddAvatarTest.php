@@ -44,4 +44,20 @@ class AddAvatarTest extends TestCase
 
         Storage::disk('public')->assertExists('avatars/' . $file->hashName());
     }
+
+    /** @test */
+    public function an_administrator_may_upload_an_avatar_for_any_user()
+    {
+        $this->signIn(factory('App\User')->state('administrator')->create());
+
+        $user = create('App\User');
+
+        Storage::fake('public');
+
+        $this->json('POST', 'api/users/' . $user->username . '/avatar', ['avatar' => $file = UploadedFile::fake()->image('avatar.jpg')]);
+
+        $this->assertEquals(asset('storage/avatars/'.$file->hashName()), $user->fresh()->avatar_path);
+
+        Storage::disk('public')->assertExists('avatars/' . $file->hashName());
+    }
 }

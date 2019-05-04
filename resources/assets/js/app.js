@@ -22,7 +22,7 @@ Vue.component('thread-view', require('./pages/Thread.vue'));
 Vue.component('avatar-form', require('./components/AvatarForm.vue'));
 Vue.component('mega-menu', require('./components/MegaMenu.vue'));
 Vue.component('course-registration', require('./components/CourseRegistration.vue'));
-Vue.component('user-registration', require('./components/UserRegistration.vue'));
+Vue.component('new-user', require('./components/NewUser.vue'));
 Vue.component('users', require('./components/Users.vue'));
 Vue.component('program-registration', require('./pages/ProgramRegistration.vue'));
 Vue.component('testing', require('./components/testing.vue'));
