@@ -34,13 +34,15 @@ Route::post('courses/{course}/requirement', 'RequirementController@store')->midd
 Route::post('courses/{course}/section', 'SectionController@store')->middleware(['auth', 'admin'])->name('section.store');
 Route::get('courses/{course}/section', 'SectionController@index')->middleware(['auth', 'admin'])->name('section.index');
 Route::post('courses/{course}/{section}/topic', 'TopicController@store')->middleware(['auth', 'admin'])->name('topic.store');
-Route::get('courses/{course}/{section}/topic', 'TopicController@index')->middleware(['auth', 'admin'])->name('topic.store');
+Route::get('courses/{course}/{section}/topic', 'TopicController@index')->middleware(['auth', 'admin'])->name('topic.get');
 
 Route::post('/courses', 'CourseController@store')->middleware('admin')->name('courses.store');
 Route::get('/dashboard/courses/create', 'CourseController@create')->middleware('admin')->name('courses.create');
 
 Route::get('/dashboard/users', 'ManageUserController@index')->middleware('admin')->name('manage_user.index');
-Route::get('/dashboard/get_users', 'ManageUserController@get_users')->middleware('admin');
+Route::get('/dashboard/users/datatable', 'ManageUserController@getUsersForDataTable')->middleware('admin')->name('manage_user.datatables');
+
+Route::patch('/users/{user}/update', 'ManageUserController@update')->middleware('admin');
 
 Route::get('/courses', 'CourseController@index')->name('courses');
 Route::get('/courses/{subject}', 'CourseController@index');

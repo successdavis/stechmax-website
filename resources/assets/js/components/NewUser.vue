@@ -17,7 +17,7 @@
                     <avatar-form :user="user" v-if="update"></avatar-form>
                 </div>
 
-                <form method="post" @submit.prevent="registerUser" @keydown="Form.errors.clear()">
+                <form method="post" @submit.prevent="handleForm" @keydown="Form.errors.clear()">
                         <div class="grid-x grid-padding-x">
 
                             <div class="medium-6 cell">
@@ -74,7 +74,7 @@
 
                             <div class="medium-6 cell">
                                 <label>Date of Birth
-                                    <input type="date" v-model="Form.date" aria-describedby="courseTitleHelpText" required>
+                                    <input type="date" v-model="Form.dob" aria-describedby="courseTitleHelpText" required>
                                 </label>
                                 <p class="help-text" id="courseTitleHelpText"></p>
                             </div>
@@ -89,9 +89,9 @@
                         </div>
                     <div class="grid-x grid-padding-x mb-2 mt-2">
                         <div class="medium-6">
-                            <button type="submit" class="expanded medium button success" v-text="update ? 'Update' : 'Register User'"></button>
+                            <button type="submit" class="expanded medium button success" v-text="update ? 'Update User' : 'Register User'"></button>
                         </div>
-                        <div class="medium-6">
+                        <div class="medium-6" v-if="update === false">
                             <button type="reset" class="expanded medium button danger">Reset</button>
                         </div>
                     </div>
@@ -120,14 +120,20 @@
                     alternative_phone: '',
                     email: '',
                     gender: '',
-                    date_of_birth: '' ,
+                    dob: '' ,
                     r_address: ''
                 })
             }
         },
 
         methods: {
+            handleForm () {
+                if (this.update) {
+                 return this.updateUser();
+                }
 
+                return this.registerUser();
+            },
 
             registerUser () {
                 this.Form.post('/register/new_user')
@@ -140,11 +146,12 @@
                     );
             },
 
+            // '/users/{user}/update'
             updateUser () {
-                this.Form.patch(`/register/${user.username}`)
+                this.Form.patch(`/users/${this.user.username}/update`)
                     .then(data => {
                             // this.Form.reset();
-                            flash('User Credentials Updated Successfully');
+                            flash('User Update Successfully.');
                         }
                     );
             },

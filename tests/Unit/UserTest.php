@@ -31,4 +31,19 @@ class UserTest extends TestCase
         $this->assertEquals(asset('storage/avatars/me.jpg'), $user->avatar_path);
     }
 
+    /** @test */
+    public function an_admin_can_update_any_user()
+    {
+        $this->signIn(factory('App\User')->state('administrator')->create());
+
+        $user = create('App\User');
+        $data = $user->toArray();
+
+        $data['f_name'] = 'Martins';
+        $data['l_name'] = 'Ushie';
+
+        $user->update($data);
+
+        $this->assertEquals($data['f_name'], $user->f_name);
+    }
 }

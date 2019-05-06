@@ -3,6 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -32,7 +33,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token'
     ];
 
     public function getRouteKeyName()
@@ -102,5 +103,6 @@ class User extends Authenticatable
         // return in_array($this->f_name, ['JohnDoe', 'JaneDoe']);
         return $this->admin;
     }
+
 }
  

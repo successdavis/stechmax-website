@@ -44,7 +44,7 @@
       <li>
         <a href="#">Manage Student</a>
         <ul class="menu vertical nested">
-            <li><new-user :display="'AddUser'" :modal="'regModal'" ></new-user></li>
+            <li><new-user :modal="'regModal'" ></new-user></li>
           <li><a href="{{route('manage_user.index')}}">View Users</a></li>
         </ul>
       </li>
