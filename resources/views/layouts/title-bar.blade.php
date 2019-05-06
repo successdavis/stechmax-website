@@ -34,7 +34,7 @@
 
       <li><a href="{{ url('/threads') }}">FORUM</a></li>
       <li>
-        <input type="search" name="q" placeholder="Search for courses.." class="animated-search-form">
+        <input type="search" name="q" placeholder="Search catalogue" class="animated-search-form">
       </li>
 
     </ul>
