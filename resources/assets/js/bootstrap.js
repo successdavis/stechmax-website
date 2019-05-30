@@ -33,6 +33,7 @@ import Form from './utilities/Form';
 import VModal from 'vue-js-modal';
 
 window.Form = Form;
+window.Event = new Vue();
 
 Vue.use(PortalVue);
 Vue.use(VModal);

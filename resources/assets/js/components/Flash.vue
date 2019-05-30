@@ -52,8 +52,14 @@
 
 <style>
     .alert-flash {
-        position: fixed;
-        right: 25px;
-        bottom: 25px;
+        position: absolute;
+        background: blue;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 2002;
+        text-align: center;
+        color: white;
+        padding: 1em 0;
     }
 </style>

@@ -24,6 +24,10 @@
                     </select>
                 </label>
             </div>
+            <div class="small-3 medium-2">
+                <new-user :modal="'newUserRegModal'" class="medium button" style="margin-left: 1em; margin-top: 1.66em;"></new-user>
+            </div>
+
         </div>
 
         <table>
@@ -88,6 +92,7 @@
 
         created() {
             this.fetch();
+            Event.$on('newUserCreated', (user) => this.items.unshift(user));
         },
 
         methods: {

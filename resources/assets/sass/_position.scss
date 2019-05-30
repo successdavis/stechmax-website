@@ -9,3 +9,8 @@
     position: relative;
     z-index: 100;
 }
+
+.scrollable {
+    overflow-y: auto;
+    height: 523px;
+}

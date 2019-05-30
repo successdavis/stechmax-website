@@ -19,11 +19,11 @@ class ManageUserController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'f_name'    => 'required',
-            'l_name'    => 'required',
+            'f_name'    => 'required|min:3',
+            'l_name'    => 'required|min:2',
             'gender'    => 'required',
-            'phone'     => 'required',
-            'r_address' => 'required',
+            'phone'     => 'required|min:11',
+            'r_address' => 'required|min:10',
             'email'     => 'email|unique:users,email'
         ]);
 
