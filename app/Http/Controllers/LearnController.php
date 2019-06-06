@@ -37,13 +37,13 @@ class LearnController extends Controller
     public function store(Course $course, Request $request)
     {
         $this->validate(request(), [
-            'body' => 'required|spamfree'
+            'body' => 'required|spamfree',
         ]);
-
-        $learn = $course->addLearn([
-            'body' => request('body')
-        ]);
-
+        
+        $learn = Learn::add([
+            'body' => ucfirst(request('body')),
+            'course_id' => $course->id
+        ], $course);
         return $learn;
     }
 
@@ -78,7 +78,25 @@ class LearnController extends Controller
      */
     public function update(Request $request, Learn $learn)
     {
-        //
+        $learn->update([
+            'body' => request('body')
+        ]);
+    }
+
+    public function reOrderLearns(Course $course)
+    {
+        $originalLearns = $course->learns;
+
+        foreach ($originalLearns as $oLearn) {
+            $id = $oLearn->id;
+            foreach (request()->learns as $newLearn) {
+                if ($id === $newLearn['id']) {
+                    $oLearn->update([
+                        'order' => $newLearn['order'] 
+                    ]);
+                }
+            }
+        }    
     }
 
     /**
@@ -89,6 +107,13 @@ class LearnController extends Controller
      */
     public function destroy(Learn $learn)
     {
-        //
+        $learn->delete();
+    }
+
+    public function getLearns(Course $course)
+    {
+        $learns = $course->learns()->orderBy('order')->get();
+
+        return $learns;
     }
 }

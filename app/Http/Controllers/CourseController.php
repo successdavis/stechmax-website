@@ -39,7 +39,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('dashboard.create', [
+        return view('dashboard.courses.create', [
             'displayMenu' => true
         ]);
     }
@@ -55,7 +55,6 @@ class CourseController extends Controller
         $this->validate(request(), [
             'title' => 'required|spamfree',
             'duration' => 'required',
-            'amount' => 'required',
             'description' => 'required',
             'sypnosis' => 'required',
             'subject_id' => 'required|exists:subjects,id',
@@ -103,7 +102,7 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        //
+        return view('dashboard.courses.manage', compact('course'));
     }
 
     /**
@@ -131,7 +130,7 @@ class CourseController extends Controller
 
     public function getCourses($subject, $filters)
     {
-        $courses = Course::latest()->filter($filters);
+        $courses = Course::latest()->filter($filters)->where('published', true);
 
         if ($subject->exists) {
             $courses->where('subject_id', $subject->id);

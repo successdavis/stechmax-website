@@ -1,0 +1,22 @@
+.createCourseFlow--card {
+    border: 1px solid gray;
+    margin-right: 1em;
+    min-height: 225px;
+    cursor: pointer;
+}
+
+.createCourseFlow--card:hover, .createCourseFlow--card--active {
+    border: 2px solid gray;
+}
+
+.createCourseFlow--card input[type="radio"]{
+    visibility:hidden;
+}
+
+.createCourseFlow--card .icon {
+    width: 50px;
+    height: 50px;
+    display: inherit;
+    margin: 1em auto;
+
+}

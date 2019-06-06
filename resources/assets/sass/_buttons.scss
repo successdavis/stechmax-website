@@ -1,3 +1,28 @@
-.red {
-    background-color: red;
+.c_buttons,
+.c_buttons--move{
+    border: 1.3px solid gray;
+    padding: .65em;
+}
+
+.c_buttons--move {
+    cursor: move;
+}
+
+.floating-button-body {
+    position: relative;
+}
+
+.floating-button-body:hover > .floating-button {
+    opacity: 100;
+}
+
+.floating-button {
+    background: white;
+    display: inline-block;
+    padding: .65em;
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    opacity: 0;
+    cursor: pointer;
 }

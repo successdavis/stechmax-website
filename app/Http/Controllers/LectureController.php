@@ -4,21 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use App\Section;
-use App\topic;
+use App\Lecture;
 use Illuminate\Http\Request;
 
-class TopicController extends Controller
+class LectureController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Course $course, Section $section)
+    public function index(Section $section)
     {
-        $topics = $section->topics;
+        $lectures = $section->lectures()->orderBy('order')->get();;
 
-        return $topics;
+        return $lectures;
     }
 
     /**
@@ -37,17 +37,18 @@ class TopicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Course $course, Section $section)
+    public function store(Section $section)
     {
         $this->validate(request(), [
             'title' => 'required|spamfree'
         ]);
 
-        $topic = $section->addTopic([
-            'title' => request('title')
-        ]);
+        $lecture = Lecture::addLecture([
+            'title' => request('title'),
+            'section_id' => $section->id
+        ], $section);
 
-        return $topic;
+        return $lecture;
     }
 
     /**
@@ -79,9 +80,31 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Lecture $lecture)
     {
-        //
+        $this->validate(request(), [
+            'title' => 'required|spamfree'
+        ]);
+           
+        $lecture->update([
+            "title" => request('title')
+        ]);
+    }
+
+    public function reOrderLectures(Section $section)
+    {
+        $originalLectures = $section->lectures;
+
+        foreach ($originalLectures as $oLectures) {
+            $id = $oLectures->id;
+            foreach (request()->lectures as $newLecture) {
+                if ($id === $newLecture['id']) {
+                    $oLectures->update([
+                        'order' => $newLecture['order'] 
+                    ]);
+                }
+            }
+        }    
     }
 
     /**
@@ -90,8 +113,8 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Lecture $lecture)
     {
-        //
+        $lecture->delete();
     }
 }

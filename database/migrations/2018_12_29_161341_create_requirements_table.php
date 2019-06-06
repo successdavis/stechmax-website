@@ -15,8 +15,9 @@ class CreateRequirementsTable extends Migration
     {
         Schema::create('requirements', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('body');
             $table->unsignedInteger('course_id')->index();
+            $table->string('body');
+            $table->integer('order');
             $table->timestamps();
         });
     }

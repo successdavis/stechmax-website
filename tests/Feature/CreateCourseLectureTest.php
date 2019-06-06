@@ -7,26 +7,25 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class CreateCourseTopicTest extends TestCase
+class CreateCourseLectureTest extends TestCase
 {
     use DatabaseMigrations;
 
     /** @test */
-    public function administrator_may_create_a_new_topic()
+    public function administrator_may_create_a_new_lecture()
     {
         $this->signIn(factory('App\User')->states('administrator')->create());
 
-        $topic = make('App\Topic');
+        $lecture = make('App\Lecture');
         $section = create('App\Section');
-        $course = create('App\Course');
 
-        $response = $this->post(route('topic.store', ['course' => $course->id, 'section' => $section->id]), $topic->toArray());
-        $this->assertDatabaseHas('topics', ['title' => $topic->title]);
+        $response = $this->post(route('lecture.store', ['section' => $section->id]), $lecture->toArray());
+        $this->assertDatabaseHas('lectures', ['title' => $lecture->title]);
 
     }
 
     /** @test */
-    public function non_administrator_may_not_create_new_topic()
+    public function non_administrator_may_not_create_new_lecture()
     {
         $this->withExceptionHandling();
         $this->signIn();
@@ -35,31 +34,31 @@ class CreateCourseTopicTest extends TestCase
 
         $course = create('App\Course');
 
-        $response = $this->post(route('topic.store', ['course' => $course->id, 'section' => $section->id]), [])
+        $response = $this->post(route('lecture.store', ['section' => $section->id]), [])
             ->assertStatus(403);
     }
 
     /** @test */
-    public function a_topic_requires_a_valid_title()
+    public function a_lecture_requires_a_valid_title()
     {
-        $this->publishTopic(['title' => null])
+        $this->publishLecture(['title' => null])
             ->assertSessionHasErrors('title');
 
-        $this->publishTopic(['title' => 'ggggggggggggggggg'])
+        $this->publishlecture(['title' => 'ggggggggggggggggg'])
             ->assertSessionHasErrors('title');
     }
 
 
-    public function publishTopic($overrides = [])
+    public function publishLecture($overrides = [])
     {
         $this->withExceptionHandling();
         $this->signIn(factory('App\User')->states('administrator')->create());
 
-        $topic = make('App\Topic', $overrides);
+        $lecture = make('App\Lecture', $overrides);
 
         $section = create('App\Section');
         $course = create('App\Course');
 
-        return $this->post(route('topic.store', ['course' => $course->id, 'section' => $section->id]), $topic->toArray());
+        return $this->post(route('lecture.store', ['course' => $course->id, 'section' => $section->id]), $lecture->toArray());
     }
 }

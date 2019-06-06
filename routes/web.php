@@ -30,14 +30,33 @@ Route::get('api/courses', 'Api\CoursesController@getSubjects');
 Route::post('api/courses/{subject}/{course}', 'Api\CourseImageController@store')->middleware(['auth', 'admin']);
 
 Route::post('courses/{course}/learn', 'LearnController@store')->middleware(['auth', 'admin'])->name('learn.store');
+Route::get('courses/{course}/learn', 'LearnController@getLearns')->middleware(['admin']);
+Route::put('courses/{course}/learn', 'LearnController@reOrderLearns')->middleware(['admin']);
+Route::delete('courses/{learn}/learn', 'LearnController@destroy')->middleware(['admin']);
+Route::patch('courses/{learn}/learn', 'LearnController@update')->middleware(['admin']);
+
 Route::post('courses/{course}/requirement', 'RequirementController@store')->middleware(['auth', 'admin'])->name('requirement.store');
-Route::post('courses/{course}/section', 'SectionController@store')->middleware(['auth', 'admin'])->name('section.store');
-Route::get('courses/{course}/section', 'SectionController@index')->middleware(['auth', 'admin'])->name('section.index');
-Route::post('courses/{course}/{section}/topic', 'TopicController@store')->middleware(['auth', 'admin'])->name('topic.store');
-Route::get('courses/{course}/{section}/topic', 'TopicController@index')->middleware(['auth', 'admin'])->name('topic.get');
+Route::get('courses/{course}/requirement', 'RequirementController@getRequirements')->middleware(['admin']);
+Route::put('courses/{course}/requirement', 'RequirementController@reOrderRequirements')->middleware(['admin']);
+Route::delete('courses/{requirement}/requirement', 'RequirementController@destroy')->middleware(['admin']);
+Route::patch('courses/{requirement}/requirement', 'RequirementController@update')->middleware(['admin']);
+
+Route::post('manage/{course}/section', 'SectionController@store')->middleware(['auth', 'admin'])->name('section.store');
+Route::get('manage/{course}/sections', 'SectionController@index')->middleware(['auth', 'admin'])->name('section.index');
+Route::put('manage/{course}/sections', 'SectionController@reOrderSections')->middleware(['admin']);
+Route::patch('manage/{section}/section', 'SectionController@update')->middleware(['admin']);
+Route::delete('manage/{section}/section', 'SectionController@destroy')->middleware(['admin']);
+
+Route::post('manage/{section}/lecture', 'LectureController@store')->middleware(['auth', 'admin'])->name('lecture.store');
+Route::get('manage/{section}/lectures', 'LectureController@index')->middleware(['admin'])->name('lecture.get');
+Route::put('manage/{section}/lectures', 'LectureController@reOrderLectures')->middleware(['admin']);
+Route::patch('manage/{lecture}/lecture', 'LectureController@update')->middleware(['admin']);
+Route::delete('manage/{lecture}/lecture', 'LectureController@destroy')->middleware(['admin']);
+
 
 Route::post('/courses', 'CourseController@store')->middleware('admin')->name('courses.store');
 Route::get('/dashboard/courses/create', 'CourseController@create')->middleware('admin')->name('courses.create');
+Route::get('/dashboard/{course}/manage', 'CourseController@edit')->middleware('admin')->name('courses.edit');
 
 Route::get('/dashboard/users', 'ManageUserController@index')->middleware('admin')->name('manage_user.index');
 Route::get('/dashboard/users/datatable', 'ManageUserController@getUsersForDataTable')->middleware('admin')->name('manage_user.datatables');

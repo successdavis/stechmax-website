@@ -47,15 +47,24 @@ class CreateLearnsTest extends TestCase
             ->assertSessionHasErrors('body');
     }
 
+    /** @test */
+    public function a_learn_auto_set_a_unique_order_number()
+    {
+        $learn = $this->publishLearn()->json();
+        $this->assertEquals(1, $learn['order']);
+
+        $learnTwo = $this->publishLearn()->json();
+        $this->assertEquals(2, $learnTwo['order']);
+    }
+
 
     public function publishLearn($overrides = [])
     {
         $this->withExceptionHandling();
         $this->signIn(factory('App\User')->states('administrator')->create());
-
         $learn = make('App\Learn', $overrides);
-        $course = create('App\Course');
-
-        return $this->post(route('learn.store', ['course' => $course->id]), $learn->toArray());
+        return $this->post(route('learn.store', ['course' => $learn->course_id]), $learn->toArray());
     }
+
+
 }

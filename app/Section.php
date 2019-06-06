@@ -7,20 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Section extends Model
 {
     protected $guarded = [];
-    protected $with = ['topics'];
+    protected $with = ['lectures'];
+
+    use SortOrdering;
+
     public function course()
     {
         return $this->belongsTo('App\Course');
     }
 
-    public function topics()
+    public function lectures()
     {
-        return $this->hasMany('App\Topic');
-    }
-
-    public function addTopic($topic) {
-        $topic = $this->topics()->create($topic);
-
-        return $topic;
+        return $this->hasMany('App\Lecture');
     }
 }

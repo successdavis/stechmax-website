@@ -32,7 +32,7 @@ class NotificationTest extends TestCase
             'body' => 'Some reply here'
         ]);
         
-        // the user should not receie any notification  
+        // the user should not receie a notification  
         $this->assertCount(0, auth()->user()->fresh()->notifications);
 
         // but if this reply is added by somebody else 

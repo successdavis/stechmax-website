@@ -347,6 +347,32 @@ ul#off-canvas_panel-links {
   color: #888;
 }
 
+.course-section {
+  min-height: 120px;
+  background: antiquewhite;
+  padding: 1.2em;
+  margin: 1.5em 0;
+  padding-bottom: 3.3em;
+}
+
+.course-lecture {
+  background: white;
+  padding: .85em;
+  margin: .75em 0;
+  color: gray;
+}
+
+.display-mini-icons:hover .mini-icons {
+  opacity: 100;
+}
+
+.mini-icons {
+  font-size: 13px;
+  padding: 0 .3em;
+  cursor: pointer;
+  opacity: 0;
+}
+
 .course {
   -webkit-box-shadow: -1px 2px 10px -1px rgba(71, 69, 71, 0.6);
           box-shadow: -1px 2px 10px -1px rgba(71, 69, 71, 0.6);
@@ -457,6 +483,35 @@ ul#off-canvas_panel-links {
 
 #reg-form input[type="submit"] {
   background: red;
+}
+
+.c_buttons,
+.c_buttons--move {
+  border: 1.3px solid gray;
+  padding: .65em;
+}
+
+.c_buttons--move {
+  cursor: move;
+}
+
+.floating-button-body {
+  position: relative;
+}
+
+.floating-button-body:hover > .floating-button {
+  opacity: 100;
+}
+
+.floating-button {
+  background: white;
+  display: inline-block;
+  padding: .65em;
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  opacity: 0;
+  cursor: pointer;
 }
 
 .timeline .timeline-item::after,
@@ -747,6 +802,10 @@ span.v-stepper__step__step.primary {
   background-color: #222a38;
 }
 
+.gray-text {
+  color: gray;
+}
+
 .align-content__center {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -954,6 +1013,33 @@ body {
         -ms-flex-direction: column;
             flex-direction: column;
   }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.createCourseFlow--card {
+  border: 1px solid gray;
+  margin-right: 1em;
+  min-height: 225px;
+  cursor: pointer;
+}
+
+.createCourseFlow--card:hover,
+.createCourseFlow--card--active {
+  border: 2px solid gray;
+}
+
+.createCourseFlow--card input[type="radio"] {
+  visibility: hidden;
+}
+
+.createCourseFlow--card .icon {
+  width: 50px;
+  height: 50px;
+  display: inherit;
+  margin: 1em auto;
 }
 
 .navbar-laravel {

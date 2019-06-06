@@ -66,13 +66,6 @@ class Course extends Model
         return $this->hasMany('App\Learn');
     }
 
-    public function addLearn($learn)
-    {
-        $learn = $this->requirements()->create($learn);
-
-        return $learn;
-    }
-
     public function requirements()
     {
         return $this->hasMany('App\Requirement');

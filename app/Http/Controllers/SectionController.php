@@ -42,9 +42,11 @@ class SectionController extends Controller
            'title' => 'required|spamfree'
         ]);
 
-        $section = $course->addSection([
-            'title' => request('title')
-        ]);
+        $section = Section::add([
+            'title' => request('title'),
+            'course_id' => $course->id,
+            'description' => request('description')
+        ], $course);
 
         return $section;
     }
@@ -78,9 +80,33 @@ class SectionController extends Controller
      * @param  \App\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Section $section)
+    public function update(Section $section)
     {
-        //
+        $this->validate(request(), [
+            'title' => 'required|spamfree'
+        ]);
+
+        $section->update([
+            'title' => request('title'),
+            'description' => request('description')
+        ]);
+    }
+
+
+    public function reOrderSections(Course $course)
+    {
+        $originalSections = $course->sections;
+
+        foreach ($originalSections as $oSection) {
+            $id = $oSection->id;
+            foreach (request()->sections as $newSection) {
+                if ($id === $newSection['id']) {
+                    $oSection->update([
+                        'order' => $newSection['order'] 
+                    ]);
+                }
+            }
+        }    
     }
 
     /**
@@ -91,6 +117,13 @@ class SectionController extends Controller
      */
     public function destroy(Section $section)
     {
-        //
+        $section->delete();
+    }
+
+    public function getSections(Course $course)
+    {
+        $sections = $course->sections()->orderBy('order')->get();
+
+        return $sections;
     }
 }

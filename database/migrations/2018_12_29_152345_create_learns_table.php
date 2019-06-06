@@ -17,6 +17,7 @@ class CreateLearnsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('course_id')->index();
             $table->string('body');
+            $table->integer('order');
             $table->timestamps();
         });
     }

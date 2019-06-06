@@ -52,7 +52,7 @@
 
 <style>
     .alert-flash {
-        position: absolute;
+        position: fixed;
         background: blue;
         width: 100%;
         top: 0;

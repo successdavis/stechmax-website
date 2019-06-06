@@ -148,3 +148,30 @@ ul#off-canvas_panel-links {
     font-weight: bolder;
     color: #888;
 }
+
+
+.course-section {
+    min-height: 120px;
+    background: antiquewhite;
+    padding: 1.2em;
+    margin: 1.5em 0;
+    padding-bottom: 3.3em;
+}
+
+.course-lecture {
+    background: white;
+    padding: .85em;
+    margin: .75em 0;
+    color: gray;
+}
+
+.display-mini-icons:hover .mini-icons {
+    opacity: 100;
+}
+
+.mini-icons {
+    font-size: 13px;
+    padding: 0 .3em;
+    cursor: pointer;
+    opacity: 0;
+}

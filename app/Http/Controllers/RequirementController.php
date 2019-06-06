@@ -40,9 +40,10 @@ class RequirementController extends Controller
             'body' => 'required|spamfree'
         ]);
 
-        $requirement = $course->addRequirement([
-            'body' => request('body')
-        ]);
+        $requirement = Requirement::add([
+            'body' => request('body'),
+            'course_id' => $course->id
+        ], $course);
 
         return $requirement;
     }
@@ -76,9 +77,27 @@ class RequirementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Requirement $requirement)
     {
-        //
+        $requirement->update([
+            'body' => request('body')
+        ]);
+    }
+
+    public function reOrderRequirements(Course $course)
+    {
+        $originalRequirement = $course->requirements;
+
+        foreach ($originalRequirement as $oRequirement) {
+            $id = $oRequirement->id;
+            foreach (request()->requirements as $newRequirement) {
+                if ($id === $newRequirement['id']) {
+                    $oRequirement->update([
+                        'order' => $newRequirement['order'] 
+                    ]);
+                }
+            }
+        }
     }
 
     /**
@@ -87,8 +106,15 @@ class RequirementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Requirement $requirement)
     {
-        //
+        $requirement->delete();
+    }
+
+    public function getRequirements(Course $course)
+    {
+        $requirements = $course->requirements()->orderBy('order')->get();
+
+        return $requirements;
     }
 }

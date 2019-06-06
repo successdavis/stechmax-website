@@ -8,7 +8,7 @@ class CreateSectionsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * Divide courses into sections.
      * @return void
      */
     public function up()
@@ -16,6 +16,8 @@ class CreateSectionsTable extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title', 50);
+            $table->string('description');
+            $table->integer('order');
             $table->unsignedInteger('course_id');
             $table->timestamps();
         });
