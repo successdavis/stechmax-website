@@ -1,3 +1,4 @@
+@import '/vue-croppa/dist/vue-croppa.css';
 // Fonts
 // Variables
 @import 'base';
@@ -20,6 +21,7 @@
 @import 'progress-step';
 @import 'progress-bar';
 @import 'createCourseFlow';
+@import 'transitions';
 
 
 .navbar-laravel {

@@ -1,4 +1,4 @@
-body {
+@import url(/vue-croppa/dist/vue-croppa.css);body {
   color: black;
   background-color: #edeff0;
 }
@@ -195,6 +195,10 @@ h3.text-center.mt-4.mb-4.text-white {
   height: 523px;
 }
 
+.relative-body {
+  position: relative;
+}
+
 .gray-text {
   color: #606f7b;
 }
@@ -373,6 +377,26 @@ ul#off-canvas_panel-links {
   opacity: 0;
 }
 
+.croppa-container {
+  background-color: lightblue;
+  border: 2px solid grey;
+  border-radius: 8px;
+}
+
+.croppa-container:hover {
+  opacity: 1;
+  background-color: #8ac9ef;
+}
+
+.input.border-bottom-only,
+.input.border-bottom-only:active {
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-bottom: 1.5px solid gray;
+  margin-top: 1em;
+}
+
 .course {
   -webkit-box-shadow: -1px 2px 10px -1px rgba(71, 69, 71, 0.6);
           box-shadow: -1px 2px 10px -1px rgba(71, 69, 71, 0.6);
@@ -504,14 +528,30 @@ ul#off-canvas_panel-links {
 }
 
 .floating-button {
+  position: absolute;
+  opacity: 0;
+}
+
+.buttons-right {
+  right: 0;
+  top: 0;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+}
+
+.add-lecture-button {
   background: white;
   display: inline-block;
   padding: .65em;
-  position: absolute;
   right: 0;
   bottom: 10px;
-  opacity: 0;
   cursor: pointer;
+}
+
+.top-right-button {
+  position: absolute;
+  top: 1em;
+  right: 1em;
 }
 
 .timeline .timeline-item::after,
@@ -1040,6 +1080,25 @@ body {
   height: 50px;
   display: inherit;
   margin: 1em auto;
+}
+
+.flip-list-move {
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  transition: transform 0.5s, -webkit-transform 0.5s;
+}
+
+.no-move {
+  -webkit-transition: -webkit-transform 0s;
+  transition: -webkit-transform 0s;
+  transition: transform 0s;
+  transition: transform 0s, -webkit-transform 0s;
+}
+
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
 }
 
 .navbar-laravel {

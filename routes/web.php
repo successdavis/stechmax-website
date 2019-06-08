@@ -55,8 +55,11 @@ Route::delete('manage/{lecture}/lecture', 'LectureController@destroy')->middlewa
 
 
 Route::post('/courses', 'CourseController@store')->middleware('admin')->name('courses.store');
+Route::patch('/courses/{course}', 'CourseController@update')->middleware('admin')->name('courses.update');
 Route::get('/dashboard/courses/create', 'CourseController@create')->middleware('admin')->name('courses.create');
 Route::get('/dashboard/{course}/manage', 'CourseController@edit')->middleware('admin')->name('courses.edit');
+Route::get('/dashboard/{course}/publish', 'CourseController@publish')->middleware('admin')->name('courses.publish');
+Route::get('/dashboard/{course}/unpublish', 'CourseController@unPublish')->middleware('admin')->name('courses.unPublish');
 
 Route::get('/dashboard/users', 'ManageUserController@index')->middleware('admin')->name('manage_user.index');
 Route::get('/dashboard/users/datatable', 'ManageUserController@getUsersForDataTable')->middleware('admin')->name('manage_user.datatables');

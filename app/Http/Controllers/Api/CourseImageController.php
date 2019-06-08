@@ -38,7 +38,7 @@ class CourseImageController extends Controller
     public function store(Subject $subject, Course $course)
     {
         $this->validate(request(), [
-           'thumbnail' => ['required', 'image']
+           'thumbnail' => 'required|image|max:1000|dimensions:width=750,height=422'
         ]);
 
         $course->update([

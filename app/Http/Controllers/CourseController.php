@@ -62,16 +62,7 @@ class CourseController extends Controller
             'difficulty_id' => 'required|exists:difficulties,id'
         ]);
 
-        $course = Course::create([
-            'title' => request('title'),
-            'duration' => request('duration'),
-            'subject_id' => request('subject_id'),
-            'difficulty_id' => request('difficulty_id'),
-            'type_id' => request('type_id'),
-            'amount' => request('amount'),
-            'description' => request('description'),
-            'sypnosis' => request('sypnosis')
-        ]);
+        $course = Course::create(request()->all());
 
         $path = $course->path();
 
@@ -112,9 +103,32 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(Course $course)
     {
-        //
+        $course->update(request()->validate([
+            'title' => 'required|spamfree',
+            'description' => 'required|spamfree',
+            'duration' => 'required',
+            'subject_id' => 'required',
+            'amount' => 'required|integer',
+            'sypnosis' => 'required|spamfree',
+            'difficulty_id' => 'required'
+        ]));
+    }
+
+    public function publish(Course $course)
+    {
+        $course->publish();
+
+        return back()
+            ->with('flash', 'This course is now visible to users');
+    }
+
+    public function unPublish(Course $course)
+    {
+        $course->unPublish();
+        return back()
+            ->with('flash', 'This course is nolonger visible to users');
     }
 
     /**

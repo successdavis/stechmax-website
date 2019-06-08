@@ -1,6 +1,7 @@
+
 <template>
     <div>
-        <form @submit.prevent="create" @keydown="Form.errors.clear()">
+        <form @submit.prevent="create" @keydown="Form.errors.clear()" @keydown.enter.prevent="create">
             <label for="title">New Lecture</label>
             <input id="title" type="text" v-model="Form.title">
             <p class="help-text" v-if="Form.errors.has('title')" v-text="Form.errors.get('title')" id="title"></p>

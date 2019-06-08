@@ -17,12 +17,27 @@
 }
 
 .floating-button {
+    position: absolute;
+    opacity: 0;
+}
+
+.buttons-right {
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+}
+
+.add-lecture-button {
     background: white;
     display: inline-block;
     padding: .65em;
-    position: absolute;
     right: 0;
     bottom: 10px;
-    opacity: 0;
     cursor: pointer;
+}
+
+.top-right-button {
+    position: absolute;
+    top: 1em;
+    right: 1em;
 }

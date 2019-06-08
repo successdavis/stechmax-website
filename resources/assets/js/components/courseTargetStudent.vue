@@ -2,31 +2,35 @@
     <div class="grid-container">
         <p class="mb-3">The descriptions you write here will help students decide if this course/track is the one for them.</p>
         <p>What will students learn in your course?</p>
-            <draggable :list="learns" :element="'div'" @change="reOrderLearns">
-                <div v-for="(item, index) in learns" :key="item.id">
-                    <CourseLearn :learn="item" @deleted="removeLearn(index)"></CourseLearn>
-                </div>
+            <draggable :list="learns" handle=".handle" :element="'div'" @change="reOrderLearns">
+                <transition-group type="transition" name="flip-list">
+                    <div v-for="(item, index) in learns" :key="item.id">
+                        <CourseLearn :learn="item" @deleted="removeLearn(index)"></CourseLearn>
+                    </div>
+                </transition-group>
             </draggable>
         <form action="" @submit.prevent="addLearn" @keydown="learnForm.errors.clear()">
             <div class="cell">
                 <label>
-                    <input placeholder="Example: Basic of Photoshop" type="text" aria-describedby="courseBenefitHelpText" v-model="learnForm.body" required>
+                    <input class="input border-bottom-only" placeholder="Example: Basic of Photoshop" type="text" aria-describedby="courseBenefitHelpText" v-model="learnForm.body" required>
                 </label>
             </div>
             <button type="submit" class="small button success" :disabled="learnForm.errors.any()">Add Learn</button>
         </form>
         
         <p class="mt-3">Are there any course requirements or prerequisites?</p>
-        <draggable :list="requirements" :element="'div'" @change="reOrderRequirements">
-            <div v-for="(item, index) in requirements" :key="item.id">
-                <CourseRequirement :requirement="item" @deleted="removeRequirement(index)"></CourseRequirement>
-            </div>
+        <draggable :list="requirements" handle=".handle" :element="'div'" @change="reOrderRequirements">
+            <transition-group type="transition" name="flip-list">
+                <div v-for="(item, index) in requirements" :key="item.id">
+                    <CourseRequirement :requirement="item" @deleted="removeRequirement(index)"></CourseRequirement>
+                </div>
+            </transition-group>
         </draggable>
 
         <form action="" @submit.prevent="addRequirement" @keydown="requirementForm.errors.clear()">
             <div class="cell">
                 <label>Add a requirement
-                    <input type="text" aria-describedby="courseRequirementHelpText" v-model="requirementForm.body" required>
+                    <input type="text" class="input border-bottom-only" aria-describedby="courseRequirementHelpText" v-model="requirementForm.body" required>
                 </label>
             </div>
             <button type="submit" class="small button success" :disabled="requirementForm.errors.any()">Add Requirement</button>

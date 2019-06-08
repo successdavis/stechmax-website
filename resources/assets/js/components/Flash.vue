@@ -1,10 +1,16 @@
 <template>
-    <div class="alert alert-flash"
-         :class="'alert-'+level"
-         role="alert"
-         v-show="show"
-         v-text="body">
-    </div>
+    <transition 
+        name="custom-classes-transition"
+        enter-active-class="animated slideInDown fast"
+        leave-active-class="animated slideOutUp"
+    >
+        <div class="alert alert-flash"
+             :class="'alert-'+level"
+             role="alert"
+             v-show="show"
+             v-text="body">
+        </div>
+    </transition>
 </template>
 
 <script>

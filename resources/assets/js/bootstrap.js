@@ -31,14 +31,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import PortalVue from 'portal-vue';
 import Form from './utilities/Form';
 import VModal from 'vue-js-modal';
+import Croppa from 'vue-croppa'
 
 window.Form = Form;
 window.Event = new Vue();
 
 Vue.use(PortalVue);
 Vue.use(VModal);
-
-
+Vue.use(Croppa);
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that

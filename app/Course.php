@@ -12,6 +12,10 @@ class Course extends Model
     use Billable;
     use Subscriber;
 
+    protected $casts = [
+        'published' => 'boolean'
+    ];
+
     public function path()
     {
         return '/courses/' . $this->subject->slug . '/' . $this->id;
@@ -29,6 +33,24 @@ class Course extends Model
         }else {
             return asset('storage/thumbnails/default.jpg');
         }
+    }
+
+    public function publish()
+    {
+        $this->update([
+            'published' => true
+        ]);
+
+        return true;
+    }
+
+    public function unPublish()
+    {
+        $this->update([
+            'published' => false
+        ]);
+
+        return true;
     }
 
     public function checkCustomCourse()

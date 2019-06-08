@@ -175,3 +175,21 @@ ul#off-canvas_panel-links {
     cursor: pointer;
     opacity: 0;
 }
+.croppa-container {
+   background-color: lightblue;
+   border: 2px solid grey;
+   border-radius: 8px;
+ }
+ 
+ .croppa-container:hover {
+   opacity: 1;
+   background-color: #8ac9ef;
+ }
+
+.input.border-bottom-only,
+.input.border-bottom-only:active {
+    border: none;
+    box-shadow: none;
+    border-bottom: 1.5px solid gray;
+    margin-top: 1em;
+}

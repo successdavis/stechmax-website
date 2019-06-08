@@ -1,10 +1,12 @@
 <template>
-    <div class="grid-x">
-        <input type="text" v-model="body" class="medium-10" @change="update()">
-        <span class="medium-2">
-            <i class="far fa-trash-alt c_buttons" @click="deleteItem()">D</i>
-            <i class="fas fa-arrows-alt c_buttons--move" title="Drag this button to re-order items"></i>
-        </span>
+    <div class="grid-x ">
+        <div class="medium-11 floating-button-body">
+            <input type="text" v-model="body" class="cell" @change="update()">
+            <span class="medium-2 floating-button buttons-right">
+                <i class="far fa-trash-alt c_buttons" @click="deleteItem()"></i>
+                <i class="fas fa-arrows-alt c_buttons--move handle" title="Drag this button to re-order items"></i>
+            </span>
+        </div>
     </div>
     
 </template>

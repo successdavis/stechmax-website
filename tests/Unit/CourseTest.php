@@ -128,4 +128,27 @@ class CourseTest extends TestCase
 
         $this->assertInstanceOf('App\Type', $course->type);
     }
+
+    /** @test */
+    public function it_can_be_published()
+    {
+        $course = create('App\Course');
+        $this->assertFalse($course->published);
+
+        $course->publish();
+
+        $this->assertTrue($course->published);
+    }
+
+    /** @test */
+    public function it_can_be_unPublished()
+    {
+        $course = create('App\Course');
+        $course->publish();
+        $this->assertTrue($course->published);
+
+        $course->unPublish();
+
+        $this->assertFalse($course->published);
+    }
 }
