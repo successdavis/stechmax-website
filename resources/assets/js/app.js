@@ -24,6 +24,7 @@ Vue.component('mega-menu', require('./components/MegaMenu.vue'));
 Vue.component('course-registration', require('./components/CourseRegistration.vue'));
 Vue.component('target-student', require('./components/courseTargetStudent.vue'));
 Vue.component('course-curriculum', require('./components/CourseCurriculum.vue'));
+Vue.component('track-curriculum', require('./components/TrackCurriculum.vue'));
 Vue.component('course-landing', require('./components/CourseLanding.vue'));
 Vue.component('new-user', require('./components/NewUser.vue'));
 Vue.component('view-user', require('./components/ViewUser.vue'));

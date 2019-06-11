@@ -7,9 +7,9 @@
       <div class="grid-x grid-margin-x">
         <div class="cell medium-3">
           <ul class="vertical tabs" data-tabs id="example-tabs">
-            <li class="tabs-title"><a href="#panel1v" aria-selected="true">Target your students</a></li>
-            <li class="tabs-title"><a href="#panel2v">Setup Curriculum</a></li>
-            <li class="tabs-title is-active"><a href="#panel3v">Course Landing Page</a></li>
+            <li class="tabs-title"><a href="#target-student" aria-selected="true">Target your students</a></li>
+            <li class="tabs-title is-active"><a href="#setup-curriculum">Setup Curriculum</a></li>
+            <li class="tabs-title "><a href="#course-landing-page">Course Landing Page</a></li>
             @if ($course->published)
               <a href="/dashboard/{{$course->id}}/unpublish" class="mt-3 button medium expanded">Unpublish Course</a>
             @else
@@ -19,7 +19,7 @@
         </div>
         <div class="cell medium-9">
           <div class="tabs-content" data-tabs-content="example-tabs">
-            <div class="tabs-panel" id="panel1v">
+            <div class="tabs-panel" id="target-student">
                 <div class=" grid-container mb-3">
                     <h4>Target Your Audience</h4>
                 </div>
@@ -27,15 +27,19 @@
                 <target-student :course="{{$course}}"></target-student>
             </div>
 
-            <div class="tabs-panel " id="panel2v">
+            <div class="tabs-panel is-active" id="setup-curriculum">
               <div class="grid-container mb-3">
-                <h4>Curriculum</h4>
+                <h4>{{$course->type->name }} Curriculum</h4>
               </div>
               <hr>
-              <course-curriculum :course="{{$course}}"></course-curriculum>
+              @if (strtolower($course->type->name) === 'course')
+                <course-curriculum :course="{{$course}}"></course-curriculum>
+              @else 
+                <track-curriculum :course="{{$course}}"></track-curriculum>
+              @endif
             </div>
 
-            <div class="tabs-panel is-active relative-body" id="panel3v">
+            <div class="tabs-panel relative-body" id="course-landing-page">
               <div class="grid-container mb-3">
                 <h4>Course landing page</h4>
               </div>

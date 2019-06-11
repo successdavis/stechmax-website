@@ -15,8 +15,8 @@ class SectionTest extends TestCase
     public function it_consist_of_course_topics()
     {
         $section = create('App\Section');
-        $topic = create('App\Topic', ['section_id' => $section->id]);
+        $lecture = create('App\Lecture', ['section_id' => $section->id]);
 
-         $this->assertTrue($section->topics->contains($topic));
+         $this->assertTrue($section->lectures->contains($lecture));
     }
 }

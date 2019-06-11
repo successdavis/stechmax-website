@@ -17,6 +17,7 @@ class CreateCourseTracksTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('track_id'); //The Track title
             $table->unsignedInteger('course_id'); // The Course title
+            $table->integer('order'); // Determine the rendering oder
             $table->timestamps();
         });
     }

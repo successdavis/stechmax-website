@@ -66,9 +66,9 @@ class CreateCourseTest extends TestCase
     public function publishCourse($overrides = [])
     {
         $this->signIn(factory('App\User')->states('administrator')->create());
+        create('App\Type');
         $course = make('App\Course', $overrides);
-
-        $this->post(route('courses.store'), $course->toArray());
+        $response = $this->post(route('courses.store'), $course->toArray());
 
         return $course;
     }

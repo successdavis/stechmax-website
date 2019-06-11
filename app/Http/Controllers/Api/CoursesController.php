@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Type;
 use App\Subject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,6 +19,12 @@ class CoursesController extends Controller
         $subjects = Subject::all();
         return $subjects;
     } 
+    
+    public function getCourses()
+    {
+        $courses = Type::find(1)->courses;
+        return $courses;
+    }
 
     /**
      * Show the form for creating a new resource.

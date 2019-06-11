@@ -15,7 +15,7 @@ class ReadCourseTest extends TestCase
     {
         parent::setUp();
 
-        $this->course = create('App\Course');
+        $this->course = create('App\Course', ['published' => true]);
     }
     
     /** @test */
@@ -48,11 +48,22 @@ class ReadCourseTest extends TestCase
     public function a_user_can_browse_courses_by_subjects()
     {
         $subject = create('App\Subject');
-        $courseInSubject = create('App\Course', ['subject_id' => $subject->id]);
-        $courseNotInSubject = create('App\Course');
+        $courseInSubject = create('App\Course', ['subject_id' => $subject->id, 'published' => true]);
+        $courseNotInSubject = create('App\Course', ['subject_id' => $subject->id, 'published' => true]);
 
         $this->get('/courses/' . $subject->slug)
             ->assertSee($courseInSubject->title);
             // ->assertDontSee($courseNotInSubject->title);
+    }
+
+    /** @test */
+    public function an_admin_can_retrive_all_courses()
+    {
+        $this->signIn(factory('App\User')->states('administrator')->create());
+        create('App\Type');
+        $course = create('App\Course');
+        $track = factory('App\Course')->states('track')->create();
+        $courses = $this->getJson('api/courses/allcourses')->json();
+        $this->assertCount(2, $courses);
     }
 }

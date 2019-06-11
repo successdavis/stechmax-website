@@ -50,10 +50,11 @@ class CreateLearnsTest extends TestCase
     /** @test */
     public function a_learn_auto_set_a_unique_order_number()
     {
-        $learn = $this->publishLearn()->json();
+        $course = create('App\Course');
+        $learn = $this->publishLearn(['course_id' => $course->id])->json();
         $this->assertEquals(1, $learn['order']);
 
-        $learnTwo = $this->publishLearn()->json();
+        $learnTwo = $this->publishLearn(['course_id' => $course->id])->json();
         $this->assertEquals(2, $learnTwo['order']);
     }
 

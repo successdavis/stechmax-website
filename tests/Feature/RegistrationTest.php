@@ -103,7 +103,6 @@ class RegistrationTest extends TestCase
             ->assertStatus(403);
     }
 
-    /** @test */
     public function an_administrator_can_register_a_new_user ()
     {
         $this->signIn(factory('App\User')->states('administrator')->create(['phone' => 80612688888]));

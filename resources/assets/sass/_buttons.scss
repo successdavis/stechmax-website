@@ -8,8 +8,19 @@
     cursor: move;
 }
 
-.floating-button-body {
+.c_buttons--pointer {
+    cursor: pointer;
+}
+
+.floating-button-body,
+.relative-body {
     position: relative;
+}
+
+.pull-right-button {
+    position: absolute;
+    right: 10px;
+    color: darkslateblue;
 }
 
 .floating-button-body:hover > .floating-button {
@@ -40,4 +51,21 @@
     position: absolute;
     top: 1em;
     right: 1em;
+}
+.button-plus-sign {
+    background: white;
+    color: black;
+    padding: 1em;
+}
+
+.tiny-button {
+    padding: .5rem;
+    font-size: .6rem;
+    font-weight: 700;
+    border: 1px solid transparent;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 9999px;
+    background-color: #ffb900;
+    transition: background-color .3s,border .3s;
 }

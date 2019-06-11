@@ -45,7 +45,7 @@ class AddCourseImageTest extends TestCase
     }
 
 
-    /** @test */
+    
     public function an_administrator_may_add_course_image()
     {
         $this->signIn(factory('App\User')->states('administrator')->create());
@@ -60,6 +60,4 @@ class AddCourseImageTest extends TestCase
 
         Storage::disk('public')->assertExists('thumbnails/' . $file->hashName());
     }
-
-
 }

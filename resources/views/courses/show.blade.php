@@ -78,12 +78,12 @@
                             <h3>Course Content</h3>
                             <div class="columns">
                                 <ul class="accordion" data-accordion>
-                                    @foreach ($course->sections as $section)
+                                    @foreach ($course->getSections() as $section)
                                         <li class="accordion-item" data-accordion-item>
                                             <a href="accordion-title">{{$section->title}}</a>
                                             <div class="accordion-content" data-tab-content>
                                                 <ul>
-                                                    @foreach ($section->topics as $topic)
+                                                    @foreach ($section->lectures as $topic)
                                                         <li>{{$topic->title}}</li>
                                                     @endforeach
                                                 </ul>

@@ -49,17 +49,17 @@ class CreateRequirementsTest extends TestCase
      /** @test */
     public function a_requirement_auto_set_a_unique_order_number()
     {
-        $requirement = $this->publishRequirement()->json();
+        $course = create('App\Course');
+        $requirement = $this->publishRequirement(['course_id' => $course->id])->json();
         $this->assertEquals(1, $requirement['order']);
 
-        $requirementTwo = $this->publishRequirement()->json();
+        $requirementTwo = $this->publishRequirement(['course_id' => $course->id])->json();
         $this->assertEquals(2, $requirementTwo['order']);
     }
 
-
     public function publishRequirement($overrides = [])
     {
-        // $this->withExceptionHandling();
+        $this->withExceptionHandling();
         $this->signIn(factory('App\User')->states('administrator')->create());
 
         $requirement = make('App\Requirement', $overrides);
@@ -67,3 +67,4 @@ class CreateRequirementsTest extends TestCase
         return $this->post(route('requirement.store', ['course' => $requirement->course_id]), $requirement->toArray());
     }
 }
+    

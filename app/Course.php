@@ -60,12 +60,40 @@ class Course extends Model
 
     public function childrenCourses()
     {
-        return $this->belongsToMany('App\Course', 'course_tracks','track_id','course_id');
+        return $this->belongsToMany('App\Course', 'course_tracks','track_id','course_id')->withPivot('order');
     }
 
-    public function ParentCourse()
+    public function getSections()
     {
-        return $this->belongsToMany('App\Course', 'track_courses','course_id','track_id');
+        return $this->sections()->orderBy('order')->get();   
+    }
+
+    public function parentCourse()
+    {
+        return $this->belongsToMany('App\Course', 'track_courses','course_id','track_id')->withPivot('order');
+    }
+
+    public function attachCourseToTrack($course)
+    {
+        $order = 1;
+        if ($this->childrenCourses()->whereOrder($order)->exists()) {
+            $order = $this->incrementOrder();
+        }
+        $this->childrenCourses()->attach($course->id, ['order' => $order]);
+    }
+
+    public function detachCourseFromTrack($course)
+    {
+        $this->childrenCourses()->detach($course->id);
+    }
+
+    public function incrementOrder()
+    {
+        $order = 1;
+        while($this->childrenCourses()->whereOrder($order)->exists()) {
+            $order++;
+        }
+        return $order;
     }
 
     public function plans()
@@ -85,12 +113,12 @@ class Course extends Model
 
     public function learns()
     {
-        return $this->hasMany('App\Learn');
+        return $this->hasMany('App\Learn')->orderBy('order');
     }
 
     public function requirements()
     {
-        return $this->hasMany('App\Requirement');
+        return $this->hasMany('App\Requirement')->orderBy('order');
     }
 
     public function addRequirement($requirement)

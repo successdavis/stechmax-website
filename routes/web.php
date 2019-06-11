@@ -27,7 +27,13 @@ Route::post('/completeregistration', 'Auth\CompleteRegistrationController@update
 Route::get('/threads/search', 'SearchController@show');
 
 Route::get('api/courses', 'Api\CoursesController@getSubjects');
+Route::get('api/courses/allcourses', 'Api\CoursesController@getCourses');
 Route::post('api/courses/{subject}/{course}', 'Api\CourseImageController@store')->middleware(['auth', 'admin']);
+
+Route::get('api/courses/{course}/getcourses', 'TrackController@getTrackCourses')->middleware('admin')->name('courses.getCourses');
+Route::post('tracks/{course}/addcourse', 'TrackController@store')->middleware('admin')->name('track.store');
+Route::put('tracks/{course}/reOrderCourses', 'TrackController@reOrderCourses')->middleware('admin')->name('track.reOrder');
+Route::delete('tracks/{course}/delete', 'TrackController@destroy')->middleware('admin')->name('track.destroy');
 
 Route::post('courses/{course}/learn', 'LearnController@store')->middleware(['auth', 'admin'])->name('learn.store');
 Route::get('courses/{course}/learn', 'LearnController@getLearns')->middleware(['admin']);

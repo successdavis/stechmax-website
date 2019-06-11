@@ -18,6 +18,6 @@ class Section extends Model
 
     public function lectures()
     {
-        return $this->hasMany('App\Lecture');
+        return $this->hasMany('App\Lecture')->orderBy('order');
     }
 }
