@@ -9,28 +9,37 @@
             <p class="mb-3">{{$course->description}} </p>
             <div class="grid-x grid-padding-x mb-2">
                 @foreach ($course->learns()->get() as $learn)
-                    <div class="medium-4">
+                    <div class="cell medium-4">
                         {{$learn->body}}
                     </div>
                 @endforeach
             </div>
-            <a class="medium button" href="{{$course->path()}}/subscription?class=false">Subscribe to Series</a>
+            <a class="medium button" href="{{$course->path()}}/subscription?class=true">Subscribe to Series</a>
         </div>
     </div>
     <div class="hero-image" style="background-image: url({{asset($course->thumbnail_path)}})"></div>
 </div>
     {{-- ==================================================================== --}}
-<div class="grid-container mt-4 mb-3">
-    <div class="timeline www-Container">
-        <div class="timeline-item">
-            <div class="timeline-icon">
-                <i class="fas fa-award" ></i>
+<div class="grid-container mt-4 mb-4">
+    @foreach ($course->childrenCourses()->get() as $index => $linkCourse)
+        <div class="step">
+            <div>
+                <div class="circle">{{$index + 1}}</div>
             </div>
-            <div class="timeline-content right">
-                <h2 class="timeline-content-date">Certification</h2>
-                <p>A certificate from Stechmax speaks volume about you. A Tech Certificate distinguishes you as an expert in the field, with proven levels of skills and knowledge.</p>
+            <div>
+                <div class="grid-x grid-padding-x">
+                    <div class="cell medium-3">
+                        <img src="{{asset($linkCourse->thumbnail_path)}}">
+                    </div>
+                    <div class="cell medium-6">
+                        <div class="title"><a href="{{$linkCourse->path()}}">{{$linkCourse->title}} </a></div>
+                        <div class="">{{$linkCourse->description}} </div>
+                        <hr>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        </div>  
+    @endforeach
 </div>
+
 @endsection
