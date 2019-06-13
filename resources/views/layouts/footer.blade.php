@@ -9,9 +9,9 @@
                 <div class="cell medium-6 large-3">
                     <p>Contact Details</p>
                     <ul>
-                        <li><span class="link-icon"><i class="fi-telephone"></i></span><a href="#">09061260072</a></li>
-                        <li><span class="link-icon"><i class="fi-mail"></i></span><a href="#">success.dav&#64;hotmail.com</a></li>
-                        <li><span class="link-icon"><i class="fi-marker"></i></span><a href="#"> #1 Hospital Lane Obudu Cross River State </a></li>
+                        <li><span class="link-icon"><i class="fi-telephone"></i></span>09061260072</li>
+                        <li><span class="link-icon"><i class="fi-mail"></i></span>success.dav&#64;hotmail.com</li>
+                        <li><span class="link-icon"><i class="fi-marker"></i></span>#1 Hospital Lane Obudu Cross River State</li>
                     </ul>
                     <div class="social-icons-container">
                         <p>Find us on</p>
@@ -27,7 +27,7 @@
                     <p>Get in Touch</p>
                     <ul>
                         <li><a href="">Get Support</a></li>
-                        <li><a href="">Community</a></li>
+                        <li><a href="/threads">Community</a></li>
                         <li><a href="">Affiliate Program</a></li>
                         <li><a href="">Contact Us</a></li>
                     </ul>

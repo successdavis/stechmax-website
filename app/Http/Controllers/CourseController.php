@@ -22,14 +22,13 @@ class CourseController extends Controller
     public function index(Subject $subject, CourseFilters $filters)
     {
         $courses = $this->getCourses($subject, $filters)->take('10');
-        $tracks = Type::getCourseByType('track')->get()->take('10');
         $subjects = Subject::all();
 
         if (request()->wantsJson()) {
             return $courses;
         }
 
-        return view('courses.index', compact('courses','tracks','subjects'));
+        return view('courses.index', compact('courses','subjects'));
     }
 
     /**

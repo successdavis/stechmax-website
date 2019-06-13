@@ -1,20 +1,20 @@
 <div class="cell medium-6 large-3 ">
-    <a href="{{$course->path()}}">
+    <a href="{{$track->path()}}">
         <div class="card course">
           <div class="course__image">
-            <img src="{{asset('storage/course/' . $course->img)}}">
+            <img src="{{asset($track->thumbnail_path)}}">
           </div>
           <div class="card-section course__meta-information grid-x">
             <span class="cell">Type: Track</span>
           </div>
           <div class="card-section course__title">
-            {{$course->title}}
+            {{$track->title}}
           </div>
           <div class="card-section course__difficulty">
-              {{$course->difficulty}}
+              {{$track->difficulty}}
           </div>
           <div class="card-section course__fee">
-            N{{$course->fee}}
+            N{{$track->fee}}
           </div>
         </div>
     </a>

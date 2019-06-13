@@ -41,8 +41,8 @@
                   <label for="gender">Gender</label>
                   <select id="gender" name="gender">
                     <option value="" disabled selected>Select</option>
-                    <option value="Male">Male</option>
-                    <option value="Male">Female</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
                   </select>
                 </div>
               </div>

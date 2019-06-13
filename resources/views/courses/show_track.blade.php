@@ -14,6 +14,7 @@
                     </div>
                 @endforeach
             </div>
+            <h3 class="inline">&#8358;{{$course->amount / 100}} </h3>
             <a class="medium button" href="{{$course->path()}}/subscription?class=true">Subscribe to Series</a>
         </div>
     </div>

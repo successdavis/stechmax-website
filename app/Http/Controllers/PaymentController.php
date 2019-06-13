@@ -8,6 +8,7 @@ use App\Invoice;
 use App\Subject;
 use Carbon\Carbon;
 use App\Http\Requests;
+use App\submittedpayments;
 use Illuminate\Http\Request;
 use App\Payments\CoursePayment;
 //use App\Http\Controllers\Controller;
@@ -40,6 +41,25 @@ class PaymentController extends Controller
 //
 //
 //        return Paystack::getAuthorizationUrl($data)->redirectNow();
+    }
+
+    public function create()
+    {
+        return view('payments.submitDetails');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'payee_name' => 'required',
+            'amount' => 'required',
+            'transaction_date' => 'required',
+            'course' => 'required',
+        ]);
+
+        $paidDetails = submittedpayments::create(request()->all());
+
+        return back()->with('flash', 'Your payment details was submitted Successful');
     }
 
     /**

@@ -60,7 +60,9 @@
           <h4>Single Courses</h4>
           <div class="grid-x grid-padding-x">
             @forelse ($courses as $course)
-                @include('courses.course')
+                @if (strtolower($course->type->name) === 'course')
+                  @include('courses.course')
+                @endif
             @empty
             <p>There are not result at this time</p>
             @endforelse
@@ -68,8 +70,11 @@
           <h4>Track Courses</h4>
         </div>
         <div class="grid-x grid-padding-x">
-            @forelse ($tracks as $track)
+            @forelse ($courses as $track)
+              @if (strtolower($track->type->name) === 'track')
                 @include('courses.track')
+                {{-- {{$track->title}} --}}
+              @endif
             @empty
             <p>There are not result at this time</p>
             @endforelse

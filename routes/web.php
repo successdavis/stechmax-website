@@ -133,9 +133,11 @@ Route::post('/follow', 'FollowersController@store');
 
 Route::get('/testing', 'TestingController@index'); // will be here temporary
 
+Route::get('/paid/submit_details', 'PaymentController@create')->name('pay.submitDetails');
 
 //Route::post('/pay/{course}', 'PaymentController@redirectToGateway')->name('pay');
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 Route::get('/paid/{course}', 'PaymentController@paymentSuccessful');
+Route::post('/paid/savedetails', 'PaymentController@store')->name('pay.saveDetails');
 
 Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth')->name('avatar');

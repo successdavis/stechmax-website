@@ -10,7 +10,10 @@
 
             @if ($class === false)
                 <p>Sorry! At the moment we dont offer online training</p>
-                <p>Please check back later</p>
+                <p class="mb-4">Please check back later. You can choose to enroll for classroom training to study at our esteem institue and share physical interaction with instructors.</p>
+                
+                <a href="{{$course->path()}}/subscription?class=true" class="medium button">STUDY IN CLASSROOM</a>
+
                   {{--<followers></followers>--}}
                             {{--Pay <strong>N{{$course->fee}}</strong> for  <strong>{{$course->title}}</strong>.--}}
               {{--Your Training will base online--}}
@@ -42,13 +45,13 @@
 ,        </div>
         <div class="medium-6">
           <div class="grid-container">
-            <p>Prefer to pay at the bank? please use the details below</p>
+            <p>Prefer to pay at the bank or make transfer? please use the details below</p>
             <p><strong>Account Name:</strong> Ikong Simon David</p>
-            <p><strong>Account Number:</strong> 0981147294</p>
-            <p><strong>Bank:</strong> Ecobank</p>
+            <p><strong>Account Number:</strong> 0799592449</p>
+            <p><strong>Bank:</strong> Access Bank</p>
 
             <div>
-              <p>if you had already made payment, click <a href="">here</a> to supply payment information</p>
+              <p>if you had already made payment, click <a href="{{ route('pay.submitDetails') }}">here</a> to supply payment information</p>
             </div>
           </div>
         </div>
