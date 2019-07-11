@@ -7,6 +7,8 @@
 
 require('./bootstrap');
 
+const compiler = require('vue-template-compiler');
+
 window.Vue = require('vue');
 
 /**
@@ -15,22 +17,23 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('Flash', require('./components/Flash.vue'));
+Vue.component('Flash', require('./components/Flash.vue').default);
 Vue.component('paginator', require('./components/paginator.vue'));
-Vue.component('user-notifications', require('./components/UserNotifications.vue'));
-Vue.component('thread-view', require('./pages/Thread.vue'));
-Vue.component('avatar-form', require('./components/AvatarForm.vue'));
-Vue.component('mega-menu', require('./components/MegaMenu.vue'));
-Vue.component('course-registration', require('./components/CourseRegistration.vue'));
-Vue.component('target-student', require('./components/courseTargetStudent.vue'));
-Vue.component('course-curriculum', require('./components/CourseCurriculum.vue'));
-Vue.component('track-curriculum', require('./components/TrackCurriculum.vue'));
-Vue.component('course-landing', require('./components/CourseLanding.vue'));
-Vue.component('new-user', require('./components/NewUser.vue'));
-Vue.component('view-user', require('./components/ViewUser.vue'));
-Vue.component('users', require('./components/Users.vue'));
-Vue.component('program-registration', require('./pages/ProgramRegistration.vue'));
-Vue.component('testing', require('./components/testing.vue'));
+Vue.component('user-notifications', require('./components/UserNotifications.vue').default);
+Vue.component('thread-view', require('./pages/Thread.vue').default);
+Vue.component('avatar-form', require('./components/AvatarForm.vue').default);
+Vue.component('mega-menu', require('./components/MegaMenu.vue').default);
+Vue.component('course-registration', require('./components/CourseRegistration.vue').default);
+Vue.component('target-student', require('./components/courseTargetStudent.vue').default);
+Vue.component('course-curriculum', require('./components/CourseCurriculum.vue').default);
+Vue.component('track-curriculum', require('./components/TrackCurriculum.vue').default);
+Vue.component('course-landing', require('./components/CourseLanding.vue').default);
+Vue.component('new-user', require('./components/NewUser.vue').default);
+Vue.component('view-user', require('./components/ViewUser.vue').default);
+Vue.component('users', require('./components/Users.vue').default);
+Vue.component('program-registration', require('./pages/ProgramRegistration.vue').default);
+Vue.component('testing', require('./components/testing.vue').default);
+Vue.component('data-table', require('./components/DataTable.vue').default);
 
 
 const app = new Vue({

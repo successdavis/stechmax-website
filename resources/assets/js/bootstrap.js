@@ -5,6 +5,7 @@ window._ = require('lodash'); window.Popper = require('popper.js').default;
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie. */
 
+const compiler = require('vue-template-compiler');
 
 window.Vue = require('vue');
 

@@ -48,7 +48,7 @@
 
     <div class="off-canvas-wrapper">
         <div class="off-canvas off-canvas_panel position-left bg--dark-blue @if ($displayMenu)
-          {{"reveal-for-medium"}} @endif" id="offCanvasLeftOverlap" data-off-canvas data-transition="overlap">
+          {{'reveal-for-medium'}} @endif" id="offCanvasLeftOverlap" data-off-canvas data-transition="overlap">
 
             {{-- button to toggle off canvas --}}
             <button class="close-button" aria-label="Close menu" type="button" data-close>
