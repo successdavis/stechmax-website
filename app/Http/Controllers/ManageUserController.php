@@ -65,6 +65,5 @@ class ManageUserController extends Controller
         $user = $query->paginate($request->per_page);
 
         return UserResource::collection($user);
-
     }
 }

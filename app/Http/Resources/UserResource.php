@@ -17,16 +17,12 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'email' => $this->email,
             'f_name' => $this->f_name,
             'l_name' => $this->l_name,
-            'm_name' => $this->m_name,
-            'phone' => $this->phone,
-            'r_address' => $this->r_address,
             'gender' => $this->gender,
-            'dob'    => $this->dob,
-            'avatar_path' => $this->avatar_path,
-            'created_at' => Carbon::parse($this->created_at)->toDayDateTimeString(),
+            'phone' => $this->phone,
+            // 'avatar_path' => $this->avatar_path,
+            // 'created_at' => Carbon::parse($this->created_at)->toDayDateTimeString(),
         ];
     }
 }

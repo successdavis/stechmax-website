@@ -1,10 +1,12 @@
 <template>
     <div>
-        <data-table :headers="headers" :setup="setup" :action="actions"></data-table>
+        <data-table :headers="headers" :setup="setup"></data-table>
+
+        <!-- Include here all components you want to appear on the table head -->
         <portal to="datatable-buttons">
-            <div class="small-3 medium-2">
+            <!-- <div class="small-3 medium-2">
                     <new-user :modal="'newUserRegModal'" class="medium button" style="margin-left: 1em; margin-top: 1.66em;"></new-user>
-                </div>
+                </div> -->
         </portal>
     </div>
 
@@ -19,20 +21,21 @@
                 dataSet: false,
                 
                 headers: [
-                    {name: 'Id'},
-                    {name: 'First Name', sort: 'f_name'},
-                    {name: 'L Name', sort: 'l_name'},
-                    {name: 'Gender'},
-                    {name: 'Phone No'},
-                    {name: 'Action'}
+                    {name: 'Title', sort: 'title'},
+                    {name: 'Duration'},
+                    {name: 'Published'},
+                    {name: 'Action'},
                 ],
                 setup: {
                     offset: 4,
                     currentPage: 1,
                     perPage: 25,
-                    sortedColumn: 'f_name',
+                    sortedColumn: 'title',
                     order: 'asc'  
-                }
+                },
+                actions: [
+                    // {url: '<view-></view-user>', Label: 'Manage'}
+                ],
             };
         },
 

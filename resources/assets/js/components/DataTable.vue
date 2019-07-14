@@ -14,7 +14,7 @@
             </div>
             <span style="margin-right: 1em"></span>
             <div class="small-3 medium-2">
-                <label>Sort by State
+                <label>Sort by:
                     <select>
                         <option  value="Active">Active</option>
                         <option value="Inactive">Inactive</option>
@@ -24,9 +24,7 @@
                     </select>
                 </label>
             </div>
-            <div class="small-3 medium-2">
-                <new-user :modal="'newUserRegModal'" class="medium button" style="margin-left: 1em; margin-top: 1.66em;"></new-user>
-            </div>
+            <portal-target name="datatable-buttons"></portal-target>
 
         </div>
 
@@ -46,12 +44,9 @@
 
         <tbody>
             <tr v-for="data in items" :key="data.id">
-                <td v-text="data.f_name + ' ' + data.m_name + ' ' + data.l_name ">
+                <td v-for="(value, key) in data" v-text="value">
                 </td>
-                <td v-text="data.gender"></td>
-                <td v-text="data.dob"></td>
-                <td v-text="data.phone"></td>
-                <td ><view-user :modal="data.email"></view-user></td>
+                <td ><view-user :modal="'modal' + data.id"></view-user></td>
             </tr>
         </tbody>
     </table>
@@ -61,10 +56,11 @@
 </template>
 
 <script>
-    import NewReply from './NewReply.vue';
     import collection from '../mixins/collection';
 
     export  default {
+
+        props: ['headers', 'setup'],
 
         data() {
             return {
@@ -75,24 +71,17 @@
                 pagination: {
                     meta: { to: 1, from: 1 }
                 },
-                headers: [
-                    {name: 'Name', sort: 'f_name'},
-                    {name: 'Gender'},
-                    {name: 'Date of Birth'},
-                    {name: 'Phone No'},
-                    {name: 'Action'}
-                ],
-                offset: 4,
-                currentPage: 1,
-                perPage: 50,
-                sortedColumn: 'f_name',
-                order: 'asc'
+                offset: this.setup.offset,
+                currentPage: this.setup.currentPage,
+                perPage: this.setup.perPage,
+                sortedColumn: this.setup.sortedColumn,
+                order: this.setup.order
             };
         },
 
         created() {
             this.fetch();
-            Event.$on('newUserCreated', (user) => this.items.unshift(user));
+            // Event.$on('newUserCreated', (user) => this.items.unshift(user));
         },
 
         methods: {

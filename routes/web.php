@@ -28,6 +28,7 @@ Route::get('/threads/search', 'SearchController@show');
 
 Route::get('api/courses', 'Api\CoursesController@getSubjects');
 Route::get('api/courses/allcourses', 'Api\CoursesController@getCourses');
+Route::get('api/courses/viewAllCourses', 'Api\CoursesController@index')->middleware(['admin'])->name('courses.index');
 Route::post('api/courses/{subject}/{course}', 'Api\CourseImageController@store')->middleware(['auth', 'admin']);
 
 Route::get('api/courses/{course}/getcourses', 'TrackController@getTrackCourses')->middleware('admin')->name('courses.getCourses');
@@ -69,6 +70,7 @@ Route::get('/dashboard/{course}/unpublish', 'CourseController@unPublish')->middl
 
 Route::get('/dashboard/users', 'ManageUserController@index')->middleware('admin')->name('manage_user.index');
 Route::get('/dashboard/users/datatable', 'ManageUserController@getUsersForDataTable')->middleware('admin')->name('manage_user.datatables');
+Route::get('/api/courses/viewAllCourses/datatable  ', 'Api\CoursesController@getCoursesForDataTable')->middleware('admin')->name('manage_courses.datatables');
 
 Route::patch('/users/{user}/update', 'ManageUserController@update')->middleware('admin');
 

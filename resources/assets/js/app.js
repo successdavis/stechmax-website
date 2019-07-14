@@ -18,9 +18,10 @@ window.Vue = require('vue');
  */
 
 Vue.component('Flash', require('./components/Flash.vue').default);
-Vue.component('paginator', require('./components/paginator.vue'));
+Vue.component('paginator', require('./components/paginator.vue').default);
 Vue.component('user-notifications', require('./components/UserNotifications.vue').default);
 Vue.component('thread-view', require('./pages/Thread.vue').default);
+Vue.component('view-all-courses', require('./pages/Courses.vue').default);
 Vue.component('avatar-form', require('./components/AvatarForm.vue').default);
 Vue.component('mega-menu', require('./components/MegaMenu.vue').default);
 Vue.component('course-registration', require('./components/CourseRegistration.vue').default);
@@ -31,7 +32,7 @@ Vue.component('course-landing', require('./components/CourseLanding.vue').defaul
 Vue.component('new-user', require('./components/NewUser.vue').default);
 Vue.component('view-user', require('./components/ViewUser.vue').default);
 Vue.component('users', require('./components/Users.vue').default);
-Vue.component('program-registration', require('./pages/ProgramRegistration.vue').default);
+// Vue.component('program-registration', require('./pages/ProgramRegistration.vue').default);
 Vue.component('testing', require('./components/testing.vue').default);
 Vue.component('data-table', require('./components/DataTable.vue').default);
 

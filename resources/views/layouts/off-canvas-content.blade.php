@@ -37,7 +37,7 @@
         <a href="#">Manage Course</a>
         <ul class="menu vertical nested">
           <li><a href="{{route('courses.create')}}">Create Course</a></li>
-          <li><a href="#">Manage Course</a></li>
+          <li><a href="{{route('courses.index')}}">Manage Course</a></li>
         </ul>
       </li>
 

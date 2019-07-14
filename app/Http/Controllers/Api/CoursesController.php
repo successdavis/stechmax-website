@@ -3,12 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Type;
+use App\Course;
 use App\Subject;
+use App\Http\Resources\CourseResource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CoursesController extends Controller
 {
+     public function index ()
+    {
+        return view('dashboard.courses.index', [
+            'displayMenu' => true
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -90,5 +98,13 @@ class CoursesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getCoursesForDataTable(Request $request)
+    {
+        $query = Course::orderBy($request->column, $request->order);
+        $courses = $query->paginate($request->per_page);
+
+        return CourseResource::collection($courses);
     }
 }
