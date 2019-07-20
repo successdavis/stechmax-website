@@ -1,4 +1,3 @@
-        
 window._ = require('lodash'); window.Popper = require('popper.js').default;
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -55,10 +54,10 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 };
 
-window.axios.defaults.headers.common = {
-    // 'X-CSRF-TOKEN': window.App.crsfToken,
-    'X-Requested-With': 'XMLHttpRequest'
-};
+// window.axios.defaults.headers.common = {
+//     // 'X-CSRF-TOKEN': window.App.crsfToken,
+//     'X-Requested-With': 'XMLHttpRequest'
+// };
 
 window.events = new Vue();
 

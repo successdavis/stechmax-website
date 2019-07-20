@@ -16,12 +16,15 @@ class CourseResource extends JsonResource
     public function toArray($request)
     {
         return [
-            // 'id' => $this->id,
+            'id' => $this->id,
             'title' => $this->title,
             'duration' => $this->duration,
-            // 'subject_id' => $this->subject_id,
-            // 'sypnosis' => $this->sypnosis,
-            'published' => $this->published,
+            'subject' => $this->subject->name,
+            'thumbnail_path' => $this->thumbnail_path,
+            'sypnosis' => $this->sypnosis,
+            'duration' => $this->duration,
+            'published' => $this->published ? 'Published' : 'Unpublished',
+            'path' => $this->path,
         ];
     }
 }

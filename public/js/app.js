@@ -2547,6 +2547,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['headers', 'setup'],
@@ -4104,39 +4105,126 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       dataSet: false,
-      headers: [{
-        name: 'Title',
-        sort: 'title'
-      }, {
-        name: 'Duration'
-      }, {
-        name: 'Published'
-      }, {
-        name: 'Action'
-      }],
-      setup: {
-        offset: 4,
-        currentPage: 1,
-        perPage: 25,
-        sortedColumn: 'title',
-        order: 'asc'
+      items: [],
+      pagination: {
+        meta: {
+          to: 1,
+          from: 1
+        }
       },
-      actions: [// {url: '<view-></view-user>', Label: 'Manage'}
-      ]
+      status: true,
+      type: '1',
+      search: '',
+      currentPage: 1,
+      perPage: 25,
+      sortedColumn: 'title',
+      order: 'asc'
     };
   },
   created: function created() {
-    var _this = this;
+    this.fetch(); // Event.$on('newUserCreated', (user) => this.items.unshift(user));
+  },
+  methods: {
+    fetch: function fetch(page) {
+      axios.get(this.url(page)).then(this.refresh);
+    },
+    url: function url(page) {
+      if (!page) {
+        var query = location.search.match(/page=(\d+)/);
+        page = query ? query[1] : 1;
+      }
 
-    // this.fetch();
-    Event.$on('newUserCreated', function (user) {
-      return _this.items.unshift(user);
-    });
+      return "".concat(location.pathname, "/datatable?page=").concat(page, "&column=").concat(this.sortedColumn, "&published=").concat(this.status, "&type_id=").concat(this.type, "&order=").concat(this.order, "&per_page=").concat(this.perPage);
+    },
+    sortByColumn: function sortByColumn(column) {
+      if (column === this.sortedColumn) {
+        this.order = this.order === 'asc' ? 'desc' : 'asc';
+      } else {
+        this.sortedColumn = column;
+        this.order = 'asc';
+      }
+
+      this.fetch();
+    },
+    refresh: function refresh(_ref) {
+      var data = _ref.data;
+      this.dataSet = {
+        next_page_url: data.links.next,
+        current_page: data.meta.current_page,
+        per_page: data.meta.per_page,
+        total: data.meta.total,
+        prev_page_url: data.links.prev
+      };
+      this.items = data.data;
+      this.pagination = data;
+      window.scrollTo(0, 0);
+    }
   }
 });
 
@@ -4323,7 +4411,7 @@ function toComment(sourceMap) {
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
  * @license
  * Lodash <https://lodash.com/>
- * Copyright JS Foundation and other contributors <https://js.foundation/>
+ * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -4334,7 +4422,7 @@ function toComment(sourceMap) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.11';
+  var VERSION = '4.17.14';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -6993,16 +7081,10 @@ function toComment(sourceMap) {
         value.forEach(function(subValue) {
           result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
         });
-
-        return result;
-      }
-
-      if (isMap(value)) {
+      } else if (isMap(value)) {
         value.forEach(function(subValue, key) {
           result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
         });
-
-        return result;
       }
 
       var keysFunc = isFull
@@ -7926,8 +8008,8 @@ function toComment(sourceMap) {
         return;
       }
       baseFor(source, function(srcValue, key) {
+        stack || (stack = new Stack);
         if (isObject(srcValue)) {
-          stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
         }
         else {
@@ -9744,7 +9826,7 @@ function toComment(sourceMap) {
       return function(number, precision) {
         number = toNumber(number);
         precision = precision == null ? 0 : nativeMin(toInteger(precision), 292);
-        if (precision) {
+        if (precision && nativeIsFinite(number)) {
           // Shift with exponential notation to avoid floating-point issues.
           // See [MDN](https://mdn.io/round#Examples) for more details.
           var pair = (toString(number) + 'e').split('e'),
@@ -10927,7 +11009,7 @@ function toComment(sourceMap) {
     }
 
     /**
-     * Gets the value at `key`, unless `key` is "__proto__".
+     * Gets the value at `key`, unless `key` is "__proto__" or "constructor".
      *
      * @private
      * @param {Object} object The object to query.
@@ -10935,6 +11017,10 @@ function toComment(sourceMap) {
      * @returns {*} Returns the property value.
      */
     function safeGet(object, key) {
+      if (key === 'constructor' && typeof object[key] === 'function') {
+        return;
+      }
+
       if (key == '__proto__') {
         return;
       }
@@ -14735,6 +14821,7 @@ function toComment(sourceMap) {
           }
           if (maxing) {
             // Handle invocations in a tight loop.
+            clearTimeout(timerId);
             timerId = setTimeout(timerExpired, wait);
             return invokeFunc(lastCallTime);
           }
@@ -19121,9 +19208,12 @@ function toComment(sourceMap) {
       , 'g');
 
       // Use a sourceURL for easier debugging.
+      // The sourceURL gets injected into the source that's eval-ed, so be careful
+      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
+      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
       var sourceURL = '//# sourceURL=' +
-        ('sourceURL' in options
-          ? options.sourceURL
+        (hasOwnProperty.call(options, 'sourceURL')
+          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -19156,7 +19246,9 @@ function toComment(sourceMap) {
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      var variable = options.variable;
+      // Like with sourceURL, we take care to not check the option's prototype,
+      // as this configuration is a code injection vector.
+      var variable = hasOwnProperty.call(options, 'variable') && options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
@@ -21361,10 +21453,11 @@ function toComment(sourceMap) {
     baseForOwn(LazyWrapper.prototype, function(func, methodName) {
       var lodashFunc = lodash[methodName];
       if (lodashFunc) {
-        var key = (lodashFunc.name + ''),
-            names = realNames[key] || (realNames[key] = []);
-
-        names.push({ 'name': methodName, 'func': lodashFunc });
+        var key = lodashFunc.name + '';
+        if (!hasOwnProperty.call(realNames, key)) {
+          realNames[key] = [];
+        }
+        realNames[key].push({ 'name': methodName, 'func': lodashFunc });
       }
     });
 
@@ -31388,9 +31481,9 @@ var render = function() {
         "div",
         { staticClass: "grid-x grid-padding-x grid-container" },
         [
-          _c("div", { staticClass: "small-2 medium-1" }, [
+          _c("div", { staticClass: "small-2 medium-2" }, [
             _c("label", [
-              _vm._v("No Per Page\n                "),
+              _vm._v("Per Page\n                "),
               _c(
                 "select",
                 {
@@ -31493,7 +31586,11 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "td",
-                  [_c("view-user", { attrs: { modal: "modal" + data.id } })],
+                  [
+                    _c("view-user", {
+                      attrs: { modal: "modal" + data.id, selectedUser: data }
+                    })
+                  ],
                   1
                 )
               ],
@@ -33276,9 +33373,16 @@ var render = function() {
               staticClass: "grid-x grid-padding-x grid-container align-center"
             },
             [
-              _c("div", {
-                staticClass: "medium-6 grid-x align-right grid-container"
-              })
+              _c(
+                "div",
+                { staticClass: "medium-6 grid-x align-right grid-container" },
+                [
+                  _c("img", {
+                    staticClass: "thumbnail&#45;&#45;medium mt-2",
+                    attrs: { src: _vm.selectedUser.avatar_path }
+                  })
+                ]
+              )
             ]
           )
         ]
@@ -34068,17 +34172,252 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("data-table", { attrs: { headers: _vm.headers, setup: _vm.setup } }),
-      _vm._v(" "),
-      _c("portal", { attrs: { to: "datatable-buttons" } })
-    ],
-    1
-  )
+  return _c("div", { staticClass: "grid-container" }, [
+    _c("form", [
+      _c("div", { staticClass: "grid-container" }, [
+        _c("div", { staticClass: "grid-x grid-padding-x" }, [
+          _c("div", { staticClass: "medium-2 cell" }, [
+            _c("label", [
+              _vm._v("Per page\n                "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.perPage,
+                      expression: "perPage"
+                    }
+                  ],
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.perPage = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "10" } }, [_vm._v("10")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "25" } }, [_vm._v("25")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "50" } }, [_vm._v("50")])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "medium-2 cell" }, [
+            _c("label", [
+              _vm._v("Status\n                "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.status,
+                      expression: "status"
+                    }
+                  ],
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.status = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      _vm.fetch
+                    ]
+                  }
+                },
+                [
+                  _c("option", [_vm._v("All")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "true" } }, [
+                    _vm._v("Active")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "0" } }, [_vm._v("Inactive")])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "medium-2 cell" }, [
+            _c("label", [
+              _vm._v("Type\n                "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.type,
+                      expression: "type"
+                    }
+                  ],
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.type = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      _vm.fetch
+                    ]
+                  }
+                },
+                [
+                  _c("option", [_vm._v("All")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1" } }, [_vm._v("Course")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [_vm._v("Track")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "3" } }, [_vm._v("Practice")])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "medium-6 cell" }, [
+            _c("label", [
+              _vm._v(" Search\n                  "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("span", { staticClass: "input-group-label" }, [_vm._v("Q")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.search,
+                      expression: "search"
+                    }
+                  ],
+                  staticClass: "input-group-field",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.search },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.search = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "grid-x grid-padding-x small-up-2 medium-up-3" },
+      _vm._l(_vm.items, function(course) {
+        return _c("div", { staticClass: "cell mt-3" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("img", { attrs: { src: course.thumbnail_path } }),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-section" }, [
+              _c("span", {
+                domProps: { textContent: _vm._s(course.published) }
+              }),
+              _vm._v(" |\n              "),
+              _c("span", {
+                domProps: { textContent: _vm._s(course.duration + " weeks") }
+              }),
+              _vm._v(" "),
+              _c("h4", { domProps: { textContent: _vm._s(course.title) } }),
+              _vm._v(" "),
+              _c("p", { domProps: { textContent: _vm._s(course.sypnosis) } })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "grid-x grid-padding-x" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "cell small-6 small button",
+                  attrs: { href: course.path, target: "_blank" }
+                },
+                [_vm._v("Visit")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "cell small-6 small button secondary",
+                  attrs: { href: "/dashboard/" + course.id + "/manage" }
+                },
+                [_vm._v("Edit")]
+              )
+            ])
+          ])
+        ])
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "mb-3 mt-2" },
+      [
+        _c("paginator", {
+          attrs: { dataSet: _vm.dataSet },
+          on: { changed: _vm.fetch }
+        })
+      ],
+      1
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-button" }, [
+      _c("input", {
+        staticClass: "button",
+        attrs: { type: "submit", value: "Search" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -55292,7 +55631,8 @@ Vue.component('view-user', __webpack_require__(/*! ./components/ViewUser.vue */ 
 Vue.component('users', __webpack_require__(/*! ./components/Users.vue */ "./resources/assets/js/components/Users.vue")["default"]); // Vue.component('program-registration', require('./pages/ProgramRegistration.vue').default);
 
 Vue.component('testing', __webpack_require__(/*! ./components/testing.vue */ "./resources/assets/js/components/testing.vue")["default"]);
-Vue.component('data-table', __webpack_require__(/*! ./components/DataTable.vue */ "./resources/assets/js/components/DataTable.vue")["default"]);
+Vue.component('data-table', __webpack_require__(/*! ./components/DataTable.vue */ "./resources/assets/js/components/DataTable.vue")["default"]); // Vue.component('test', require('./components/Test.vue').default);
+
 var app = new Vue({
   el: '#app'
 });
@@ -55388,11 +55728,11 @@ if (token) {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
-;
-window.axios.defaults.headers.common = {
-  // 'X-CSRF-TOKEN': window.App.crsfToken,
-  'X-Requested-With': 'XMLHttpRequest'
-};
+; // window.axios.defaults.headers.common = {
+//     // 'X-CSRF-TOKEN': window.App.crsfToken,
+//     'X-Requested-With': 'XMLHttpRequest'
+// };
+
 window.events = new Vue();
 
 window.flash = function (message) {

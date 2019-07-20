@@ -23,6 +23,7 @@ class CreateCoursesTable extends Migration
             $table->unsignedInteger('amount')->nullable();
             $table->text('description');
             $table->text('sypnosis');
+            $table->text('thumbnail_path');
             $table->boolean('custom_course')->default(false);
             $table->integer('development_stage')->default(0); // 1 stage one, 2 stage two, 3 stage three
             $table->boolean('published')->default(false); // is the course visible to the users

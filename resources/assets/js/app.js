@@ -35,6 +35,7 @@ Vue.component('users', require('./components/Users.vue').default);
 // Vue.component('program-registration', require('./pages/ProgramRegistration.vue').default);
 Vue.component('testing', require('./components/testing.vue').default);
 Vue.component('data-table', require('./components/DataTable.vue').default);
+// Vue.component('test', require('./components/Test.vue').default);
 
 
 const app = new Vue({

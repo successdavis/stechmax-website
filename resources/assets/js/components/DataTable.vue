@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="grid-x grid-padding-x grid-container">
-            <div class="small-2 medium-1">
-                <label>No Per Page
+            <div class="small-2 medium-2">
+                <label>Per Page
                     <select v-model="perPage" @change="fetch">
                         <option value="25">25</option>
                         <option value="50">50</option>
@@ -46,7 +46,8 @@
             <tr v-for="data in items" :key="data.id">
                 <td v-for="(value, key) in data" v-text="value">
                 </td>
-                <td ><view-user :modal="'modal' + data.id"></view-user></td>
+                <!-- <td >View</td> -->
+                <td ><view-user :modal="'modal' + data.id" :selectedUser="data"></view-user></td>
             </tr>
         </tbody>
     </table>

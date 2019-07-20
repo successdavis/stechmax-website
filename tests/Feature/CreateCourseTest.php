@@ -19,7 +19,6 @@ class CreateCourseTest extends TestCase
         
         $response = $this->post(route('courses.store'), [])
             ->assertStatus(403);
-
     }
 
     /** @test */
@@ -69,6 +68,7 @@ class CreateCourseTest extends TestCase
         create('App\Type');
         $course = make('App\Course', $overrides);
         $response = $this->post(route('courses.store'), $course->toArray());
+
 
         return $course;
     }

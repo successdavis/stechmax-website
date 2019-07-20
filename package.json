@@ -13,14 +13,13 @@
     "axios": "^0.19.0",
     "cross-env": "^5.2.0",
     "laravel-mix": "^4.0.16",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.14",
     "popper.js": "^1.12",
-    "resolve-url-loader": "^2.3.1",  
+    "resolve-url-loader": "^2.3.1",
     "sass": "^1.22.2",
-    "sass-loader": "^7.1.0", 
+    "sass-loader": "^7.1.0",
     "vue": "^2.5.7",
     "vue-template-compiler": "^2.6.10"
-    
   },
   "dependencies": {
     "moment": "^2.24.0",

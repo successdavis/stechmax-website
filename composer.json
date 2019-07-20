@@ -9,7 +9,7 @@
         "algolia/algoliasearch-client-php": "^2.2",
         "aloha/twilio": "^4.0",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "5.6.*",
+        "laravel/framework": "5.7.9",
         "laravel/scout": "^7.1",
         "laravel/tinker": "^1.0",
         "unicodeveloper/laravel-paystack": "1.0.*"

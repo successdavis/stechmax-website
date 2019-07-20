@@ -134,6 +134,7 @@ Route::post('/follow', 'FollowersController@store');
 
 
 Route::get('/testing', 'TestingController@index'); // will be here temporary
+Route::post('/testing', 'TestingController@store'); // will be here temporary
 
 Route::get('/paid/submit_details', 'PaymentController@create')->name('pay.submitDetails');
 
