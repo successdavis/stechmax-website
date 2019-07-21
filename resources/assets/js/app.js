@@ -23,6 +23,7 @@ Vue.component('user-notifications', require('./components/UserNotifications.vue'
 Vue.component('thread-view', require('./pages/Thread.vue').default);
 Vue.component('view-all-courses', require('./pages/Courses.vue').default);
 Vue.component('avatar-form', require('./components/AvatarForm.vue').default);
+Vue.component('passport-form', require('./components/PassportForm.vue').default);
 Vue.component('mega-menu', require('./components/MegaMenu.vue').default);
 Vue.component('course-registration', require('./components/CourseRegistration.vue').default);
 Vue.component('target-student', require('./components/courseTargetStudent.vue').default);

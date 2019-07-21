@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->date('dob')->nullable();
             $table->string('alternative_phone')->nullable();   
             $table->string('avatar_path')->nullable();
+            $table->string('passport_path')->nullable();
             $table->string('email')->unique()->nullable();
             $table->boolean('confirmed')->default(false);
             $table->boolean('admin')->default(false);

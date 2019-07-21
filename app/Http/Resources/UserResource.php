@@ -19,10 +19,16 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'f_name' => $this->f_name,
             'l_name' => $this->l_name,
+            'm_name' => $this->m_name,
             'gender' => $this->gender,
             'phone' => $this->phone,
-            // 'avatar_path' => $this->avatar_path,
-            // 'created_at' => Carbon::parse($this->created_at)->toDayDateTimeString(),
+            'dob' => $this->dob,
+            'email' => $this->email,
+            'r_address' => $this->r_address,
+            'alternative_phone' => $this->alternative_phone,
+            'username' => $this->username,
+            'passport_path' => $this->passport_path,
+            'Date_Joined' => Carbon::parse($this->created_at)->toDayDateTimeString(),
         ];
     }
 }

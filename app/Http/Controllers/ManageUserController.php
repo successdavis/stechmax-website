@@ -23,6 +23,7 @@ class ManageUserController extends Controller
             'l_name'    => 'required|min:2',
             'gender'    => 'required',
             'phone'     => 'required|min:11',
+            'dob'       => 'required',
             'r_address' => 'required|min:10',
             'email'     => 'email|unique:users,email'
         ]);
@@ -50,8 +51,27 @@ class ManageUserController extends Controller
 
     public function update(User $user)
     {
+
+        $this->validate(request(), [
+            'surname'    => 'required|min:3',
+            'last_name'    => 'required|min:2',
+            'gender'    => 'required',
+            'phone'     => 'required|min:11',
+            'address' => 'required|min:10',
+            'email'     => 'email|unique:users,email',
+        ]);
+
         try {
-            $user->update(request()->all());
+            $user->update([
+                'f_name' => request('surname'),
+                'l_name' => request('last_name'),
+                'm_name' => request('middle_name'),
+                'r_address' => request('address'),
+                'dob' => request('dob'),
+                'gender' => request('gender'),
+                'phone' => request('phone'),
+                'alternative_phone' => request('alternative_phone'),
+            ]);
         } catch (Exception $e) {
             return $response (
                 'Sorry user could not be updated at this time', 422

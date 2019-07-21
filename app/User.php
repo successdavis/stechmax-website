@@ -94,7 +94,16 @@ class User extends Authenticatable
         if ($avatar) {
             return asset('storage/' . $avatar);
         }else {
-            return asset('storage/avatars/default.png');
+            return asset('storage/avatars/default.jpg');
+        }
+    }
+
+    public function getPassportPathAttribute($passport)
+    {
+        if ($passport) {
+            return asset('storage/' . $passport);
+        }else {
+            return asset('storage/passports/default.jpg');
         }
     }
 

@@ -144,3 +144,5 @@ Route::get('/paid/{course}', 'PaymentController@paymentSuccessful');
 Route::post('/paid/savedetails', 'PaymentController@store')->name('pay.saveDetails');
 
 Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth')->name('avatar');
+
+Route::post('api/users/{user}/passport', 'Api\UserAvatarController@storePassport')->middleware('auth')->name('passport');

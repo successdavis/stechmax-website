@@ -44,10 +44,12 @@
 
         <tbody>
             <tr v-for="data in items" :key="data.id">
-                <td v-for="(value, key) in data" v-text="value">
+                <td v-text="data.f_name">
                 </td>
-                <!-- <td >View</td> -->
-                <td ><view-user :modal="'modal' + data.id" :selectedUser="data"></view-user></td>
+                <td v-text="data.l_name"></td>
+                <td v-text="data.gender"></td>
+                <td v-text="data.phone"></td>
+                <td ><view-user :modal="data.id + 'a'" :selectedUser="data" @userUpdated="fetch"></view-user></td>
             </tr>
         </tbody>
     </table>

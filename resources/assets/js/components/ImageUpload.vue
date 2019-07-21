@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label for="avater" class="button small">Upload File</label>
+        <label for="avater" class="button small">Update File</label>
         <input type="file" id="avater" class="show-for-sr" accept="image/*" @change="onChange">
     </div>
 </template>

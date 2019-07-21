@@ -1,6 +1,6 @@
 <template>
     <div>
-        <data-table :headers="headers" :setup="setup" :action="actions"></data-table>
+        <data-table :headers="headers" :setup="setup"></data-table>
         <portal to="datatable-buttons">
             <div class="small-3 medium-2">
                     <new-user :modal="'newUserRegModal'" class="medium button" style="margin-left: 1em; margin-top: 1.66em;"></new-user>
@@ -19,9 +19,8 @@
                 dataSet: false,
                 
                 headers: [
-                    {name: 'Id'},
                     {name: 'First Name', sort: 'f_name'},
-                    {name: 'L Name', sort: 'l_name'},
+                    {name: 'Last Name', sort: 'l_name'},
                     {name: 'Gender'},
                     {name: 'Phone No'},
                     {name: 'Action'}
