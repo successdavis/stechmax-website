@@ -5,6 +5,7 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -19,6 +20,7 @@ class User extends Authenticatable
     // protected $fillable = [
     //     'f_name', 'l_name', 'email', 'password', 'paystack_id', 'phone', 'gender', 'avatar_path', ''
     // ];
+    protected $with = ['guardians'];
 
     protected $guarded = [];
 
@@ -51,6 +53,11 @@ class User extends Authenticatable
         return $this->hasOne(Reply::class)->latest();
     }
 
+    public function guardians()
+    {
+        return $this->hasOne(Guardian::class)->latest();
+    }
+
      public function activity()
     {
         return $this->hasMany(Activity::class);
@@ -62,6 +69,20 @@ class User extends Authenticatable
         $this->confirmation_token = null;
 
         $this->save();
+    }
+
+    public function validateAndUpdatePassword($old_password = null, $new_password = null)
+    {
+        $old_password = !empty($old_password) ? $old_password : request('old_password');
+        $new_password = !empty($new_password) ? $new_password : request('new_password');
+
+        if(Hash::check($old_password, $this->password)){
+             return $this->update([
+                'password' => Hash::make($new_password)
+             ]);
+        }
+
+        return false;
     }
 
     public function subscriptions()

@@ -4,13 +4,18 @@
     <div class="mb-2">
         <span class="thumbnail--icon dark-gray">
           <a href="{{route('profile.show', ['user' => auth()->user()->email])}}">
-            <i class="fas fa-user-tie" title="Access your profile here"></i>
+            <i class="fas fa-user-tie" title="Access your profile here" style="color: white"></i>
           </a>
         </span>
       <span class="thumbnail--icon dark-gray">
         <i class="fas fa-cogs"></i>
       </span>
       <span class="thumbnail--icon dark-gray">
+        <a href="{{ route('logout') }}"
+           onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+            <!-- {{ __('Logout') }} -->
+        </a>
         <i class="fas fa-power-off"></i>
       </span>
     </div>
@@ -70,6 +75,6 @@
 
     <li><a href="#">Payments</a></li>
     <li><a href="#">Notification</a></li>
-    <li><a href="#">Settings</a></li>
+    <li><a href="{{route('update.settings.edit')}}">Settings</a></li>
 </ul>
 

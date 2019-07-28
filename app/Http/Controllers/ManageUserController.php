@@ -49,9 +49,13 @@ class ManageUserController extends Controller
         return view('dashboard.users.create');
     }
 
+    public function edit() {
+        return view('dashboard.users.settings');
+    }
+
     public function update(User $user)
     {
-
+// this method is used to update a user by an admin
         $this->validate(request(), [
             'surname'    => 'required|min:3',
             'last_name'    => 'required|min:2',

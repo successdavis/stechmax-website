@@ -29,6 +29,7 @@ class UserResource extends JsonResource
             'username' => $this->username,
             'passport_path' => $this->passport_path,
             'Date_Joined' => Carbon::parse($this->created_at)->toDayDateTimeString(),
+            'Date_Joined' => $this->guardians
         ];
     }
 }

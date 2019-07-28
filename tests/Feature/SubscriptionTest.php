@@ -46,7 +46,7 @@ class SubscriptionTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_resubscribe_to_course_only_when_previous_subscription_has_elapsed()
+    public function a_user_can_resubscribe_to_course_only_previous_subscription_has_elapsed()
     {
         $user = $this->signIn();
         $course  = create('App\Course');

@@ -73,6 +73,16 @@ Route::get('/dashboard/users/datatable', 'ManageUserController@getUsersForDataTa
 Route::get('/api/courses/viewAllCourses/datatable  ', 'Api\CoursesController@getCoursesForDataTable')->middleware('admin')->name('manage_courses.datatables');
 
 Route::patch('/users/{user}/update', 'ManageUserController@update')->middleware('admin');
+Route::patch('/users/{user}/updateprofile', 'ManageUserController@update')->name('update-profile');
+
+
+Route::get('/dashboard/updateprofile', 'UserController@edit')->name('update.settings.edit');
+Route::patch('/dashboard/{user}/updateprofile', 'UserController@update')->name('update.settings.store');
+Route::patch('/dashboard/{user}/updatepassword', 'UserController@updatePassword')->name('update.setting.password');
+
+Route::post('/dashboard/{user}/createguardian', 'GuardianController@store')->name('guardian.store');
+Route::patch('/dashboard/{guardian}/updateguardian', 'GuardianController@update')->name('guardian.update');
+
 
 Route::get('/courses', 'CourseController@index')->name('courses');
 Route::get('/courses/{subject}', 'CourseController@index');

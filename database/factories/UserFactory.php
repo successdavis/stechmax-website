@@ -21,6 +21,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'gender' => 'M',
         'phone' => '09061260072',
         'email' => $faker->unique()->safeEmail,
+        'r_address' => '#1 Hospital Lane Obudu',
         'confirmed' => true,
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'remember_token' => str_random(10),
@@ -45,6 +46,25 @@ $factory->define(App\Subject::class, function (Faker $faker) {
         'name' => $name,
         'slug'  => $name,
         'icon_path'  => 'subject_icon.png',
+    ];
+});
+
+$factory->define(App\Guardian::class, function (Faker $faker) {
+    
+    return [
+        'user_id' => function() {
+            return factory('App\User')->create()->id;
+        },
+        'name' => $faker->name,
+        'title' => $faker->word,
+        'occupation' => $faker->word,
+        'company_name' => $faker->word,
+        'work_address' => $faker->word,
+        'phone' => '08076727008',
+        'alternative_phone' => '09050635733',
+        'email' => $faker->unique()->safeEmail,
+        'r_address' => '#77 Imota Road Kaduna',
+        'relationship' => 'father',
     ];
 });
 

@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -46,4 +47,57 @@ class UserTest extends TestCase
 
         $this->assertEquals($data['f_name'], $user->f_name);
     }
+
+
+    /** @test */
+        public function a_user_can_update_their_profile()
+        {
+            // $this->signIn()->withExceptionHandling();
+
+            $dbUser = create('App\User');
+            $user = $dbUser->toArray();
+            $user['f_name'] = 'changed';
+            $user['l_name'] = 'changed';
+
+            $this->patch(route('update.settings.store', ['user' => $user['username']]), $user)
+            ->assertStatus(401);
+
+            // tap($dbUser->fresh(), function ($dbUser) {
+            //     $this->assertEquals('changed', $dbUser->f_name);
+            // });
+
+        }
+
+        /** @test */
+            public function a_user_cannot_update_their_password_if_the_old_password_supplied_is_incorrect()
+            {
+                $dbUser = create('App\User', ['password' => Hash::make('success')]);
+
+                $responds = $this->patch(route('update.setting.password', ['user' => $dbUser['username']]), [
+                    'old_password' => 'wrongPassword',
+                    'new_password' => 'somedummytext',
+                    'confirm_password' => 'somedummytext',
+                ])
+                ->assertStatus(401);
+                tap($dbUser->fresh(), function ($dbUser) {
+                    $this->assertFalse($dbUser->validateAndUpdatePassword('somedummytext', $dbUser->password));
+                });
+
+            }
+
+        /** @test */
+        public function a_user_can_update_their_password_if_the_old_password_supplied_is_correct()
+        {
+            $dbUser = create('App\User', ['password' => Hash::make('success')]);
+
+            $responds = $this->patch(route('update.setting.password', ['user' => $dbUser['username']]), [
+                'old_password' => 'success',
+                'new_password' => 'somedummytext',
+                'confirm_password' => 'somedummytext',
+            ]);
+            tap($dbUser->fresh(), function ($dbUser) {
+                $this->assertTrue($dbUser->validateAndUpdatePassword('somedummytext', $dbUser->password));
+            });
+
+        }
 }

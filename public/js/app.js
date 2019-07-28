@@ -4450,6 +4450,305 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/UserSetting.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/pages/UserSetting.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['User'],
+  data: function data() {
+    return {
+      editing: false,
+      General_Form: new Form({
+        f_name: this.User.f_name,
+        m_name: this.User.m_name,
+        l_name: this.User.l_name,
+        gender: this.User.gender,
+        username: this.User.username,
+        phone: this.User.phone,
+        r_address: this.User.r_address,
+        dob: this.User.dob,
+        alternative_phone: this.User.alternative_phone,
+        avatar_path: this.User.avatar_path
+      }),
+      Security_Form: new Form({
+        email: this.User.email,
+        username: this.User.username,
+        old_password: '',
+        new_password: '',
+        confirm_password: ''
+      }),
+      Guardian_Form: new Form({
+        email: this.User.guardians !== null ? this.User.guardians.email : '',
+        name: this.User.guardians !== null ? this.User.guardians.name : '',
+        title: this.User.guardians !== null ? this.User.guardians.title : '',
+        occupation: this.User.guardians !== null ? this.User.guardians.occupation : '',
+        company_name: this.User.guardians !== null ? this.User.guardians.company_name : '',
+        work_address: this.User.guardians !== null ? this.User.guardians.work_address : '',
+        phone: this.User.guardians !== null ? this.User.guardians.phone : '',
+        alternative_phone: this.User.guardians !== null ? this.User.guardians.alternative_phone : '',
+        r_address: this.User.guardians !== null ? this.User.guardians.r_address : '',
+        relationship: this.User.guardians !== null ? this.User.guardians.relationship : ''
+      })
+    };
+  },
+  computed: {
+    active: function active() {
+      return this.User.guardians === null ? false : true;
+    }
+  },
+  methods: {
+    updateGeneral: function updateGeneral() {
+      var _this = this;
+
+      if (!this.editing) {
+        this.General_Form.patch("/dashboard/".concat(this.User.username, "/updateprofile")).then(function () {
+          flash('General settings updated');
+
+          _this.$emit('userUpdated');
+        })["catch"](function (error) {
+          flash('Something went wrong updating the ' + _this.panel + ' settings');
+          _this.editing = true;
+        });
+      }
+    },
+    updatePassword: function updatePassword() {
+      var _this2 = this;
+
+      this.Security_Form.patch("/dashboard/".concat(this.User.username, "/updatepassword")).then(function () {
+        flash('Security settings updated');
+
+        _this2.$emit('userUpdated');
+      })["catch"](function (error) {
+        flash('Something went wrong updating the security settings');
+      });
+    },
+    Post_Guardian_Form: function Post_Guardian_Form() {
+      if (this.active) {
+        this.Guardian_Form.patch("/dashboard/".concat(this.User.guardians.id, "/updateguardian")).then(function () {
+          flash('Guardian Updated');
+        })["catch"](function (error) {
+          flash('Sorry! Something went wrong');
+        });
+      } else {
+        this.Guardian_Form.post("/dashboard/".concat(this.User.username, "/createguardian")).then(function () {
+          flash('New Guardian Added successfully');
+        })["catch"](function (error) {
+          flash('Sorry! Something adding wrong');
+        });
+      }
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Flash.vue?vue&type=style&index=0&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Flash.vue?vue&type=style&index=0&lang=css& ***!
@@ -4482,6 +4781,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, "\n.scroll[data-v-70149d72] {\r\n    overflow: scroll;\n}\n.user-header[data-v-70149d72],\r\n.switch[data-v-70149d72] {\r\n  display: -webkit-box;\r\n  display: flex;\n}\n.user-header[data-v-70149d72] {\r\n  -webkit-box-pack: justify;\r\n          justify-content: space-between;\r\n  background: #1b222d;\r\n  color: white;\r\n  -webkit-box-align: center;\r\n          align-items: center;\r\n  border-bottom: 5px solid red;\r\n  padding: .2em 1.5em;\n}\n.switch[data-v-70149d72] {\r\n  margin-bottom: 0;\n}\n.text[data-v-70149d72] {\r\n    display: inline-block;\r\n    color: white;\r\n    /* padding: 0; */\r\n    margin: 0;\r\n    align-self: center;\r\n    padding-right: 1em;\n}\n.user-passport[data-v-70149d72]{\r\n    display: -webkit-box;\r\n    display: flex;\r\n    -webkit-box-pack: center;\r\n            justify-content: center;\r\n    -webkit-box-align: start;\r\n            align-items: flex-start;\n}\n.user-passport--info[data-v-70149d72] {\r\n    margin-top: 32px;\r\n    padding-left: 1em;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/UserSetting.vue?vue&type=style&index=0&id=752ed558&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/pages/UserSetting.vue?vue&type=style&index=0&id=752ed558&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.scroll[data-v-752ed558] {\r\n    overflow: scroll;\n}\n.user-header[data-v-752ed558],\r\n.switch[data-v-752ed558] {\r\n  display: -webkit-box;\r\n  display: flex;\n}\n.user-header[data-v-752ed558] {\r\n  -webkit-box-pack: justify;\r\n          justify-content: space-between;\r\n  background: #1b222d;\r\n  color: white;\r\n  -webkit-box-align: center;\r\n          align-items: center;\r\n  border-bottom: 5px solid red;\r\n  padding: .2em 1.5em;\n}\n.switch[data-v-752ed558] {\r\n  margin-bottom: 0;\n}\n.text[data-v-752ed558] {\r\n    display: inline-block;\r\n    color: white;\r\n    /* padding: 0; */\r\n    margin: 0;\r\n    align-self: center;\r\n    padding-right: 1em;\n}\n.user-passport[data-v-752ed558]{\r\n    display: -webkit-box;\r\n    display: flex;\r\n    -webkit-box-pack: center;\r\n            justify-content: center;\r\n    -webkit-box-align: start;\r\n            align-items: flex-start;\n}\n.user-passport--info[data-v-752ed558] {\r\n    margin-top: 32px;\r\n    padding-left: 1em;\n}\r\n", ""]);
 
 // exports
 
@@ -27858,6 +28176,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/UserSetting.vue?vue&type=style&index=0&id=752ed558&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/pages/UserSetting.vue?vue&type=style&index=0&id=752ed558&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./UserSetting.vue?vue&type=style&index=0&id=752ed558&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/UserSetting.vue?vue&type=style&index=0&id=752ed558&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -34986,6 +35334,1201 @@ var staticRenderFns = [
         attrs: { type: "submit", value: "Search" }
       })
     ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/UserSetting.vue?vue&type=template&id=752ed558&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/pages/UserSetting.vue?vue&type=template&id=752ed558&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "grid-container" }, [
+    _c("div", { staticClass: "grid-x grid-margin-x mt-4 mb-3" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "cell medium-9" }, [
+        _c("div", { staticClass: "user-header" }, [
+          _c("h3", [_vm._v("UPDATE SETTINGS")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "switch" }, [
+            _c("p", {
+              staticClass: "text",
+              domProps: {
+                textContent: _vm._s(_vm.editing ? "Done?" : "Edit Data")
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.editing,
+                  expression: "editing"
+                }
+              ],
+              staticClass: "switch-input",
+              attrs: {
+                id: "exampleSwitch",
+                type: "checkbox",
+                name: "exampleSwitch"
+              },
+              domProps: {
+                checked: Array.isArray(_vm.editing)
+                  ? _vm._i(_vm.editing, null) > -1
+                  : _vm.editing
+              },
+              on: {
+                change: [
+                  function($event) {
+                    var $$a = _vm.editing,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.editing = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.editing = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.editing = $$c
+                    }
+                  },
+                  _vm.updateGeneral
+                ]
+              }
+            }),
+            _vm._v(" "),
+            _vm._m(1)
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "tabs-content",
+            attrs: { "data-tabs-content": "example-tabs" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "tabs-panel is-active mt-2 mb-3",
+                attrs: { id: "general" }
+              },
+              [
+                _c("form", [
+                  _c("div", { staticClass: "grid-container" }, [
+                    _c("div", { staticClass: "grid-x grid-padding-x" }, [
+                      _c("div", { staticClass: "medium-6 cell" }, [
+                        _c("label", [
+                          _vm._v("Surname\n\t\t\t          "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.General_Form.f_name,
+                                expression: "General_Form.f_name"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: "Type Your Surname Here",
+                              disabled: !_vm.editing
+                            },
+                            domProps: { value: _vm.General_Form.f_name },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.General_Form,
+                                  "f_name",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.General_Form.errors.has("f_name")
+                            ? _c("p", {
+                                staticClass: "help-text",
+                                attrs: { id: "subjectHelpText" },
+                                domProps: {
+                                  textContent: _vm._s(
+                                    _vm.General_Form.errors.get("f_name")
+                                  )
+                                }
+                              })
+                            : _vm._e()
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "medium-6 cell" }, [
+                        _c("label", [
+                          _vm._v("Middle Name\n\t\t\t          "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.General_Form.m_name,
+                                expression: "General_Form.m_name"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: "Type your Middle ",
+                              disabled: !_vm.editing
+                            },
+                            domProps: { value: _vm.General_Form.m_name },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.General_Form,
+                                  "m_name",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.General_Form.errors.has("m_name")
+                            ? _c("p", {
+                                staticClass: "help-text",
+                                attrs: { id: "subjectHelpText" },
+                                domProps: {
+                                  textContent: _vm._s(
+                                    _vm.General_Form.errors.get("m_name")
+                                  )
+                                }
+                              })
+                            : _vm._e()
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "medium-6 cell" }, [
+                        _c("label", [
+                          _vm._v("Last Name\n\t\t\t          "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.General_Form.l_name,
+                                expression: "General_Form.l_name"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: "Type your Middle ",
+                              disabled: !_vm.editing
+                            },
+                            domProps: { value: _vm.General_Form.l_name },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.General_Form,
+                                  "l_name",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.General_Form.errors.has("l_name")
+                            ? _c("p", {
+                                staticClass: "help-text",
+                                attrs: { id: "subjectHelpText" },
+                                domProps: {
+                                  textContent: _vm._s(
+                                    _vm.General_Form.errors.get("l_name")
+                                  )
+                                }
+                              })
+                            : _vm._e()
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "medium-6 cell" }, [
+                        _c("label", [
+                          _vm._v("Gender\n\t\t\t          "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.General_Form.gender,
+                                  expression: "General_Form.gender"
+                                }
+                              ],
+                              attrs: { disabled: !_vm.editing },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.General_Form,
+                                    "gender",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "M" } }, [
+                                _vm._v("Male")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "F" } }, [
+                                _vm._v("Female")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm.General_Form.errors.has("gender")
+                            ? _c("p", {
+                                staticClass: "help-text",
+                                attrs: { id: "subjectHelpText" },
+                                domProps: {
+                                  textContent: _vm._s(
+                                    _vm.General_Form.errors.get("gender")
+                                  )
+                                }
+                              })
+                            : _vm._e()
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "medium-6 cell" }, [
+                        _c("label", [
+                          _vm._v("Date of Birth\n\t\t\t        \t"),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.General_Form.dob,
+                                expression: "General_Form.dob"
+                              }
+                            ],
+                            attrs: { type: "date", disabled: !_vm.editing },
+                            domProps: { value: _vm.General_Form.dob },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.General_Form,
+                                  "dob",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.General_Form.errors.has("dob")
+                            ? _c("p", {
+                                staticClass: "help-text",
+                                attrs: { id: "subjectHelpText" },
+                                domProps: {
+                                  textContent: _vm._s(
+                                    _vm.General_Form.errors.get("dob")
+                                  )
+                                }
+                              })
+                            : _vm._e()
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "medium-6 cell" }, [
+                        _c("label", [
+                          _vm._v("Phone\n\t\t\t        \t"),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.General_Form.phone,
+                                expression: "General_Form.phone"
+                              }
+                            ],
+                            attrs: { type: "text", disabled: !_vm.editing },
+                            domProps: { value: _vm.General_Form.phone },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.General_Form,
+                                  "phone",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.General_Form.errors.has("phone")
+                            ? _c("p", {
+                                staticClass: "help-text",
+                                attrs: { id: "subjectHelpText" },
+                                domProps: {
+                                  textContent: _vm._s(
+                                    _vm.General_Form.errors.get("phone")
+                                  )
+                                }
+                              })
+                            : _vm._e()
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "medium-6 cell" }, [
+                        _c("label", [
+                          _vm._v("Alternative Phone\n\t\t\t        \t"),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.General_Form.alternative_phone,
+                                expression: "General_Form.alternative_phone"
+                              }
+                            ],
+                            attrs: { type: "text", disabled: !_vm.editing },
+                            domProps: {
+                              value: _vm.General_Form.alternative_phone
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.General_Form,
+                                  "alternative_phone",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.General_Form.errors.has("alternative_phone")
+                            ? _c("p", {
+                                staticClass: "help-text",
+                                attrs: { id: "subjectHelpText" },
+                                domProps: {
+                                  textContent: _vm._s(
+                                    _vm.General_Form.errors.get(
+                                      "alternative_phone"
+                                    )
+                                  )
+                                }
+                              })
+                            : _vm._e()
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "medium-6 cell" }, [
+                        _c("label", [
+                          _vm._v("Residential Address\n\t\t\t        \t"),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.General_Form.r_address,
+                                expression: "General_Form.r_address"
+                              }
+                            ],
+                            attrs: { type: "text", disabled: !_vm.editing },
+                            domProps: { value: _vm.General_Form.r_address },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.General_Form,
+                                  "r_address",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.General_Form.errors.has("r_address")
+                            ? _c("p", {
+                                staticClass: "help-text",
+                                attrs: { id: "subjectHelpText" },
+                                domProps: {
+                                  textContent: _vm._s(
+                                    _vm.General_Form.errors.get("r_address")
+                                  )
+                                }
+                              })
+                            : _vm._e()
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "tabs-panel", attrs: { id: "Security" } },
+              [
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.updatePassword($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "grid-container" }, [
+                      _c("div", { staticClass: "grid-x grid-padding-x" }, [
+                        _c("div", { staticClass: "medium-6 cell" }, [
+                          _c("label", [
+                            _vm._v("Email Address\n\t\t\t          "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.Security_Form.email,
+                                  expression: "Security_Form.email"
+                                }
+                              ],
+                              attrs: {
+                                type: "text",
+                                placeholder: "Type Your Surname Here",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.Security_Form.email },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.Security_Form,
+                                    "email",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "medium-6 cell" }, [
+                          _c("label", [
+                            _vm._v("Username\n\t\t\t          "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.Security_Form.username,
+                                  expression: "Security_Form.username"
+                                }
+                              ],
+                              attrs: {
+                                type: "text",
+                                placeholder: "Type your Middle ",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.Security_Form.username },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.Security_Form,
+                                    "username",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "medium-6 cell" }, [
+                          _c("label", [
+                            _vm._v("Old Password\n\t\t\t        \t"),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.Security_Form.old_password,
+                                  expression: "Security_Form.old_password"
+                                }
+                              ],
+                              attrs: {
+                                type: "Password",
+                                placeholder: "Type your Middle "
+                              },
+                              domProps: {
+                                value: _vm.Security_Form.old_password
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.Security_Form,
+                                    "old_password",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.Security_Form.errors.has("old_password")
+                              ? _c("p", {
+                                  staticClass: "help-text",
+                                  attrs: { id: "subjectHelpText" },
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      _vm.Security_Form.errors.get(
+                                        "old_password"
+                                      )
+                                    )
+                                  }
+                                })
+                              : _vm._e()
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "medium-6 cell" }, [
+                          _c("label", [
+                            _vm._v("New Password\n\t\t\t          "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.Security_Form.new_password,
+                                  expression: "Security_Form.new_password"
+                                }
+                              ],
+                              attrs: {
+                                type: "Password",
+                                placeholder: "Type your Middle "
+                              },
+                              domProps: {
+                                value: _vm.Security_Form.new_password
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.Security_Form,
+                                    "new_password",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.Security_Form.errors.has("new_password")
+                              ? _c("p", {
+                                  staticClass: "help-text",
+                                  attrs: { id: "subjectHelpText" },
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      _vm.Security_Form.errors.get(
+                                        "new_password"
+                                      )
+                                    )
+                                  }
+                                })
+                              : _vm._e()
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "medium-6 cell" }, [
+                          _c("label", [
+                            _vm._v("Confirm New Password\n\t\t\t          "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.Security_Form.confirm_password,
+                                  expression: "Security_Form.confirm_password"
+                                }
+                              ],
+                              attrs: {
+                                type: "Password",
+                                placeholder: "Type your Middle "
+                              },
+                              domProps: {
+                                value: _vm.Security_Form.confirm_password
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.Security_Form,
+                                    "confirm_password",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.Security_Form.errors.has("confirm_password")
+                              ? _c("p", {
+                                  staticClass: "help-text",
+                                  attrs: { id: "subjectHelpText" },
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      _vm.Security_Form.errors.get(
+                                        "confirm_password"
+                                      )
+                                    )
+                                  }
+                                })
+                              : _vm._e()
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "medium button",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Submit")]
+                      )
+                    ])
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "tabs-panel", attrs: { id: "Guardian" } },
+              [
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.Post_Guardian_Form($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "grid-container" }, [
+                      _c("div", { staticClass: "grid-x grid-padding-x" }, [
+                        _c("div", { staticClass: "medium-6 cell" }, [
+                          _c("label", [
+                            _vm._v("Email Address\n\t\t\t          "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.Guardian_Form.email,
+                                  expression: "Guardian_Form.email"
+                                }
+                              ],
+                              attrs: {
+                                type: "text",
+                                placeholder: "Type Email Address Here"
+                              },
+                              domProps: { value: _vm.Guardian_Form.email },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.Guardian_Form,
+                                    "email",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "medium-6 cell" }, [
+                          _c("label", [
+                            _vm._v("Title\n\t\t\t          "),
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.Guardian_Form.title,
+                                    expression: "Guardian_Form.title"
+                                  }
+                                ],
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.Guardian_Form,
+                                      "title",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("option", { attrs: { value: "Mr" } }, [
+                                  _vm._v("Mr")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "Dr" } }, [
+                                  _vm._v("Dr")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "Bar" } }, [
+                                  _vm._v("Bar")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "Mrs" } }, [
+                                  _vm._v("Mrs")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "Miss" } }, [
+                                  _vm._v("Miss")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "Others" } }, [
+                                  _vm._v("Others")
+                                ])
+                              ]
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "medium-6 cell" }, [
+                          _c("label", [
+                            _vm._v("Name\n\t\t\t          "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.Guardian_Form.name,
+                                  expression: "Guardian_Form.name"
+                                }
+                              ],
+                              attrs: {
+                                type: "text",
+                                placeholder: "Surname  First Name   Last Name  "
+                              },
+                              domProps: { value: _vm.Guardian_Form.name },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.Guardian_Form,
+                                    "name",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "medium-6 cell" }, [
+                          _c("label", [
+                            _vm._v("Occupation\n\t\t\t          "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.Guardian_Form.occupation,
+                                  expression: "Guardian_Form.occupation"
+                                }
+                              ],
+                              attrs: {
+                                type: "text",
+                                placeholder: "Work work does he/she does? "
+                              },
+                              domProps: { value: _vm.Guardian_Form.occupation },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.Guardian_Form,
+                                    "occupation",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "medium-6 cell" }, [
+                          _c("label", [
+                            _vm._v("Company working for\n\t\t\t          "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.Guardian_Form.company_name,
+                                  expression: "Guardian_Form.company_name"
+                                }
+                              ],
+                              attrs: {
+                                type: "text",
+                                placeholder:
+                                  "What company does he/she works for? "
+                              },
+                              domProps: {
+                                value: _vm.Guardian_Form.company_name
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.Guardian_Form,
+                                    "company_name",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "medium-6 cell" }, [
+                          _c("label", [
+                            _vm._v("Work Address\n\t\t\t          "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.Guardian_Form.work_address,
+                                  expression: "Guardian_Form.work_address"
+                                }
+                              ],
+                              attrs: {
+                                type: "text",
+                                placeholder: "Where is this company located? "
+                              },
+                              domProps: {
+                                value: _vm.Guardian_Form.work_address
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.Guardian_Form,
+                                    "work_address",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "medium-6 cell" }, [
+                          _c("label", [
+                            _vm._v("Residential Address\n\t\t\t          "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.Guardian_Form.r_address,
+                                  expression: "Guardian_Form.r_address"
+                                }
+                              ],
+                              attrs: {
+                                type: "text",
+                                placeholder: "Where does he/she lives "
+                              },
+                              domProps: { value: _vm.Guardian_Form.r_address },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.Guardian_Form,
+                                    "r_address",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "medium-6 cell" }, [
+                          _c("label", [
+                            _vm._v("Relationship\n\t\t\t          "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.Guardian_Form.relationship,
+                                  expression: "Guardian_Form.relationship"
+                                }
+                              ],
+                              attrs: {
+                                type: "text",
+                                placeholder:
+                                  "What is your relationship with this person"
+                              },
+                              domProps: {
+                                value: _vm.Guardian_Form.relationship
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.Guardian_Form,
+                                    "relationship",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "medium-6 cell" }, [
+                          _c("label", [
+                            _vm._v("Phone\n\t\t\t          "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.Guardian_Form.phone,
+                                  expression: "Guardian_Form.phone"
+                                }
+                              ],
+                              attrs: {
+                                type: "text",
+                                placeholder:
+                                  "Please provide us a means of contacting him"
+                              },
+                              domProps: { value: _vm.Guardian_Form.phone },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.Guardian_Form,
+                                    "phone",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "medium-6 cell" }, [
+                          _c("label", [
+                            _vm._v("Alternative Phone\n\t\t\t          "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.Guardian_Form.alternative_phone,
+                                  expression: "Guardian_Form.alternative_phone"
+                                }
+                              ],
+                              attrs: {
+                                type: "text",
+                                placeholder:
+                                  "Which other contact can we reach this person "
+                              },
+                              domProps: {
+                                value: _vm.Guardian_Form.alternative_phone
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.Guardian_Form,
+                                    "alternative_phone",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("button", {
+                          staticClass: "medium button",
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.active ? "Update Guardian" : "Create Guardian"
+                            )
+                          },
+                          on: { click: _vm.Post_Guardian_Form }
+                        })
+                      ])
+                    ])
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "tabs-panel", attrs: { id: "Payment" } }, [
+              _c("p", [_vm._v("Hi " + _vm._s(_vm.User.f_name) + " !")]),
+              _vm._v(" "),
+              _c("p", [_vm._v("Section Under Maintenance")])
+            ])
+          ]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "cell medium-3 mt-4" }, [
+      _c(
+        "ul",
+        {
+          staticClass: "vertical tabs",
+          attrs: {
+            "data-deep-link": "true",
+            "data-update-history": "true",
+            "data-deep-link-smudge": "true",
+            "data-tabs": "",
+            id: "example-tabs"
+          }
+        },
+        [
+          _c("li", { staticClass: "tabs-title is-active" }, [
+            _c("a", { attrs: { href: "#general", "aria-selected": "true" } }, [
+              _vm._v("General")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "tabs-title" }, [
+            _c("a", { attrs: { href: "#Security" } }, [_vm._v("Security")])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "tabs-title" }, [
+            _c("a", { attrs: { href: "#Guardian" } }, [_vm._v("Guardian")])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "tabs-title" }, [
+            _c("a", { attrs: { href: "#Payment" } }, [_vm._v("Update Payment")])
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "switch-paddle", attrs: { for: "exampleSwitch" } },
+      [_c("span", { staticClass: "show-for-sr" }, [_vm._v("Edit")])]
+    )
   }
 ]
 render._withStripped = true
@@ -56189,6 +57732,7 @@ Vue.component('paginator', __webpack_require__(/*! ./components/paginator.vue */
 Vue.component('user-notifications', __webpack_require__(/*! ./components/UserNotifications.vue */ "./resources/assets/js/components/UserNotifications.vue")["default"]);
 Vue.component('thread-view', __webpack_require__(/*! ./pages/Thread.vue */ "./resources/assets/js/pages/Thread.vue")["default"]);
 Vue.component('view-all-courses', __webpack_require__(/*! ./pages/Courses.vue */ "./resources/assets/js/pages/Courses.vue")["default"]);
+Vue.component('user-setting', __webpack_require__(/*! ./pages/UserSetting.vue */ "./resources/assets/js/pages/UserSetting.vue")["default"]);
 Vue.component('avatar-form', __webpack_require__(/*! ./components/AvatarForm.vue */ "./resources/assets/js/components/AvatarForm.vue")["default"]);
 Vue.component('passport-form', __webpack_require__(/*! ./components/PassportForm.vue */ "./resources/assets/js/components/PassportForm.vue")["default"]);
 Vue.component('mega-menu', __webpack_require__(/*! ./components/MegaMenu.vue */ "./resources/assets/js/components/MegaMenu.vue")["default"]);
@@ -58530,6 +60074,93 @@ component.options.__file = "resources/assets/js/pages/Thread.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Thread_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Thread.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/Thread.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Thread_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/UserSetting.vue":
+/*!***************************************************!*\
+  !*** ./resources/assets/js/pages/UserSetting.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _UserSetting_vue_vue_type_template_id_752ed558_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserSetting.vue?vue&type=template&id=752ed558&scoped=true& */ "./resources/assets/js/pages/UserSetting.vue?vue&type=template&id=752ed558&scoped=true&");
+/* harmony import */ var _UserSetting_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserSetting.vue?vue&type=script&lang=js& */ "./resources/assets/js/pages/UserSetting.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _UserSetting_vue_vue_type_style_index_0_id_752ed558_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserSetting.vue?vue&type=style&index=0&id=752ed558&scoped=true&lang=css& */ "./resources/assets/js/pages/UserSetting.vue?vue&type=style&index=0&id=752ed558&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _UserSetting_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UserSetting_vue_vue_type_template_id_752ed558_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UserSetting_vue_vue_type_template_id_752ed558_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "752ed558",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/pages/UserSetting.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/UserSetting.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/assets/js/pages/UserSetting.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSetting_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./UserSetting.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/UserSetting.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSetting_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/UserSetting.vue?vue&type=style&index=0&id=752ed558&scoped=true&lang=css&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/assets/js/pages/UserSetting.vue?vue&type=style&index=0&id=752ed558&scoped=true&lang=css& ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSetting_vue_vue_type_style_index_0_id_752ed558_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./UserSetting.vue?vue&type=style&index=0&id=752ed558&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/UserSetting.vue?vue&type=style&index=0&id=752ed558&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSetting_vue_vue_type_style_index_0_id_752ed558_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSetting_vue_vue_type_style_index_0_id_752ed558_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSetting_vue_vue_type_style_index_0_id_752ed558_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSetting_vue_vue_type_style_index_0_id_752ed558_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSetting_vue_vue_type_style_index_0_id_752ed558_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/UserSetting.vue?vue&type=template&id=752ed558&scoped=true&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/assets/js/pages/UserSetting.vue?vue&type=template&id=752ed558&scoped=true& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSetting_vue_vue_type_template_id_752ed558_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./UserSetting.vue?vue&type=template&id=752ed558&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/UserSetting.vue?vue&type=template&id=752ed558&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSetting_vue_vue_type_template_id_752ed558_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserSetting_vue_vue_type_template_id_752ed558_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

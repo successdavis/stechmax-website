@@ -22,6 +22,7 @@ Vue.component('paginator', require('./components/paginator.vue').default);
 Vue.component('user-notifications', require('./components/UserNotifications.vue').default);
 Vue.component('thread-view', require('./pages/Thread.vue').default);
 Vue.component('view-all-courses', require('./pages/Courses.vue').default);
+Vue.component('user-setting', require('./pages/UserSetting.vue').default);
 Vue.component('avatar-form', require('./components/AvatarForm.vue').default);
 Vue.component('passport-form', require('./components/PassportForm.vue').default);
 Vue.component('mega-menu', require('./components/MegaMenu.vue').default);
