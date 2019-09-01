@@ -29,18 +29,14 @@ class PaymentController extends Controller
      * Redirect the User to Paystack Payment Page
      * @return Url
      */
-    public function redirectToGateway(Course $course, Request $request, $invoiceId = null)
+    public function redirectToGateway(Course $course, Request $request)
     {
-//        if (isset($invoiceId) && !Invoice::validateInvoice(invoiceId)) {
-//            return back()->withErrors('Invalid Invoice, No invoice found');
-//        }
-//        $invoice_Id = empty($invoiceId) ? Invoice::createInvoice($course)->id : $invoiceId;
-//
-//        $payment = new CoursePayment($request);
-//        $data = $payment->generatePayData($course, $invoice_Id);
-//
-//
-//        return Paystack::getAuthorizationUrl($data)->redirectNow();
+
+       $payment = new CoursePayment($request);
+       $data = $payment->generatePayData($course, $invoice_Id);
+
+
+       return Paystack::getAuthorizationUrl($data)->redirectNow();
     }
 
     public function create()

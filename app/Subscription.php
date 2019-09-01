@@ -11,10 +11,10 @@ class Subscription extends Model
 
 //    protected $with = ['courses'];
 
-//    public function courses()
-//    {
-//        return $this->belongsTo(Course::class, 'course_id');
-//    }
+   // public function courses()
+   // {
+   //     return $this->belongsTo(Course::class, 'subscriber_id');
+   // }
 //
 //    public function activate($subscription = null)
 //    {
@@ -29,6 +29,7 @@ class Subscription extends Model
 //    }
 //
 //
+
     public function deactivate()
     {
         return $this->update([

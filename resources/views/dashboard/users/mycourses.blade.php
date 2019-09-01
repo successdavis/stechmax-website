@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -8,18 +7,17 @@
             <nav aria-label="You are here:" role="navigation" class="mt-2">
                 <ul class="breadcrumbs">
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">Settings</a></li>
-                    {{-- <li class="disabled"></li> --}}
-                    <li>
-                        <span class="show-for-sr">Update Profile </span> Modify 
-                    </li>
+                    <li><a href="#">Mycourses</a></li>
+<!--                     <li>
+                        <span class="show-for-sr">Course Registration: </span> Course Registration
+                    </li> -->
                 </ul>
             </nav>
         </div>
         {{-- Content --}}
         <div class="grid-container mt-2">
             <div class="bg-white">
-                <user-setting :User="{{auth()->user()}}"></user-setting>
+                <user-courses :user="{{auth()->user()}}"></user-courses>
             </div>
         </div>
 @endsection

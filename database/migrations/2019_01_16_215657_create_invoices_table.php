@@ -18,8 +18,9 @@ class CreateInvoicesTable extends Migration
             $table->integer('amount');
             $table->unsignedInteger('user_id');
             $table->integer('billable_id');
-            $table->string('billable_type');
-            $table->boolean('active')->default(false); // if active then invoice can still receive payment else invoice was created and abandoned
+            $table->string('billable_type'); // get the Model this invoice is created for e.g. Course, Certificates, etc.
+            $table->boolean('paid')->default(false); // if paid then invoice has recieved full payments and should not be payable
+            $table->boolean('installmental')->default(false); // if true then invoice can accept installmental payments
             $table->timestamps();
         });
     }

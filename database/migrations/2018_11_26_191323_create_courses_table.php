@@ -18,12 +18,13 @@ class CreateCoursesTable extends Migration
             $table->string('title')->unique();
             $table->string('difficulty_id')->nullable();
             $table->integer('duration');
-            $table->unsignedInteger('subject_id')->index();
+            $table->unsignedInteger('subject_id')->index(); // 1 Course 2 Track 3 Practice 4 Program
             $table->unsignedInteger('type_id')->index();
             $table->unsignedInteger('amount')->nullable();
             $table->text('description');
             $table->text('sypnosis');
-            $table->text('thumbnail_path');
+            $table->text('plan_code')->nullable();
+            $table->text('thumbnail_path')->nullable();
             $table->boolean('custom_course')->default(false);
             $table->integer('development_stage')->default(0); // 1 stage one, 2 stage two, 3 stage three
             $table->boolean('published')->default(false); // is the course visible to the users

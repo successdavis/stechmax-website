@@ -46,6 +46,7 @@ class CourseTest extends TestCase
             // ->assertDontSee($courseNotInSubject->title);
     }
 
+
     /** @test */
     public function it_can_be_browse_by_price_lowest_to_highess()
     {

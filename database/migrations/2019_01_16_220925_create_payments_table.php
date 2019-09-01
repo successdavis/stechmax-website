@@ -17,9 +17,9 @@ class CreatePaymentsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('invoice_id');
             $table->integer('amount');
-            $table->string('method');
-            $table->string('purpose');
-            $table->string('transaction_ref');
+            $table->string('method'); // what method did the user used to make this payment
+            $table->string('purpose'); // what is the user paying for?
+            $table->string('transaction_ref'); // The transaction references generated from the payment
             $table->timestamps();
         });
     }

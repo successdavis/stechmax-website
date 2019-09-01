@@ -8,18 +8,14 @@ use App\Subject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CourseSubscriptionController extends Controller
+class PaymentMethodController extends Controller
 {
     public function index(Subject $subject, Course $course)
     {
-        $class = true;
-        if (request()->class == 'false') {
-            $class = false;
-            return view('payments.medium', compact('course','class'));
-        }
-
+        $class = request()->class;
         return view('payments.medium', compact('course', 'class'));
     }
+
 
     public function store(Subject $subject, Course $course)
     {

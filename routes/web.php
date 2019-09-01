@@ -11,11 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    $type = \App\Type::find(3);
-    $programs = !empty($type) ? $type->courses()->get() : [];
-    return view('welcome', compact('programs'));
-});
+
+Route::get('/', 'HomepageController@index')->name('homepage.index');
 
 
 Auth::routes();
@@ -79,6 +76,8 @@ Route::patch('/users/{user}/updateprofile', 'ManageUserController@update')->name
 Route::get('/dashboard/updateprofile', 'UserController@edit')->name('update.settings.edit');
 Route::patch('/dashboard/{user}/updateprofile', 'UserController@update')->name('update.settings.store');
 Route::patch('/dashboard/{user}/updatepassword', 'UserController@updatePassword')->name('update.setting.password');
+Route::get('/dashboard/{user}/mycourses', 'UserSubscribedCoursesController@index')->name('mycourses.index');
+Route::get('/dashboard/{user}/getusercourses', 'UserSubscribedCoursesController@getDataForDataTable')->name('mycourses.datatable');
 
 Route::post('/dashboard/{user}/createguardian', 'GuardianController@store')->name('guardian.store');
 Route::patch('/dashboard/{guardian}/updateguardian', 'GuardianController@update')->name('guardian.update');
@@ -89,12 +88,6 @@ Route::get('/courses/{subject}', 'CourseController@index');
 Route::get('/courses/{subject}/{course}', 'CourseController@show');
 
 Route::get('/courses/{subject}/{course}/register', 'ProgramController@create');
-
-
-Route::get('/courses/{subject}/{course}/subscription', 'Payment\CourseSubscriptionController@index')->name('course_subscription.index')->middleware('auth')->middleware('auth', 'must-be-confirmed');
-Route::post('/courses/{subject}/{course}/subscription', 'Payment\CourseSubscriptionController@store')->name('course_subscription.store')->middleware('auth', 'must-be-confirmed');
-//Route::get('/courses/{subject}/{course}/callback', 'Payment\CourseSubscriptionController@update')->name('course_subscription.update')->middleware('auth');
-
 
 Route::post('/subjects', 'SubjectController@store')->middleware('admin')->name('subjects.new');
 
@@ -146,13 +139,23 @@ Route::post('/follow', 'FollowersController@store');
 Route::get('/testing', 'TestingController@index'); // will be here temporary
 Route::post('/testing', 'TestingController@store'); // will be here temporary
 
+
+Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth')->name('avatar');
+Route::post('api/users/{user}/passport', 'Api\UserAvatarController@storePassport')->middleware('auth')->name('passport');
+
+Route::get('/courses/{subject}/{course}/subscription', 'Payment\PaymentMethodController@index')->name('course_subscription.index')->middleware('auth', 'must-be-confirmed');
+Route::post('/courses/{subject}/{course}/subscription', 'Payment\PaymentMethodController@store')->name('course_subscription.store')->middleware('auth', 'must-be-confirmed');
+//Route::get('/courses/{subject}/{course}/callback', 'Payment\CourseSubscriptionController@update')->name('course_subscription.update')->middleware('auth');
+
+
+Route::post('/courses/{subject}/{course}/paystack', 'PaystackSubscriptionController@makeFullPayment')->name('paystack.makeFullPayment');
+
+
 Route::get('/paid/submit_details', 'PaymentController@create')->name('pay.submitDetails');
 
-//Route::post('/pay/{course}', 'PaymentController@redirectToGateway')->name('pay');
-Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
+
+Route::get('/payment/callback', 'PaystackSubscriptionController@handleGatewayCallback');
 Route::get('/paid/{course}', 'PaymentController@paymentSuccessful');
 Route::post('/paid/savedetails', 'PaymentController@store')->name('pay.saveDetails');
 
-Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth')->name('avatar');
 
-Route::post('api/users/{user}/passport', 'Api\UserAvatarController@storePassport')->middleware('auth')->name('passport');

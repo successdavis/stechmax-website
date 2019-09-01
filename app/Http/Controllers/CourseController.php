@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Paystack;
 use App\Type;
 use App\Course;
 use App\Subject;
@@ -63,10 +64,12 @@ class CourseController extends Controller
 
         $course = Course::create(request()->all());
 
-        $path = $course->path();
+        $course->createPlanOnPaystack();
+
+        // $path = $course->path();
 
         if (request()->expectsJson()) {
-            return ['course' => $course, 'path' => $path];
+            return ['course' => $course, 'path' => $course->path()];
         }
 
         return redirect($course->path())

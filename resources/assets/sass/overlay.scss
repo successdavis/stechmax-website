@@ -1,0 +1,79 @@
+// This class should be added to the overlay container
+.has-overlay {
+	position: relative;
+	&:hover .showOnHover {
+		opacity: 1;
+	}
+
+	&:hover .overlay__content{
+		top: 50%;
+		left: 50%;
+		&--hover {
+			opacity: 1;
+		}
+	}
+}
+
+// create an empty div and apply this class to it
+// This will be the div to overlay when the object is hovered over
+.overlay {
+	background: rgba(0,0,0,0.7);
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	-webkit-transition: all 0.4s ease-in-out 0s;
+	-moz-transition: all 0.4s ease-in-out 0s;
+	transition: all 0.4s ease-in-out 0s;
+	&__content {
+		position: absolute;
+		text-align: center;
+		padding-left: 1em;
+		padding-right: 1em;
+		width: 100%;
+		top: 50%;
+		left: 50%;
+		-webkit-transform: translate(-50%, -50%);
+		-moz-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+		-webkit-transition: all 0.3s ease-in-out 0s;
+		-moz-transition: all 0.3s ease-in-out 0s;
+		transition: all 0.3s ease-in-out 0s;
+		&--hover {
+			opacity: 0;
+		}
+		&--head {
+			font-size: 1.7em;
+			color: white;
+			letter-spacing: 0.15em;
+			text-transform: uppercase;
+		}
+		a:hover {
+			color: white;
+			border-bottom: 2px solid white;
+		}
+	}
+}
+
+.showOnHover {
+	opacity: 0;
+}
+
+.content__fadeIn--bottom{
+  top: 80%;
+}
+
+.content__fadeIn--top{
+  top: 20%;
+}
+
+.content__fadeIn--left{
+  left: 20%;
+}
+
+.content__fadeIn--right{
+  left: 80%;
+}

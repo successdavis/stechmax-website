@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     @if (!Auth::check())
-        @include('layouts.regFormStreamer')
+        @include('layouts.regFormStreamerTwo')
     @else 
         @include('layouts.noticeStreamer')
     @endif

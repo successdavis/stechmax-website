@@ -1,0 +1,43 @@
+.streamer {
+    	height: calc(100vh - 56px);
+    	position: relative;
+    	overflow: hidden;
+	&__banner { 
+		background-image: url(/../images/banner.jpg);
+		background-size: cover;
+	    background-position: center;
+	    background-repeat: no-repeat; 
+	}
+	&__courses {
+		overflow: hidden;
+		&--card {
+			overflow: hidden;
+			height: 33%;
+			margin: 1.6% 0;
+		}
+	}
+}
+
+.card-sibling {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	// color: white;
+	&--primary {
+		border-radius: 10px;
+		background: #222a38;
+	}
+	&--secondary {
+	background: white;
+	}
+}
+
+.full-width {
+	widows: 100%;
+}
+
+// .banner {
+//     background-image: url(/../images/banner.jpg);
+//     position: relative;
+//     min-height: calc(100vh - 56px);
+// }

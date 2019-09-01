@@ -9,7 +9,7 @@ trait Billable
         return $this->morphMany(Invoice::class, 'billable');
     }
 
-//    get all courses invoice by this user
+//    get all courses with an invoice by this user
     public function scopeWhereInvoicedBy($query, User $user)
     {
         return $query->whereHas('invoices', function ($query) use ($user) {
@@ -17,13 +17,21 @@ trait Billable
         });
     }
 
-//    to create invoice for a user in a particular module e.g. $course->createInvoice(1);
-    public function createInvoice($userId = null)
+//  Get all invoices for this user only on a specified mode i.e. not all of the users invoices 
+//  but only the ones related to a specific course or other payments.
+    public function InvoicesOnItemByUsers(user $user)
+    {
+        return $this->invoices()->where('user_id', $user->id);
+    }
+
+//  to create invoice for a user in a particular module e.g. $course->createInvoice(1);
+    public function createInvoice($userId = null, $installmental = null)
     {
         return $this->invoices()->save(
             new Invoice([
                 'user_id' => $userId ?: auth()->id(),
                 'amount' => $this->amount,
+                'installmental' => $installmental ?: true,
             ])
         );
     }

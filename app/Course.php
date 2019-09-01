@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use Paystack;
 use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
@@ -15,6 +15,9 @@ class Course extends Model
     protected $casts = [
         'published' => 'boolean'
     ];
+
+    // protected $with = ['subscriptions'];
+
 
     public function path()
     {
@@ -140,7 +143,7 @@ class Course extends Model
         return $section;
     }
 
-     public function difficulties()
+     public function difficulty()
     {
         return $this->belongsTo(Difficulty::class);
     }
@@ -154,6 +157,25 @@ class Course extends Model
     {
         return $this->plans;
     }
+
+    public function createPlanOnPaystack()
+    {
+        $data = [
+            "name" => $this->title,
+            "description" => $this->description,
+            "amount" => intval($this->amount),
+            // "key" => config('paystack.secretKey'),
+            "interval" => 'monthly',
+        ];
+
+        $plan = Paystack::createPlan($data);
+
+        return $this->update([
+            'plan_code' => $plan['data']['plan_code']
+        ]);
+    }
+
+
 
     public function getFirstInstallment($course = null)
     {

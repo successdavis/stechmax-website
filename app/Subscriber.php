@@ -11,7 +11,7 @@ trait Subscriber
         return $this->morphMany(Subscription::class, 'subscriber');
     }
 
-    //    get all subscriptions by this user
+    //    get all courses with a subscriptions by this user
     public function scopeWhereSubscribeBy($query, User $user)
     {
         return $query->whereHas('subscriptions', function ($query) use ($user) {
