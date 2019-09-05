@@ -72,4 +72,12 @@ class Subscription extends Model
         }
         return $this->created_at->diffInMonths();
     }
+
+    public function status($subscription = null)
+    {
+        if (!empty($subscription)) {
+            return !! $subscription->active;
+        }
+        return !! $this->active;
+    }
 }

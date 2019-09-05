@@ -26,7 +26,7 @@
             @else
               <div class="mt-3">
                 <h3>Make Full Payment</h3>
-                Pay <strong>N{{$course->amount}}</strong> for  <strong>{{$course->title}}</strong>.
+                Pay <strong>N{{$course->amount / 100}}</strong> for  <strong>{{$course->title}}</strong>.
                 <p>Your Training will base offline</p>
                 <p>Payment Options</p>
                 <div class="grid-x grid-padding-x">
@@ -49,8 +49,8 @@
                   </div>
                 </div>
                 <p>You can choose to make your payments installmental, First Installment takes 60% of the total fee and second installment takes 40%.</p>
-                <p>60% of N{{$course->amount}} is N{{$course->getFirstInstallment()}} </p>
-                <form method="post" action="{{$course->path()}}/subscription">
+                <p>60% of N{{$course->amount}} is N{{$course->getFirstInstallment() / 100}} </p>
+                <form method="post" action="{{$course->path()}}/paystack/part">
                     @csrf
                     <input type="hidden" name="class" value="true" placeholder="Please Ignore this field if displayed">
                     <input type="hidden" name="pay_module" value="part">

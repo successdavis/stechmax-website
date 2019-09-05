@@ -3,15 +3,19 @@
 		<h3>My Subscription History</h3>
 		<table class="mt-3">
 			<thead>
-				<th>Status</th>
+				<th>Active</th>
 				<th>Title</th>
 				<th>Subscribed On</th>
 				<th>Subscription Ends at</th>
 			</thead>
-			<tr v-for="data in courses">
-				<td v-text=""></td>
-				<td v-text="data.title"></td>
-			</tr>
+			<tbody>
+				<tr v-for="data in courses">
+					<td v-text="data.status"></td>
+					<td><a :href="data.path" v-text="data.title"></a></td>
+					<td v-text="data.subscribedOn"></td>
+					<td v-text="data.subscribtionEndAt"></td> 
+				</tr>
+			</tbody>
 		</table>
 	</div>
 </template>

@@ -11,6 +11,7 @@ trait Subscriber
         return $this->morphMany(Subscription::class, 'subscriber');
     }
 
+        // App\Course::WhereSubscribeBy(App\User::find(2))->get();
     //    get all courses with a subscriptions by this user
     public function scopeWhereSubscribeBy($query, User $user)
     {
@@ -56,5 +57,13 @@ trait Subscriber
         return $this->subscriptions()
             ->where(['user_id' => $user->id, 'active' => true])
             ->exists();
+    }
+
+    // Return a subscription for this course by this user
+    public function findSubscription(User $user)
+    {
+        return $this->subscriptions()
+            ->where(['user_id' => $user->id])
+            ->first();
     }
 }

@@ -79,6 +79,9 @@ Route::patch('/dashboard/{user}/updatepassword', 'UserController@updatePassword'
 Route::get('/dashboard/{user}/mycourses', 'UserSubscribedCoursesController@index')->name('mycourses.index');
 Route::get('/dashboard/{user}/getusercourses', 'UserSubscribedCoursesController@getDataForDataTable')->name('mycourses.datatable');
 
+Route::get('/dashboard/{user}/mypayments', 'UserPaymentsController@index')->name('mypayments.index');
+Route::get('/dashboard/{user}/getuserpayments', 'UserPaymentsController@getDataForDataTable')->name('mypayments.datatable');
+
 Route::post('/dashboard/{user}/createguardian', 'GuardianController@store')->name('guardian.store');
 Route::patch('/dashboard/{guardian}/updateguardian', 'GuardianController@update')->name('guardian.update');
 
@@ -149,6 +152,7 @@ Route::post('/courses/{subject}/{course}/subscription', 'Payment\PaymentMethodCo
 
 
 Route::post('/courses/{subject}/{course}/paystack', 'PaystackSubscriptionController@makeFullPayment')->name('paystack.makeFullPayment');
+Route::post('/courses/{subject}/{course}/paystack/part', 'PaystackSubscriptionController@makePartPayment')->name('paystack.makePartPayment');
 
 
 Route::get('/paid/submit_details', 'PaymentController@create')->name('pay.submitDetails');

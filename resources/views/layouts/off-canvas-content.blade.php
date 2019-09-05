@@ -57,13 +57,13 @@
     @endif
 
 
-    <li>
+ {{--    <li>
       <a href="#">Fee</a>
       <ul class="menu vertical nested">
         <li><a href="#">Pay Fee</a></li>
-        <li><a href="#">View all Payments</a></li>
+        <li><a href="{{route('mypayments.index', ['user' => auth()->user()->username])}}">View all Payments</a></li>
       </ul>
-    </li>
+    </li> --}}
 
     <li>
       <a href="#">Projects</a>
@@ -73,7 +73,7 @@
       </ul>
     </li>
 
-    <li><a href="#">Payments</a></li>
+    <li><a href="{{route('mypayments.index', ['user' => auth()->user()->username])}}">Payments</a></li>
     <li><a href="#">Notification</a></li>
     <li><a href="{{route('update.settings.edit')}}">Settings</a></li>
 </ul>
