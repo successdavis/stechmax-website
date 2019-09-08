@@ -31,6 +31,7 @@ trait Billable
             new Invoice([
                 'user_id' => $userId ?: auth()->id(),
                 'amount' => $this->amount,
+                'invoiceNo' => Invoice::generateInvoiceNo(),
                 'installmental' => $installmental ?: true,
             ])
         );

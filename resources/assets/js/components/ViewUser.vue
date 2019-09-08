@@ -26,51 +26,80 @@
                   <div class="medium-4 cell">
                     <label>Surname Name
                       <input type="text" v-model="Form.surname" :disabled="!editing">
+                      <p class="help-text" v-if="Form.errors.has('surname')" v-text="Form.errors.get('surname')" id="subjectHelpText"></p>
+
                     </label>
                   </div>
                   <div class="medium-4 cell">
                     <label>Middle Name
                       <input type="text" v-model="Form.middle_name" :disabled="!editing">
+                      <p class="help-text" v-if="Form.errors.has('middle_name')" v-text="Form.errors.get('middle_name')" id="subjectHelpText"></p>
                     </label>
                   </div>
                   <div class="medium-4 cell">
                     <label>Last Name
                       <input type="text" v-model="Form.last_name" :disabled="!editing">
+                      <p class="help-text" v-if="Form.errors.has('last_name')" v-text="Form.errors.get('last_name')" id="subjectHelpText"></p>
                     </label>
                   </div>
                   <div class="medium-4 cell">
                     <label>Gender
                       <input type="text" v-model="Form.gender" :disabled="!editing">
+                      <p class="help-text" v-if="Form.errors.has('gender')" v-text="Form.errors.get('gender')" id="subjectHelpText"></p>
                     </label>
                   </div>
                   <div class="medium-4 cell">
                     <label>Username
                       <input type="text" v-model="Form.username" disabled>
+                      <p class="help-text" v-if="Form.errors.has('username')" v-text="Form.errors.get('username')" id="subjectHelpText"></p>
                     </label>
                   </div>
                   <div class="medium-4 cell">
                     <label>Date of Birth
                       <input type="date" v-model="Form.dob" :disabled="!editing">
+                      <p class="help-text" v-if="Form.errors.has('dob')" v-text="Form.errors.get('dob')" id="subjectHelpText"></p>
                     </label>
                   </div>
                   <div class="medium-4 cell">
                     <label>Phone 1
                       <input type="text" v-model="Form.phone" :disabled="!editing">
+                      <p class="help-text" v-if="Form.errors.has('phone')" v-text="Form.errors.get('phone')" id="subjectHelpText"></p>
                     </label>
                   </div>
                   <div class="medium-4 cell">
                     <label>Phone 2
                       <input type="text" v-model="Form.alternative_phone" :disabled="!editing">
+                      <p class="help-text" v-if="Form.errors.has('alternative_phone')" v-text="Form.errors.get('alternative_phone')" id="subjectHelpText"></p>
                     </label>
                   </div>
                   <div class="medium-4 cell">
                     <label>Address
                       <input type="text" v-model="Form.address" :disabled="!editing">
+                      <p class="help-text" v-if="Form.errors.has('address')" v-text="Form.errors.get('address')" id="subjectHelpText"></p>
                     </label>
                   </div>
                 </div>
               </div>
             </form>
+            <div class="grid-container">
+              <h4>Subscription History</h4>
+              <table class="mt-1">
+                <thead>
+                  <th>Active</th>
+                  <th>Title</th>
+                  <th>Subscribed On</th>
+                  <th>Subscription Ends at</th>
+                </thead>
+                <tbody>
+                  <tr v-for="data in courses">
+                    <td v-text="data.status"></td>
+                    <td><a :href="data.path" v-text="data.title"></a></td>
+                    <td v-text="data.subscribedOn"></td>
+                    <td v-text="data.subscribtionEndAt"></td> 
+                  </tr>
+                </tbody>
+              </table>
+            </div>
         </modal>
     </div>
     
@@ -86,6 +115,8 @@
             editing: false,
             date_joined: this.selectedUser.Date_Joined,
             email: this.selectedUser.email,
+            errorMsg: '',
+            courses: '',
 
             Form: new Form ({
                 surname: this.selectedUser.f_name,
@@ -103,6 +134,14 @@
           }
         },
 
+        created () {
+          axios.get(`/dashboard/${this.selectedUser.username}/getusercourses`)
+            .then(response => {
+              this.courses = response.data.data
+            }
+          );
+        },
+
         methods: {
           update () {
             if (!this.editing) {
@@ -112,11 +151,12 @@
                       this.$emit('userUpdated')
                 })
                 .catch(error => {
+                    this.errorMsg = error.message;
                     flash('Something went wrong updating this user')
                     this.editing = true;
                 });
             }
-          }
+          },
         }
     }
 </script>

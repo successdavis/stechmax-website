@@ -52,4 +52,43 @@ class InvoiceTest extends TestCase
 
     }
 
+    /** @test */
+    public function an_invoice_id_is_generated_for_a_new_invoice()
+    {
+        $user = $this->signIn(create('App\User'));
+        $invoice = create('App\Invoice');
+        $invoiceNo = $invoice->generateInvoiceNo();
+        $this->assertEquals($invoiceNo, 'STM-2019-0002');
+    }
+
+    /** @test */
+    public function an_invoice_can_determine_its_status()
+    {
+        $user = $this->signIn(create('App\User'));
+        $invoice = create('App\Invoice');
+        $this->assertEquals($invoice->status(), 'completed');
+        $invoice->openInvoice();
+        $this->assertEquals($invoice->status(), $invoice->amountOwed());
+    }
+
+    /** @test */
+    public function an_invoice_can_be_closed()
+    {
+        $user = $this->signIn(create('App\User'));
+        $invoice = create('App\Invoice');
+        $invoice->closeInvoice();
+        $this->assertTrue($invoice->completed);
+        $invoice->openInvoice();
+        $this->assertEquals($invoice->status(), $invoice->amountOwed());
+    }
+
+    /** @test */
+    public function an_invoice_can_be_open()
+    {
+        $user = $this->signIn(create('App\User'));
+        $invoice = create('App\Invoice');
+        $invoice->openInvoice();
+
++        $this->assertFalse($invoice->completed);
+    }
 }

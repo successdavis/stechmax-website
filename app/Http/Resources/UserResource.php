@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\User;
+use App\Course;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -29,7 +31,7 @@ class UserResource extends JsonResource
             'username' => $this->username,
             'passport_path' => $this->passport_path,
             'Date_Joined' => Carbon::parse($this->created_at)->toDayDateTimeString(),
-            'Date_Joined' => $this->guardians
+            'Date_Joined' => $this->guardians,
         ];
     }
 }

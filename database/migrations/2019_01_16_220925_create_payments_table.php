@@ -16,7 +16,7 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('invoice_id');
-            $table->integer('amount');
+            $table->integer('amount'); //record payments and discount as negative, record refund as positive
             $table->string('method'); // what method did the user used to make this payment
             $table->string('purpose'); // what is the user paying for?
             $table->string('transaction_ref'); // The transaction references generated from the payment

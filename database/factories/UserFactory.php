@@ -211,7 +211,8 @@ $factory->define(App\Invoice::class, function (Faker $faker) {
         },
         'billable_type' => 'App\Course',
         'amount'  => 5000,
-        'active' => true,
+        'completed' => true,
+        'invoiceNo' => 'STM-' . date('Y') . '-001',
     ];
 });
 

@@ -117,4 +117,11 @@ class CoursesController extends Controller
 
         return CourseResource::collection($courses);
     }
+
+    public function allcoursesandtracks()
+    {
+        $courses = Course::latest()->get();
+        
+        return $courses;
+    }
 }

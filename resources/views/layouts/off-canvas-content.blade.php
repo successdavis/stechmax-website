@@ -8,15 +8,17 @@
           </a>
         </span>
       <span class="thumbnail--icon dark-gray">
-        <i class="fas fa-cogs"></i>
+        <a href="{{route('update.settings.edit')}}">
+          <i class="fas fa-cogs" title="Apply Changes to your profile " style="color: white"></i>
+        </a>
       </span>
       <span class="thumbnail--icon dark-gray">
         <a href="{{ route('logout') }}"
            onclick="event.preventDefault();
             document.getElementById('logout-form').submit();">
             <!-- {{ __('Logout') }} -->
+        <i class="fas fa-power-off" title="End your login Session " style="color: red"></i>
         </a>
-        <i class="fas fa-power-off"></i>
       </span>
     </div>
 </div>
@@ -33,7 +35,7 @@
 </div> --}}
 
 <ul class="white vertical menu accordion-menu" id="off-canvas_panel-links" data-accordion-menu>
-    <li class="dark-gray"><a href="/home">Dashboard</a></li>
+    <li class="dark-gray"><a href="/dashboard">Dashboard</a></li>
     <li><a href="{{route('mycourses.index', ['user' => auth()->user()->username])}}">My Courses</a></li>
    
     @if (Auth::user()->isAdmin())
@@ -53,6 +55,16 @@
           <li><a href="{{route('manage_user.index')}}">View Users</a></li>
         </ul>
       </li>
+
+      <li>
+        <a href="#">Cashier</a>
+        <ul class="menu vertical nested">
+          <li><a href="{{route('manage_invoice.create', ['user' => auth()->user()->username])}}">Create Invoice</a></li>
+          <li><a href="{{route('manage_invoice.index', ['user' => auth()->user()->username])}}">View Invoices</a></li>
+          <li><a href="{{route('manage_invoice.addpayment')}}">Add Payment</a></li>
+        </ul>
+      </li>
+
 
     @endif
 
@@ -75,6 +87,6 @@
 
     <li><a href="{{route('mypayments.index', ['user' => auth()->user()->username])}}">Payments</a></li>
     <li><a href="#">Notification</a></li>
-    <li><a href="{{route('update.settings.edit')}}">Settings</a></li>
+    {{-- <li><a href="{{route('update.settings.edit')}}">Settings</a></li> --}}
 </ul>
 

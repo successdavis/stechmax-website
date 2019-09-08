@@ -6,6 +6,7 @@ use Paystack;
 use App\Course;
 use App\Invoice;
 use App\Subject;
+use App\payments;
 use Carbon\Carbon;
 use App\Http\Requests;
 use App\submittedpayments;
@@ -25,18 +26,71 @@ class PaymentController extends Controller
 
     }
 
-    /**
-     * Redirect the User to Paystack Payment Page
-     * @return Url
-     */
-    public function redirectToGateway(Course $course, Request $request)
+    public function addpayment()
     {
+        return view('dashboard.payments.addpayment', [
+            'displayMenu' => true
+        ]);
+    }
 
-       $payment = new CoursePayment($request);
-       $data = $payment->generatePayData($course, $invoice_Id);
+    public function savepayments()
+    {
+         $this->validate(request(), [
+            'invoice' => 'required|exists:invoices,id',
+            'amount' => 'required|min:0',
+            'purpose' => 'required',
+        ]);
 
+        $invoice = Invoice::find(request()->invoice);
+        $amount = '-' . request()->amount . '00';
+        $purpose = request()->purpose;
 
-       return Paystack::getAuthorizationUrl($data)->redirectNow();
+        try {
+
+            if ($amount >= $invoice->amountOwed()) {
+                abort(422, 'The amount you entered is greater than Invoice Amount Owed');
+            }
+
+            if ($invoice->completed) {
+                abort(422, 'Sorry This invoice Can no longer recieve payment');
+            }
+
+            $payment = $invoice->payments()->create([
+                'amount' => $amount,
+                'method' => 'Admin',
+                'purpose' => $purpose,
+                'transaction_ref' => hexdec(uniqid())
+            ]);
+
+            return $invoice;
+            
+        } catch (Exception $e) {
+            return response('This user has an active subscription to this course.', 422);
+        }
+    }
+
+    public function refundPayment() {
+         $this->validate(request(), [
+            'invoice' => 'required|exists:invoices,id',
+            'paymentId' => 'required|exists:payments,id',
+        ]);
+
+        try {
+            $invoice = Invoice::find(request()->invoice);
+            $oldPayment = payments::find(request()->paymentId);
+
+            $payment = $invoice->payments()->create([
+                'amount' => ltrim($oldPayment->amount, '-'),
+                'method' => 'Admin',
+                'purpose' => 'refund-' . $oldPayment->transaction_ref,
+                'transaction_ref' => hexdec(uniqid())
+            ]);
+
+            return $invoice;
+            
+        } catch (Exception $e) {
+            return response('Sorry we were Unable to refund payment', 422);
+        }
     }
 
     public function create()
@@ -56,26 +110,6 @@ class PaymentController extends Controller
         $paidDetails = submittedpayments::create(request()->all());
 
         return back()->with('flash', 'Your payment details was submitted Successful');
-    }
-
-    /**
-     * Obtain Paystack payment information
-     * @return void
-     */
-    public function handleGatewayCallback()
-    {
-        $paymentDetails = Paystack::getPaymentData();
-
-        $course = Course::findOrFail($paymentDetails['data']['metadata']['course_id']);        
-        $Invoice = Invoice::findOrFail($paymentDetails['data']['metadata']['invoice_id']);
-
-        $Invoice->recordPayment($paymentDetails['data']);
-        $course->createSubscription('', $Invoice->id);
-
-        request()->user()->updatePaystackId($paymentDetails['data']['customer']['customer_code']);
-
-        return redirect('/paid/' . $course->id)
-            ->with('flash', 'Payment Successful');
     }
 
     public function paymentSuccessful(Course $course)

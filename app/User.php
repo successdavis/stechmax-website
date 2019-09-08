@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use App\Course;
+use App\Http\Resources\CourseSubscriptionsResource;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -132,6 +134,12 @@ class User extends Authenticatable
     {
         // return in_array($this->f_name, ['JohnDoe', 'JaneDoe']);
         return $this->admin;
+    }
+
+    public function retriveMyCourses() 
+    {
+        $subscriptions = Course::WhereSubscribeBy($this)->get();
+            return CourseSubscriptionsResource::collection($subscriptions);
     }
 
 }

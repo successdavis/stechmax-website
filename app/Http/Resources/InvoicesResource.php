@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserPaymentsResource extends JsonResource
+class InvoicesResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -24,6 +24,7 @@ class UserPaymentsResource extends JsonResource
             'invoiceNo' => $this->invoiceNo,
             'billable' => $this->billable,
             'status' => $this->status(),
+            'billedTo' => $this->owner,
         ];
     }
 }

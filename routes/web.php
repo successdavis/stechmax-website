@@ -25,6 +25,7 @@ Route::get('/threads/search', 'SearchController@show');
 
 Route::get('api/courses', 'Api\CoursesController@getSubjects');
 Route::get('api/courses/allcourses', 'Api\CoursesController@getCourses');
+Route::get('api/courses/allcoursesandtracks', 'Api\CoursesController@allcoursesandtracks')->middleware('admin');
 Route::get('api/courses/viewAllCourses', 'Api\CoursesController@index')->middleware(['admin'])->name('courses.index');
 Route::post('api/courses/{subject}/{course}', 'Api\CourseImageController@store')->middleware(['auth', 'admin']);
 
@@ -72,6 +73,8 @@ Route::get('/api/courses/viewAllCourses/datatable  ', 'Api\CoursesController@get
 Route::patch('/users/{user}/update', 'ManageUserController@update')->middleware('admin');
 Route::patch('/users/{user}/updateprofile', 'ManageUserController@update')->name('update-profile');
 
+Route::get('api/users/getallusers', 'ManageUserController@getallusers')->middleware('admin')->name('getallusers');
+
 
 Route::get('/dashboard/updateprofile', 'UserController@edit')->name('update.settings.edit');
 Route::patch('/dashboard/{user}/updateprofile', 'UserController@update')->name('update.settings.store');
@@ -85,6 +88,16 @@ Route::get('/dashboard/{user}/getuserpayments', 'UserPaymentsController@getDataF
 Route::post('/dashboard/{user}/createguardian', 'GuardianController@store')->name('guardian.store');
 Route::patch('/dashboard/{guardian}/updateguardian', 'GuardianController@update')->name('guardian.update');
 
+Route::get('/dashboard/{user}/manageinvoices', 'InvoiceController@index')->middleware('admin')->name('manage_invoice.index');
+Route::get('/dashboard/{user}/createinvoice', 'InvoiceController@create')->middleware('admin')->name('manage_invoice.create');
+
+Route::get('/dashboard/payments/addpayment', 'PaymentController@addpayment')->middleware('admin')->name('manage_invoice.addpayment');
+Route::post('/dashboard/payments/addpayment', 'PaymentController@savepayments')->middleware('admin')->name('manage_invoice.savepayments');
+Route::post('/dashboard/payments/refundpayment', 'PaymentController@refundPayment')->middleware('admin')->name('manage_invoice.refundpayment');
+
+Route::post('/dashboard/invoices/createinvoiceforuser', 'InvoiceController@store')->middleware('admin')->name('manage_invoice.store');
+Route::get('/dashboard/{user}/manageinvoices/datatable', 'InvoiceController@getallinvoices')->middleware('admin')->name('manage_invoice.getallinvoices');
+Route::get('/api/invoices/getallinvoices', 'InvoiceController@retrieveallinvoices')->middleware('admin')->name('manage_invoice.retrieveallinvoices');
 
 Route::get('/courses', 'CourseController@index')->name('courses');
 Route::get('/courses/{subject}', 'CourseController@index');

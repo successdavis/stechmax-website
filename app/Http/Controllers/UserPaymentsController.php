@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserPaymentsResource;
+use App\User;
+use App\payments;
 use Illuminate\Http\Request;
 
 class UserPaymentsController extends Controller
@@ -20,7 +23,7 @@ class UserPaymentsController extends Controller
 
     public function getDataForDataTable(User $user)
     {
-         $subscriptions = Course::WhereSubscribeBy($user)->get();
-         return UserPaymentsResource::collection($subscriptions);
+         $invoices = $user->invoices()->get();
+         return UserPaymentsResource::collection($invoices);
     }
 }

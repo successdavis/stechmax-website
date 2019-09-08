@@ -83,6 +83,13 @@ class ManageUserController extends Controller
         }
     }
 
+    public function getallusers(User $user)
+    {
+        $users = User::latest()->get();
+
+        return $users;
+    }
+
     public function getUsersForDataTable(Request $request)
     {
         $query = User::orderBy($request->column, $request->order);
