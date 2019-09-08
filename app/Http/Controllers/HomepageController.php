@@ -16,7 +16,8 @@ class HomepageController extends Controller
     {
         $type = \App\Type::find(3);
         $programs = !empty($type) ? $type->courses()->get() : [];
-        $streamerCourses = Course::inRandomOrder()->whereSubject_id('2')->get()->take('3');
+        $streamerCourses = Course::inRandomOrder()->whereType_id('2')->get()->take('3');
+        dd($streamerCourses);
         return view('welcome', compact('programs', 'streamerCourses'));
     }
 
