@@ -3,15 +3,7 @@
 		<p>Hello world</p>
 		<div class="row">
 			<div class="grid-x grid-container overlay__content" style="max-width: 850px;">
-
-				<div class="medium-8">	
-					<div class="switch large">
-					  <input class="switch-input" id="yes-no" type="checkbox" name="exampleSwitch">
-					  <label class="switch-paddle" for="yes-no">
-					    <span class="switch-active" aria-hidden="true">Register an Account</span>
-					    <span class="switch-inactive" aria-hidden="true">Login</span>
-					  </label>
-					</div>
+				<div class="medium-8 text-align-left">
 					<form>
 					  <div class="grid-container">
 					    <div class="grid-x grid-padding-x">
@@ -63,6 +55,7 @@
 					          <input type="text" placeholder="Optional">
 					        </label>
 					      </div>
+					      <button>Submit</button>
 					    </div>
 					  </div>
 					</form>
@@ -83,5 +76,23 @@
 <script>
 	export default {
 
-	}
+	};
+
 </script>
+
+<style scoped>
+	.text-align-left {
+		text-align: left;
+	}
+
+	label {
+		color: white;
+	}
+
+	.reg-form {
+		-webkit-box-shadow: 0px 3px 13px 3px rgba(42,40,66,0.78);
+		-moz-box-shadow: 0px 3px 13px 3px rgba(42,40,66,0.78);
+		box-shadow: 0px 3px 13px 3px rgba(42,40,66,0.78);
+	}
+
+</style>
