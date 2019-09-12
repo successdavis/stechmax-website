@@ -40,6 +40,7 @@
             'signedIn'  => Auth::check()      
         ]) !!};
     </script>
+    @yield('head')
 </head>
 <body>
 <body>
@@ -96,6 +97,8 @@
 <script src="/js/vendor/foundation.js"></script>
 <script src="{{ asset('js/app.js') }}" ></script>
 <script src="{{ asset('js/remita-pay-inline.bundle.js') }}" ></script>
+
+@yield('body-close')
 
 <script type="text/javascript">
     $(document).foundation();

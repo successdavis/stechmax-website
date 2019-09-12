@@ -113,6 +113,7 @@ return [
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
     'spamfree'             => 'The :attribute contains spam',
+    'emailorphone'         => 'You have provided an invalid email or phone',
 
     /*
     |--------------------------------------------------------------------------

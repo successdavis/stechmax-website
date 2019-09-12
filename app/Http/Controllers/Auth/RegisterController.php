@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\PleaseConfirmYourEmail;
+use App\Rules\Recaptcha;
+use App\User;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Zttp\Zttp;
 
 class RegisterController extends Controller
 {
@@ -52,14 +54,16 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'f_name' => 'required|string|max:100',
-            'l_name' => 'required|string|max:100',
-            'gender' => 'required|string|max:15',
-            'gender' => 'required',
-            'phone' => 'required|string|max:15|min:11',
-            'email' => 'required|string|email|max:255|unique:users',
+            'emailOrPhone' => 'required|unique:users,email|emailorphone',
+            'surname' => 'required|string|max:50',
+            'lastname' => 'required|string|max:50',
+            'middlename' => 'string|max:50',
+            'gender' => 'required|string|max:1',
+            'dateofbirth' => 'required|max:255',
             'password' => 'required|string|min:8|confirmed',
+            'token' => ['required', new Recaptcha()],
         ]);
+        
     }
 
     /**
@@ -74,18 +78,28 @@ class RegisterController extends Controller
             $token = str_random(25);
         } while ( user::where('confirmation_token', $token)->exists());
 
+        do {
+            $username = $data['surname'] . $data['lastname'] . rand(2,5);
+        } while ( user::where('confirmation_token', $username)->exists());
 
-        return User::create([
-            'f_name' => $data['f_name'],
-            'l_name' => $data['l_name'],
-            'username' => $data['f_name'] . ' ' . $data['l_name'],
+        $storeData = [
+            'f_name' => $data['surname'],
+            'l_name' => $data['lastname'],
+            'm_name' => $data['middlename'],
+            'dob' => $data['dateofbirth'],
+            'username' => $username,
             'gender' => $data['gender'],
-            'phone' => $data['phone'],
-            'gender' => $data['gender'],
-            'email'  => $data['email'],
-            'confirmation_token' => str_limit(md5($data['email'] . str_random()), 25, ''),
+            'confirmation_token' => str_limit(md5($data['emailOrPhone'] . str_random()), 25, ''),
             'password' => Hash::make($data['password']),
-        ]);
+        ];
+
+        if (ctype_digit($data['emailOrPhone'])) {
+            $storeData['phone'] = $data['emailOrPhone'];
+        }else {
+            $storeData['email'] = $data['emailOrPhone'];
+        };
+
+        return User::create($storeData);
     }
 
     /**
@@ -97,7 +111,9 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
-        Mail::to($user)->send(new PleaseConfirmYourEmail($user));
-        return redirect($this->redirectPath());
+        if (filter_var($user->email, FILTER_VALIDATE_EMAIL)) {
+            Mail::to($user)->send(new PleaseConfirmYourEmail($user));
+            return redirect($this->redirectPath());
+        }
     }
 }

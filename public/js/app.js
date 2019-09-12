@@ -5046,9 +5046,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      errorMessage: '',
+      submitting: '',
+      RegForm: new Form({
+        emailOrPhone: 'hello@gmail.com',
+        surname: 'success',
+        lastname: 'daviso',
+        middlename: 'feaf',
+        gender: 'M',
+        dateofbirth: '',
+        password: '0000000000',
+        password_confirmation: '0000000000',
+        token: ''
+      })
+    };
+  },
+  methods: {
+    submitForm: function submitForm() {
+      var _this = this;
+
+      this.RegForm.token = window.App.token;
+      this.RegForm.post('/register').then(function (data) {
+        flash("Registration Successful");
+        window.location.href = "http://success.test/dashboard";
+      })["catch"](function (error) {
+        _this.errorMessage = error.message;
+        flash('Your form contain errors');
+        _this.submitting = false;
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -5542,7 +5573,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.text-align-left[data-v-40419bdd] {\n\ttext-align: left;\n}\nlabel[data-v-40419bdd] {\n\tcolor: white;\n}\n.reg-form[data-v-40419bdd] {\n\tbox-shadow: 0px 3px 13px 3px rgba(42,40,66,0.78);\n}\n\n", ""]);
+exports.push([module.i, "\n.text-align-left[data-v-40419bdd] {\n\ttext-align: left;\n}\nlabel[data-v-40419bdd], .white[data-v-40419bdd], p[data-v-40419bdd] {\n\tcolor: white;\n}\n.reg-form[data-v-40419bdd] {\n\tbackground: #222a38;\n\tbox-shadow: 0px 3px 13px 3px rgba(42,40,66,0.78);\n}\n\n", ""]);
 
 // exports
 
@@ -37466,37 +37497,74 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "overlay" }, [
-      _c("p", [_vm._v("Hello world")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          {
-            staticClass: "grid-x grid-container overlay__content",
-            staticStyle: { "max-width": "850px" }
-          },
-          [
-            _c("div", { staticClass: "medium-8 text-align-left" }, [
-              _c("form", [
+  return _c("div", { staticClass: "overlay" }, [
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        {
+          staticClass: "grid-x grid-container overlay__content reg-form",
+          staticStyle: { "max-width": "850px" }
+        },
+        [
+          _c("div", { staticClass: "medium-8 text-align-left mt-3" }, [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.submitForm($event)
+                  },
+                  keydown: function($event) {
+                    return _vm.RegForm.errors.clear()
+                  }
+                }
+              },
+              [
                 _c("div", { staticClass: "grid-container" }, [
                   _c("div", { staticClass: "grid-x grid-padding-x" }, [
                     _c("div", { staticClass: "cell" }, [
                       _c("label", [
                         _vm._v("Email or Phone\n\t\t\t\t          "),
                         _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.RegForm.emailOrPhone,
+                              expression: "RegForm.emailOrPhone"
+                            }
+                          ],
                           attrs: {
                             type: "text",
-                            placeholder: "Enter your Surname Here"
+                            placeholder: "Required",
+                            required: ""
+                          },
+                          domProps: { value: _vm.RegForm.emailOrPhone },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.RegForm,
+                                "emailOrPhone",
+                                $event.target.value
+                              )
+                            }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.RegForm.errors.has("emailOrPhone")
+                          ? _c("p", {
+                              staticClass: "help-text",
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.RegForm.errors.get("emailOrPhone")
+                                )
+                              }
+                            })
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -37504,9 +37572,31 @@ var staticRenderFns = [
                       _c("label", [
                         _vm._v("Surname\n\t\t\t\t          "),
                         _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.RegForm.surname,
+                              expression: "RegForm.surname"
+                            }
+                          ],
                           attrs: {
                             type: "text",
-                            placeholder: "Enter your Lasname Here"
+                            placeholder: "Required",
+                            required: ""
+                          },
+                          domProps: { value: _vm.RegForm.surname },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.RegForm,
+                                "surname",
+                                $event.target.value
+                              )
+                            }
                           }
                         })
                       ])
@@ -37516,9 +37606,31 @@ var staticRenderFns = [
                       _c("label", [
                         _vm._v("Last Name\n\t\t\t\t          "),
                         _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.RegForm.lastname,
+                              expression: "RegForm.lastname"
+                            }
+                          ],
                           attrs: {
                             type: "text",
-                            placeholder: "Enter your Lasname Here"
+                            placeholder: "Required",
+                            required: ""
+                          },
+                          domProps: { value: _vm.RegForm.lastname },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.RegForm,
+                                "lastname",
+                                $event.target.value
+                              )
+                            }
                           }
                         })
                       ])
@@ -37528,16 +37640,28 @@ var staticRenderFns = [
                       _c("label", [
                         _vm._v("Other Names\n\t\t\t\t          "),
                         _c("input", {
-                          attrs: { type: "text", placeholder: "Optional" }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "medium-6 cell" }, [
-                      _c("label", [
-                        _vm._v("Contact Phone\n\t\t\t\t          "),
-                        _c("input", {
-                          attrs: { type: "text", placeholder: "Optional" }
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.RegForm.middlename,
+                              expression: "RegForm.middlename"
+                            }
+                          ],
+                          attrs: { type: "text", placeholder: "Optional" },
+                          domProps: { value: _vm.RegForm.middlename },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.RegForm,
+                                "middlename",
+                                $event.target.value
+                              )
+                            }
+                          }
                         })
                       ])
                     ]),
@@ -37545,15 +37669,56 @@ var staticRenderFns = [
                     _c("div", { staticClass: "medium-6 cell" }, [
                       _c("label", [
                         _vm._v("Gender\n\t\t\t\t          "),
-                        _c("select", [
-                          _c("option", { attrs: { value: "male" } }, [
-                            _vm._v("Male")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "Female" } }, [
-                            _vm._v("Female")
-                          ])
-                        ])
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.RegForm.gender,
+                                expression: "RegForm.gender"
+                              }
+                            ],
+                            attrs: { required: "" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.RegForm,
+                                  "gender",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { selected: "", value: "", disabled: "" }
+                              },
+                              [_vm._v("Click to pick")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "M" } }, [
+                              _vm._v("Male")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "F" } }, [
+                              _vm._v("Female")
+                            ])
+                          ]
+                        )
                       ])
                     ]),
                     _vm._v(" "),
@@ -37561,7 +37726,32 @@ var staticRenderFns = [
                       _c("label", [
                         _vm._v("Date of Birth\n\t\t\t\t          "),
                         _c("input", {
-                          attrs: { type: "text", placeholder: "Optional" }
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.RegForm.dateofbirth,
+                              expression: "RegForm.dateofbirth"
+                            }
+                          ],
+                          attrs: {
+                            type: "date",
+                            placeholder: "Required",
+                            required: ""
+                          },
+                          domProps: { value: _vm.RegForm.dateofbirth },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.RegForm,
+                                "dateofbirth",
+                                $event.target.value
+                              )
+                            }
+                          }
                         })
                       ])
                     ]),
@@ -37570,7 +37760,32 @@ var staticRenderFns = [
                       _c("label", [
                         _vm._v("Password\n\t\t\t\t          "),
                         _c("input", {
-                          attrs: { type: "text", placeholder: "Optional" }
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.RegForm.password,
+                              expression: "RegForm.password"
+                            }
+                          ],
+                          attrs: {
+                            type: "password",
+                            placeholder: "Required",
+                            required: ""
+                          },
+                          domProps: { value: _vm.RegForm.password },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.RegForm,
+                                "password",
+                                $event.target.value
+                              )
+                            }
+                          }
                         })
                       ])
                     ]),
@@ -37579,25 +37794,72 @@ var staticRenderFns = [
                       _c("label", [
                         _vm._v("Confirm Password\n\t\t\t\t          "),
                         _c("input", {
-                          attrs: { type: "text", placeholder: "Optional" }
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.RegForm.password_confirmation,
+                              expression: "RegForm.password_confirmation"
+                            }
+                          ],
+                          attrs: {
+                            type: "password",
+                            placeholder: "Re-type password here",
+                            required: ""
+                          },
+                          domProps: {
+                            value: _vm.RegForm.password_confirmation
+                          },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.RegForm,
+                                "password_confirmation",
+                                $event.target.value
+                              )
+                            }
+                          }
                         })
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("button", [_vm._v("Submit")])
+                    _vm._m(0)
                   ])
                 ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "medium-4" }, [
-              _c("p", [
-                _vm._v(
-                  "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n\t\t\t\ttempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n\t\t\t\tquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n\t\t\t\tconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n\t\t\t\tcillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n\t\t\t\tproident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                )
-              ])
-            ])
-          ]
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(1)
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "cell" }, [
+      _c(
+        "button",
+        { staticClass: "medium button", attrs: { type: "submit" } },
+        [_vm._v("Submit")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "medium-4 white mt-4" }, [
+      _c("p", [
+        _vm._v(
+          "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n\t\t\t\ttempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n\t\t\t\tquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n\t\t\t\tconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n\t\t\t\tcillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n\t\t\t\tproident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         )
       ])
     ])
@@ -62721,15 +62983,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************************!*\
   !*** ./resources/assets/js/pages/SiteRegistration.vue ***!
   \********************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SiteRegistration_vue_vue_type_template_id_40419bdd_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SiteRegistration.vue?vue&type=template&id=40419bdd&scoped=true& */ "./resources/assets/js/pages/SiteRegistration.vue?vue&type=template&id=40419bdd&scoped=true&");
 /* harmony import */ var _SiteRegistration_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SiteRegistration.vue?vue&type=script&lang=js& */ "./resources/assets/js/pages/SiteRegistration.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _SiteRegistration_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _SiteRegistration_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _SiteRegistration_vue_vue_type_style_index_0_id_40419bdd_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SiteRegistration.vue?vue&type=style&index=0&id=40419bdd&scoped=true&lang=css& */ "./resources/assets/js/pages/SiteRegistration.vue?vue&type=style&index=0&id=40419bdd&scoped=true&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _SiteRegistration_vue_vue_type_style_index_0_id_40419bdd_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SiteRegistration.vue?vue&type=style&index=0&id=40419bdd&scoped=true&lang=css& */ "./resources/assets/js/pages/SiteRegistration.vue?vue&type=style&index=0&id=40419bdd&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -62761,7 +63022,7 @@ component.options.__file = "resources/assets/js/pages/SiteRegistration.vue"
 /*!*********************************************************************************!*\
   !*** ./resources/assets/js/pages/SiteRegistration.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
