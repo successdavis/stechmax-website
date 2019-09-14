@@ -5046,36 +5046,89 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       errorMessage: '',
       submitting: '',
+      logo: '',
+      templatelogo: '',
+      template: '',
       RegForm: new Form({
-        emailOrPhone: 'hello@gmail.com',
-        surname: 'success',
-        lastname: 'daviso',
-        middlename: 'feaf',
-        gender: 'M',
+        emailOrPhone: '',
+        surname: '',
+        lastname: '',
+        middlename: '',
+        gender: '',
         dateofbirth: '',
-        password: '0000000000',
-        password_confirmation: '0000000000',
+        password: '',
+        password_confirmation: '',
         token: ''
       })
     };
   },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/settings/getSiteLogo').then(function (response) {
+      _this.logo = response.data;
+    });
+  },
   methods: {
     submitForm: function submitForm() {
-      var _this = this;
+      var _this2 = this;
 
-      this.RegForm.token = window.App.token;
       this.RegForm.post('/register').then(function (data) {
         flash("Registration Successful");
-        window.location.href = "http://success.test/dashboard";
+        window.location.href = "/register/comfirm_email";
       })["catch"](function (error) {
-        _this.errorMessage = error.message;
+        _this2.errorMessage = error.message;
         flash('Your form contain errors');
-        _this.submitting = false;
+        _this2.submitting = false;
+      });
+    },
+    generateRecaptcha: function generateRecaptcha() {
+      var _this3 = this;
+
+      grecaptcha.ready(function () {
+        grecaptcha.execute('6LeawrcUAAAAAIrA-LQ-kytjPFEBcedXDLcWHHHM', {
+          action: 'homepage'
+        }).then(function (token) {
+          _this3.RegForm.token = token;
+
+          _this3.submitForm();
+        });
       });
     }
   }
@@ -5573,7 +5626,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.text-align-left[data-v-40419bdd] {\n\ttext-align: left;\n}\nlabel[data-v-40419bdd], .white[data-v-40419bdd], p[data-v-40419bdd] {\n\tcolor: white;\n}\n.reg-form[data-v-40419bdd] {\n\tbackground: #222a38;\n\tbox-shadow: 0px 3px 13px 3px rgba(42,40,66,0.78);\n}\n\n", ""]);
+exports.push([module.i, "\n.text-align-left[data-v-40419bdd] {\n\ttext-align: left;\n}\nlabel[data-v-40419bdd], .white[data-v-40419bdd], p[data-v-40419bdd] {\n\tcolor: white;\n}\n.reg-form[data-v-40419bdd] {\n\tbackground: #222a38;\n\tbox-shadow: 0px 3px 13px 3px rgba(42,40,66,0.78);\n}\n.background[data-v-40419bdd] {\n\tbackground-image: url(/../images/background_2.jpg);\n\tbackground-size: cover;\n    background-position: center;\n    background-repeat: no-repeat;\n}\n.help-text[data-v-40419bdd] {\n\tcolor: red;\n}\ni[data-v-40419bdd] {\n\tcolor: antiquewhite;\n\tfont-size: 1.7em;\n}\n.logo[data-v-40419bdd] {\n    width: 2.2em;\n}\n.pageTitle[data-v-40419bdd] {\n\twidth: 100%;\n    text-align: center;\n    color: antiquewhite;\n}\na[data-v-40419bdd]:hover {\n\tborder-bottom: none;\n}\n.login_link[data-v-40419bdd] {\n\tcolor: white;\n}\n.login_link[data-v-40419bdd]:hover {\n\tcolor: red;\n}\n", ""]);
 
 // exports
 
@@ -37497,13 +37550,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "overlay" }, [
+  return _c("div", { staticClass: "overlay background" }, [
+    _c("div", { staticClass: "overlay" }),
+    _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c(
         "div",
         {
           staticClass: "grid-x grid-container overlay__content reg-form",
-          staticStyle: { "max-width": "850px" }
+          staticStyle: { "max-width": "750px" }
         },
         [
           _c("div", { staticClass: "medium-8 text-align-left mt-3" }, [
@@ -37513,7 +37568,7 @@ var render = function() {
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
-                    return _vm.submitForm($event)
+                    return _vm.generateRecaptcha($event)
                   },
                   keydown: function($event) {
                     return _vm.RegForm.errors.clear()
@@ -37523,6 +37578,10 @@ var render = function() {
               [
                 _c("div", { staticClass: "grid-container" }, [
                   _c("div", { staticClass: "grid-x grid-padding-x" }, [
+                    _c("h3", { staticClass: "pageTitle" }, [
+                      _vm._v("Create an Account")
+                    ]),
+                    _vm._v(" "),
                     _c("div", { staticClass: "cell" }, [
                       _c("label", [
                         _vm._v("Email or Phone\n\t\t\t\t          "),
@@ -37598,7 +37657,18 @@ var render = function() {
                               )
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.RegForm.errors.has("surname")
+                          ? _c("p", {
+                              staticClass: "help-text",
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.RegForm.errors.get("surname")
+                                )
+                              }
+                            })
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -37632,7 +37702,18 @@ var render = function() {
                               )
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.RegForm.errors.has("lastname")
+                          ? _c("p", {
+                              staticClass: "help-text",
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.RegForm.errors.get("lastname")
+                                )
+                              }
+                            })
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -37662,7 +37743,18 @@ var render = function() {
                               )
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.RegForm.errors.has("middlename")
+                          ? _c("p", {
+                              staticClass: "help-text",
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.RegForm.errors.get("middlename")
+                                )
+                              }
+                            })
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -37718,7 +37810,18 @@ var render = function() {
                               _vm._v("Female")
                             ])
                           ]
-                        )
+                        ),
+                        _vm._v(" "),
+                        _vm.RegForm.errors.has("gender")
+                          ? _c("p", {
+                              staticClass: "help-text",
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.RegForm.errors.get("gender")
+                                )
+                              }
+                            })
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -37752,7 +37855,18 @@ var render = function() {
                               )
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.RegForm.errors.has("dateofbirth")
+                          ? _c("p", {
+                              staticClass: "help-text",
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.RegForm.errors.get("dateofbirth")
+                                )
+                              }
+                            })
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -37786,7 +37900,18 @@ var render = function() {
                               )
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.RegForm.errors.has("password")
+                          ? _c("p", {
+                              staticClass: "help-text",
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.RegForm.errors.get("password")
+                                )
+                              }
+                            })
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -37822,7 +37947,20 @@ var render = function() {
                               )
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.RegForm.errors.has("password_confirmation")
+                          ? _c("p", {
+                              staticClass: "help-text",
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.RegForm.errors.get(
+                                    "password_confirmation"
+                                  )
+                                )
+                              }
+                            })
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -37833,7 +37971,25 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(1)
+          _c("div", { staticClass: "medium-4 white mt-3" }, [
+            _c("div", { staticClass: "mb-3" }, [
+              _c("a", { attrs: { href: "" } }, [
+                _c("img", { attrs: { src: _vm.logo, alt: "Stechmax Logo" } })
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "center-text" }, [
+                _vm._v("One Account for all Services")
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "Registration with phone is only for Nigerians, for non-Nigerians please use email"
+              )
+            ])
+          ])
         ]
       )
     ])
@@ -37849,18 +38005,59 @@ var staticRenderFns = [
         "button",
         { staticClass: "medium button", attrs: { type: "submit" } },
         [_vm._v("Submit")]
-      )
+      ),
+      _vm._v(" "),
+      _c("span", { staticStyle: { color: "white" } }, [
+        _vm._v("Already have an account? ")
+      ]),
+      _c("a", { staticClass: "login_link", attrs: { href: "/login" } }, [
+        _vm._v(" Login")
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "medium-4 white mt-4" }, [
-      _c("p", [
-        _vm._v(
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n\t\t\t\ttempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n\t\t\t\tquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n\t\t\t\tconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n\t\t\t\tcillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n\t\t\t\tproident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        )
+    return _c("div", { staticClass: "grid-x grid-container grid-padding-x" }, [
+      _c("div", { staticClass: "cell medium-6" }, [
+        _c("a", { attrs: { href: "" } }, [
+          _c("i", { staticClass: "fas fa-book-open" })
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "center-text" }, [_vm._v("Projects")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "cell medium-6" }, [
+        _c("a", { attrs: { href: "" } }, [
+          _c("i", { staticClass: "fas fa-store" })
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "center-text" }, [_vm._v("E-Store")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "cell medium-6" }, [
+        _c("a", { attrs: { href: "/threads" } }, [
+          _c("i", { staticClass: "far fa-comments" })
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "center-text" }, [_vm._v("Forum")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "cell medium-6" }, [
+        _c("a", { attrs: { href: "" } }, [
+          _c("i", { staticClass: "fas fa-copy" })
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "center-text" }, [_vm._v("Templates")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "cell medium-6" }, [
+        _c("a", { attrs: { href: "" } }, [
+          _c("i", { staticClass: "fas fa-school" })
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "center-text" }, [_vm._v("School")])
       ])
     ])
   }

@@ -1,11 +1,13 @@
 <template>
-	<div class="overlay">
+	<div class="overlay background">
+		<div class="overlay"></div>
 		<div class="row">
-			<div class="grid-x grid-container overlay__content reg-form" style="max-width: 850px;">
+			<div class="grid-x grid-container overlay__content reg-form" style="max-width: 750px;">
 				<div class="medium-8 text-align-left mt-3">
-					<form @submit.prevent="submitForm" @keydown="RegForm.errors.clear()">
+					<form @submit.prevent="generateRecaptcha" @keydown="RegForm.errors.clear()">
 					  <div class="grid-container">
 					    <div class="grid-x grid-padding-x">
+					    	<h3 class="pageTitle">Create an Account</h3>
 					      <div class="cell">
 					        <label>Email or Phone
 					          <input type="text" placeholder="Required" v-model="RegForm.emailOrPhone" required>
@@ -15,16 +17,19 @@
 					      <div class="medium-6 cell">
 					        <label>Surname
 					          <input type="text" placeholder="Required" v-model="RegForm.surname" required>
+					          <p class="help-text" v-if="RegForm.errors.has('surname')" v-text="RegForm.errors.get('surname')"></p>
 					        </label>
 					      </div>
 					      <div class="medium-6 cell">
 					        <label>Last Name
 					          <input type="text" placeholder="Required" v-model="RegForm.lastname" required>
+					          <p class="help-text" v-if="RegForm.errors.has('lastname')" v-text="RegForm.errors.get('lastname')"></p>
 					        </label>
 					      </div>
 					      <div class="medium-6 cell">
 					        <label>Other Names
 					          <input type="text" placeholder="Optional" v-model="RegForm.middlename">
+					          <p class="help-text" v-if="RegForm.errors.has('middlename')" v-text="RegForm.errors.get('middlename')"></p>
 					        </label>
 					      </div>
 					      <div class="medium-6 cell">
@@ -34,37 +39,63 @@
 							    <option value="M">Male</option>
 							    <option value="F">Female</option>
 							  </select>
+					          <p class="help-text" v-if="RegForm.errors.has('gender')" v-text="RegForm.errors.get('gender')"></p>
 					        </label>
 					      </div>
 					      <div class="medium-6 cell">
 					        <label>Date of Birth
 					          <input type="date" placeholder="Required" v-model="RegForm.dateofbirth" required>
+					          <p class="help-text" v-if="RegForm.errors.has('dateofbirth')" v-text="RegForm.errors.get('dateofbirth')"></p>
 					        </label>
 					      </div>
 					      <div class="medium-6 cell">
 					        <label>Password
 					          <input type="password" placeholder="Required" v-model="RegForm.password" required>
+					          <p class="help-text" v-if="RegForm.errors.has('password')" v-text="RegForm.errors.get('password')"></p>
 					        </label>
 					      </div>
 					      <div class="medium-6 cell">
 					        <label>Confirm Password
 					          <input type="password" placeholder="Re-type password here" v-model="RegForm.password_confirmation" required>
+					          <p class="help-text" v-if="RegForm.errors.has('password_confirmation')" v-text="RegForm.errors.get('password_confirmation')"></p>
 					        </label>
 					      </div>
 					      <div class="cell">
 						      <button type="submit" class="medium button">Submit</button>
+						      <span style="color: white">Already have an account? </span><a href="/login" class="login_link"> Login</a>
 					      </div>
 					    </div>
 					  </div>
 					</form>
 				</div>
-				<div class="medium-4 white mt-4">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<div class="medium-4 white mt-3">
+					<div class="mb-3">
+						<a href=""><img :src="logo" alt="Stechmax Logo"></a>
+						<p class="center-text">One Account for all Services</p>
+					</div>
+					<div class="grid-x grid-container grid-padding-x">
+						<div class="cell medium-6">
+							<a href=""><i class="fas fa-book-open"></i></a>
+							<p class="center-text">Projects</p>
+						</div>
+						<div class="cell medium-6">
+							<a href=""><i class="fas fa-store"></i></a>
+							<p class="center-text">E-Store</p>
+						</div>
+						<div class="cell medium-6">
+							<a href="/threads"><i class="far fa-comments"></i></a>
+							<p class="center-text">Forum</p>
+						</div>
+						<div class="cell medium-6">
+							<a href=""><i class="fas fa-copy"></i></a>
+							<p class="center-text">Templates</p>
+						</div>
+						<div class="cell medium-6">
+							<a href=""><i class="fas fa-school"></i></a>
+							<p class="center-text">School</p>
+						</div>
+					</div>
+					<p>Registration with phone is only for Nigerians, for non-Nigerians please use email</p>
 				</div>
 			</div>
 		</div>
@@ -77,35 +108,55 @@
 			return {
 				errorMessage: '',
 				submitting: '',
+				logo:'',
+				templatelogo:'',
+				template:'',
 				RegForm: new Form ({
-					emailOrPhone:'hello@gmail.com',
-					surname:'success',
-					lastname:'daviso',
-					middlename: 'feaf',
-					gender:'M',
+					emailOrPhone:'',
+					surname:'',
+					lastname:'',
+					middlename: '',
+					gender:'',
 					dateofbirth:'',
-					password:'0000000000',
-					password_confirmation:'0000000000',
+					password:'',
+					password_confirmation:'',
 					token:'',
 				})
 			}
 		},
 
+		created () {
+			axios.get('/settings/getSiteLogo')
+				.then(response => {
+					this.logo = response.data;
+				}
+			);
+		},
+
 		methods: {
 			submitForm () {
-				this.RegForm.token = window.App.token;
 
 				this.RegForm.post('/register')
 				.then(data => {
 					flash("Registration Successful")
-					window.location.href = "http://success.test/dashboard";
+					window.location.href = "/register/comfirm_email";
 				})
 				.catch(error => {
 					this.errorMessage = error.message;
 					flash('Your form contain errors')
 					this.submitting = false;
 				})
-			}
+			},
+
+			generateRecaptcha() {
+				grecaptcha.ready(() => {
+			      	grecaptcha.execute('6LeawrcUAAAAAIrA-LQ-kytjPFEBcedXDLcWHHHM', {action: 'homepage'})
+			      	.then((token) => {
+			      		this.RegForm.token = token;
+			      		this.submitForm();
+			      	});
+				});
+			},
 		}
 	};
 
@@ -127,4 +178,40 @@
 		box-shadow: 0px 3px 13px 3px rgba(42,40,66,0.78);
 	}
 
+	.background {
+		background-image: url(/../images/background_2.jpg);
+		background-size: cover;
+	    background-position: center;
+	    background-repeat: no-repeat; 
+	}
+
+	.help-text {
+		color: red;
+	}
+
+	i {
+		color: antiquewhite;
+		font-size: 1.7em;
+	}
+
+	.logo {
+	    width: 2.2em;
+	}
+
+	.pageTitle {
+		width: 100%;
+	    text-align: center;
+	    color: antiquewhite;
+	}
+	a:hover {
+		border-bottom: none;
+		
+	}
+
+	.login_link {
+		color: white;
+	}
+	.login_link:hover {
+		color: red;
+	}
 </style>

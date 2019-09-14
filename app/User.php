@@ -3,6 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
+use App\SmartSms\SmartSms;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
@@ -140,6 +141,32 @@ class User extends Authenticatable
     {
         $subscriptions = Course::WhereSubscribeBy($this)->get();
             return CourseSubscriptionsResource::collection($subscriptions);
+    }
+
+    public function twilioSendMessage()
+    {
+        $accountId  =   config('services.twilio.account_sid');
+        $token      =   config('services.twilio.token');
+        $fromNumber =   '+17204596176';
+
+        $twilio = new \Aloha\Twilio\Twilio($accountId, $token, $fromNumber);
+
+        $twilio->message($this->phone, 'Hello World');
+    }
+
+    public function smartSendToken()
+    {   
+        $token = $randomid = mt_rand(100000,999999); 
+        $this->update([
+            'phone_token' => $token
+        ]);
+
+        $message = 'Activation Token: ' . $token;
+
+        $smartsms = new SmartSms();
+
+        $smartsms->message($this->phone, $message, 'S-TECHMAX');
+        
     }
 
 }

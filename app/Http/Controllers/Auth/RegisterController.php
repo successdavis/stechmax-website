@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Twilio;
 use App\Http\Controllers\Controller;
 use App\Mail\PleaseConfirmYourEmail;
 use App\Rules\Recaptcha;
@@ -53,10 +54,11 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
             'emailOrPhone' => 'required|unique:users,email|emailorphone',
-            'surname' => 'required|string|max:50',
-            'lastname' => 'required|string|max:50',
+            'surname' => 'required|string|max:50|min:3',
+            'lastname' => 'required|string|max:50|min:3',
             'middlename' => 'string|max:50',
             'gender' => 'required|string|max:1',
             'dateofbirth' => 'required|max:255',
@@ -114,6 +116,8 @@ class RegisterController extends Controller
         if (filter_var($user->email, FILTER_VALIDATE_EMAIL)) {
             Mail::to($user)->send(new PleaseConfirmYourEmail($user));
             return redirect($this->redirectPath());
-        }
+        };
+
+        $user->smartSendToken();
     }
 }

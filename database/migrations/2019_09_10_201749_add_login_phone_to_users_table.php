@@ -14,7 +14,8 @@ class AddLoginPhoneToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->unsignedInteger('phone_token')->nullable();
+            $table->boolean('phone_confirmed')->default(false);
         });
     }
 

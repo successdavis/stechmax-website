@@ -175,4 +175,7 @@ Route::get('/payment/callback', 'PaystackSubscriptionController@handleGatewayCal
 Route::get('/paid/{course}', 'PaymentController@paymentSuccessful');
 Route::post('/paid/savedetails', 'PaymentController@store')->name('pay.saveDetails');
 
+Route::get('/settings/getSiteLogo', 'SiteController@getSiteLogo')->name('site.logo');
+Route::get('/settings/getTemplateLogo', 'SiteController@getTemplateLogo')->name('site.templates');
+
 
