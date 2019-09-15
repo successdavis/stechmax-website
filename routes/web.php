@@ -145,7 +145,9 @@ Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->na
 Route::get('/register/resend', 'Auth\RegisterConfirmationController@resend')->name('register.resend_comfirmation');
 Route::get('/register/comfirm_email', 'Auth\RegisterConfirmationController@create')->middleware('cannot-see-resend-link-page')->name('register.confirm_email');
 
-Route::post('/register/verifytoken', 'Auth\RegisterConfirmationController@verifytoken')->middleware('cannot-see-resend-link-page')->name('register.confirm_email');
+Route::post('/register/verifytoken', 'Auth\RegisterConfirmationController@verifytoken')->middleware('cannot-see-resend-link-page')->name('register.verifytoken');
+Route::post('/password/phonereset', 'Auth\RegisterConfirmationController@phoneReset')->name('password.phone.reset');
+Route::post('/password/resetUpdatePassword', 'Auth\RegisterConfirmationController@updatePassword')->name('password.update');
 
 Route::post('/register/new_user', 'ManageUserController@store')->middleware('admin')->name('manage_user.store');
 

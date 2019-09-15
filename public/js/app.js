@@ -5077,6 +5077,169 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/ResetPassword.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/pages/ResetPassword.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      email: '',
+      phone: '',
+      logo: '',
+      submitting: '',
+      errorMessage: '',
+      phoneReset: false,
+      resetTokenSent: false,
+      sent: 0,
+      Form: new Form({
+        token: '',
+        phone: this.phone,
+        password: '',
+        password_confirmation: ''
+      })
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/settings/getSiteLogo').then(function (response) {
+      _this.logo = response.data;
+    });
+  },
+  methods: {
+    resetPassword: function resetPassword() {
+      if (this.phoneReset) {
+        this.resetUsingPhone();
+      } else {
+        this.resetUsingEmail();
+      }
+    },
+    resetUsingEmail: function resetUsingEmail() {
+      var _this2 = this;
+
+      this.submitting = true;
+      axios.post('/password/email', {
+        email: this.email
+      }).then(function (data) {
+        flash('Password Reset Link Sent Successfully');
+        _this2.sent = '1';
+      })["catch"](function (error) {
+        _this2.errorMessage = error.message;
+        flash('This email is not yet registered', 'failed');
+        _this2.submitting = false;
+        _this2.sent = '2';
+      });
+    },
+    resetUsingPhone: function resetUsingPhone() {
+      var _this3 = this;
+
+      if (this.phone.length != 11) {
+        flash('Your phone number is not complete', 'failed');
+        return false;
+      }
+
+      var numbers = /^[0-9]+$/;
+
+      if (!this.phone.match(numbers)) {
+        flash('Please input numeric characters only', 'failed');
+        return false;
+      }
+
+      this.submitting = true;
+      axios.post('/password/phonereset', {
+        phone: this.phone
+      }).then(function (data) {
+        flash('A token has been sent to your phone');
+        _this3.resetTokenSent = true;
+        _this3.Form.phone = _this3.phone;
+      })["catch"](function (error) {
+        _this3.errorMessage = error.message;
+        flash('Sorry! You do not have an account with us', 'failed');
+        _this3.sent = '2';
+      });
+    },
+    updatePassword: function updatePassword() {
+      this.Form.post('/password/resetUpdatePassword').then(function (data) {
+        flash('Password updated Successfully');
+        window.location.href = "/login";
+      })["catch"](function (error) {
+        console.log(error);
+        flash('We were unable to update your password', 'failed');
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/SiteRegistration.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/pages/SiteRegistration.vue?vue&type=script&lang=js& ***!
@@ -5222,12 +5385,19 @@ __webpack_require__.r(__webpack_exports__);
     submitForm: function submitForm() {
       var _this2 = this;
 
+      this.$Progress.start();
       this.RegForm.post('/register').then(function (data) {
         flash("Registration Successful");
+
+        _this2.$Progress.finish();
+
         window.location.href = "/register/comfirm_email";
       })["catch"](function (error) {
         _this2.errorMessage = error.message;
         flash('Your form contain errors', 'failed');
+
+        _this2.$Progress.fail();
+
         _this2.submitting = false;
       });
     },
@@ -5740,6 +5910,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, "\n.flex-container[data-v-71c0d276] {\n\tdisplay: -webkit-box;\n\tdisplay: flex;\n}\n.paymentsheader[data-v-71c0d276] {\n\tfont-weight: bolder;\n\t-webkit-box-flex: 1;\n\t        flex-grow: 1;\n}\nul li[data-v-71c0d276] {\n    list-style: none;\n}\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/ResetPassword.vue?vue&type=style&index=0&id=935215c6&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/pages/ResetPassword.vue?vue&type=style&index=0&id=935215c6&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.text-align-left[data-v-935215c6] {\n\ttext-align: left;\n}\nlabel[data-v-935215c6], .white[data-v-935215c6], p[data-v-935215c6] {\n\tcolor: white;\n}\n.reg-form[data-v-935215c6] {\n\tbackground: #222a38;\n\tbox-shadow: 0px 3px 13px 3px rgba(42,40,66,0.78);\n}\n.background[data-v-935215c6] {\n\tbackground-image: url(/../images/background_2.jpg);\n\tbackground-size: cover;\n    background-position: center;\n    background-repeat: no-repeat;\n}\n.help-text[data-v-935215c6] {\n\tcolor: red;\n}\ni[data-v-935215c6] {\n\tcolor: antiquewhite;\n\tfont-size: 1.7em;\n}\n.logo[data-v-935215c6] {\n    width: 2.2em;\n}\n.pageTitle[data-v-935215c6] {\n\twidth: 100%;\n    text-align: center;\n    color: antiquewhite;\n}\na[data-v-935215c6]:hover {\n\tborder-bottom: none;\n}\n.login_link[data-v-935215c6],\n.white[data-v-935215c6] {\n\tcolor: white;\n}\n.login_link[data-v-935215c6]:hover {\n\tcolor: red;\n}\n.red-text[data-v-935215c6] {\n\tcolor: red;\n}\n", ""]);
 
 // exports
 
@@ -29304,6 +29493,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/ResetPassword.vue?vue&type=style&index=0&id=935215c6&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/pages/ResetPassword.vue?vue&type=style&index=0&id=935215c6&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResetPassword.vue?vue&type=style&index=0&id=935215c6&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/ResetPassword.vue?vue&type=style&index=0&id=935215c6&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/SiteRegistration.vue?vue&type=style&index=0&id=40419bdd&scoped=true&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/pages/SiteRegistration.vue?vue&type=style&index=0&id=40419bdd&scoped=true&lang=css& ***!
@@ -37841,6 +38060,393 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/ResetPassword.vue?vue&type=template&id=935215c6&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/pages/ResetPassword.vue?vue&type=template&id=935215c6&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "overlay background" }, [
+    _c("div", { staticClass: "overlay" }),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        {
+          staticClass: "grid-x grid-container overlay__content reg-form",
+          staticStyle: { "max-width": "750px" }
+        },
+        [
+          _c("div", { staticClass: "medium-8 text-align-left mt-3" }, [
+            _c("div", { staticClass: "grid-container" }, [
+              _c("h3", { staticClass: "pageTitle mb-2" }, [
+                _vm._v("Password Reset...")
+              ]),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  attrs: { method: "POST" },
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.resetPassword($event)
+                    }
+                  }
+                },
+                [
+                  !_vm.phoneReset
+                    ? _c("p", [
+                        _vm._v("Please provide your email address here")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.phoneReset
+                    ? _c("p", [_vm._v("Please provide your Phone Number here")])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.phoneReset,
+                        expression: "phoneReset"
+                      }
+                    ],
+                    attrs: {
+                      disabled: _vm.resetTokenSent,
+                      id: "checkbox1",
+                      type: "checkbox"
+                    },
+                    domProps: {
+                      checked: Array.isArray(_vm.phoneReset)
+                        ? _vm._i(_vm.phoneReset, null) > -1
+                        : _vm.phoneReset
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.phoneReset,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.phoneReset = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.phoneReset = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.phoneReset = $$c
+                        }
+                      }
+                    }
+                  }),
+                  _c("label", { attrs: { for: "checkbox1" } }, [
+                    _vm._v("Use Phone Number Instead")
+                  ]),
+                  _vm._v(" "),
+                  !_vm.phoneReset
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.email,
+                            expression: "email"
+                          }
+                        ],
+                        attrs: {
+                          type: "email",
+                          placeholder: "Email here",
+                          required: ""
+                        },
+                        domProps: { value: _vm.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.email = $event.target.value
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.phoneReset
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.phone,
+                            expression: "phone"
+                          }
+                        ],
+                        attrs: {
+                          disabled: _vm.resetTokenSent,
+                          type: "text",
+                          placeholder: "Phone Number Here",
+                          maxlength: "11",
+                          required: ""
+                        },
+                        domProps: { value: _vm.phone },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.phone = $event.target.value
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("button", {
+                    staticClass: "button medium",
+                    attrs: { disabled: _vm.resetTokenSent, type: "submit" },
+                    domProps: {
+                      textContent: _vm._s(
+                        _vm.phoneReset ? "Send Token" : "Send Reset Link"
+                      )
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticStyle: { color: "white" } }, [
+                    _vm._v("Already have an account? ")
+                  ]),
+                  _c(
+                    "a",
+                    { staticClass: "login_link", attrs: { href: "/login" } },
+                    [_vm._v(" Login")]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _vm.resetTokenSent
+                ? _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.updatePassword($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("label", [
+                        _vm._v("Enter Token\r\n\t\t\t\t\t          "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.Form.token,
+                              expression: "Form.token"
+                            }
+                          ],
+                          attrs: {
+                            type: "text",
+                            placeholder: "Required",
+                            required: ""
+                          },
+                          domProps: { value: _vm.Form.token },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.Form, "token", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.Form.errors.has("token")
+                          ? _c("p", {
+                              staticClass: "help-text",
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.Form.errors.get("token")
+                                )
+                              }
+                            })
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("label", [
+                        _vm._v("New Password\r\n\t\t\t\t\t          "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.Form.password,
+                              expression: "Form.password"
+                            }
+                          ],
+                          attrs: {
+                            type: "text",
+                            placeholder: "Required",
+                            required: ""
+                          },
+                          domProps: { value: _vm.Form.password },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.Form,
+                                "password",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.Form.errors.has("password")
+                          ? _c("p", {
+                              staticClass: "help-text",
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.Form.errors.get("password")
+                                )
+                              }
+                            })
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("label", [
+                        _vm._v("Re-enter New Password\r\n\t\t\t\t\t          "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.Form.password_confirmation,
+                              expression: "Form.password_confirmation"
+                            }
+                          ],
+                          attrs: {
+                            type: "text",
+                            placeholder: "Required",
+                            required: ""
+                          },
+                          domProps: { value: _vm.Form.password_confirmation },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.Form,
+                                "password_confirmation",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.Form.errors.has("password_confirmation")
+                          ? _c("p", {
+                              staticClass: "help-text",
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.Form.errors.get("password_confirmation")
+                                )
+                              }
+                            })
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "button medium",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Reset Password")]
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticStyle: { color: "white" } }, [
+                        _vm._v("Already have an account? ")
+                      ]),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "login_link",
+                          attrs: { href: "/login" }
+                        },
+                        [_vm._v(" Login")]
+                      )
+                    ]
+                  )
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "medium-4 white mt-3" }, [
+            _c("div", { staticClass: "mb-3" }, [
+              _c("a", { attrs: { href: "" } }, [
+                _c("img", { attrs: { src: _vm.logo, alt: "Stechmax Logo" } })
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "center-text" }, [
+                _vm._v("One Account for all Services")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "A reset link will be send to your registered email address"
+              )
+            ]),
+            _vm._v(" "),
+            _vm.sent == 1
+              ? _c("p", [
+                  _vm._v(
+                    "We have sent a reset link to your email, please check your inbox"
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.sent == 2
+              ? _c("p", { staticClass: "red-text" }, [
+                  _vm._v("You do not have an account with us please "),
+                  _c(
+                    "a",
+                    { staticClass: "login_link", attrs: { href: "/register" } },
+                    [_vm._v("Register")]
+                  )
+                ])
+              : _vm._e()
+          ])
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/SiteRegistration.vue?vue&type=template&id=40419bdd&scoped=true&":
 /*!*********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/pages/SiteRegistration.vue?vue&type=template&id=40419bdd&scoped=true& ***!
@@ -39672,6 +40278,18 @@ function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-progressbar/dist/vue-progressbar.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/vue-progressbar/dist/vue-progressbar.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(t,o){ true?module.exports=o():undefined}(this,function(){"use strict";!function(){if("undefined"!=typeof document){var t=document.head||document.getElementsByTagName("head")[0],o=document.createElement("style"),i=" .__cov-progress { opacity: 1; z-index: 999999; } ";o.type="text/css",o.styleSheet?o.styleSheet.cssText=i:o.appendChild(document.createTextNode(i)),t.appendChild(o)}}();var t="undefined"!=typeof window,r={render:function(){var t=this,o=t.$createElement;return(t._self._c||o)("div",{staticClass:"__cov-progress",style:t.style})},staticRenderFns:[],name:"VueProgress",serverCacheKey:function(){return"Progress"},computed:{style:function(){var t=this.progress,o=t.options,i=!!o.show,e=o.location,s={"background-color":o.canSuccess?o.color:o.failedColor,opacity:o.show?1:0,position:o.position};return"top"===e||"bottom"===e?("top"===e?s.top="0px":s.bottom="0px",o.inverse?s.right="0px":s.left="0px",s.width=t.percent+"%",s.height=o.thickness,s.transition=(i?"width "+o.transition.speed+", ":"")+"opacity "+o.transition.opacity):"left"!==e&&"right"!==e||("left"===e?s.left="0px":s.right="0px",o.inverse?s.top="0px":s.bottom="0px",s.height=t.percent+"%",s.width=o.thickness,s.transition=(i?"height "+o.transition.speed+", ":"")+"opacity "+o.transition.opacity),s},progress:function(){return t?window.VueProgressBarEventBus.RADON_LOADING_BAR:{percent:0,options:{canSuccess:!0,show:!1,color:"rgb(19, 91, 55)",failedColor:"red",thickness:"2px",transition:{speed:"0.2s",opacity:"0.6s",termination:300},location:"top",autoRevert:!0,inverse:!1}}}}};return{install:function(o){var t=1<arguments.length&&void 0!==arguments[1]?arguments[1]:{},i=(o.version.split(".")[0],"undefined"!=typeof window),e={$vm:null,state:{tFailColor:"",tColor:"",timer:null,cut:0},init:function(t){this.$vm=t},start:function(t){var o=this;this.$vm&&(t||(t=3e3),this.$vm.RADON_LOADING_BAR.percent=0,this.$vm.RADON_LOADING_BAR.options.show=!0,this.$vm.RADON_LOADING_BAR.options.canSuccess=!0,this.state.cut=1e4/Math.floor(t),clearInterval(this.state.timer),this.state.timer=setInterval(function(){o.increase(o.state.cut*Math.random()),95<o.$vm.RADON_LOADING_BAR.percent&&o.$vm.RADON_LOADING_BAR.options.autoFinish&&o.finish()},100))},set:function(t){this.$vm.RADON_LOADING_BAR.options.show=!0,this.$vm.RADON_LOADING_BAR.options.canSuccess=!0,this.$vm.RADON_LOADING_BAR.percent=Math.floor(t)},get:function(){return Math.floor(this.$vm.RADON_LOADING_BAR.percent)},increase:function(t){this.$vm.RADON_LOADING_BAR.percent=Math.min(99,this.$vm.RADON_LOADING_BAR.percent+Math.floor(t))},decrease:function(t){this.$vm.RADON_LOADING_BAR.percent=this.$vm.RADON_LOADING_BAR.percent-Math.floor(t)},hide:function(){var t=this;clearInterval(this.state.timer),this.state.timer=null,setTimeout(function(){t.$vm.RADON_LOADING_BAR.options.show=!1,o.nextTick(function(){setTimeout(function(){t.$vm.RADON_LOADING_BAR.percent=0},100),t.$vm.RADON_LOADING_BAR.options.autoRevert&&setTimeout(function(){t.revert()},300)})},this.$vm.RADON_LOADING_BAR.options.transition.termination)},pause:function(){clearInterval(this.state.timer)},finish:function(){this.$vm&&(this.$vm.RADON_LOADING_BAR.percent=100,this.hide())},fail:function(){this.$vm.RADON_LOADING_BAR.options.canSuccess=!1,this.$vm.RADON_LOADING_BAR.percent=100,this.hide()},setFailColor:function(t){this.$vm.RADON_LOADING_BAR.options.failedColor=t},setColor:function(t){this.$vm.RADON_LOADING_BAR.options.color=t},setLocation:function(t){this.$vm.RADON_LOADING_BAR.options.location=t},setTransition:function(t){this.$vm.RADON_LOADING_BAR.options.transition=t},tempFailColor:function(t){this.state.tFailColor=this.$vm.RADON_LOADING_BAR.options.failedColor,this.$vm.RADON_LOADING_BAR.options.failedColor=t},tempColor:function(t){this.state.tColor=this.$vm.RADON_LOADING_BAR.options.color,this.$vm.RADON_LOADING_BAR.options.color=t},tempLocation:function(t){this.state.tLocation=this.$vm.RADON_LOADING_BAR.options.location,this.$vm.RADON_LOADING_BAR.options.location=t},tempTransition:function(t){this.state.tTransition=this.$vm.RADON_LOADING_BAR.options.transition,this.$vm.RADON_LOADING_BAR.options.transition=t},revertColor:function(){this.$vm.RADON_LOADING_BAR.options.color=this.state.tColor,this.state.tColor=""},revertFailColor:function(){this.$vm.RADON_LOADING_BAR.options.failedColor=this.state.tFailColor,this.state.tFailColor=""},revertLocation:function(){this.$vm.RADON_LOADING_BAR.options.location=this.state.tLocation,this.state.tLocation=""},revertTransition:function(){this.$vm.RADON_LOADING_BAR.options.transition=this.state.tTransition,this.state.tTransition={}},revert:function(){this.$vm.RADON_LOADING_BAR.options.autoRevert&&(this.state.tColor&&this.revertColor(),this.state.tFailColor&&this.revertFailColor(),this.state.tLocation&&this.revertLocation(),!this.state.tTransition||void 0===this.state.tTransition.speed&&void 0===this.state.tTransition.opacity||this.revertTransition())},parseMeta:function(t){for(var o in t.func){var i=t.func[o];switch(i.call){case"color":switch(i.modifier){case"set":this.setColor(i.argument);break;case"temp":this.tempColor(i.argument)}break;case"fail":switch(i.modifier){case"set":this.setFailColor(i.argument);break;case"temp":this.tempFailColor(i.argument)}break;case"location":switch(i.modifier){case"set":this.setLocation(i.argument);break;case"temp":this.tempLocation(i.argument)}break;case"transition":switch(i.modifier){case"set":this.setTransition(i.argument);break;case"temp":this.tempTransition(i.argument)}}}}},s=function(t,o){for(var i,e,s=1;s<arguments.length;++s)for(i in e=arguments[s])Object.prototype.hasOwnProperty.call(e,i)&&(t[i]=e[i]);return t}({canSuccess:!0,show:!1,color:"#73ccec",position:"fixed",failedColor:"red",thickness:"2px",transition:{speed:"0.2s",opacity:"0.6s",termination:300},autoRevert:!0,location:"top",inverse:!1,autoFinish:!0},t),n=new o({data:{RADON_LOADING_BAR:{percent:0,options:s}}});i&&(window.VueProgressBarEventBus=n,e.init(n)),o.component("vue-progress-bar",r),o.prototype.$Progress=e}}});
 
 
 /***/ }),
@@ -60771,6 +61389,7 @@ Vue.component('manage-invoices', __webpack_require__(/*! ./pages/ManageInvoices.
 Vue.component('create-invoices', __webpack_require__(/*! ./pages/CreateInvoices.vue */ "./resources/assets/js/pages/CreateInvoices.vue")["default"]);
 Vue.component('site-registration', __webpack_require__(/*! ./pages/SiteRegistration.vue */ "./resources/assets/js/pages/SiteRegistration.vue")["default"]);
 Vue.component('account-confirmation', __webpack_require__(/*! ./pages/AccountConfirmation.vue */ "./resources/assets/js/pages/AccountConfirmation.vue")["default"]);
+Vue.component('reset-passwords', __webpack_require__(/*! ./pages/ResetPassword.vue */ "./resources/assets/js/pages/ResetPassword.vue")["default"]);
 Vue.component('invoice-payments', __webpack_require__(/*! ./components/ViewInvoicePayments.vue */ "./resources/assets/js/components/ViewInvoicePayments.vue")["default"]);
 Vue.component('add-payment', __webpack_require__(/*! ./components/AddPayment.vue */ "./resources/assets/js/components/AddPayment.vue")["default"]);
 Vue.component('avatar-form', __webpack_require__(/*! ./components/AvatarForm.vue */ "./resources/assets/js/components/AvatarForm.vue")["default"]);
@@ -60829,6 +61448,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_js_modal__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue_croppa__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-croppa */ "./node_modules/vue-croppa/dist/vue-croppa.js");
 /* harmony import */ var vue_croppa__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_croppa__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-progressbar */ "./node_modules/vue-progressbar/dist/vue-progressbar.js");
+/* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_progressbar__WEBPACK_IMPORTED_MODULE_4__);
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"];
 /**
@@ -60863,11 +61484,17 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 
+
 window.Form = _utilities_Form__WEBPACK_IMPORTED_MODULE_1__["default"];
 window.Event = new Vue();
 Vue.use(portal_vue__WEBPACK_IMPORTED_MODULE_0___default.a);
 Vue.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_2___default.a);
 Vue.use(vue_croppa__WEBPACK_IMPORTED_MODULE_3___default.a);
+Vue.use(vue_progressbar__WEBPACK_IMPORTED_MODULE_4___default.a, {
+  color: 'rgb(143, 255, 199)',
+  failedColor: 'red',
+  height: '10px'
+});
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
  * all outgoing HTTP requests automatically have it attached. This is just
@@ -63565,6 +64192,94 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyPayments_vue_vue_type_template_id_71c0d276_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyPayments_vue_vue_type_template_id_71c0d276_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/ResetPassword.vue":
+/*!*****************************************************!*\
+  !*** ./resources/assets/js/pages/ResetPassword.vue ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ResetPassword_vue_vue_type_template_id_935215c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResetPassword.vue?vue&type=template&id=935215c6&scoped=true& */ "./resources/assets/js/pages/ResetPassword.vue?vue&type=template&id=935215c6&scoped=true&");
+/* harmony import */ var _ResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResetPassword.vue?vue&type=script&lang=js& */ "./resources/assets/js/pages/ResetPassword.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _ResetPassword_vue_vue_type_style_index_0_id_935215c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ResetPassword.vue?vue&type=style&index=0&id=935215c6&scoped=true&lang=css& */ "./resources/assets/js/pages/ResetPassword.vue?vue&type=style&index=0&id=935215c6&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ResetPassword_vue_vue_type_template_id_935215c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ResetPassword_vue_vue_type_template_id_935215c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "935215c6",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/pages/ResetPassword.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/ResetPassword.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/assets/js/pages/ResetPassword.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResetPassword.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/ResetPassword.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/ResetPassword.vue?vue&type=style&index=0&id=935215c6&scoped=true&lang=css&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/assets/js/pages/ResetPassword.vue?vue&type=style&index=0&id=935215c6&scoped=true&lang=css& ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_style_index_0_id_935215c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResetPassword.vue?vue&type=style&index=0&id=935215c6&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/ResetPassword.vue?vue&type=style&index=0&id=935215c6&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_style_index_0_id_935215c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_style_index_0_id_935215c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_style_index_0_id_935215c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_style_index_0_id_935215c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_style_index_0_id_935215c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/pages/ResetPassword.vue?vue&type=template&id=935215c6&scoped=true&":
+/*!************************************************************************************************!*\
+  !*** ./resources/assets/js/pages/ResetPassword.vue?vue&type=template&id=935215c6&scoped=true& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_template_id_935215c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResetPassword.vue?vue&type=template&id=935215c6&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/pages/ResetPassword.vue?vue&type=template&id=935215c6&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_template_id_935215c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_template_id_935215c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -46,6 +46,7 @@
 <body>
 
 <div id="app">
+<vue-progress-bar></vue-progress-bar>
 
     <div class="off-canvas-wrapper">
         <div class="off-canvas off-canvas_panel position-left bg--dark-blue @if ($displayMenu)

@@ -81,6 +81,8 @@ class User extends Authenticatable
         $this->phone_token = null;
 
         $this->save();
+
+        return $this;
     }
 
     public function validateAndUpdatePassword($old_password = null, $new_password = null)
@@ -172,10 +174,23 @@ class User extends Authenticatable
 
         $message = 'Activation Token: ' . $token;
 
-        $smartsms = new SmartSms();
+        return true;
 
-        $smartsms->message($this->phone, $message, 'S-TECHMAX');
+        // $smartsms = new SmartSms();
+
+        // $smartsms->message($this->phone, $message, 'S-TECHMAX');
         
     }
 
+    public function updatePassword($password)
+    {
+        $this->password = Hash::make($password);
+
+        $this->save();
+    }
+
+    public function verified()
+    {
+        return $this->confirmed || $this->phone_confirmed;
+    }
 }

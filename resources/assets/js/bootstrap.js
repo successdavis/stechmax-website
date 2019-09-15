@@ -32,6 +32,8 @@ import PortalVue from 'portal-vue';
 import Form from './utilities/Form';
 import VModal from 'vue-js-modal';
 import Croppa from 'vue-croppa'
+import VueProgressBar from 'vue-progressbar'
+
 
 window.Form = Form;
 window.Event = new Vue();
@@ -39,6 +41,11 @@ window.Event = new Vue();
 Vue.use(PortalVue);
 Vue.use(VModal);
 Vue.use(Croppa);
+Vue.use(VueProgressBar, {
+  color: 'rgb(143, 255, 199)',
+  failedColor: 'red',
+  height: '10px'
+})
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -64,3 +71,5 @@ window.events = new Vue();
 window.flash = function (message, level = 'success') {
     window.events.$emit('flash', {message, level});
 };
+
+

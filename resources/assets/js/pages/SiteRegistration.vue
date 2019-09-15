@@ -135,20 +135,23 @@
 
 		methods: {
 			submitForm () {
-
+				this.$Progress.start()
 				this.RegForm.post('/register')
 				.then(data => {
 					flash("Registration Successful")
+					this.$Progress.finish()
 					window.location.href = "/register/comfirm_email";
 				})
 				.catch(error => {
 					this.errorMessage = error.message;
 					flash('Your form contain errors', 'failed')
+					this.$Progress.fail()
 					this.submitting = false;
 				})
 			},
 
 			generateRecaptcha() {
+
 				grecaptcha.ready(() => {
 			      	grecaptcha.execute('6LeawrcUAAAAAIrA-LQ-kytjPFEBcedXDLcWHHHM', {action: 'homepage'})
 			      	.then((token) => {
