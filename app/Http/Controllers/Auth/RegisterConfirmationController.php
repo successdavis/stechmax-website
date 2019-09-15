@@ -36,4 +36,23 @@ class RegisterConfirmationController extends Controller
         Mail::to($user)->send(new PleaseConfirmYourEmail($user));
         return back();
     }
+
+    public function verifyToken(Request $request)
+    {
+        $request->validate([
+            'token' => 'required|min:6'
+        ]);
+
+        try {
+            User::where('phone_token', request('token'))
+                ->firstOrFail()
+                ->confirmToken();
+
+            return 'Account Activated';
+        } catch (\Exception $e) {
+            return response('Sorry! We do not recognize this token', 422);
+        }
+
+        return response('Account Activated', 200);
+    }
 }

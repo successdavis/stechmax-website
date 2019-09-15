@@ -59,7 +59,6 @@
 <style>
     .alert-flash {
         position: fixed;
-        background: blue;
         width: 100%;
         top: 0;
         left: 0;
@@ -67,5 +66,13 @@
         text-align: center;
         color: white;
         padding: 1em 0;
+    }
+
+    .alert-success {
+        background: blue;
+    }
+
+    .alert-failed {
+        background: red;
     }
 </style>

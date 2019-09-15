@@ -29,6 +29,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'confirmed' => 'boolean',
+        'phone_confirmed' => 'boolean',
         'admin' => 'boolean'
     ];
 
@@ -70,6 +71,14 @@ class User extends Authenticatable
     {
         $this->confirmed = true; 
         $this->confirmation_token = null;
+
+        $this->save();
+    }
+
+    public function confirmToken()
+    {
+        $this->phone_confirmed = true; 
+        $this->phone_token = null;
 
         $this->save();
     }
@@ -170,4 +179,3 @@ class User extends Authenticatable
     }
 
 }
- 

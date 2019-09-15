@@ -28,6 +28,7 @@ Vue.component('user-payments', require('./pages/MyPayments.vue').default);
 Vue.component('manage-invoices', require('./pages/ManageInvoices.vue').default);
 Vue.component('create-invoices', require('./pages/CreateInvoices.vue').default);
 Vue.component('site-registration', require('./pages/SiteRegistration.vue').default);
+Vue.component('account-confirmation', require('./pages/AccountConfirmation.vue').default);
 Vue.component('invoice-payments', require('./components/ViewInvoicePayments.vue').default);
 Vue.component('add-payment', require('./components/AddPayment.vue').default);
 Vue.component('avatar-form', require('./components/AvatarForm.vue').default);

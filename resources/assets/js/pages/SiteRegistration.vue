@@ -143,7 +143,7 @@
 				})
 				.catch(error => {
 					this.errorMessage = error.message;
-					flash('Your form contain errors')
+					flash('Your form contain errors', 'failed')
 					this.submitting = false;
 				})
 			},
