@@ -30,7 +30,7 @@ class SmartSms
             'sender' 	=> $sender,
             'to' 		=> $to,
             'type' 		=> '0',
-            'routing' 	=> 3,
+            'routing' 	=> 4,
             'message' 	=> $message
         ]);
 

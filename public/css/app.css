@@ -1279,9 +1279,8 @@ body {
 }
 
 .streamer {
-  height: calc(100vh - 56px);
+  min-height: calc(100vh - 56px);
   position: relative;
-  overflow: hidden;
 }
 
 .streamer__banner {

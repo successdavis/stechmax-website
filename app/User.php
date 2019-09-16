@@ -176,9 +176,9 @@ class User extends Authenticatable
 
         return true;
 
-        // $smartsms = new SmartSms();
+        $smartsms = new SmartSms();
 
-        // $smartsms->message($this->phone, $message, 'S-TECHMAX');
+        $smartsms->message($this->phone, $message, 'S-TECHMAX');
         
     }
 

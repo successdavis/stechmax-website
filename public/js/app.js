@@ -5947,7 +5947,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.text-align-left[data-v-40419bdd] {\n\ttext-align: left;\n}\nlabel[data-v-40419bdd], .white[data-v-40419bdd], p[data-v-40419bdd] {\n\tcolor: white;\n}\n.reg-form[data-v-40419bdd] {\n\tbackground: #222a38;\n\tbox-shadow: 0px 3px 13px 3px rgba(42,40,66,0.78);\n}\n.background[data-v-40419bdd] {\n\tbackground-image: url(/../images/background_2.jpg);\n\tbackground-size: cover;\n    background-position: center;\n    background-repeat: no-repeat;\n}\n.help-text[data-v-40419bdd] {\n\tcolor: red;\n}\ni[data-v-40419bdd] {\n\tcolor: antiquewhite;\n\tfont-size: 1.7em;\n}\n.logo[data-v-40419bdd] {\n    width: 2.2em;\n}\n.pageTitle[data-v-40419bdd] {\n\twidth: 100%;\n    text-align: center;\n    color: antiquewhite;\n}\na[data-v-40419bdd]:hover {\n\tborder-bottom: none;\n}\n.login_link[data-v-40419bdd] {\n\tcolor: white;\n}\n.login_link[data-v-40419bdd]:hover {\n\tcolor: red;\n}\n", ""]);
+exports.push([module.i, "\n.text-align-left[data-v-40419bdd] {\n\ttext-align: left;\n}\nlabel[data-v-40419bdd], .white[data-v-40419bdd], p[data-v-40419bdd] {\n\tcolor: white;\n}\n.reg-form[data-v-40419bdd] {\n\tbackground: #222a38;\n\tbox-shadow: 0px 3px 13px 3px rgba(42,40,66,0.78);\n}\n.background[data-v-40419bdd] {\n\tbackground-image: url(/../images/background_2.jpg);\n\tbackground-size: cover;\n    background-position: center;\n    background-repeat: no-repeat;\n}\n.help-text[data-v-40419bdd] {\n\tcolor: red;\n}\ni[data-v-40419bdd] {\n\tcolor: antiquewhite;\n\tfont-size: 1.7em;\n}\n.logo[data-v-40419bdd] {\n    width: 2.2em;\n}\n.pageTitle[data-v-40419bdd] {\n\twidth: 100%;\n    text-align: center;\n    color: antiquewhite;\n}\na[data-v-40419bdd]:hover {\n\tborder-bottom: none;\n}\n.login_link[data-v-40419bdd] {\n\tcolor: white;\n}\n.login_link[data-v-40419bdd]:hover {\n\tcolor: red;\n}\n.has-overlay[data-v-40419bdd] {\n\tposition: absolute;\n\ttop: 0;\n\twidth: 100%;\n\theight: 100vh;\n}\n@media (max-width: 640px) {\n.reg-form-paragraph[data-v-40419bdd] {\n\t\t-webkit-box-ordinal-group: 0;\n\t\t        order: -1;\n}\n.has-overlay[data-v-40419bdd] {\n\t\theight: unset;\n\t\tposition: unset;\n}\n.overlay__content[data-v-40419bdd] {\n\t\tposition: relative;\n\t\t-webkit-transform: unset;\n\t\ttransform: unset;\n\t\tleft: unset;\n\t\tpadding: unset;\n}\n.overlay[data-v-40419bdd] {\n\t\tdisplay: none;\n}\n.has-overlay:hover .overlay__content[data-v-40419bdd]{\n\ttop: unset;\n\tleft: unset;\n}\n}\n", ""]);
 
 // exports
 
@@ -38462,15 +38462,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "overlay background" }, [
+  return _c("div", { staticClass: "has-overlay background" }, [
     _c("div", { staticClass: "overlay" }),
     _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "row overlay__content" }, [
       _c(
         "div",
         {
-          staticClass: "grid-x grid-container overlay__content reg-form",
-          staticStyle: { "max-width": "750px" }
+          staticClass: "grid-x grid-container reg-form",
+          staticStyle: { "max-width": "850px" }
         },
         [
           _c("div", { staticClass: "medium-8 text-align-left mt-3" }, [
@@ -38883,9 +38883,9 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "medium-4 white mt-3" }, [
+          _c("div", { staticClass: "medium-4 white mt-3 reg-form-paragraph" }, [
             _c("div", { staticClass: "mb-3" }, [
-              _c("a", { attrs: { href: "" } }, [
+              _c("a", { attrs: { href: "/" } }, [
                 _c("img", { attrs: { src: _vm.logo, alt: "Stechmax Logo" } })
               ]),
               _vm._v(" "),
@@ -38932,7 +38932,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "grid-x grid-container grid-padding-x" }, [
-      _c("div", { staticClass: "cell medium-6" }, [
+      _c("div", { staticClass: "small-6 medium-6" }, [
         _c("a", { attrs: { href: "" } }, [
           _c("i", { staticClass: "fas fa-book-open" })
         ]),
@@ -38940,7 +38940,7 @@ var staticRenderFns = [
         _c("p", { staticClass: "center-text" }, [_vm._v("Projects")])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "cell medium-6" }, [
+      _c("div", { staticClass: "small-6 medium-6" }, [
         _c("a", { attrs: { href: "" } }, [
           _c("i", { staticClass: "fas fa-store" })
         ]),
@@ -38948,7 +38948,7 @@ var staticRenderFns = [
         _c("p", { staticClass: "center-text" }, [_vm._v("E-Store")])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "cell medium-6" }, [
+      _c("div", { staticClass: "small-6 medium-6" }, [
         _c("a", { attrs: { href: "/threads" } }, [
           _c("i", { staticClass: "far fa-comments" })
         ]),
@@ -38956,7 +38956,7 @@ var staticRenderFns = [
         _c("p", { staticClass: "center-text" }, [_vm._v("Forum")])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "cell medium-6" }, [
+      _c("div", { staticClass: "small-6 medium-6" }, [
         _c("a", { attrs: { href: "" } }, [
           _c("i", { staticClass: "fas fa-copy" })
         ]),
@@ -38964,7 +38964,7 @@ var staticRenderFns = [
         _c("p", { staticClass: "center-text" }, [_vm._v("Templates")])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "cell medium-6" }, [
+      _c("div", { staticClass: "small-6 medium-6" }, [
         _c("a", { attrs: { href: "" } }, [
           _c("i", { staticClass: "fas fa-school" })
         ]),
@@ -64201,15 +64201,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************************!*\
   !*** ./resources/assets/js/pages/ResetPassword.vue ***!
   \*****************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ResetPassword_vue_vue_type_template_id_935215c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResetPassword.vue?vue&type=template&id=935215c6&scoped=true& */ "./resources/assets/js/pages/ResetPassword.vue?vue&type=template&id=935215c6&scoped=true&");
 /* harmony import */ var _ResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResetPassword.vue?vue&type=script&lang=js& */ "./resources/assets/js/pages/ResetPassword.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _ResetPassword_vue_vue_type_style_index_0_id_935215c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ResetPassword.vue?vue&type=style&index=0&id=935215c6&scoped=true&lang=css& */ "./resources/assets/js/pages/ResetPassword.vue?vue&type=style&index=0&id=935215c6&scoped=true&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ResetPassword_vue_vue_type_style_index_0_id_935215c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ResetPassword.vue?vue&type=style&index=0&id=935215c6&scoped=true&lang=css& */ "./resources/assets/js/pages/ResetPassword.vue?vue&type=style&index=0&id=935215c6&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -64241,7 +64240,7 @@ component.options.__file = "resources/assets/js/pages/ResetPassword.vue"
 /*!******************************************************************************!*\
   !*** ./resources/assets/js/pages/ResetPassword.vue?vue&type=script&lang=js& ***!
   \******************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

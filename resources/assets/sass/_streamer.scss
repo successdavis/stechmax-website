@@ -1,7 +1,7 @@
 .streamer {
-    	height: calc(100vh - 56px);
+    	min-height: calc(100vh - 56px);
     	position: relative;
-    	overflow: hidden;
+    	// overflow: hidden;
 	&__banner { 
 		background-image: url(/../images/banner.jpg);
 		background-size: cover;

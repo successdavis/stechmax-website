@@ -1,8 +1,8 @@
 <template>
-	<div class="overlay background">
+	<div class="has-overlay background">
 		<div class="overlay"></div>
-		<div class="row">
-			<div class="grid-x grid-container overlay__content reg-form" style="max-width: 750px;">
+		<div class="row overlay__content">
+			<div class="grid-x grid-container reg-form" style="max-width: 850px;">
 				<div class="medium-8 text-align-left mt-3">
 					<form @submit.prevent="generateRecaptcha" @keydown="RegForm.errors.clear()">
 					  <div class="grid-container">
@@ -68,29 +68,29 @@
 					  </div>
 					</form>
 				</div>
-				<div class="medium-4 white mt-3">
+				<div class="medium-4 white mt-3 reg-form-paragraph">
 					<div class="mb-3">
-						<a href=""><img :src="logo" alt="Stechmax Logo"></a>
+						<a href="/"><img :src="logo" alt="Stechmax Logo"></a>
 						<p class="center-text">One Account for all Services</p>
 					</div>
 					<div class="grid-x grid-container grid-padding-x">
-						<div class="cell medium-6">
+						<div class="small-6 medium-6">
 							<a href=""><i class="fas fa-book-open"></i></a>
 							<p class="center-text">Projects</p>
 						</div>
-						<div class="cell medium-6">
+						<div class="small-6 medium-6">
 							<a href=""><i class="fas fa-store"></i></a>
 							<p class="center-text">E-Store</p>
 						</div>
-						<div class="cell medium-6">
+						<div class="small-6 medium-6">
 							<a href="/threads"><i class="far fa-comments"></i></a>
 							<p class="center-text">Forum</p>
 						</div>
-						<div class="cell medium-6">
+						<div class="small-6 medium-6">
 							<a href=""><i class="fas fa-copy"></i></a>
 							<p class="center-text">Templates</p>
 						</div>
-						<div class="cell medium-6">
+						<div class="small-6 medium-6">
 							<a href=""><i class="fas fa-school"></i></a>
 							<p class="center-text">School</p>
 						</div>
@@ -216,5 +216,38 @@
 	}
 	.login_link:hover {
 		color: red;
+	}
+	.has-overlay {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100vh;
+	}
+	@media (max-width: 640px) {
+		.reg-form-paragraph {
+			order: -1;
+		}
+
+		.has-overlay {
+			height: unset;
+			position: unset;
+		}
+
+		.overlay__content {
+			position: relative;
+			-webkit-transform: unset;
+			-moz-transform: unset;
+			transform: unset;
+			left: unset;
+			padding: unset;
+		}
+
+		.overlay {
+			display: none;
+		}
+		.has-overlay:hover .overlay__content{
+		top: unset;
+		left: unset;
+	}
 	}
 </style>
