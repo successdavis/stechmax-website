@@ -145,6 +145,10 @@ Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->na
 Route::get('/register/resend', 'Auth\RegisterConfirmationController@resend')->name('register.resend_comfirmation');
 Route::get('/register/comfirm_email', 'Auth\RegisterConfirmationController@create')->middleware('cannot-see-resend-link-page')->name('register.confirm_email');
 
+Route::post('/register/verifytoken', 'Auth\RegisterConfirmationController@verifytoken')->middleware('cannot-see-resend-link-page')->name('register.verifytoken');
+Route::post('/password/phonereset', 'Auth\RegisterConfirmationController@phoneReset')->name('password.phone.reset');
+Route::post('/password/resetUpdatePassword', 'Auth\RegisterConfirmationController@updatePassword')->name('password.update');
+
 Route::post('/register/new_user', 'ManageUserController@store')->middleware('admin')->name('manage_user.store');
 
 //Route::patch('/users/{user}', 'ManageUserController@store')->middleware('admin')->name('manage_user.store');
@@ -174,5 +178,8 @@ Route::get('/paid/submit_details', 'PaymentController@create')->name('pay.submit
 Route::get('/payment/callback', 'PaystackSubscriptionController@handleGatewayCallback');
 Route::get('/paid/{course}', 'PaymentController@paymentSuccessful');
 Route::post('/paid/savedetails', 'PaymentController@store')->name('pay.saveDetails');
+
+Route::get('/settings/getSiteLogo', 'SiteController@getSiteLogo')->name('site.logo');
+Route::get('/settings/getTemplateLogo', 'SiteController@getTemplateLogo')->name('site.templates');
 
 

@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         // });
 
         \Validator::extend('spamfree', 'App\Rules\SpamFree@passes');
+        \Validator::extend('emailorphone', 'App\Rules\EmailOrPhone@passes');
     }
 
     /**

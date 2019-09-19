@@ -3,6 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
+use App\SmartSms\SmartSms;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
@@ -28,6 +29,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'confirmed' => 'boolean',
+        'phone_confirmed' => 'boolean',
         'admin' => 'boolean'
     ];
 
@@ -71,6 +73,16 @@ class User extends Authenticatable
         $this->confirmation_token = null;
 
         $this->save();
+    }
+
+    public function confirmToken()
+    {
+        $this->phone_confirmed = true; 
+        $this->phone_token = null;
+
+        $this->save();
+
+        return $this;
     }
 
     public function validateAndUpdatePassword($old_password = null, $new_password = null)
@@ -142,5 +154,43 @@ class User extends Authenticatable
             return CourseSubscriptionsResource::collection($subscriptions);
     }
 
+    public function twilioSendMessage()
+    {
+        $accountId  =   config('services.twilio.account_sid');
+        $token      =   config('services.twilio.token');
+        $fromNumber =   '+17204596176';
+
+        $twilio = new \Aloha\Twilio\Twilio($accountId, $token, $fromNumber);
+
+        $twilio->message($this->phone, 'Hello World');
+    }
+
+    public function smartSendToken()
+    {   
+        $token = $randomid = mt_rand(100000,999999); 
+        $this->update([
+            'phone_token' => $token
+        ]);
+
+        $message = 'Activation Token: ' . $token;
+
+        return true;
+
+        $smartsms = new SmartSms();
+
+        $smartsms->message($this->phone, $message, 'S-TECHMAX');
+        
+    }
+
+    public function updatePassword($password)
+    {
+        $this->password = Hash::make($password);
+
+        $this->save();
+    }
+
+    public function verified()
+    {
+        return $this->confirmed || $this->phone_confirmed;
+    }
 }
- 

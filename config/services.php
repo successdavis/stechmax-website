@@ -35,4 +35,17 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'recaptcha' => [
+        'secret' => env('RECAPTCHA_SECRET')
+    ],
+
+    'smartsms' => [
+        'token' => env('SMART_SMS_API')
+    ],
+
+    'twilio' => [
+        'account_sid' => env('TWILIO_ACCOUNT_SID'),
+        'token' => env('TWILIO_AUTH_TOKEN'),
+    ]
+
 ];

@@ -40,11 +40,13 @@
             'signedIn'  => Auth::check()      
         ]) !!};
     </script>
+    @yield('head')
 </head>
 <body>
 <body>
 
 <div id="app">
+<vue-progress-bar></vue-progress-bar>
 
     <div class="off-canvas-wrapper">
         <div class="off-canvas off-canvas_panel position-left bg--dark-blue @if ($displayMenu)
@@ -96,6 +98,8 @@
 <script src="/js/vendor/foundation.js"></script>
 <script src="{{ asset('js/app.js') }}" ></script>
 <script src="{{ asset('js/remita-pay-inline.bundle.js') }}" ></script>
+
+@yield('body-close')
 
 <script type="text/javascript">
     $(document).foundation();
