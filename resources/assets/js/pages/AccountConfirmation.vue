@@ -21,7 +21,7 @@
 				        		<p>Please provide token sent to <span v-text="user.phone"></span></p>
 				        		<input type="text" v-model="token" maxlength="6">
 				        	</form>
-				        	<span class="center-text white"><a @click.prevent="resendToken">Resend Token</a></span>            
+				        	<span class="center-text white"><a @click.prevent="resendToken" style="color: white">Resend Token</a></span>            
 				        </div>
 					</div>
 				</div>
@@ -96,7 +96,7 @@
 					})
 					.catch(error => {
 						this.errorMessage = error.message;
-						flash('You have submitted an invalid token', 'failed');
+						flash('Error! Please wait for five minutes before resending code', 'failed');
 						this.submitting = false
 					})
 			}

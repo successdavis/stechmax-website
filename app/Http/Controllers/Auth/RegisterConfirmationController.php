@@ -59,8 +59,11 @@ class RegisterConfirmationController extends Controller
 
     public function resendVerifyToken(Request $request)
     {
-        return auth()->user()->smartSendToken();
-
+        if (auth()->user()->canSendNewToken()) {
+            auth()->user()->smartSendToken();
+            return 'Token resent successfully';
+        }
+        abort(422, 'Please wait atleast five minutes before trying to resend token');
     }
 
 // at the moment I dont know why I named this method phoneReset and I cannot find where this method is being used

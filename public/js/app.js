@@ -4537,7 +4537,7 @@ __webpack_require__.r(__webpack_exports__);
         flash('Token Verification Successful'); // window.location.href = "/courses";
       })["catch"](function (error) {
         _this3.errorMessage = error.message;
-        flash('You have submitted an invalid token', 'failed');
+        flash('Error! Please wait for five minutes before resending code', 'failed');
         _this3.submitting = false;
       });
     }
@@ -37043,6 +37043,7 @@ var render = function() {
                       _c(
                         "a",
                         {
+                          staticStyle: { color: "white" },
                           on: {
                             click: function($event) {
                               $event.preventDefault()
