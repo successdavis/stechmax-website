@@ -174,8 +174,6 @@ class User extends Authenticatable
 
         $message = 'Activation Token: ' . $token;
 
-        return true;
-
         $smartsms = new SmartSms();
 
         $smartsms->message($this->phone, $message, 'S-TECHMAX');
