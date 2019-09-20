@@ -21,7 +21,7 @@
 				        		<p>Please provide token sent to <span v-text="user.phone"></span></p>
 				        		<input type="text" v-model="token" maxlength="6">
 				        	</form>
-				        	<span class="center-text white" @click.prevent="resendToken">Click Resend Token</span>            
+				        	<span class="center-text white"><a @click.prevent="resendToken" style="color: white">Resend Token</a></span>            
 				        </div>
 					</div>
 				</div>
@@ -89,14 +89,14 @@
 			},
 
 			resendToken () {
-				axios.post('/register/verifytoken', { token: this.token})
+				axios.post('/register/resendverifytoken')
 					.then (data => {
 						flash('Token Verification Successful')
-						window.location.href = "/courses";
+						// window.location.href = "/courses";
 					})
 					.catch(error => {
 						this.errorMessage = error.message;
-						flash('You have submitted an invalid token', 'failed');
+						flash('Error! Please wait for five minutes before resending code', 'failed');
 						this.submitting = false
 					})
 			}

@@ -146,6 +146,7 @@ Route::get('/register/resend', 'Auth\RegisterConfirmationController@resend')->na
 Route::get('/register/comfirm_email', 'Auth\RegisterConfirmationController@create')->middleware('cannot-see-resend-link-page')->name('register.confirm_email');
 
 Route::post('/register/verifytoken', 'Auth\RegisterConfirmationController@verifytoken')->middleware('cannot-see-resend-link-page')->name('register.verifytoken');
+Route::post('/register/resendverifytoken', 'Auth\RegisterConfirmationController@resendverifytoken')->middleware('cannot-see-resend-link-page')->name('register.resendverifytoken');
 Route::post('/password/phonereset', 'Auth\RegisterConfirmationController@phoneReset')->name('password.phone.reset');
 Route::post('/password/resetUpdatePassword', 'Auth\RegisterConfirmationController@updatePassword')->name('password.update');
 

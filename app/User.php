@@ -167,17 +167,27 @@ class User extends Authenticatable
 
     public function smartSendToken()
     {   
-        $token = $randomid = mt_rand(100000,999999); 
-        $this->update([
-            'phone_token' => $token
-        ]);
+            $token = $randomid = mt_rand(100000,999999); 
+            $this->update([
+                'phone_token' => $token
+            ]);
 
-        $message = 'Activation Token: ' . $token;
+            $message = 'Activation Token: ' . $token;
 
-        $smartsms = new SmartSms();
+            $smartsms = new SmartSms();
 
-        $smartsms->message($this->phone, $message, 'S-TECHMAX');
-        
+            $smartsms->message($this->phone, $message, 'S-TECHMAX');
+
+            return true;
+    }
+
+    public function canSendNewToken()
+    {
+        if ($this->updated_at->diffInMinutes() >= 5) {
+            return true;
+        }
+       
+       return false;
     }
 
     public function updatePassword($password)
