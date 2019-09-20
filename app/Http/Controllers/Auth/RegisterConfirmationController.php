@@ -57,7 +57,13 @@ class RegisterConfirmationController extends Controller
         return response('Account Activated', 200);
     }
 
+    public function resendVerifyToken(Request $request)
+    {
+        return auth()->user()->smartSendToken();
 
+    }
+
+// at the moment I dont know why I named this method phoneReset and I cannot find where this method is being used
     public function phoneReset(Request $request)
     {
         $request->validate([
