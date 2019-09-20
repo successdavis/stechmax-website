@@ -92,7 +92,7 @@
 				axios.post('/register/resendverifytoken')
 					.then (data => {
 						flash('Token Verification Successful')
-						// window.location.href = "/courses";
+						window.location.href = "/courses";
 					})
 					.catch(error => {
 						this.errorMessage = error.message;
