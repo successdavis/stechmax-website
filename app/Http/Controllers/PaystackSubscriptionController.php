@@ -12,7 +12,7 @@ class PaystackSubscriptionController extends Controller
     public function makeFullPayment(Subject $subject, Course $course, Request $request)
     {
         $data = [
-            // "amount" => $course->amount,  We get the amount from the subscription plan on paystack
+            "amount" => $course->amount,  //We get the amount from the subscription plan on paystack
             "reference" => Paystack::genTranxRef(),
             "key" => config('paystack.secretKey'),
             "email" => auth()->user()->email,
