@@ -15,7 +15,7 @@ class CreateTypesTable extends Migration
     {
         Schema::create('types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');  // 1 for course, 2 for track, 3 for practice
+            $table->string('name');  // 1 for course, 2 for track, 3 for practice, 4 for programs
             $table->string('description'); 
             $table->string('icon_path'); 
             $table->timestamps();

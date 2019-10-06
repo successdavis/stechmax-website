@@ -35,6 +35,7 @@ Vue.component('add-payment', require('./components/AddPayment.vue').default);
 Vue.component('avatar-form', require('./components/AvatarForm.vue').default);
 Vue.component('passport-form', require('./components/PassportForm.vue').default);
 Vue.component('mega-menu', require('./components/MegaMenu.vue').default);
+Vue.component('lower-nav', require('./components/LowerNav.vue').default);
 Vue.component('course-registration', require('./components/CourseRegistration.vue').default);
 Vue.component('target-student', require('./components/courseTargetStudent.vue').default);
 Vue.component('course-curriculum', require('./components/CourseCurriculum.vue').default);

@@ -12,6 +12,10 @@ body {
   min-height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 #site-body {
     min-height: 100vh;
 }

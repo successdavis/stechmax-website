@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="grid-container">
+{{-- <div class="grid-container">
 
 <div class="grid-x grid-margin-x grid-padding-x mt-3">
     <div class="hide-for-small-only">
@@ -20,7 +20,7 @@
                     </div>
                 </div> 
             </form>
-            {{-- <div class="cell medium-6">
+            <div class="cell medium-6">
                 <div class="grid-container">
                     <div class="grid-x grid-padding-x">
                         <div class="small-6">
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
         @forelse ($threads as $thread)
         <div class="grid-x grid-padding-x mb-2">
@@ -80,5 +80,26 @@
       @include('forum.rightSideBar')
     </div>
 </div>
+</div> --}}
+
+{{-- hello world --}}
+<div class="uper__nav">
+   <div class="grid-x grid-margin-x">
+       <div class="cell small-4">
+           <div class="">
+               
+           </div>
+           
+       </div>
+       <div class="cell auto">
+           
+       </div>
+       <div class="cell small-4">
+           
+           
+       </div>
+   </div> 
 </div>
+
+
 @endsection

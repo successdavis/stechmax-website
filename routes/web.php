@@ -103,6 +103,8 @@ Route::get('/courses', 'CourseController@index')->name('courses');
 Route::get('/courses/{subject}', 'CourseController@index');
 Route::get('/courses/{subject}/{course}', 'CourseController@show');
 
+Route::get('/program/{subject}/{course}', 'CourseController@show')->name('displayProgramDetails');
+
 Route::get('/courses/{subject}/{course}/register', 'ProgramController@create');
 
 Route::post('/subjects', 'SubjectController@store')->middleware('admin')->name('subjects.new');

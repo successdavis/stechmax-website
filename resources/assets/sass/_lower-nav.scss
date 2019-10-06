@@ -1,0 +1,29 @@
+.lower-nav {
+	height: 72px;
+	background: rgb(34, 34, 34);
+	margin: 0;
+	margin-bottom: 7em;
+	&__content {
+		display: flex;
+		max-width: 80%;
+		margin: 0 auto;
+		list-style: none;
+		height: 100%;
+		align-items: center;
+		justify-content: center;
+		&--item {
+			color: #acacac;
+			margin: 0 1em;
+			letter-spacing: 2px;
+			&:hover {
+				color: white;
+				cursor: pointer;
+			}
+			@media (max-width: 769px) {
+				margin: 0 .5em;
+				letter-spacing: 1px;
+			}
+		}
+	}
+
+}

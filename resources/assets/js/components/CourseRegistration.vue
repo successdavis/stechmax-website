@@ -62,7 +62,7 @@
                         <p class="help-text" id="difficultyHelpText" v-if="Form.errors.has('difficulty')" v-text="Form.errors.get('difficulty')"></p>
                      </div>
                     <div class="medium-6 cell">
-                        <label>Whats the {{selectedTypeTitle}} duration (Specify in weeks)
+                        <label>Whats the {{selectedTypeTitle}} duration (Specify in Months)
                            <input type="number" aria-describedby="durationHelpText" v-model="Form.duration" placeholder="Type in figure e.g. 3 for 3 weeks" required>
                         </label>
                         <p class="help-text" id="durationHelpText" v-if="Form.errors.has('duration')" v-text="Form.errors.get('duration')"></p>
