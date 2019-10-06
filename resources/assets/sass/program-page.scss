@@ -1,0 +1,72 @@
+.program-header {
+	width: 100%;
+	background-image: url(/../images/bg.jpg);
+	min-height: calc(500px - 56px);
+	position: relative;
+	// background: black;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.program-overlay{
+
+}
+
+.header-content {
+	position: absolute;
+	color: white;
+	width: 75%;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	-webkit-transition: all 0.3s ease-in-out 0s;
+	-moz-transition: all 0.3s ease-in-out 0s;
+	transition: all 0.3s ease-in-out 0s;
+	&__hero {
+		font-size: 3em;
+		text-shadow: 0px 0px 12px rgba(0, 0, 0, 1);
+		margin-bottom: .65em;
+		font-weight: bolder;
+		@media (max-width: 769px){
+			font-size: 2em;
+		}
+	}
+	&__paragraph {
+		font-size: 1.8em;
+		text-align: center;
+		color: white;
+		@media (max-width: 769px) {
+			font-size: 1.5em;
+		}
+	}
+}
+
+.program-headlines {
+	color: red;
+}
+
+.program-course-curriculum {
+	background-color: #CECEDB;
+	padding: 2em 1em;
+}
+
+.program-card-content {
+	z-index: 1;
+	background: white;
+}
+.program-curriculum-item {
+	position: relative;
+	overflow: unset;
+	margin: 1em 0;
+}
+
+.shadow {
+	position: absolute;
+	bottom: -35px;
+	left: 0;
+	width: 100%;
+}

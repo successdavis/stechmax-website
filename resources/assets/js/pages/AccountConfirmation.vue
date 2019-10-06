@@ -91,8 +91,7 @@
 			resendToken () {
 				axios.post('/register/resendverifytoken')
 					.then (data => {
-						flash('Token Verification Successful')
-						window.location.href = "/courses";
+						flash('A new token has been sent to your phone')
 					})
 					.catch(error => {
 						this.errorMessage = error.message;
