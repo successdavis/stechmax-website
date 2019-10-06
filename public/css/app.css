@@ -1043,6 +1043,10 @@ span.v-stepper__step__step.primary {
   color: gray;
 }
 
+.subscribe-button {
+  background: #9e2911;
+}
+
 .align-content__center {
   display: -webkit-box;
   display: flex;
