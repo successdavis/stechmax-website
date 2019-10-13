@@ -9,7 +9,8 @@
 
   <div class="title-bar-title">
     <a class="navbar-brand" style="color: white" href="{{ url('/') }}">
-        {{ config('app.name', 'STECHMAX') }}
+        {{-- {{ config('app.name', 'STECHMAX') }} --}}
+          <img style="width: 120px;" src="{{ asset('storage/site-images/logo.png') }}">
     </a>
   </div>
 </div>
@@ -24,6 +25,7 @@
       <li>
         <a class="menu-text" href="{{ url('/') }}">
           {{-- {{ config('app.name', 'STECHMAX') }} --}}
+          <img style="width: 120px;" src="{{ asset('storage/site-images/logo.png') }}">
         </a>
       </li>
 
