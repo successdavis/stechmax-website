@@ -8,7 +8,7 @@
   <button type="button" class="menu-icon" data-toggle="offCanvasLeftOverlap"></button>
 
   <div class="title-bar-title">
-    <a class="navbar-brand" href="{{ url('/') }}">
+    <a class="navbar-brand" style="color: white" href="{{ url('/') }}">
         {{ config('app.name', 'STECHMAX') }}
     </a>
   </div>
@@ -23,7 +23,7 @@
     <ul class="dropdown menu" data-dropdown-menu>
       <li>
         <a class="menu-text" href="{{ url('/') }}">
-          {{ config('app.name', 'STECHMAX') }}
+          {{-- {{ config('app.name', 'STECHMAX') }} --}}
         </a>
       </li>
 

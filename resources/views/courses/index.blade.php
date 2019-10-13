@@ -60,10 +60,9 @@
           <h4>Single Courses</h4>
           <div class="grid-x grid-padding-x">
             @forelse ($courses as $course)
-            {{dd($course)}}
-                {{-- @if (strtolower($course->type->name) === 'course')
+                @if (strtolower($course->type->name) === 'course')
                   @include('courses.course')
-                @endif --}}
+                @endif
             @empty
             <p>There are not result at this time</p>
             @endforelse
@@ -72,7 +71,6 @@
         </div>
         <div class="grid-x grid-padding-x">
             @forelse ($courses as $track)
-              {{dd($track)}}
   
             @empty
             <p>There are not result at this time</p>

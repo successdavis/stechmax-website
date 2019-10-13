@@ -2,7 +2,7 @@
 
 @section('content')
 
-{{-- <div class="grid-container">
+<div class="grid-container">
 
 <div class="grid-x grid-margin-x grid-padding-x mt-3">
     <div class="hide-for-small-only">
@@ -80,7 +80,7 @@
       @include('forum.rightSideBar')
     </div>
 </div>
-</div> --}}
+</div>
 
 {{-- hello world --}}
 <div class="uper__nav">
