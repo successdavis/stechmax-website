@@ -49,7 +49,7 @@
 <vue-progress-bar></vue-progress-bar>
 
     <div class="off-canvas-wrapper">
-        <div class="off-canvas off-canvas_panel position-left bg--dark-blue @if ($displayMenu)
+        <div style="z-index: 10000;" class="off-canvas off-canvas_panel position-left bg--dark-blue @if ($displayMenu)
           {{'reveal-for-medium'}} @endif" id="offCanvasLeftOverlap" data-off-canvas data-transition="overlap">
 
             {{-- button to toggle off canvas --}}
