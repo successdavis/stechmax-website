@@ -181,4 +181,9 @@ class Course extends Model
     {
         return !empty($course) ? $course->amount * 60 / 100 : $this->amount * 60 / 100;
     }
+
+    public function getAmount()
+    {
+        return $this->amount / 100;
+    }
 }

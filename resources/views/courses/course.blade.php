@@ -8,13 +8,13 @@
             <span class="cell">Type: Course</span>
           </div>
           <div class="card-section course__title">
-            {{$course->title}}
+            <h5>{{$course->title}}</h5>
           </div>
           <div class="card-section course__difficulty">
-              {{$course->difficulty}}
+              {{$course->difficulty->level}}
           </div>
           <div class="card-section course__fee">
-            N{{$course->amount}}
+              &#8358; {{$course->getAmount()}}
           </div>
         </div>
     </a>

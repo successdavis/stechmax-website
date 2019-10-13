@@ -3,6 +3,10 @@
                   <h4 class="program-headlines">Course Type</h4>
                   <p>{{ucfirst($course->type->name)}}</p>
                </div>
+               <div class="mb-3">
+                  <h4 class="program-headlines">Course Price</h4>
+                  <p>  &#8358;  {{$course->getAmount()}}</p>
+               </div>
 
                <div class="mb-3">
                   <h4 class="program-headlines">Category</h4>

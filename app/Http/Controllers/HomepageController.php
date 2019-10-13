@@ -14,7 +14,7 @@ class HomepageController extends Controller
      */
     public function index()
     {
-        $type = \App\Type::find(3);
+        $type = \App\Type::find(4);
         
         $programs = !empty($type) ? $type->courses()->get() : [];
         $streamerCourses = Course::inRandomOrder()->whereType_id('2')->get()->take('3');
