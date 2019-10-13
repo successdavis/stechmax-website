@@ -52,7 +52,7 @@ class Invoice extends Model
     {
         $record = self::latest()->first();
         if(! $record) {
-            return 'STM' . date('Y') . 0001;
+            return 'STM-' . date('Y') . '-0001';
         }
         $expInvoiceNo = explode('-', $record->invoiceNo);
         $newNo = $expInvoiceNo['2']+1;

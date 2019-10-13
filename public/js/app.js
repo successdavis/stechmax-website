@@ -2036,9 +2036,9 @@ __webpack_require__.r(__webpack_exports__);
     canUpdate: function canUpdate() {
       var _this = this;
 
-      return this.authorize('isAdmin', function (user) {
+      return this.authorize(function (user) {
         return user.id === _this.user.id;
-      });
+      }, 'isAdmin');
     }
   },
   methods: {
