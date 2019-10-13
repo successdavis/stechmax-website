@@ -46,7 +46,7 @@
                 {{-- Course Content Tab --}}
                 <div class="tabs-panel is-active" id="course_content_tab">
                     <div class="grid-x grid-padding-x">
-                        <div class="cell medium-8">
+                        <div class="cell medium-8 double-line-height ">
                             <h5><strong>What you will learn</strong></h5>
                             <div class="grid-container">
                                 <div class="grid-container">
@@ -61,7 +61,7 @@
                             <h5><strong>Course Requirement(s)</strong></h5>
                             <div class="grid-container">
                                 <div class="grid-container">
-                                    <ul class="grid-x grid-padding-x">
+                                    <ul class="grid-x grid-padding-x double-line-height ">
                                         @foreach ($course->requirements as $requirement)
                                             <li class="medium-6">{{$requirement->body}}</li>
                                         @endforeach
@@ -71,7 +71,7 @@
 
                             <div>
                                 <h5><strong>Course Description</strong></h5>
-                                <p>{{$course->description}} </p>
+                                <p class="double-line-height">{{$course->description}} </p>
                             </div>
                         </div>
                         <div class="cell medium-4">
@@ -96,7 +96,7 @@
 
                 {{-- Course Instructors Tab --}}
                 <div class="tabs-panel" id="Course_instructors_tab">
-                    <p>Suspendisse dictum feugiat nisl ut dapibus.  Vivamus hendrerit arcu sed erat molestie vehicula. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor.  Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
+                    <p>This section is still under development</p>
                 </div>
                 @if (auth()->check() && $course->isSubscribedBY(auth()->user()))
                     <div class="tabs-panel" id="Course_materials_tab">
