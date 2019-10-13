@@ -23,7 +23,7 @@
 
         computed: {
             canUpdate() {
-                return this.authorize('isAdmin', user => user.id === this.user.id)
+                return this.authorize(user => user.id === this.user.id, 'isAdmin')
             }
         },
 
