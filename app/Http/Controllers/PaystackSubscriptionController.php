@@ -27,11 +27,7 @@ class PaystackSubscriptionController extends Controller
                 'class' => !empty(request()->class) ? request()->class : ''
             ],
         ];
-
-        dd($data);
-
         return Paystack::getAuthorizationUrl($data)->redirectNow();
-        // return Paystack::getAuthorizationUrl($data)->redirectNow();
     }
 
     public function makePartPayment(Subject $subject, Course $course, Request $request)
