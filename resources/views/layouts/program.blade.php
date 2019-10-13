@@ -4,7 +4,7 @@
         <p class="text-center pt-3 text-white">Your Dream Job is wating for you!</p>
         <h3 class="text-center pb-3 text-white">START A CAREER PROGRAMME</h3>
         <div class="grid-container">
-            <div class="grid-x grid-margin-x small-up-2 medium-up-3">
+            <div class="grid-x grid-margin-x small-up-1 medium-up-3">
                 @foreach($programs as $program)
                     <div class="cell">
                         <div class="card" >
