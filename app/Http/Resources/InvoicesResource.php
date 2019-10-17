@@ -20,7 +20,7 @@ class InvoicesResource extends JsonResource
             'date' => Carbon::parse($this->created_at)->toDayDateTimeString(),
             'amount' => $this->amount / 100,
             'amountOwed' => $this->amountOwed() / 100,
-            'payments' => $this->payments,
+            'payments' => UserPaymentsResource::collection($this->payments),
             'invoiceNo' => $this->invoiceNo,
             'billable' => $this->billable,
             'status' => $this->status(),

@@ -30,8 +30,10 @@ Vue.component('create-invoices', require('./pages/CreateInvoices.vue').default);
 Vue.component('site-registration', require('./pages/SiteRegistration.vue').default);
 Vue.component('account-confirmation', require('./pages/AccountConfirmation.vue').default);
 Vue.component('reset-passwords', require('./pages/ResetPassword.vue').default);
+Vue.component('billing', require('./pages/Billing.vue').default);
 Vue.component('invoice-payments', require('./components/ViewInvoicePayments.vue').default);
 Vue.component('add-payment', require('./components/AddPayment.vue').default);
+Vue.component('user-add-payment', require('./components/UserAddPayment.vue').default);
 Vue.component('avatar-form', require('./components/AvatarForm.vue').default);
 Vue.component('passport-form', require('./components/PassportForm.vue').default);
 Vue.component('mega-menu', require('./components/MegaMenu.vue').default);
@@ -46,6 +48,7 @@ Vue.component('view-user', require('./components/ViewUser.vue').default);
 Vue.component('users', require('./components/Users.vue').default);
 // Vue.component('program-registration', require('./pages/ProgramRegistration.vue').default);
 Vue.component('data-table', require('./components/DataTable.vue').default);
+Vue.component('data-table2', require('./components/datatable2.vue').default);
 // Vue.component('test', require('./components/Test.vue').default);
 
 

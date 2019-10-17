@@ -124,6 +124,22 @@ class User extends Authenticatable
         return true;
     }
 
+    public function totalActiveCourse($user = '')
+    {
+        return Course::WhereSubscribeBy($this)->get()->count();
+    }
+
+    public function getTotalAmountOwed()
+    {
+        $owed = 0;
+
+        foreach ($this->invoices as $invoice) {
+            $owed += $invoice->amountOwed();
+        }
+
+        return $owed / 100;
+    }
+
     public function getAvatarPathAttribute($avatar)
     {
         if ($avatar) {

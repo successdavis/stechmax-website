@@ -16,6 +16,10 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\ThreadHasNewReply' => [
             'App\Listeners\NotifyThreadSubscribers',
         ],
+        'App\Events\PaymentWasAdded' => [
+            'App\Listeners\SendPaymentReceipt',
+            'App\Listeners\CloseInvoiceIfNeccessary',
+        ],
 
     ];
 

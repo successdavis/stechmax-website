@@ -37,6 +37,7 @@
 <ul class="white vertical menu accordion-menu" id="off-canvas_panel-links" data-accordion-menu>
     <li class="dark-gray"><a href="/dashboard">Dashboard</a></li>
     <li><a href="{{route('mycourses.index', ['user' => auth()->user()->username])}}">My Courses</a></li>
+    <li><a href="{{route('billing.home')}}">Billing</a></li>
    
     @if (Auth::user()->isAdmin())
 

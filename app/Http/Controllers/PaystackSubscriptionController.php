@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Paystack;
 use App\Course;
 use App\Subject;
+use App\Invoice;
 use Illuminate\Http\Request;
 
 class PaystackSubscriptionController extends Controller

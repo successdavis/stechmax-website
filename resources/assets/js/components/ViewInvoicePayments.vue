@@ -2,7 +2,29 @@
     <div>
         <button @click="$modal.show(modal)" class="small button">VIEW PAYMENTS</button>
         <modal :name="modal" height="auto" draggable=".window-header" class="scroll">
-              
+              <table class="stack">
+                  <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Method</th>
+                        <th>Trans Ref.</th>
+                        <th>Status</th>
+                      </tr>
+                  </thead>
+                  <tbody v-if="payments.length != 0">
+                      <tr v-for="data in payments" :key="data.id">
+                          <td v-text="data.date"></td>
+                          <td v-text="data.amount"></td>
+                          <td v-text="data.method"></td>
+                          <td v-text="data.ref"></td>
+                          <td v-text="data.status"></td>
+                      </tr>
+                  </tbody>
+                  <div v-else>
+                    <p>No payment records for this invoice</p>
+                  </div>
+              </table>
         </modal>
     </div>
     
@@ -15,11 +37,10 @@
 
         data () {
           return {
-            editing: false,
-            date_joined: this.selectedUser.Date_Joined,
-            email: this.selectedUser.email,
+            payments: this.selectedInvoice.payments,
           }
         },
+
 
         methods: {
 
@@ -33,41 +54,5 @@
     overflow: scroll;
 }
 
-.user-header,
-.switch {
-  display: flex;
-}
 
-.user-header {
-  justify-content: space-between;
-  background: #1b222d;
-  color: white;
-  align-items: center;
-  border-bottom: 5px solid red;
-  padding: .2em 1.5em;
-}
-
-.switch {
-  margin-bottom: 0;
-}
-
-.text {
-    display: inline-block;
-    color: white;
-    /* padding: 0; */
-    margin: 0;
-    align-self: center;
-    padding-right: 1em;
-  }
-
-.user-passport{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-  }
-
-.user-passport--info {
-    margin-top: 32px;
-    padding-left: 1em;
-}
 </style>

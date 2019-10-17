@@ -99,6 +99,14 @@ Route::post('/dashboard/invoices/createinvoiceforuser', 'InvoiceController@store
 Route::get('/dashboard/{user}/manageinvoices/datatable', 'InvoiceController@getallinvoices')->middleware('admin')->name('manage_invoice.getallinvoices');
 Route::get('/api/invoices/getallinvoices', 'InvoiceController@retrieveallinvoices')->middleware('admin')->name('manage_invoice.retrieveallinvoices');
 
+Route::get('/dashboard/billing/index', 'BillingController@index')->middleware('must-be-confirmed')->name('billing.home');
+Route::get('/dashboard/{user}/getallinvoices', 'BillingController@getallinvoices')->middleware('must-be-confirmed')->name('billing.invoices');
+Route::get('/dashboard/{invoice}/getinvoicepayments', 'BillingController@getinvoicepayments')->middleware('must-be-confirmed')->name('billing.payments');
+Route::get('/dashboard/{user}/totalamountowed', 'BillingController@totalamountowed')->middleware('must-be-confirmed')->name('billing.totalamountowed');
+
+Route::get('/dashboard/billing/{invoice}/clearinvoicedebt', 'BillingController@clearInvoiceDebt')->middleware('must-be-confirmed')->name('billing.clearinvoicedebt');
+Route::get('/dashboard/billing/{invoice}/payspecifyamount', 'BillingController@specifyAmount')->middleware('must-be-confirmed')->name('billing.specifyAmount');
+
 Route::get('/courses', 'CourseController@index')->name('courses');
 Route::get('/courses/{subject}', 'CourseController@index');
 Route::get('/courses/{subject}/{course}', 'CourseController@show');
@@ -161,6 +169,8 @@ Route::post('/follow', 'FollowersController@store');
 
 Route::get('/testing', 'TestingController@index'); // will be here temporary
 Route::post('/testing', 'TestingController@store'); // will be here temporary
+
+
 
 
 Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth')->name('avatar');
