@@ -26,6 +26,10 @@ class CloseInvoiceIfNeccessary
      */
     public function handle(PaymentWasAdded $event)
     {
-        //
+        $invoice = $event->payment->invoice;
+        if ($invoice->amountOwed() <= 0) {
+            $invoice->closeInvoice();
+            return true;
+        }
     }
 }

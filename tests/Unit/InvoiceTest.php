@@ -66,9 +66,9 @@ class InvoiceTest extends TestCase
     {
         $user = $this->signIn(create('App\User'));
         $invoice = create('App\Invoice');
+        $this->assertEquals($invoice->status(), $invoice->amount / 100);
+        $invoice->closeInvoice();
         $this->assertEquals($invoice->status(), 'completed');
-        $invoice->openInvoice();
-        $this->assertEquals($invoice->status(), $invoice->amountOwed());
     }
 
     /** @test */
@@ -77,9 +77,7 @@ class InvoiceTest extends TestCase
         $user = $this->signIn(create('App\User'));
         $invoice = create('App\Invoice');
         $invoice->closeInvoice();
-        $this->assertTrue($invoice->completed);
-        $invoice->openInvoice();
-        $this->assertEquals($invoice->status(), $invoice->amountOwed());
+        $this->assertTrue($invoice->paid);
     }
 
     /** @test */
@@ -87,8 +85,27 @@ class InvoiceTest extends TestCase
     {
         $user = $this->signIn(create('App\User'));
         $invoice = create('App\Invoice');
+        $invoice->closeInvoice();
++        $this->assertTrue($invoice->paid);
         $invoice->openInvoice();
-
-+        $this->assertFalse($invoice->completed);
++        $this->assertFalse($invoice->paid);
     }
+
+    /** @test */
+    public function an_invoice_is_auto_close_once_it_has_recieved_full_payment()
+    {
+        $user = $this->signIn(create('App\User'));
+        $invoice = create('App\Invoice');
+
+        $data = [];
+        $data['amount'] = $invoice->amount;
+        $data['metadata']['method'] = 'Office';
+        $data['metadata']['purpose'] = 'course payment';
+        $data['reference'] = '7343ffe89';
+
+        $invoice->recordPayment($data);
++        $this->assertTrue($invoice->fresh()->paid);
+
+    }
+
 }

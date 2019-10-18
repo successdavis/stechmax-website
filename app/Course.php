@@ -109,6 +109,11 @@ class Course extends Model
         return $this->belongsTo(Type::class);
     }
     
+    public function checkType()
+    {
+        return $this->type->name;
+    }
+
     public function subject()
     {
        return $this->belongsTo(Subject::class); // This is the category in which each course falls

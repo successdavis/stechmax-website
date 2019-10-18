@@ -2,11 +2,16 @@
 
 namespace App;
 
+use App\Events\PaymentWasAdded;
 use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
     protected $fillable = ['user_id', 'amount', 'invoiceNo'];
+
+    protected $casts = [
+        'paid' => 'boolean'
+    ];
 
     public function payments()
     {
@@ -20,12 +25,16 @@ class Invoice extends Model
 
     public function recordPayment($data)
     {
-        return $this->payments()->create([
+        $payment = $this->payments()->create([
             'amount' => '-' . $data['amount'],
             'method' => $data['metadata']['method'],
             'purpose' => $data['metadata']['purpose'],
             'transaction_ref' => $data['reference']
         ]);
+
+        event(new PaymentWasAdded($payment));
+
+        return $payment;
     }
 
     public function getAllPayments()
@@ -50,19 +59,19 @@ class Invoice extends Model
 
     static public function generateInvoiceNo()
     {
-        $record = self::latest()->first();
+        $record = self::orderBy('id', 'DESC')->first();
         if(! $record) {
             return 'STM-' . date('Y') . '-0001';
         }
         $expInvoiceNo = explode('-', $record->invoiceNo);
         $newNo = $expInvoiceNo['2']+1;
 
-        return 'STM-' .date('Y') . '-' . sprintf('%04d', $record->id+1);
+        return 'STM-' .date('Y') . '-' . sprintf('%04d', $record->id +=1);
     }
 
     public function status()
     {
-        if ($this->completed) {
+        if ($this->paid) {
             return 'completed';
         }
 
@@ -71,14 +80,14 @@ class Invoice extends Model
 
     public function openInvoice()
     {
-        $this->completed = false;  
+        $this->paid = false;  
 
         return $this->save();
     }
 
     public function closeInvoice()
     {
-        $this->completed = true;
+        $this->paid = true;
 
         return $this->save();
     }
