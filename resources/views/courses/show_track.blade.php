@@ -6,16 +6,23 @@
         <div class="medium-7">
             <a href="/courses/{{$course->subject->slug}}" class="mb-3 tiny-button">{{$course->subject->name}} </a>
             <h3 class="mb-1 mt-1 ">{{$course->title}}</h3>
-            <p class="mb-3">{{$course->description}} </p>
+            <p class="mb-3">{{$course->sypnosis}} </p>
             <div class="grid-x grid-padding-x mb-2">
-                @foreach ($course->learns()->get() as $learn)
+                @foreach ($course->learns()->limit(3)->get() as $learn)
                     <div class="cell medium-4">
                         {{$learn->body}}
                     </div>
                 @endforeach
             </div>
-            <h3 class="inline">&#8358;{{$course->amount / 100}} </h3>
-            <a class="medium button" href="{{$course->path()}}/subscription?class=true">Subscribe to Series</a>
+            <div class="grid-x">
+                <div class="medium-6 cell">
+                    <h3 class="inline">&#8358;{{$course->getAmount()}} </h3>
+                </div>
+                <div class="medium-6 cell">
+                    <a class="medium button" href="{{$course->path()}}/subscription?class=false">Study Series Online</a>
+                    <a class="medium button" href="{{$course->path()}}/subscription?class=true">Study Series Offline</a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="hero-image" style="background-image: url({{asset($course->thumbnail_path)}})"></div>

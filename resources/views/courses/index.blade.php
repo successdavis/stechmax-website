@@ -60,9 +60,9 @@
           <h4>Single Courses</h4>
           <div class="grid-x grid-padding-x">
             @forelse ($courses as $course)
-                {{-- @if (strtolower($course->checkType()) === 'course') --}}
+                @if (strtolower($course->checkType()) === 'course')
                   @include('courses.course')
-                {{-- @endif --}}
+                @endif
             @empty
             <p>There are not result at this time</p>
             @endforelse
@@ -71,7 +71,9 @@
         </div>
         <div class="grid-x grid-padding-x">
             @forelse ($courses as $track)
-  
+                @if (strtolower($track->checkType()) === 'track')
+                  @include('courses.track')
+                @endif
             @empty
             <p>There are not result at this time</p>
             @endforelse

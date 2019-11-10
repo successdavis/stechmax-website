@@ -189,6 +189,6 @@ class Course extends Model
 
     public function getAmount()
     {
-        return $this->amount / 100;
+        return number_format($this->amount / 100,2);
     }
 }

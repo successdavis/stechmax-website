@@ -31,6 +31,7 @@ Vue.component('site-registration', require('./pages/SiteRegistration.vue').defau
 Vue.component('account-confirmation', require('./pages/AccountConfirmation.vue').default);
 Vue.component('reset-passwords', require('./pages/ResetPassword.vue').default);
 Vue.component('billing', require('./pages/Billing.vue').default);
+Vue.component('classroom', require('./pages/Classroom.vue').default);
 Vue.component('invoice-payments', require('./components/ViewInvoicePayments.vue').default);
 Vue.component('add-payment', require('./components/AddPayment.vue').default);
 Vue.component('user-add-payment', require('./components/UserAddPayment.vue').default);
@@ -49,6 +50,7 @@ Vue.component('users', require('./components/Users.vue').default);
 // Vue.component('program-registration', require('./pages/ProgramRegistration.vue').default);
 Vue.component('data-table', require('./components/DataTable.vue').default);
 Vue.component('data-table2', require('./components/datatable2.vue').default);
+Vue.component('video-player', require('./components/VideoPlayer.vue').default);
 // Vue.component('test', require('./components/Test.vue').default);
 
 

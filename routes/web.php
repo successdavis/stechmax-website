@@ -184,6 +184,8 @@ Route::post('/courses/{subject}/{course}/subscription', 'Payment\PaymentMethodCo
 Route::post('/courses/{subject}/{course}/paystack', 'PaystackSubscriptionController@makeFullPayment')->name('paystack.makeFullPayment');
 Route::post('/courses/{subject}/{course}/paystack/part', 'PaystackSubscriptionController@makePartPayment')->name('paystack.makePartPayment');
 
+Route::get('/dashboard/{course}/classroom', 'ClassroomController@index')->middleware('must-be-confirmed')->name('classroom.index');
+Route::get('/api/{course}/lessonvideourl', 'ClassroomController@nextVideo')->middleware('must-be-confirmed');
 
 Route::get('/paid/submit_details', 'PaymentController@create')->name('pay.submitDetails');
 

@@ -105,7 +105,5 @@ class InvoiceTest extends TestCase
 
         $invoice->recordPayment($data);
 +        $this->assertTrue($invoice->fresh()->paid);
-
     }
-
 }

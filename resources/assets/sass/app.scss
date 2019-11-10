@@ -1,6 +1,8 @@
-@import '/vue-croppa/dist/vue-croppa.css';
-// Fonts
-// Variables
+// @import '~/video/src/vjs'; 
+
+@import "../../../node_modules/video.js/src/css/vjs";
+
+
 @import 'base';
 @import 'variables';
 @import 'mixins';
