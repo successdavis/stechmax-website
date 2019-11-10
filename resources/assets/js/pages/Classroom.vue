@@ -32,29 +32,39 @@
                 <div class="">
                     <video-player :options="videoOptions"/> 
                 </div>
-            </div>
-            <!-- ==================================================================== -->
-            <ul class="tabs" data-deep-link="true" data-update-history="true" data-deep-link-smudge="true" data-deep-link-smudge-delay="500" data-tabs id="deeplinked-tabs">
-              <li class="tabs-title is-active"><a href="#panel1d" aria-selected="true">Overview</a></li>
-              <li class="tabs-title"><a href="#panel2d">Q A</a></li>
-              <li class="tabs-title"><a href="#panel3d">Transcript</a></li>
-              <li class="tabs-title"><a href="#panel4d">Notice</a></li>
-            </ul>
 
-            <div class="tabs-content" data-tabs-content="deeplinked-tabs">
-              <div class="tabs-panel is-active" id="panel1d">
-                <p>Section Under Maintenance</p>
-              </div>
-              <div class="tabs-panel" id="panel2d">
-                <p>Section Under Maintenance.</p>
-              </div>
-              <div class="tabs-panel" id="panel3d">
-                <p>Section Under Maintenance</p>
-              </div>
-              <div class="tabs-panel" id="panel4d">
-                <p>Section Under Maintenance</p>
-              </div>
+                <ul class="tabs" data-tabs id="example-tabs">
+                    <li class="tabs-title is-active"><a href="#Overview" aria-selected="true">Overview</a></li>
+                    <li class="tabs-title"><a data-tabs-target="Transcript" href="#Transcript">Transcript</a></li>
+                    <li class="tabs-title"><a data-tabs-target="Questions" href="#Questions">Questions</a></li>
+                    <li class="tabs-title"><a data-tabs-target="Materials" href="#Materials">Materials</a></li>
+                </ul>
+
+                <div class="tabs-content" data-tabs-content="example-tabs">
+                  <div class="tabs-panel is-active" id="Overview">
+                    <div class="grid-x grid-padding-x">
+                        <div class="cell medium-2">
+                            Description
+                        </div>
+                        <div class="cell medium-8">
+                            <p v-text="course.description"></p>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="tabs-panel" id="Transcript">
+                    <p>Section under maintenance</p>
+                  </div>
+                  <div class="tabs-panel" id="Questions">
+                    <p>Section under maintenance</p>
+                  </div>
+                  <div class="tabs-panel" id="Materials">
+                    <p>Section under maintenance</p>
+                  </div>
+                </div>
+
+
             </div>
+            
         </div>
 
 

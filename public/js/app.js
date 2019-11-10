@@ -5584,6 +5584,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['course', 'sections'],
@@ -96075,13 +96085,51 @@ var render = function() {
             {},
             [_c("video-player", { attrs: { options: _vm.videoOptions } })],
             1
+          ),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "tabs-content",
+              attrs: { "data-tabs-content": "example-tabs" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "tabs-panel is-active",
+                  attrs: { id: "Overview" }
+                },
+                [
+                  _c("div", { staticClass: "grid-x grid-padding-x" }, [
+                    _c("div", { staticClass: "cell medium-2" }, [
+                      _vm._v(
+                        "\n                        Description\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "cell medium-8" }, [
+                      _c("p", {
+                        domProps: {
+                          textContent: _vm._s(_vm.course.description)
+                        }
+                      })
+                    ])
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _vm._m(4),
+              _vm._v(" "),
+              _vm._m(5)
+            ]
           )
         ]
-      ),
-      _vm._v(" "),
-      _vm._m(2),
-      _vm._v(" "),
-      _vm._m(3)
+      )
     ])
   ])
 }
@@ -96113,34 +96161,38 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "ul",
-      {
-        staticClass: "tabs",
-        attrs: {
-          "data-deep-link": "true",
-          "data-update-history": "true",
-          "data-deep-link-smudge": "true",
-          "data-deep-link-smudge-delay": "500",
-          "data-tabs": "",
-          id: "deeplinked-tabs"
-        }
-      },
+      { staticClass: "tabs", attrs: { "data-tabs": "", id: "example-tabs" } },
       [
         _c("li", { staticClass: "tabs-title is-active" }, [
-          _c("a", { attrs: { href: "#panel1d", "aria-selected": "true" } }, [
+          _c("a", { attrs: { href: "#Overview", "aria-selected": "true" } }, [
             _vm._v("Overview")
           ])
         ]),
         _vm._v(" "),
         _c("li", { staticClass: "tabs-title" }, [
-          _c("a", { attrs: { href: "#panel2d" } }, [_vm._v("Q A")])
+          _c(
+            "a",
+            {
+              attrs: { "data-tabs-target": "Transcript", href: "#Transcript" }
+            },
+            [_vm._v("Transcript")]
+          )
         ]),
         _vm._v(" "),
         _c("li", { staticClass: "tabs-title" }, [
-          _c("a", { attrs: { href: "#panel3d" } }, [_vm._v("Transcript")])
+          _c(
+            "a",
+            { attrs: { "data-tabs-target": "Questions", href: "#Questions" } },
+            [_vm._v("Questions")]
+          )
         ]),
         _vm._v(" "),
         _c("li", { staticClass: "tabs-title" }, [
-          _c("a", { attrs: { href: "#panel4d" } }, [_vm._v("Notice")])
+          _c(
+            "a",
+            { attrs: { "data-tabs-target": "Materials", href: "#Materials" } },
+            [_vm._v("Materials")]
+          )
         ])
       ]
     )
@@ -96151,29 +96203,28 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      {
-        staticClass: "tabs-content",
-        attrs: { "data-tabs-content": "deeplinked-tabs" }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "tabs-panel is-active", attrs: { id: "panel1d" } },
-          [_c("p", [_vm._v("Section Under Maintenance")])]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "tabs-panel", attrs: { id: "panel2d" } }, [
-          _c("p", [_vm._v("Section Under Maintenance.")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "tabs-panel", attrs: { id: "panel3d" } }, [
-          _c("p", [_vm._v("Section Under Maintenance")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "tabs-panel", attrs: { id: "panel4d" } }, [
-          _c("p", [_vm._v("Section Under Maintenance")])
-        ])
-      ]
+      { staticClass: "tabs-panel", attrs: { id: "Transcript" } },
+      [_c("p", [_vm._v("Section under maintenance")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "tabs-panel", attrs: { id: "Questions" } },
+      [_c("p", [_vm._v("Section under maintenance")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "tabs-panel", attrs: { id: "Materials" } },
+      [_c("p", [_vm._v("Section under maintenance")])]
     )
   }
 ]
