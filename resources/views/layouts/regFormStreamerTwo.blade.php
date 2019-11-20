@@ -1,11 +1,11 @@
-<div class="grid-x streamer">
+<div class="streamer">
 	<div class="cell medium-7 large-9 streamer__banner has-overlay">
 		<div class="overlay"></div>
 		<div class="overlay__content">
 			<p class="overlay__content overlay__content--head">Welcome! What will you like to learn today?</p>
 		</div>
 	</div>
-	<div class="medium-5 large-3 show-for-medium">
+{{-- 	<div class="medium-5 large-3 show-for-medium">
 
 		@foreach ($streamerCourses as $course)		
 		<div class="grid-x grid-padding-x streamer__courses--card">
@@ -36,5 +36,5 @@
 		</div>
 
 		@endforeach
-	</div>
+	</div> --}}
 </div>

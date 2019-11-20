@@ -5606,6 +5606,7 @@ __webpack_require__.r(__webpack_exports__);
       videoOptions: {
         autoplay: true,
         controls: true,
+        preload: 'auto',
         // aspectRatio:"16:9", 
         fluid: true,
         playbackRates: [0.2, 0.5, 1, 1.5, 2, 3, 4],
@@ -5613,9 +5614,44 @@ __webpack_require__.r(__webpack_exports__);
           src: "http://success.test/storage/videos/1.mp4",
           type: "video/mp4"
         }, {
-          src: "http://success.test/storage/videos/1.mp4",
+          src: "http://success.test/storage/videos/2.mp4",
           type: "video/mp4"
         }]
+      },
+      mounted: function mounted() {
+        var player = videojs('video');
+        player.playlist([{
+          sources: [{
+            src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
+            type: 'video/mp4'
+          }],
+          poster: 'http://media.w3.org/2010/05/sintel/poster.png'
+        }, {
+          sources: [{
+            src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
+            type: 'video/mp4'
+          }],
+          poster: 'http://media.w3.org/2010/05/bunny/poster.png'
+        }, {
+          sources: [{
+            src: 'http://vjs.zencdn.net/v/oceans.mp4',
+            type: 'video/mp4'
+          }],
+          poster: 'http://www.videojs.com/img/poster.jpg'
+        }, {
+          sources: [{
+            src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
+            type: 'video/mp4'
+          }],
+          poster: 'http://media.w3.org/2010/05/bunny/poster.png'
+        }, {
+          sources: [{
+            src: 'http://media.w3.org/2010/05/video/movie_300.mp4',
+            type: 'video/mp4'
+          }],
+          poster: 'http://media.w3.org/2010/05/video/poster.png'
+        }]);
+        player.playlist.autoadvance(0);
       }
     };
   }
@@ -120918,11 +120954,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 
+ // import videojsPlaylist from 'videojs-playlist'
+// import playlistMaker from "videojs-playlist/src/playlist-maker";
 
 window.Form = _utilities_Form__WEBPACK_IMPORTED_MODULE_1__["default"];
 window.Event = new Vue();
 Vue.use(portal_vue__WEBPACK_IMPORTED_MODULE_0___default.a);
-Vue.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_2___default.a);
+Vue.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_2___default.a); // Vue.use(videojsPlaylist);
+// Vue.use(playlistMaker);
+
 Vue.use(vue_croppa__WEBPACK_IMPORTED_MODULE_3___default.a);
 Vue.use(vue_progressbar__WEBPACK_IMPORTED_MODULE_4___default.a, {
   color: 'rgb(143, 255, 199)',

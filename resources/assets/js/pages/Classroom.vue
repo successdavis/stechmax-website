@@ -85,6 +85,7 @@ export default {
             videoOptions: {
                 autoplay: true,
                 controls: true,
+                preload: 'auto',
                 // aspectRatio:"16:9", 
                 fluid: true,
                 playbackRates: [0.2, 0.5, 1, 1.5, 2,3,4],
@@ -94,21 +95,50 @@ export default {
                         type: "video/mp4"
                     },
                     { 
-                        src: "http://success.test/storage/videos/1.mp4",
+                        src: "http://success.test/storage/videos/2.mp4",
                         type: "video/mp4"
                     },
-                ]
+                ],
+            },
+           mounted () {
+                var player = videojs('video');
+ 
+                player.playlist([{
+                  sources: [{
+                    src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
+                    type: 'video/mp4'
+                  }],
+                  poster: 'http://media.w3.org/2010/05/sintel/poster.png'
+                }, {
+                  sources: [{
+                    src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
+                    type: 'video/mp4'
+                  }],
+                  poster: 'http://media.w3.org/2010/05/bunny/poster.png'
+                }, {
+                  sources: [{
+                    src: 'http://vjs.zencdn.net/v/oceans.mp4',
+                    type: 'video/mp4'
+                  }],
+                  poster: 'http://www.videojs.com/img/poster.jpg'
+                }, {
+                  sources: [{
+                    src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
+                    type: 'video/mp4'
+                  }],
+                  poster: 'http://media.w3.org/2010/05/bunny/poster.png'
+                }, {
+                  sources: [{
+                    src: 'http://media.w3.org/2010/05/video/movie_300.mp4',
+                    type: 'video/mp4'
+                  }],
+                  poster: 'http://media.w3.org/2010/05/video/poster.png'
+                }]);
+                player.playlist.autoadvance(0);
             }
         };
     },
 
-    // created () {
-    //          axios.get(`/api/${this.course.id}/lessonvideourl`)
-    //             .then(
-    //                 response => response.data,
-                    
-    //                 );
-    //     },
 };
 </script>
 
