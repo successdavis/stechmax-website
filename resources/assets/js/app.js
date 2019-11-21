@@ -51,6 +51,7 @@ Vue.component('users', require('./components/Users.vue').default);
 Vue.component('data-table', require('./components/DataTable.vue').default);
 Vue.component('data-table2', require('./components/datatable2.vue').default);
 Vue.component('video-player', require('./components/VideoPlayer.vue').default);
+Vue.component('home-streamer', require('./components/HomePageStreamer.vue').default);
 // Vue.component('test', require('./components/Test.vue').default);
 
 
