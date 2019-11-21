@@ -26,8 +26,18 @@ class Subject extends Model
         return $this->courses->where('type_id', 1);
     }
 
-    // public function getSubjectTracks()
-    // {
-    //     return $this->courses->where('type_id', 2);
-    // }
+    public function getSubjectTracks()
+    {
+        return $this->courses->where('type_id', 2);
+    }
+
+    public function coursesCount()
+    {
+        return $this->courses->where('type_id', 1)->count();
+    } 
+
+    public function trackCount()
+    {
+        return $this->courses->where('type_id', 2)->count();
+    }   
 }
