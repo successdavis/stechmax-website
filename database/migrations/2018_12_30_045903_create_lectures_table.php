@@ -18,7 +18,7 @@ class CreateLecturesTable extends Migration
             $table->unsignedInteger('section_id')->index();
             $table->integer('order');
             $table->string('title');
-            $table->strint('videourl');
+            $table->string('videourl');
             $table->timestamps();
         });
     }

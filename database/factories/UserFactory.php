@@ -196,8 +196,13 @@ $factory->define(App\Subscription::class, function (Faker $faker) {
         'user_id'  => function() {
             return factory('App\User')->create()->id;
         },
-        'active' => true,
-        'duration' => 1
+        'active'    => true,
+        'duration'  => 1,
+        'class'     => true,
+        'invoice_id'     => 1,
+        'subscriber_id'     => 1,
+        'subscriber_type'     => 'App\Course',
+        'duration'     => '3',
     ];
 });
 

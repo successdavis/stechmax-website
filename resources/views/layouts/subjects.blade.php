@@ -8,7 +8,7 @@
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6 subject__details--left">
 					<p>{{$subjectWithCounts["developer"]["trackCount"]}}</p>
-					<div>Paths</div>
+					<div>Tracks</div>
 				</div>
 				<div class="small-6 subject__details--right">
 					<p>{{$subjectWithCounts["developer"]["courseCount"]}}</p>
@@ -26,14 +26,14 @@
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["graphic-designs"]["trackCount"]}}</p>
-					<div>Paths</div>
+					<div>Tracks</div>
 				</div>
 				<div class="small-6 ">
 					<p>{{$subjectWithCounts["graphic-designs"]["courseCount"]}}</p>
 					<div>Courses</div>
 				</div>
 			</div>
-			<a class="btn__explore">Explore</a>
+			<a href="/courses/graphic-designs" class="btn__explore">Explore</a>
 		</div>
 	</div>
 	<div class="grid__item third has-overlay">
@@ -44,14 +44,14 @@
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["photography"]["trackCount"]}}</p>
-					<div>Paths</div>
+					<div>Tracks</div>
 				</div>
 				<div class="small-6 ">
 					<p>{{$subjectWithCounts["photography"]["courseCount"]}}</p>
 					<div>Courses</div>
 				</div>
 			</div>
-			<a class="btn__explore">Explore</a>
+			<a href="/courses/photography" class="btn__explore">Explore</a>
 		</div>
 	</div>
 	<div class="grid__item fourth has-overlay">
@@ -62,14 +62,14 @@
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["video"]["trackCount"]}}</p>
-					<div>Paths</div>
+					<div>Tracks</div>
 				</div>
 				<div class="small-6 ">
 					<p>{{$subjectWithCounts["video"]["courseCount"]}}</p>
 					<div>Courses</div>
 				</div>
 			</div>
-			<a class="btn__explore">Explore</a>
+			<a href="/courses/video" class="btn__explore">Explore</a>
 		</div>
 	</div>
 	<div class="grid__item five has-overlay">
@@ -80,14 +80,14 @@
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["3d-animation"]["trackCount"]}}</p>
-					<div>Paths</div>
+					<div>Tracks</div>
 				</div>
 				<div class="small-6 ">
 					<p>{{$subjectWithCounts["3d-animation"]["courseCount"]}}</p>
 					<div>Courses</div>
 				</div>
 			</div>
-			<a class="btn__explore">Explore</a>
+			<a href="/courses/3d-animation" class="btn__explore">Explore</a>
 		</div>
 	</div>
 	<div class="grid__item six has-overlay">
@@ -98,14 +98,14 @@
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["it"]["trackCount"]}}</p>
-					<div>Paths</div>
+					<div>Tracks</div>
 				</div>
 				<div class="small-6 ">
 					<p>{{$subjectWithCounts["it"]["courseCount"]}}</p>
 					<div>Courses</div>
 				</div>
 			</div>
-			<a class="btn__explore">Explore</a>
+			<a href="/courses/it" class="btn__explore">Explore</a>
 		</div>
 	</div>
 	<div class="grid__item seven has-overlay">
@@ -116,14 +116,14 @@
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["compute-aided-designs"]["trackCount"]}}</p>
-					<div>Paths</div>
+					<div>Tracks</div>
 				</div>
 				<div class="small-6 ">
 					<p>{{$subjectWithCounts["compute-aided-designs"]["courseCount"]}}</p>
 					<div>Courses</div>
 				</div>
 			</div>
-			<a class="btn__explore">Explore</a>
+			<a href="/courses/compute-aided-designs" class="btn__explore">Explore</a>
 		</div>
 	</div>
 	<div class="grid__item eight has-overlay">
@@ -134,14 +134,14 @@
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["database-managements"]["trackCount"]}}</p>
-					<div>Paths</div>
+					<div>Tracks</div>
 				</div>
 				<div class="small-6 ">
 					<p>{{$subjectWithCounts["database-managements"]["courseCount"]}}</p>
 					<div>Courses</div>
 				</div>
 			</div>
-		<a class="btn__explore">Explore</a>
+		<a href="/courses/database-managements" class="btn__explore">Explore</a>
 		</div>
 	</div>
 </div>

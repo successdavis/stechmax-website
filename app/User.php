@@ -42,6 +42,16 @@ class User extends Authenticatable
         'password', 'remember_token'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user){
+            $user->assignId();
+        });
+
+    }
+
     public function getRouteKeyName()
     {
         return 'username';
@@ -62,7 +72,14 @@ class User extends Authenticatable
         return $this->hasOne(Guardian::class)->latest();
     }
 
-     public function activity()
+    public function assignId()
+    {
+        $this->update([
+            'user_id' => 'STM/' . date('Y') . '/B' . date('n') . '/' . sprintf('%04d', $this->id)
+        ]);    
+    }
+
+    public function activity()
     {
         return $this->hasMany(Activity::class);
     }

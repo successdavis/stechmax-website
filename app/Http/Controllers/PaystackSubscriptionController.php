@@ -73,7 +73,7 @@ class PaystackSubscriptionController extends Controller
         $invoice->recordPayment($paymentDetails['data']);
 
         // dd($paymentDetails);
-        $course->createSubscription('', $invoice->id);
+        $course->createSubscription('', $invoice->id, $class = $paymentDetails['data']['metadata']['class']);
 
         return redirect('/paid/' . $course->id)
             ->with('flash', 'Payment Successful');
