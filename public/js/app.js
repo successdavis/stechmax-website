@@ -6962,7 +6962,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.scroll[data-v-35506e47] {\r\n    overflow: scroll;\n}\r\n\r\n\r\n", ""]);
+exports.push([module.i, "\n.scroll[data-v-35506e47] {\n    overflow: scroll;\n}\n\n\n", ""]);
 
 // exports
 
@@ -97532,7 +97532,7 @@ var render = function() {
                     },
                     [
                       _c("label", [
-                        _vm._v("Enter Token\r\n\t\t\t\t\t          "),
+                        _vm._v("Enter Token\n\t\t\t\t\t          "),
                         _c("input", {
                           directives: [
                             {
@@ -97571,7 +97571,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("label", [
-                        _vm._v("New Password\r\n\t\t\t\t\t          "),
+                        _vm._v("New Password\n\t\t\t\t\t          "),
                         _c("input", {
                           directives: [
                             {
@@ -97614,7 +97614,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("label", [
-                        _vm._v("Re-enter New Password\r\n\t\t\t\t\t          "),
+                        _vm._v("Re-enter New Password\n\t\t\t\t\t          "),
                         _c("input", {
                           directives: [
                             {

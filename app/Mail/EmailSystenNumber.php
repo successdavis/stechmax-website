@@ -7,12 +7,13 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UnableToSetSystemNumber extends Mailable implements ShouldQueue
+class EmailSystenNumber extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
 
-    public $user;
+    public $subscription;
+    public $owner;
     public $subscriber;
 
     /**
@@ -20,10 +21,12 @@ class UnableToSetSystemNumber extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($subscription, $owner, $subscriber)
     {
-        return $this->user = $user;
-        return $this->subscriber = $subscriber;
+         $this->subscription = $subscription;
+         $this->owner = $owner;
+         $this->subscriber = $subscriber;
+
     }
 
     /**
@@ -33,6 +36,6 @@ class UnableToSetSystemNumber extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->markdown('emails.unable-to-set-system-no');
+        return $this->markdown('emails.email-system-no');
     }
 }

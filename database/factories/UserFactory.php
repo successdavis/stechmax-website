@@ -19,7 +19,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'm_name' => $faker->word,
         'username' => $faker->word,
         'gender' => 'M',
-        'phone' => '09061260072',
+        'phone' => '08076727008',
         'email' => $faker->unique()->safeEmail,
         'r_address' => '#1 Hospital Lane Obudu',
         'confirmed' => true,

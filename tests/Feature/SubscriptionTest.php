@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Mail\UnableToSetSystemNumber;
+use App\Mail\EmailSystenNumber;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -93,9 +94,11 @@ class SubscriptionTest extends TestCase
     /** @test */
     public function an_email_is_sent_if_unable_to_assign_systemNo()
     {
+        // This code passes when the number is decrease from the subscription class
+
         Mail::fake();
 
-        factory('App\Subscription', 15)->create();
+        factory('App\Subscription', 16)->create();
 
 
         $user = $this->signIn();
@@ -107,5 +110,18 @@ class SubscriptionTest extends TestCase
         $subscription = $course->createSubscription('', '', $class = true);      
 
         Mail::assertQueued(UnableToSetSystemNumber::class); 
+    }
+
+    /** @test */
+    public function an_email_is_sent_when_system_no_has_been_assign()
+    {
+        Mail::fake();
+
+        $user = $this->signIn();
+
+        $course  = create('App\Course');
+        $subscription = $course->createSubscription('', '', $class = true);      
+
+        Mail::assertQueued(EmailSystenNumber::class); 
     }
 }

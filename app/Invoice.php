@@ -60,6 +60,8 @@ class Invoice extends Model
     static public function generateInvoiceNo()
     {
         $record = self::orderBy('id', 'DESC')->first();
+
+
         if(! $record) {
             return 'STM-' . date('Y') . '-0001';
         }
@@ -87,7 +89,7 @@ class Invoice extends Model
 
     public function closeInvoice()
     {
-        $this->paid = true;
+        $this->completed = true;
 
         return $this->save();
     }

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\SystemNoAssigned;
 use Carbon\Carbon;
 
 trait Subscriber
@@ -24,14 +25,20 @@ trait Subscriber
     public function createSubscription($userId = null, $invoice_id = null, $class = null)
     {
         if (! $this->subscriptions()->where(['user_id' => auth()->id(), 'active' => true])->exists()){
-            return $this->subscriptions()->save(
+            $subscription = $this->subscriptions()->save(
                     new Subscription([
                         'user_id'       => $userId ?: auth()->id(),
                         'duration'      => $this->duration,
                         'invoice_id'    => $invoice_id,
-                        'class'         => $class ?: false,  
+                        'class'         => $class === 'true' ? true : false,  
                     ])
             );
+            if ($class) {
+                $subscription->setSystemNumber();
+            }
+            
+            return $subscription;
+
         };
     }
 

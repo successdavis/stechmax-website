@@ -198,6 +198,17 @@ class User extends Authenticatable
         $twilio->message($this->phone, 'Hello World');
     }
 
+    public function MessageSystemNumber($subscription)
+    {
+        $message = 'You have subscribe to "' 
+            . $subscription->subscriber->title 
+            . '" you are assigned to use System '
+            . $subscription->system_no;
+
+        $this->smartSendMessage($message);
+    }
+
+
     public function smartSendToken()
     {   
             $token = $randomid = mt_rand(100000,999999); 
@@ -213,6 +224,15 @@ class User extends Authenticatable
 
             return true;
     }
+
+    public function smartSendMessage($message)
+    {
+        $smartsms = new SmartSms();
+        
+        $smartsms->message($this->phone, $message, 'S-TECHMAX');
+    }
+
+
 
     public function canSendNewToken()
     {

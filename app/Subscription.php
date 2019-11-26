@@ -2,10 +2,10 @@
 
 namespace App;
 
+use App\Events\SystemNoAssigned;
+use App\Mail\UnableToSetSystemNumber;
 use App\User;
 use Carbon\Carbon;
-use App\Mail\PleaseConfirmYourEmail;
-use App\Mail\UnableToSetSystemNumber;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 
@@ -13,14 +13,10 @@ class Subscription extends Model
 {
     protected $guarded = [];
 
-    protected static function boot(){
-        parent::boot();
 
-        static::created(function ($subscription) {
-            if ($subscription->class) {
-                $subscription->setSystemNumber();
-            }
-        });
+    public function subscriber()
+    {
+        return $this->morphTo();
     }
 
     public function deactivate()
@@ -33,21 +29,22 @@ class Subscription extends Model
 
     public function setSystemNumber()
     {
+        $adminUsers = User::whereAdmin(true)->get();
+        $user = $this->owner;
+
         for ($i=1; $i < 16 ; $i++) { 
-            $systemNo  = date('n') . '/' . $i;
+            $systemNo  = date('y') . '/' . date('n') . '/' . $i;
             if (!Subscription::where('system_no', $systemNo)->exists()) {
                 $this->update([
                     'system_no' => $systemNo
-                ]);
+                ]);  
+                $owner      = $this->owner;
+                $subscriber = $this->subscriber;
+                event(new SystemNoAssigned($this, $owner, $subscriber));
                 return true;
             }
 
         }
-
-        $adminUsers = User::whereAdmin(true)->get();
-        $user = $this->owner();
-
-        dd($this->subscriber);
 
         Mail::to($adminUsers)->send(new UnableToSetSystemNumber($user));
 
