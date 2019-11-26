@@ -11,10 +11,10 @@
             {{$track->title}}
           </div>
           <div class="card-section course__difficulty">
-              {{$track->difficulty}}
+              {{$track->difficulty->level}}
           </div>
           <div class="card-section course__fee">
-            N{{$track->fee}}
+            &#8358; {{$track->getAmount()}}
           </div>
         </div>
     </a>

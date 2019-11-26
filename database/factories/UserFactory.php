@@ -19,7 +19,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'm_name' => $faker->word,
         'username' => $faker->word,
         'gender' => 'M',
-        'phone' => '09061260072',
+        'phone' => '08076727008',
         'email' => $faker->unique()->safeEmail,
         'r_address' => '#1 Hospital Lane Obudu',
         'confirmed' => true,
@@ -196,8 +196,13 @@ $factory->define(App\Subscription::class, function (Faker $faker) {
         'user_id'  => function() {
             return factory('App\User')->create()->id;
         },
-        'active' => true,
-        'duration' => 1
+        'active'    => true,
+        'duration'  => 1,
+        'class'     => true,
+        'invoice_id'     => 1,
+        'subscriber_id'     => 1,
+        'subscriber_type'     => 'App\Course',
+        'duration'     => '3',
     ];
 });
 

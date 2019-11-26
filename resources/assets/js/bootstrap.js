@@ -34,12 +34,17 @@ import VModal from 'vue-js-modal';
 import Croppa from 'vue-croppa'
 import VueProgressBar from 'vue-progressbar'
 
+// import videojsPlaylist from 'videojs-playlist'
+// import playlistMaker from "videojs-playlist/src/playlist-maker";
+
 
 window.Form = Form;
 window.Event = new Vue();
 
 Vue.use(PortalVue);
 Vue.use(VModal);
+// Vue.use(videojsPlaylist);
+// Vue.use(playlistMaker);
 Vue.use(Croppa);
 Vue.use(VueProgressBar, {
   color: 'rgb(143, 255, 199)',

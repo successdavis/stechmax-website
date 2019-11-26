@@ -2,33 +2,22 @@
 
 namespace App;
 
+use App\Events\SystemNoAssigned;
+use App\Mail\UnableToSetSystemNumber;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class Subscription extends Model
 {
     protected $guarded = [];
 
-//    protected $with = ['courses'];
 
-   // public function courses()
-   // {
-   //     return $this->belongsTo(Course::class, 'subscriber_id');
-   // }
-//
-//    public function activate($subscription = null)
-//    {
-//        if ($subscription) {
-//            return $subscription->update([
-//                'active' => true,
-//            ]);
-//        }
-//        return $this->update([
-//            'active' => true,
-//        ]);
-//    }
-//
-//
+    public function subscriber()
+    {
+        return $this->morphTo();
+    }
 
     public function deactivate()
     {
@@ -37,17 +26,29 @@ class Subscription extends Model
             'subscription_end_at' => Carbon::now()
         ]);
     }
-//
-//    static public function activeSubscriptions()
-//    {
-//        return static::where('active', 1);
-//    }
-//
-//    static public function activeClassRoomStudents()
-//    {
-//        return static::where('active', 1)
-//            ->where('class', true);
-//    }
+
+    public function setSystemNumber()
+    {
+        $adminUsers = User::whereAdmin(true)->get();
+        $user = $this->owner;
+
+        for ($i=1; $i < 16 ; $i++) { 
+            $systemNo  = date('y') . '/' . date('n') . '/' . $i;
+            if (!Subscription::where('system_no', $systemNo)->exists()) {
+                $this->update([
+                    'system_no' => $systemNo
+                ]);  
+                $owner      = $this->owner;
+                $subscriber = $this->subscriber;
+                event(new SystemNoAssigned($this, $owner, $subscriber));
+                return true;
+            }
+
+        }
+
+        Mail::to($adminUsers)->send(new UnableToSetSystemNumber($user));
+
+    }
 
     public function scopeActiveSubscriptions()
     {
@@ -79,5 +80,10 @@ class Subscription extends Model
             return !! $subscription->active;
         }
         return !! $this->active;
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

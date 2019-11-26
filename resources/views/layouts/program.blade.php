@@ -18,7 +18,7 @@
                                   <a href="{{$program->path()}}" class="button large">LETS BEGIN</a>
                               </div>
                               <div class="medium-5">
-                                  <h3>  &#8358; {{$program->getAmount()}}</h3>
+                                  <h4>  &#8358; {{$program->getAmount()}}</h4>
                               </div>
                           </div>
                         </div>

@@ -99,6 +99,9 @@
 <script src="{{ asset('js/app.js') }}" ></script>
 <script src="{{ asset('js/remita-pay-inline.bundle.js') }}" ></script>
 
+<script src="{{ asset('videojs-playlist/dist/videojs-playlist.js') }}"></script>
+
+
 @yield('body-close')
 
 <script type="text/javascript">

@@ -109,6 +109,11 @@ class Course extends Model
         return $this->belongsTo(Type::class);
     }
     
+    public function checkType()
+    {
+        return $this->type->name;
+    }
+
     public function subject()
     {
        return $this->belongsTo(Subject::class); // This is the category in which each course falls
@@ -184,6 +189,6 @@ class Course extends Model
 
     public function getAmount()
     {
-        return $this->amount / 100;
+        return number_format($this->amount / 100,2);
     }
 }

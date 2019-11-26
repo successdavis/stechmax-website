@@ -1,8 +1,9 @@
 
-<h3 class="text-center mt-2 mb-2">KEY FEATURES</h3>
+<h2 class="text-center mt-3 ">1,600 STUDENTS CAN'T BE WRONG</h2>
+<h4 class="text-center mb-3">Here is why you too should choose S-Techmax</h4>
 <div class="timeline www-Container">
 
-  <div class="timeline-item">
+{{--   <div class="timeline-item">
     <div class="timeline-icon">
      <i class="fas fa-award" ></i>
     </div>
@@ -10,7 +11,7 @@
       <h2 class="timeline-content-date">Certification</h2>
       <p>A certificate from Stechmax speaks volume about you. A Tech Certificate distinguishes you as an expert in the field, with proven levels of skills and knowledge.</p>
     </div>
-  </div>
+  </div> --}}
 
   <div class="timeline-item">
     <div class="timeline-icon">
@@ -29,7 +30,7 @@
     <div class="timeline-content">
       <h2 class="timeline-content-date">Planned Curriculum</h2>
       <p>
-         Our curriculum has been designed to promote and sustain a thirst for knowledge ove for learning and improve understanding.
+         Our curriculum has been designed to promote and sustain a thirst for knowledge for learning and improve understanding.
       </p>
     </div>
   </div>
@@ -56,7 +57,7 @@
     </div>
   </div>
 
-  <div class="timeline-item">
+{{--   <div class="timeline-item">
     <div class="timeline-icon">
       <i class="fab fa-quinscape"></i>
     </div>
@@ -64,7 +65,7 @@
       <p class="timeline-content-date">Advance Exercise</span></p>
       <p>A lot of practical exercise to perfect skills and engrave a deep understanding in the minds of our learner give a green light of a happy study moment.</p>
     </div>
-  </div>
+  </div> --}}
 
 </div>
 

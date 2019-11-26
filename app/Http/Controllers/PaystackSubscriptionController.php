@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Paystack;
 use App\Course;
 use App\Subject;
+use App\Invoice;
 use Illuminate\Http\Request;
 
 class PaystackSubscriptionController extends Controller
@@ -72,7 +73,7 @@ class PaystackSubscriptionController extends Controller
         $invoice->recordPayment($paymentDetails['data']);
 
         // dd($paymentDetails);
-        $course->createSubscription('', $invoice->id);
+        $course->createSubscription('', $invoice->id, $class = $paymentDetails['data']['metadata']['class']);
 
         return redirect('/paid/' . $course->id)
             ->with('flash', 'Payment Successful');

@@ -21,10 +21,12 @@ class RegistrationTest extends TestCase
         Mail::fake();
         
         $this->post('/register', [
-            'f_name' => 'John',
-            'l_name' => 'doe',
-            'email' => 'john@example.com',
-            'gender' => 'male',
+            'surname' => 'John',
+            'lastname' => 'doeniger',
+            'middlename' => 'swift',
+            'dateofbirth' => '2/13/22',
+            'emailOrPhone' => 'john@example.com',
+            'gender' => 'm',
             'phone' => '09061260072',
             'password' => 'foobar000',
             'password_confirmation' => 'foobar000'

@@ -22,7 +22,7 @@ class CourseController extends Controller
      */
     public function index(Subject $subject, CourseFilters $filters)
     {
-        $courses = $this->getCourses($subject, $filters)->take('10');
+        $courses = $this->getCourses($subject, $filters);
         $subjects = Subject::all();
 
         if (request()->wantsJson()) {
@@ -85,7 +85,7 @@ class CourseController extends Controller
     public function show($subjectId, Course $course)
     {
         if (strtolower($course->type->name) === 'course') {
-            return view('courses.show', compact('course'));        
+            return view('courses.show', compact('course'));
         } 
 
         if (strtolower($course->type->name) === 'program') {

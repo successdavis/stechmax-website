@@ -37,7 +37,7 @@
     z-index: 1;
 }
 
-// @media (min-width: 768px) {
+@media (min-width: 768px) {
     .hero-image:before {
         background: linear-gradient(to right,#fff 36%,rgba(255,255,255,0) 60%,#fff 96%),rgba(0,0,0,.15);
     }
@@ -45,7 +45,11 @@
     .path-info {
         margin-left: 5em;
     }
-// }
+}
+
+    .path-info {
+        margin-left: 1em;
+    }
 
 .full-height-fixed {
     height: calc(100vh - 56px);

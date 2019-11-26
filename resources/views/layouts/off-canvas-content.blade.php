@@ -1,6 +1,7 @@
 <div class="align-content__center">
     <img src="{{auth()->user()->avatar_path}}" class="thumbnail--medium mt-2">
-    <p class="mt-1">Hello {{auth()->user()->f_name . ' ' . auth()->user()->l_name}}</p>
+    <p class="mt-1 mb-reset">Hello {{auth()->user()->f_name . ' ' . auth()->user()->l_name}}</p>
+    <div class="mb-2">{{auth()->user()->user_id}}</div>
     <div class="mb-2">
         <span class="thumbnail--icon dark-gray">
           <a href="{{route('profile.show', ['user' => auth()->user()->email])}}">
@@ -37,6 +38,7 @@
 <ul class="white vertical menu accordion-menu" id="off-canvas_panel-links" data-accordion-menu>
     <li class="dark-gray"><a href="/dashboard">Dashboard</a></li>
     <li><a href="{{route('mycourses.index', ['user' => auth()->user()->username])}}">My Courses</a></li>
+    <li><a href="{{route('billing.home')}}">Billing</a></li>
    
     @if (Auth::user()->isAdmin())
 

@@ -7,7 +7,7 @@
       <nav aria-label="You are here:" role="navigation" class="mt-2">
         <ul class="breadcrumbs">
           <li><a href="#">Home</a></li>
-          <li><a href="#">Registration</a></li>
+          {{-- <li><a href="#">Registration</a></li> --}}
           {{-- <li class="disabled">Gene Splicing</li> --}}
           <li>
             <span class="show-for-sr">Course Registration: </span> Course Registration
@@ -18,8 +18,8 @@
 
    {{-- Content --}}
    <div class="grid-container mt-2">
-       <div class="bg-white">
-
+       <div class="">
+          @include('dashboard/partials/statusCard')
        </div>
    </div>
 @endsection

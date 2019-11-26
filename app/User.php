@@ -42,6 +42,16 @@ class User extends Authenticatable
         'password', 'remember_token'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user){
+            $user->assignId();
+        });
+
+    }
+
     public function getRouteKeyName()
     {
         return 'username';
@@ -62,7 +72,14 @@ class User extends Authenticatable
         return $this->hasOne(Guardian::class)->latest();
     }
 
-     public function activity()
+    public function assignId()
+    {
+        $this->update([
+            'user_id' => 'STM/' . date('Y') . '/B' . date('n') . '/' . sprintf('%04d', $this->id)
+        ]);    
+    }
+
+    public function activity()
     {
         return $this->hasMany(Activity::class);
     }
@@ -124,6 +141,22 @@ class User extends Authenticatable
         return true;
     }
 
+    public function totalActiveCourse($user = '')
+    {
+        return Course::WhereSubscribeBy($this)->get()->count();
+    }
+
+    public function getTotalAmountOwed()
+    {
+        $owed = 0;
+
+        foreach ($this->invoices as $invoice) {
+            $owed += $invoice->amountOwed();
+        }
+
+        return $owed / 100;
+    }
+
     public function getAvatarPathAttribute($avatar)
     {
         if ($avatar) {
@@ -165,6 +198,17 @@ class User extends Authenticatable
         $twilio->message($this->phone, 'Hello World');
     }
 
+    public function MessageSystemNumber($subscription)
+    {
+        $message = 'You have subscribe to "' 
+            . $subscription->subscriber->title 
+            . '" you are assigned to use System '
+            . $subscription->system_no;
+
+        $this->smartSendMessage($message);
+    }
+
+
     public function smartSendToken()
     {   
             $token = $randomid = mt_rand(100000,999999); 
@@ -180,6 +224,15 @@ class User extends Authenticatable
 
             return true;
     }
+
+    public function smartSendMessage($message)
+    {
+        $smartsms = new SmartSms();
+        
+        $smartsms->message($this->phone, $message, 'S-TECHMAX');
+    }
+
+
 
     public function canSendNewToken()
     {

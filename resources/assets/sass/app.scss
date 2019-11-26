@@ -1,6 +1,8 @@
-@import '/vue-croppa/dist/vue-croppa.css';
-// Fonts
-// Variables
+// @import '~/video/src/vjs'; 
+
+@import "../../../node_modules/video.js/src/css/vjs";
+
+
 @import 'base';
 @import 'variables';
 @import 'mixins';
@@ -23,9 +25,11 @@
 @import 'createCourseFlow';
 @import 'transitions';
 @import 'streamer';
+@import 'grid';
 @import 'overlay';
 @import 'program-page';
 @import 'lower-nav';
+@import 'dashboard_card';
 
 .navbar-laravel {
   background-color: #fff;

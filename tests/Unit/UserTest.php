@@ -100,4 +100,16 @@ class UserTest extends TestCase
             });
 
         }
+
+        /** @test */
+        public function an_id_is_assigned_to_a_user_when_created()
+        {
+            $user = create('App\User');
+
+            $userId = 'STM/2019/B11/000' . $user->id;
+
+            // dd('STM/' . date('Y') . '/B' . date('n') . '/' . sprintf('%04d', $user->id));
+
+            $this->assertEquals($userId, $user->user_id);
+        }
 }

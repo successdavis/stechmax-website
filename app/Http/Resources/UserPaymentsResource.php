@@ -18,12 +18,10 @@ class UserPaymentsResource extends JsonResource
         return [
             'id' => $this->id,
             'date' => Carbon::parse($this->created_at)->toDayDateTimeString(),
-            'amount' => $this->amount / 100,
-            'amountOwed' => $this->amountOwed() / 100,
-            'payments' => $this->payments,
-            'invoiceNo' => $this->invoiceNo,
-            'billable' => $this->billable,
-            'status' => $this->status(),
+            'amount' => str_replace('-', '', ($this->amount / 100)),
+            'status' => 'success',
+            'method' => $this->method,
+            'ref' => $this->transaction_ref,
         ];
     }
 }

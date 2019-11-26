@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Channel;
-use App\Subject;
+use App\Http\Resources\InvoicesResource;
+use App\Http\Resources\subjectResource;
 use App\Rules\SpamFree;
+use App\Subject;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         //     $subjects = \Cache::rememberForever('subjects', function() {
         //         return Subject::all();
         //     });
-        //     $view->with('subjects', $subjects);
+        //     $view->with('subjects', subjectResource::collection($subjects));
         // });
 
         \Validator::extend('spamfree', 'App\Rules\SpamFree@passes');

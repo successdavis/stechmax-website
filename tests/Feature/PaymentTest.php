@@ -20,30 +20,30 @@ class PaymentTest extends TestCase
    		
    		$data = [];
    		$data['amount'] = $course->amount;
-   		$data['method'] = 'Office';
-   		$data['purpose'] = 'course payment';
-   		$data['transaction_ref'] = '7343ffe89';
+   		$data['metadata']['method'] = 'Office';
+   		$data['metadata']['purpose'] = 'course payment';
+   		$data['reference'] = '7343ffe89';
 
    		$invoice->recordPayment($data);
 
    		$this->assertCount(1, $invoice->getAllPayments());    
     }
 
-    /** @test */
-    public function invoice_cannot_recieve_payment_amount_more_than_the_invoice_amount()
-    {
-        $user = $this->signIn(create('App\User'));
-   		$course = create('App\Course');
-   		$invoice = $course->createInvoice();
+    // /** @test */
+    // public function invoice_cannot_recieve_payment_amount_more_than_the_invoice_amount()
+    // {
+    //   $user = $this->signIn(create('App\User'));
+   	// 	$course = create('App\Course');
+   	// 	$invoice = $course->createInvoice();
 
-   		$data = [];
-   		$data['amount'] = $course->amount;
-   		$data['method'] = 'Office';
-   		$data['purpose'] = 'course payment';
-   		$data['transaction_ref'] = '7343ffe89';
+   	// 	$data = [];
+    //     $data['amount'] = $course->amount;
+    //     $data['metadata']['method'] = 'Office';
+    //     $data['metadata']['purpose'] = 'course payment';
+    //     $data['reference'] = '7343ffe89';
 
-   		$invoice->recordPayment($data);
-    }
+   	// 	$invoice->recordPayment($data);
+    // }
 
     /** @test */
     public function a_user_can_retrive_total_amount_paid_for_an_invoice()
@@ -64,5 +64,11 @@ class PaymentTest extends TestCase
    		$total = $invoice->totalPayments();
 
    		$this->assertEquals($course->amount, $total);
+    }
+
+    /** @test */
+    public function it_sends_an_email_once_payment_is_recieved()
+    {
+      
     }
 }
