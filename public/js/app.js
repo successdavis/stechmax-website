@@ -4787,6 +4787,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['modal', 'selectedUser'],
   name: "ViewUser",
@@ -4795,6 +4798,7 @@ __webpack_require__.r(__webpack_exports__);
       editing: false,
       date_joined: this.selectedUser.Date_Joined,
       email: this.selectedUser.email,
+      user_id: this.selectedUser.user_id,
       errorMsg: '',
       courses: '',
       Form: new Form({
@@ -94581,18 +94585,27 @@ var render = function() {
               _c("passport-form", { attrs: { user: _vm.selectedUser } }),
               _vm._v(" "),
               _c("div", { staticClass: "user-passport--info" }, [
-                _c("p", [
+                _c("p", { staticStyle: { "padding-left": "15px" } }, [
                   _c("strong", [_vm._v("Member Since:")]),
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(" " + _vm._s(_vm.date_joined) + " ")
                 ]),
                 _vm._v(" "),
-                _c("p", [
-                  _c("strong", [_vm._v("Email:")]),
+                _c("div", { staticClass: "grid-x grid-padding-x" }, [
+                  _c("p", { staticClass: "cell medium-6" }, [
+                    _c("strong", [_vm._v("Email:")]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" " + _vm._s(_vm.email) + " ")
+                  ]),
                   _vm._v(" "),
-                  _c("br"),
-                  _vm._v(" " + _vm._s(_vm.email) + " ")
+                  _c("p", { staticClass: "cell medium-6" }, [
+                    _c("strong", [_vm._v("User Id:")]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" " + _vm._s(_vm.user_id) + " ")
+                  ])
                 ])
               ])
             ],
@@ -94964,7 +94977,7 @@ var render = function() {
                     _c("td", [
                       _c("a", {
                         attrs: { href: data.path },
-                        domProps: { textContent: _vm._s(data.title) }
+                        domProps: { textContent: _vm._s(data.course.title) }
                       })
                     ]),
                     _vm._v(" "),
@@ -97202,7 +97215,7 @@ var render = function() {
             _c("td", [
               _c("a", {
                 attrs: { href: data.path },
-                domProps: { textContent: _vm._s(data.title) }
+                domProps: { textContent: _vm._s(data.course.title) }
               })
             ]),
             _vm._v(" "),

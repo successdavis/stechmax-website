@@ -16,8 +16,11 @@
             <div class="user-passport grid-container">
                 <passport-form :user="selectedUser"></passport-form>
                 <div class="user-passport--info">
-                  <p><strong>Member Since:</strong> <br> {{date_joined}} </p>
-                  <p><strong>Email:</strong> <br> {{email}} </p>
+                  <p style="padding-left: 15px"><strong>Member Since:</strong> <br> {{date_joined}} </p>
+                  <div class="grid-x grid-padding-x">
+                    <p class="cell medium-6"><strong>Email:</strong> <br> {{email}} </p>
+                    <p class="cell medium-6"><strong>User Id:</strong> <br> {{user_id}} </p>
+                  </div>
                 </div>
             </div>
             <form class="mb-4">
@@ -93,7 +96,7 @@
                 <tbody>
                   <tr v-for="data in courses">
                     <td v-text="data.status"></td>
-                    <td><a :href="data.path" v-text="data.title"></a></td>
+                    <td><a :href="data.path" v-text="data.course.title"></a></td>
                     <td v-text="data.subscribedOn"></td>
                     <td v-text="data.subscribtionEndAt"></td> 
                   </tr>
@@ -115,6 +118,7 @@
             editing: false,
             date_joined: this.selectedUser.Date_Joined,
             email: this.selectedUser.email,
+            user_id: this.selectedUser.user_id,
             errorMsg: '',
             courses: '',
 

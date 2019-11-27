@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Course;
+use App\Http\Resources\SubscriptionResource;
 use App\Http\Resources\CourseSubscriptionsResource;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,8 @@ class UserSubscribedCoursesController extends Controller
 
     public function getDataForDataTable(User $user)
     {
-    	 $subscriptions = Course::WhereSubscribeBy($user)->get();
-    	 return CourseSubscriptionsResource::collection($subscriptions);
+        $subscriptions = $user->subscriptions()->get();
+    	return SubscriptionResource::collection($subscriptions);
+    	// return CourseSubscriptionsResource::collection($subscriptions);
     }
 }

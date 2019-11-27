@@ -82,6 +82,14 @@ class Subscription extends Model
         return !! $this->active;
     }
 
+    public function isSubscribeToClass($subscription = null)
+    {
+        if (!empty($subscription)) {
+            return !! $subscription->class;
+        }
+        return !! $this->class;   
+    }
+
     public function owner()
     {
         return $this->belongsTo(User::class, 'user_id');
