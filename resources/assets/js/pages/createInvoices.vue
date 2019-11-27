@@ -56,6 +56,15 @@
 			  </select>
 			</label>
 	      </div>
+	      <div class="medium-6 cell" v-if="paying == 'Course'">
+	        <label>Is the user taking classroom lectures?
+			  <select v-model="Form.classroom" required>
+			  	<option selected value="">Click to select an Option</option>
+			    <option value="1" >Yes</option>
+			    <option value="0" >No</option>
+			  </select>
+			</label>
+	      </div>
 	    </div>
 	    <button class="medium button" :disabled="submitting">Submit</button>
 	  </div>
@@ -72,6 +81,7 @@
                     user: '',
                     partpayment: '',
                     subscribeToCourse: '',
+                    classroom: '',
                 }),
                 PayingFor: [
                 	'Course',

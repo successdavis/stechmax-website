@@ -5886,6 +5886,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5893,7 +5902,8 @@ __webpack_require__.r(__webpack_exports__);
         course: '',
         user: '',
         partpayment: '',
-        subscribeToCourse: ''
+        subscribeToCourse: '',
+        classroom: ''
       }),
       PayingFor: ['Course', 'Material', 'Certificate', 'Classroom Fee', 'Other'],
       paying: '',
@@ -96956,6 +96966,56 @@ var render = function() {
                           _vm.$set(
                             _vm.Form,
                             "subscribeToCourse",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { selected: "", value: "" } }, [
+                        _vm._v("Click to select an Option")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "1" } }, [_vm._v("Yes")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "0" } }, [_vm._v("No")])
+                    ]
+                  )
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.paying == "Course"
+            ? _c("div", { staticClass: "medium-6 cell" }, [
+                _c("label", [
+                  _vm._v("Is the user taking classroom lectures?\n\t\t  "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.Form.classroom,
+                          expression: "Form.classroom"
+                        }
+                      ],
+                      attrs: { required: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.Form,
+                            "classroom",
                             $event.target.multiple
                               ? $$selectedVal
                               : $$selectedVal[0]
