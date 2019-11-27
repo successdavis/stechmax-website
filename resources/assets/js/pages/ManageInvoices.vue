@@ -47,6 +47,7 @@
                 <td v-text="data.date">
                 </td>
                 <td v-text="data.invoiceNo"></td>
+                <td v-text="data.billedTo.f_name + ' ' + data.billedTo.l_name"></td>
                 <td v-text="data.amount"></td>
                 <td v-text="data.status"></td>
                 <td ><invoice-payments :modal="data.id + 'a'" :selectedInvoice="data"></invoice-payments></td>
@@ -69,6 +70,7 @@
                 headers: [
                     {name: 'Date', sort: 'created_at'},
                     {name: 'InvoiceNo', sort: 'invoiceno'},
+                    {name: 'BilledTo'},
                     {name: 'Amount'},
                     {name: 'Status'},
                     {name: 'Action'}
