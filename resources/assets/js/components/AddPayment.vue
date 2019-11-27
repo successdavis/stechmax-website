@@ -60,10 +60,10 @@
 			      </thead>
 			      <tbody>
 			        <tr v-for="payment in selected.payments">
-			          <td v-text="payment.created_at"></td>
-			          <td v-text="payment.transaction_ref"></td>
+			          <td v-text="payment.date"></td>
+			          <td v-text="payment.ref"></td>
 			          <td v-text="payment.purpose"></td>
-			          <td v-text="payment.amount / 100"></td>
+			          <td v-text="payment.amount"></td>
 			        </tr>
 			      </tbody>
 			    </table>

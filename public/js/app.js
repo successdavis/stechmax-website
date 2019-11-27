@@ -6003,6 +6003,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user'],
   data: function data() {
@@ -6015,6 +6016,8 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         name: 'InvoiceNo',
         sort: 'invoiceno'
+      }, {
+        name: 'BilledTo'
       }, {
         name: 'Amount'
       }, {
@@ -90822,11 +90825,11 @@ var render = function() {
                 _vm._l(_vm.selected.payments, function(payment) {
                   return _c("tr", [
                     _c("td", {
-                      domProps: { textContent: _vm._s(payment.created_at) }
+                      domProps: { textContent: _vm._s(payment.date) }
                     }),
                     _vm._v(" "),
                     _c("td", {
-                      domProps: { textContent: _vm._s(payment.transaction_ref) }
+                      domProps: { textContent: _vm._s(payment.ref) }
                     }),
                     _vm._v(" "),
                     _c("td", {
@@ -90834,7 +90837,7 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("td", {
-                      domProps: { textContent: _vm._s(payment.amount / 100) }
+                      domProps: { textContent: _vm._s(payment.amount) }
                     })
                   ])
                 }),
@@ -97129,6 +97132,14 @@ var render = function() {
               _c("td", { domProps: { textContent: _vm._s(data.date) } }),
               _vm._v(" "),
               _c("td", { domProps: { textContent: _vm._s(data.invoiceNo) } }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: {
+                  textContent: _vm._s(
+                    data.billedTo.f_name + " " + data.billedTo.l_name
+                  )
+                }
+              }),
               _vm._v(" "),
               _c("td", { domProps: { textContent: _vm._s(data.amount) } }),
               _vm._v(" "),
