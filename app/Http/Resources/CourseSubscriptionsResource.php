@@ -22,7 +22,6 @@ class CourseSubscriptionsResource extends JsonResource
             'subject' => $this->subject->name,
             'thumbnail_path' => $this->thumbnail_path,
             'sypnosis' => $this->sypnosis,
-            'duration' => $this->duration,
             'published' => $this->published ? 'Published' : 'Unpublished',
             'path' => $this->path,
             'status' => $this->findSubscription(auth()->user())->status(),

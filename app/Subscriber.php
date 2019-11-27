@@ -68,10 +68,9 @@ trait Subscriber
     }
 
     // Return a subscription for this course by this user
-    public function findSubscription(User $user)
+    public function getSubscriptionsBy(User $user)
     {
         return $this->subscriptions()
-            ->where(['user_id' => $user->id])
-            ->first();
+            ->where(['user_id' => $user->id]);
     }
 }

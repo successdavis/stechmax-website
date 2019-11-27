@@ -4787,6 +4787,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['modal', 'selectedUser'],
   name: "ViewUser",
@@ -4795,6 +4798,7 @@ __webpack_require__.r(__webpack_exports__);
       editing: false,
       date_joined: this.selectedUser.Date_Joined,
       email: this.selectedUser.email,
+      user_id: this.selectedUser.user_id,
       errorMsg: '',
       courses: '',
       Form: new Form({
@@ -5999,7 +6003,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user'],
   data: function data() {
@@ -6027,11 +6030,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.fetch(); // axios.get(`/dashboard/${this.user.username}/getallinvoices`)
-    //     .then(response => {
-    //         this.invoices = response.data.data
-    //     }
-    // );
+    this.fetch();
   },
   methods: {
     fetch: function fetch(page) {
@@ -6169,18 +6168,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user'],
   data: function data() {
     return {
-      Payments: []
+      Invoices: []
     };
   },
   created: function created() {
     var _this = this;
 
     axios.get("/dashboard/".concat(this.user.username, "/getuserpayments")).then(function (response) {
-      _this.Payments = response.data.data;
+      _this.Invoices = response.data.data;
     });
   }
 });
@@ -94581,18 +94582,27 @@ var render = function() {
               _c("passport-form", { attrs: { user: _vm.selectedUser } }),
               _vm._v(" "),
               _c("div", { staticClass: "user-passport--info" }, [
-                _c("p", [
+                _c("p", { staticStyle: { "padding-left": "15px" } }, [
                   _c("strong", [_vm._v("Member Since:")]),
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(" " + _vm._s(_vm.date_joined) + " ")
                 ]),
                 _vm._v(" "),
-                _c("p", [
-                  _c("strong", [_vm._v("Email:")]),
+                _c("div", { staticClass: "grid-x grid-padding-x" }, [
+                  _c("p", { staticClass: "cell medium-6" }, [
+                    _c("strong", [_vm._v("Email:")]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" " + _vm._s(_vm.email) + " ")
+                  ]),
                   _vm._v(" "),
-                  _c("br"),
-                  _vm._v(" " + _vm._s(_vm.email) + " ")
+                  _c("p", { staticClass: "cell medium-6" }, [
+                    _c("strong", [_vm._v("User Id:")]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" " + _vm._s(_vm.user_id) + " ")
+                  ])
                 ])
               ])
             ],
@@ -94964,7 +94974,7 @@ var render = function() {
                     _c("td", [
                       _c("a", {
                         attrs: { href: data.path },
-                        domProps: { textContent: _vm._s(data.title) }
+                        domProps: { textContent: _vm._s(data.course.title) }
                       })
                     ]),
                     _vm._v(" "),
@@ -97122,7 +97132,17 @@ var render = function() {
               _vm._v(" "),
               _c("td", { domProps: { textContent: _vm._s(data.amount) } }),
               _vm._v(" "),
-              _c("td", { domProps: { textContent: _vm._s(data.status) } })
+              _c("td", { domProps: { textContent: _vm._s(data.status) } }),
+              _vm._v(" "),
+              _c(
+                "td",
+                [
+                  _c("invoice-payments", {
+                    attrs: { modal: data.id + "a", selectedInvoice: data }
+                  })
+                ],
+                1
+              )
             ])
           }),
           0
@@ -97202,7 +97222,7 @@ var render = function() {
             _c("td", [
               _c("a", {
                 attrs: { href: data.path },
-                domProps: { textContent: _vm._s(data.title) }
+                domProps: { textContent: _vm._s(data.course.title) }
               })
             ]),
             _vm._v(" "),
@@ -97264,7 +97284,7 @@ var render = function() {
         staticClass: "vertical menu accordion-menu",
         attrs: { "data-accordion-menu": "" }
       },
-      _vm._l(_vm.Payments, function(invoice, index) {
+      _vm._l(_vm.Invoices, function(invoice, index) {
         return _c("li", { key: invoice.id }, [
           _c("a", { staticClass: "flex-container", attrs: { href: "#" } }, [
             _c("i", { staticClass: "fas fa-file-invoice" }),
@@ -97293,11 +97313,11 @@ var render = function() {
                 _vm._l(invoice.payments, function(payment) {
                   return _c("tr", [
                     _c("td", {
-                      domProps: { textContent: _vm._s(payment.created_at) }
+                      domProps: { textContent: _vm._s(payment.date) }
                     }),
                     _vm._v(" "),
                     _c("td", {
-                      domProps: { textContent: _vm._s(payment.transaction_ref) }
+                      domProps: { textContent: _vm._s(payment.ref) }
                     }),
                     _vm._v(" "),
                     _c("td", {
@@ -97306,6 +97326,10 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", {
                       domProps: { textContent: _vm._s(payment.amount) }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      domProps: { textContent: _vm._s(payment.status) }
                     })
                   ])
                 }),
@@ -97328,11 +97352,13 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Date")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Transaction")]),
+        _c("th", [_vm._v("Transaction Ref.")]),
         _vm._v(" "),
         _c("th", [_vm._v("Purpose")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Amount Paid")])
+        _c("th", [_vm._v("Amount Paid")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Status")])
       ])
     ])
   }

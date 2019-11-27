@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\InvoicesResource;
 use App\Http\Resources\UserPaymentsResource;
 use App\User;
 use App\payments;
@@ -24,6 +25,6 @@ class UserPaymentsController extends Controller
     public function getDataForDataTable(User $user)
     {
          $invoices = $user->invoices()->get();
-         return UserPaymentsResource::collection($invoices);
+         return InvoicesResource::collection($invoices);
     }
 }
