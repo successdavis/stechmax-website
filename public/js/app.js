@@ -6003,7 +6003,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user'],
   data: function data() {
@@ -6031,11 +6030,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.fetch(); // axios.get(`/dashboard/${this.user.username}/getallinvoices`)
-    //     .then(response => {
-    //         this.invoices = response.data.data
-    //     }
-    // );
+    this.fetch();
   },
   methods: {
     fetch: function fetch(page) {
@@ -97135,7 +97130,17 @@ var render = function() {
               _vm._v(" "),
               _c("td", { domProps: { textContent: _vm._s(data.amount) } }),
               _vm._v(" "),
-              _c("td", { domProps: { textContent: _vm._s(data.status) } })
+              _c("td", { domProps: { textContent: _vm._s(data.status) } }),
+              _vm._v(" "),
+              _c(
+                "td",
+                [
+                  _c("invoice-payments", {
+                    attrs: { modal: data.id + "a", selectedInvoice: data }
+                  })
+                ],
+                1
+              )
             ])
           }),
           0

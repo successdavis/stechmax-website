@@ -49,8 +49,7 @@
                 <td v-text="data.invoiceNo"></td>
                 <td v-text="data.amount"></td>
                 <td v-text="data.status"></td>
-                <!-- <td v-text="data.status"></td> -->
-                <!-- <td ><view-user :modal="data.id + 'a'" :selectedUser="data" @userUpdated="fetch"></view-user></td> -->
+                <td ><invoice-payments :modal="data.id + 'a'" :selectedInvoice="data"></invoice-payments></td>
             </tr>
         </tbody>
     </table>
@@ -84,11 +83,6 @@
 
         created () {
             this.fetch();
-            // axios.get(`/dashboard/${this.user.username}/getallinvoices`)
-            //     .then(response => {
-            //         this.invoices = response.data.data
-            //     }
-            // );
         },
 
         methods: {
