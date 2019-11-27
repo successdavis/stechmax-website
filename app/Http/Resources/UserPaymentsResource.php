@@ -21,6 +21,7 @@ class UserPaymentsResource extends JsonResource
             'amount' => str_replace('-', '', ($this->amount / 100)),
             'status' => 'success',
             'method' => $this->method,
+            'purpose' => $this->purpose,
             'ref' => $this->transaction_ref,
         ];
     }

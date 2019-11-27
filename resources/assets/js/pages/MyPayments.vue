@@ -2,7 +2,7 @@
 	<div class="grid-container">
 		<h3>My Payments History</h3>
 		<ul class="vertical menu accordion-menu" data-accordion-menu>
-		  <li v-for="(invoice, index) in Payments" :key="invoice.id">
+		  <li v-for="(invoice, index) in Invoices" :key="invoice.id">
 		    <a href="#" class="flex-container"><i class="fas fa-file-invoice"></i>
 		    	<ul class="paymentsheader flex-container">
 		    		<li v-text="invoice.date"></li>
@@ -15,17 +15,19 @@
 		      <thead>
 		        <tr>
 		          	<th>Date</th>
-					<th>Transaction</th>
+					<th>Transaction Ref.</th>
 					<th>Purpose</th>
 					<th>Amount Paid</th>
+					<th>Status</th>
 		        	</tr>
 		      </thead>
 		      <tbody>
 		        <tr v-for="payment in invoice.payments">
-		          <td v-text="payment.created_at"></td>
-		          <td v-text="payment.transaction_ref"></td>
+		          <td v-text="payment.date"></td>
+		          <td v-text="payment.ref"></td>
 		          <td v-text="payment.purpose"></td>
 		          <td v-text="payment.amount"></td>
+		          <td v-text="payment.status"></td>
 		        </tr>
 		      </tbody>
 		    </table>
@@ -41,14 +43,14 @@
 		props: ['user'],
 		data () {
 			return {
-				Payments: [],
+				Invoices: [],
 			}
 		},
 
 		created () {
 			axios.get(`/dashboard/${this.user.username}/getuserpayments`)
 				.then(response => {
-					this.Payments = response.data.data
+					this.Invoices = response.data.data
 				}
 			);
 		}

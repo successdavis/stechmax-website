@@ -6168,18 +6168,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user'],
   data: function data() {
     return {
-      Payments: []
+      Invoices: []
     };
   },
   created: function created() {
     var _this = this;
 
     axios.get("/dashboard/".concat(this.user.username, "/getuserpayments")).then(function (response) {
-      _this.Payments = response.data.data;
+      _this.Invoices = response.data.data;
     });
   }
 });
@@ -97282,7 +97284,7 @@ var render = function() {
         staticClass: "vertical menu accordion-menu",
         attrs: { "data-accordion-menu": "" }
       },
-      _vm._l(_vm.Payments, function(invoice, index) {
+      _vm._l(_vm.Invoices, function(invoice, index) {
         return _c("li", { key: invoice.id }, [
           _c("a", { staticClass: "flex-container", attrs: { href: "#" } }, [
             _c("i", { staticClass: "fas fa-file-invoice" }),
@@ -97311,11 +97313,11 @@ var render = function() {
                 _vm._l(invoice.payments, function(payment) {
                   return _c("tr", [
                     _c("td", {
-                      domProps: { textContent: _vm._s(payment.created_at) }
+                      domProps: { textContent: _vm._s(payment.date) }
                     }),
                     _vm._v(" "),
                     _c("td", {
-                      domProps: { textContent: _vm._s(payment.transaction_ref) }
+                      domProps: { textContent: _vm._s(payment.ref) }
                     }),
                     _vm._v(" "),
                     _c("td", {
@@ -97324,6 +97326,10 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", {
                       domProps: { textContent: _vm._s(payment.amount) }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      domProps: { textContent: _vm._s(payment.status) }
                     })
                   ])
                 }),
@@ -97346,11 +97352,13 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Date")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Transaction")]),
+        _c("th", [_vm._v("Transaction Ref.")]),
         _vm._v(" "),
         _c("th", [_vm._v("Purpose")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Amount Paid")])
+        _c("th", [_vm._v("Amount Paid")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Status")])
       ])
     ])
   }

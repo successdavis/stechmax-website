@@ -73,7 +73,7 @@ class Invoice extends Model
 
     public function status()
     {
-        if ($this->paid) {
+        if ($this->completed) {
             return 'completed';
         }
 
