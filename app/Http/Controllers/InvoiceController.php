@@ -53,6 +53,7 @@ class InvoiceController extends Controller
             $user = User::find(request()->user);
             $partpayment = request()->partpayment;
             $subscribeToCourse = request()->subscribeToCourse;
+            $classroom = request()->classroom;
 
             if ($course->isSubscribedBy($user)) {
                 abort(422, 'This user has an active subscription to this course.');
@@ -61,7 +62,7 @@ class InvoiceController extends Controller
             $invoice = $course->createInvoice($user->id, $partpayment);
 
             if ($subscribeToCourse == 1) {
-                $course->createSubscription($user->id, $invoice->id);
+                $course->createSubscription($user->id, $invoice->id, $classroom);
             }
 
             return $invoice;
