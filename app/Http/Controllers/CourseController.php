@@ -84,15 +84,11 @@ class CourseController extends Controller
      */
     public function show($subjectId, Course $course)
     {
-        if (strtolower($course->type->name) === 'course') {
-            return view('courses.show', compact('course'));
-        } 
-
         if (strtolower($course->type->name) === 'program') {
             return view('courses.program.index', compact('course'));        
         }
 
-            return view('courses.show_track', compact('course'));        
+        return view('courses.show', compact('course'));    
 
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLecturesTable extends Migration
+class AddVideoPathtoCoursesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateLecturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('lectures', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('section_id')->index();
-            $table->integer('order');
-            $table->string('title');
-            $table->timestamps();
+        Schema::table('courses', function (Blueprint $table) {
+            $table->text('video_path')->nullable();
         });
     }
 
@@ -29,6 +25,6 @@ class CreateLecturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lectures');
+        //
     }
 }

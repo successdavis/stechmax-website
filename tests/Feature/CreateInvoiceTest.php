@@ -15,16 +15,15 @@ class CreateInvoiceTest extends TestCase
        public function an_invoice_can_be_created_for_a_course()
        {
        		
-       		$user = $this->signIn(factory('App\User')->states('administrator')->create());
-       		$course = create('App\Course');
+         	$user = $this->signIn(factory('App\User')->states('administrator')->create());
+         	$course = create('App\Course');
 
-       		// dd(auth()->user());
+         	// dd(auth()->user());
 
-       		$this->assertCount(0, $course->whereInvoicedBy(auth()->user())->get());
+         	$this->assertCount(0, $course->whereInvoicedBy(auth()->user())->get());
 
-			$course->createInvoice();
+  			  $course->createInvoice();
 
-       		$this->assertCount(1, $course->whereInvoicedBy(auth()->user())->get());
-
+         	$this->assertCount(1, $course->whereInvoicedBy(auth()->user())->get());
        }
 }

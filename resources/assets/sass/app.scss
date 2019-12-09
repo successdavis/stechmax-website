@@ -1,6 +1,3 @@
-// @import '~/video/src/vjs'; 
-
-@import "../../../node_modules/video.js/src/css/vjs";
 
 
 @import 'base';
@@ -10,7 +7,7 @@
 @import 'position';
 @import 'components';
 @import 'course'; 
-@import 'course_details';
+@import 'course_show';
 @import 'banner';
 @import 'buttons';
 @import 'timeline';
@@ -30,6 +27,7 @@
 @import 'program-page';
 @import 'lower-nav';
 @import 'dashboard_card';
+@import 'showCourseStreamer';
 
 .navbar-laravel {
   background-color: #fff;

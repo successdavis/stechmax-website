@@ -29,6 +29,8 @@ Route::get('api/courses/allcoursesandtracks', 'Api\CoursesController@allcoursesa
 Route::get('api/courses/viewAllCourses', 'Api\CoursesController@index')->middleware(['admin'])->name('courses.index');
 Route::post('api/courses/{subject}/{course}', 'Api\CourseImageController@store')->middleware(['auth', 'admin']);
 
+Route::post('api/course/{course}/promovideo', 'PromoVideoController@store');
+
 Route::get('api/courses/{course}/getcourses', 'TrackController@getTrackCourses')->middleware('admin')->name('courses.getCourses');
 Route::post('tracks/{course}/addcourse', 'TrackController@store')->middleware('admin')->name('track.store');
 Route::put('tracks/{course}/reOrderCourses', 'TrackController@reOrderCourses')->middleware('admin')->name('track.reOrder');
@@ -57,6 +59,8 @@ Route::get('manage/{section}/lectures', 'LectureController@index')->middleware([
 Route::put('manage/{section}/lectures', 'LectureController@reOrderLectures')->middleware(['admin']);
 Route::patch('manage/{lecture}/lecture', 'LectureController@update')->middleware(['admin']);
 Route::delete('manage/{lecture}/lecture', 'LectureController@destroy')->middleware(['admin']);
+
+Route::get('lectures/{lecture}', 'LectureController@show')->name('lecture.show');
 
 
 Route::post('/courses', 'CourseController@store')->middleware('admin')->name('courses.store');

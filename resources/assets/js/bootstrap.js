@@ -33,6 +33,9 @@ import Form from './utilities/Form';
 import VModal from 'vue-js-modal';
 import Croppa from 'vue-croppa'
 import VueProgressBar from 'vue-progressbar'
+import VueVideoPlayer from 'vue-video-player'
+
+import 'video.js/dist/video-js.css'
 
 // import videojsPlaylist from 'videojs-playlist'
 // import playlistMaker from "videojs-playlist/src/playlist-maker";
@@ -50,7 +53,12 @@ Vue.use(VueProgressBar, {
   color: 'rgb(143, 255, 199)',
   failedColor: 'red',
   height: '10px'
-})
+});
+
+Vue.use(VueVideoPlayer, /* {
+  options: global default options,
+  events: global videojs events
+} */)
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that

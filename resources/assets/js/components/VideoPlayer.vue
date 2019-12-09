@@ -31,6 +31,6 @@ export default {
         if (this.player) {
             this.player.dispose()
         }
-    }
+    },
 }
 </script>

@@ -72,6 +72,11 @@ class User extends Authenticatable
         return $this->hasOne(Guardian::class)->latest();
     }
 
+    public function experience()
+    {
+        return $this->hasOne(Experience::class);
+    }
+
     public function assignId()
     {
         $this->update([

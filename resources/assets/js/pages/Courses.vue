@@ -62,7 +62,7 @@
               </div>
               <div class="grid-x grid-padding-x">
                   <a :href="course.path" target="_blank" class="cell small-6 small button">Visit</a>
-                  <a :href="'/dashboard/' + course.id + '/manage'" class="cell small-6 small button secondary">Edit</a>
+                  <a :href="'/dashboard/' + course.title + '/manage'" class="cell small-6 small button secondary">Edit</a>
               </div>
             </div>
           </div>

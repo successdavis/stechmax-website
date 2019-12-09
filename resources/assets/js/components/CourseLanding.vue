@@ -60,6 +60,7 @@
 
         </form>
         <CourseThumbnail :data="course" :path="path"></CourseThumbnail>
+        <promo-video :course="course"></promo-video>
     </div>
 </template>
 <script>
@@ -97,7 +98,7 @@
         methods: {
             persist () {
                 this.save = false;
-              this.Form.patch(`/courses/${this.course.id}`)
+              this.Form.patch(`/courses/${this.course.title}`)
                 .then(data => {
                         flash('Your changes have been saved');
                     }

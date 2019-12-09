@@ -16,6 +16,8 @@ class AuthServiceProvider extends ServiceProvider
         'App\Thread' => 'App\Policies\ThreadPolicy',
         'App\Reply' => 'App\Policies\ReplyPolicy',
         'App\User' => 'App\Policies\UserPolicy',
+        'App\Video' => 'App\Policies\VideoPolicy',
+        'App\Lecture' => 'App\Policies\LecturePolicy',
     ];
 
     /**
@@ -28,8 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::before(function($user){
-            if($user->name === 'Success Davis') return true;
-
+            if($user->isAdmin()) return true;
         });
     }
 }
