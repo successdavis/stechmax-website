@@ -57,9 +57,16 @@ class LectureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Lecture $lecture)
     {
-        //
+        $course = $lecture->section->course;
+        $this->authorize('view', $lecture); 
+
+        if (!empty($lecture->video()->get())) {
+            return $lecture->getVideoUrl();
+        }
+
+        abort(403, 'This lesson has no associated video');
     }
 
     /**

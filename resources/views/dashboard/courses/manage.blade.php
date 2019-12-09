@@ -45,7 +45,10 @@
               </div>
               <hr>
               
-              <course-landing :course="{{$course}}" :path="'{{$course->path()}}'"></course-landing>
+              <course-landing 
+                :course="{{$course}}" 
+                :path="'{{$course->path()}}'"
+              ></course-landing>
             </div>
 
             <div class="tabs-panel" id="panel4v">

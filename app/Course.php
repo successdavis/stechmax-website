@@ -18,15 +18,29 @@ class Course extends Model
 
     // protected $with = ['subscriptions'];
 
+    public function getRouteKeyName()
+    {
+        return 'title';
+    }
 
     public function path()
     {
-        return '/courses/' . $this->subject->slug . '/' . $this->id;
+        return '/courses/' . $this->subject->slug . '/' . $this->title;
     }
 
     public function getPathAttribute()
     {
         return $this->path();
+    }
+
+    public function getVideoPathAttribute($videoPath)
+    {
+        if ($videoPath) {
+            return asset('storage/' . $videoPath);
+        }else {
+            return asset('storage/promovideo/default.mp4');
+            // return null;
+        }
     }
 
 

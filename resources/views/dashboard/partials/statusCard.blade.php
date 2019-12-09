@@ -14,7 +14,7 @@
 		</div>
 		<div class="small-6" style="color: yellowgreen">
 			<p>Projects Completed</p>
-			54
+			0
 		</div>
 	</div>
 	<div class="status__card grid-x cell medium-4">

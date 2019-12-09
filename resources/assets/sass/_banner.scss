@@ -42,14 +42,8 @@
         background: linear-gradient(to right,#fff 36%,rgba(255,255,255,0) 60%,#fff 96%),rgba(0,0,0,.15);
     }
 
-    .path-info {
-        margin-left: 5em;
-    }
 }
 
-    .path-info {
-        margin-left: 1em;
-    }
 
 .full-height-fixed {
     height: calc(100vh - 56px);
@@ -67,30 +61,6 @@
     background: rgba(46,43,43,.6);
 }
 
-#path-header {
-    position: relative;
-    overflow: hidden;
-    background: white;
-    box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);
-}
-
-#path-header:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-image: linear-gradient(42deg,#fff 27%,rgba(255,255,255,.7) 37%,rgba(0,139,201,.45) 74%,rgba(0,157,165,.5) 100%);
-    z-index: 1;
-}
-
-.path-info {
-    position: absolute;
-    top: 50%;
-    z-index: 2;
-    transform: translateY(-50%);
-}
 
 #reg-form {
     background-color: rgba(0,0,0,.2);

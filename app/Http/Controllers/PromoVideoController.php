@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Lecture;
-use App\video;
+use App\Course;
 use Illuminate\Http\Request;
 
-class VideoController extends Controller
+class PromoVideoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,36 +33,42 @@ class VideoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Course $course)
     {
-        //
+        if (! auth()->user()->isAdmin()) {
+            abort(403,'You do not have access to carry out this request');
+        }
+
+        $request->validate([
+            'video' => 'required|mimetypes:video/avi,video/mpeg,video/mp4,video/quicktime'
+        ]);
+
+
+        $course->update([
+            'video_Path' => request()->file('video')->storeAs('promovideo', $course->title, 'public')
+        ]);
+
+        return response($course->video_path, 204);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\video  $video
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Lecture $lecture)
+    public function show($id)
     {
-        // $course = $lecture->section->course;
-        // $this->authorize('show', $course); 
-
-        // if (!empty($lecture->video()->get())) {
-        //     return $lecture->getVideoUrl();
-        // }
-
-        // abort(403, 'This lesson has no associated video');
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\video  $video
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(video $video)
+    public function edit($id)
     {
         //
     }
@@ -72,10 +77,10 @@ class VideoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\video  $video
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, video $video)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -83,10 +88,10 @@ class VideoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\video  $video
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(video $video)
+    public function destroy($id)
     {
         //
     }

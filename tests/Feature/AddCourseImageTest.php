@@ -25,11 +25,12 @@ class AddCourseImageTest extends TestCase
     /** @test */
     public function a_none_administrator_cannot_add_course_image()
     {
-        $this->signIn();
         $this->withExceptionHandling();
+
+        $this->signIn();
         $course = create('App\Course');
 
-        $this->json('POST', 'api/courses/'. $course->subject->slug .'/' . $course->id)
+        $this->json('POST', 'api/courses/'. $course->subject->slug .'/' . $course->title)
             ->assertStatus(403);
     }
 
@@ -40,21 +41,22 @@ class AddCourseImageTest extends TestCase
         $this->withExceptionHandling()->signIn(factory('App\User')->states('administrator')->create());
         $course = create('App\Course');
 
-        $this->json('POST', 'api/courses/' . $course->subject->slug . '/' . $course->id, ['thumbnail' => 'not an image'])
+        $this->json('POST', 'api/courses/' . $course->subject->slug . '/' . $course->title, ['thumbnail' => 'not an image'])
             ->assertStatus(422);
     }
 
 
-    
+     /** @test */
     public function an_administrator_may_add_course_image()
     {
+        $this->withExceptionHandling();
         $this->signIn(factory('App\User')->states('administrator')->create());
 
         $course = create('App\Course');
 
         storage::fake('public');
 
-        $this->json('POST', 'api/courses/' . $course->subject->slug . '/' . $course->id, ['thumbnail' => $file = UploadedFile::fake()->image('thumbnail.jpg')]);
+        $this->json('POST', 'api/courses/' . $course->subject->slug . '/' . $course->title, ['thumbnail' => $file = UploadedFile::fake()->image('thumbnail.jpg', '750', '422')]);
 
         $this->assertEquals(asset('storage/thumbnails/'.$file->hashName()), $course->fresh()->thumbnail_path);
 
