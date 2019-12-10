@@ -26,6 +26,6 @@ class UserEarnedExperience
     public function __construct($user, $experience)
     {
         $this->user         = $user;
-        $this->experience   = $experience
+        $this->experience   = $experience;
     }
 }

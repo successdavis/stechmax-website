@@ -13,7 +13,12 @@
         "laravel/framework": "5.7.9",
         "laravel/scout": "^7.1",
         "laravel/tinker": "^1.0",
+<<<<<<< HEAD
         "unicodeveloper/laravel-paystack": "^1.0"
+=======
+        "php-ffmpeg/php-ffmpeg": "^0.14.0",
+        "unicodeveloper/laravel-paystack": "1.0.*"
+>>>>>>> 22ab8b44f830f1ccf5a52501584be09a7b4ddb83
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

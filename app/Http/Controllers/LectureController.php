@@ -66,7 +66,7 @@ class LectureController extends Controller
             return $lecture->getVideoUrl();
         }
 
-        abort(403, 'This lesson has no associated video');
+        abort(403, 'This lesson has no associate video');
     }
 
     /**

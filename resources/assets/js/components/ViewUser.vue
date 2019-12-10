@@ -13,6 +13,19 @@
                 </div>
               </div>
 
+            <div class="grid-container">
+              <div class="button experience-btn" type="button">
+                <span @click="toggleExperiencePane">Award EXP</span>
+                <div class="experience-pane" v-if="awardingExperience">
+                    <form>
+                        <h2 v-text="iPoints"></h2>
+                        <input type="number" name="points" v-model="points" placeholder="Specify points to Award">
+                        <button class="medium button" @click.prevent="awardExperience">Award</button>
+                    </form>
+                </div>
+              </div>
+            </div>
+
             <div class="user-passport grid-container">
                 <passport-form :user="selectedUser"></passport-form>
                 <div class="user-passport--info">
@@ -115,12 +128,15 @@
 
         data () {
           return {
+            iPoints: this.selectedUser.points,
             editing: false,
             date_joined: this.selectedUser.Date_Joined,
             email: this.selectedUser.email,
             user_id: this.selectedUser.user_id,
             errorMsg: '',
             courses: '',
+            points: '',
+            awardingExperience: false,
 
             Form: new Form ({
                 surname: this.selectedUser.f_name,
@@ -161,6 +177,25 @@
                 });
             }
           },
+
+          toggleExperiencePane() {
+            if (this.awardingExperience) {
+                return this.awardingExperience = false
+            }
+            return this.awardingExperience = true
+          },
+
+          awardExperience() {
+            axios.post(`/api/${this.selectedUser.username}/awardexperience`, {points: this.points})
+              .then(() => {
+                flash('Points Awarded');
+                this.awardingExperience = false;
+                this.iPoints += this.points;
+              })
+              .catch(error => {
+                flash('Unable to award Experience Points', 'failed');
+              })
+          }
         }
     }
 </script>
@@ -209,5 +244,18 @@
 .user-passport--info {
     margin-top: 32px;
     padding-left: 1em;
+}
+
+.experience-btn {
+  position: relative;
+}
+
+.experience-pane {
+    position: absolute;
+    top: 42px;
+    background: #222a38;
+    min-width: 300px;
+    left: 0;
+    padding: 1em;
 }
 </style>
