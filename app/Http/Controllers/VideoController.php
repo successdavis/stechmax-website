@@ -34,9 +34,26 @@ class VideoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Lecture $lecture)
     {
-        //
+        abort(422, 'URL Under maintenance');
+        if (! auth()->user()->isAdmin()) {
+            abort(403,'You do not have access to carry out this request');
+        }
+
+        $request->validate([
+            'video' => 'required|mimetypes:video/avi,video/mpeg,video/mp4,video/quicktime'
+        ]);
+
+        // $lecture->video()->create([
+        //     'duration' => 
+        // ]);
+
+        $lecture->update([
+            'url' => request()->file('video')->storeAs('promovideo', $course->title, 'public')
+        ]);
+
+        return response($course->video_path, 204);
     }
 
     /**

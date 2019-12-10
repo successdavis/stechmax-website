@@ -23,32 +23,21 @@ class ExperienceTest extends TestCase
     }
 
     /** @test */
-    public function an_annoucement_is_made_when_experience_is_awarded()
+    public function experience_can_be_awarded_to_a_user()
     {
-    	Event::fake();
+        $this->signIn();
 
-    	$this->signIn();
-
-    	$invoice = create('App\Invoice', ['user_id' => $this->user->id]);
-    	$course = Course::find(1);
-
-    	$subscription = $course->createSubscription($this->user->id, $invoice->id);
-
-    	Event::assertDispatched(UserEarnedExperience::class);
-
-    	
+        $this->user->awardExperience(500);
+        $this->assertEquals(500, $this->user->experienceLevel());
     }
 
     /** @test */
-    public function a_user_earns_experience_when_they_subscribe_to_lesson()
+    public function experience_can_be_strip_off_a_user()
     {
-    	$this->signIn();
-    	$invoice = create('App\Invoice');
+        $this->signIn();
 
-    	$this->user->createSubscription('',$invoice->id);
-
-    	$this->assertEquals(100, $user->userExperience());
+        $this->user->awardExperience(500);
+        $this->user->stripExperience(200);
+        $this->assertEquals(300, $this->user->experienceLevel());
     }
-
-
 }

@@ -2,27 +2,21 @@
 
 namespace App;
 
-use Carbon\Carbon;
+use App\Course;
+use App\Experience;
+use App\Http\Resources\CourseSubscriptionsResource;
 use App\SmartSms\SmartSms;
+use Carbon\Carbon;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
-use App\Course;
-use App\Http\Resources\CourseSubscriptionsResource;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use Experience;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    // protected $fillable = [
-    //     'f_name', 'l_name', 'email', 'password', 'paystack_id', 'phone', 'gender', 'avatar_path', ''
-    // ];
     protected $with = ['guardians'];
 
     protected $guarded = [];
@@ -32,6 +26,7 @@ class User extends Authenticatable
         'phone_confirmed' => 'boolean',
         'admin' => 'boolean'
     ];
+
 
     /**
      * The attributes that should be hidden for arrays.

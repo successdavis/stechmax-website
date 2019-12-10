@@ -5,7 +5,7 @@
 		</div>
 		<div class="small-6">
 			<p>Points Earned</p>
-			0
+				{{auth()->user()->experienceLevel()}}
 		</div>
 	</div>
 	<div class="status__card grid-x cell medium-4">

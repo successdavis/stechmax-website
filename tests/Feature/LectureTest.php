@@ -6,6 +6,8 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 
 class LectureTest extends TestCase
@@ -25,7 +27,7 @@ class LectureTest extends TestCase
     }
 
     /** @test */
-    public function subscribe_user_may_access_billed_lecture_url()
+    public function subscribe_user_may_access_billed_lecture_video_url()
     {
         $this->withExceptionHandling();
         $user       = $this->signIn();
@@ -38,5 +40,20 @@ class LectureTest extends TestCase
 
         $this->get(route('lecture.show', ['lecture' => $lecture->title]))
             ->assertStatus(200);
+    }
+
+    /** @test */
+    public function an_admin_can_attach_a_video_to_a_course()
+    {
+        $this->withExceptionHandling();
+        $this->signIn(factory('App\User')->states('administrator')->create());
+        $lecture = create('App\Lecture');
+
+        $this->json('POST', 'api/' . $lecture->id . '/attachvideo', ['video' => $file = UploadedFile::fake()->create('promo-video.mp4', 90)]);
+
+
+        $this->assertEquals(asset('storage/lecturesvideo/'.$lecture->title), $lecture->fresh()->getVideoUrl());
+
+        Storage::disk('public')->assertExists('lecturesvideo/' . $lecture->title);
     }
 }
