@@ -190,7 +190,7 @@
               .then(() => {
                 flash('Points Awarded');
                 this.awardingExperience = false;
-                this.iPoints += this.points;
+                this.iPoints = +this.iPoints + +this.points;
               })
               .catch(error => {
                 flash('Unable to award Experience Points', 'failed');

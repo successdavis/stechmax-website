@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use FFMpeg;
+
 use App\Course;
 use Illuminate\Http\Request;
 
@@ -43,10 +45,22 @@ class PromoVideoController extends Controller
             'video' => 'required|mimetypes:video/avi,video/mpeg,video/mp4,video/quicktime'
         ]);
 
-
         $course->update([
             'video_Path' => request()->file('video')->storeAs('promovideo', $course->title, 'public')
         ]);
+
+        require 'vendor/autoload.php';
+        dd(exec('which ffmpeg'));
+        $ffmpeg = FFMpeg\FFMpeg::create(array(
+            'ffmpeg.binaries' => 'C:\FFmpeg\bin\ffmpeg.exe',
+            'ffprobe.binaries' => 'C:\FFmpeg\bin\ffprope.exe',
+            'timeout' => 3600, // The timeout for the underlying process
+            'ffmpeg.threads' => 12, // The number of threads that FFMpeg should use
+            ), @$logger);
+
+        $video = $ffmpeg->open($course->videoPath);
+
+        dd($video);
 
         return response($course->video_path, 204);
     }
