@@ -7,7 +7,7 @@
             <div class="grid-x grid-margin-x small-up-1 medium-up-3">
                 @foreach($programs as $program)
                     <div class="cell">
-                        <div class="card" >
+                        <div class="card" style="width: 300px;">
                           <img src="{{$program->thumbnail_path}}">
                           <div class="card-section">
                             <h4>{{$program->title}}</h4>
@@ -18,7 +18,7 @@
                                   <a href="{{$program->path()}}" class="button large">LETS BEGIN</a>
                               </div>
                               <div class="medium-5">
-                                  <h4>  &#8358; {{$program->getAmount()}}</h4>
+                                  <h5>  &#8358; {{$program->getAmount()}}</h5>
                               </div>
                           </div>
                         </div>

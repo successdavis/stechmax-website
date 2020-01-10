@@ -29,6 +29,9 @@ class AddAvatarTest extends TestCase
 
         $this->json('POST', 'api/users/' . auth()->user()->username . '/avatar', ['avatar' => 'not-an-image'])
             ->assertStatus(422);
+
+        return redirect($school->path())
+            ->with('flash', 'School Created');
     }
 
     /** @test */
