@@ -19,7 +19,7 @@ class CreateLearnsTest extends TestCase
         $learn = make('App\Learn');
         $course = create('App\Course');
 
-        $response = $this->post(route('learn.store', ['course' => $course->id]), $learn->toArray());
+        $response = $this->post(route('learn.store', ['course' => $course->slug]), $learn->toArray());
 
         $this->get($course->path())
             ->assertStatus(200);
@@ -33,7 +33,7 @@ class CreateLearnsTest extends TestCase
 
         $course = create('App\Course');
 
-        $response = $this->post(route('learn.store', ['course' => $course->id]), [])
+        $response = $this->post(route('learn.store', ['course' => $course->slug]), [])
             ->assertStatus(403);
     }
 
@@ -55,6 +55,7 @@ class CreateLearnsTest extends TestCase
         $this->assertEquals(1, $learn['order']);
 
         $learnTwo = $this->publishLearn(['course_id' => $course->id])->json();
+
         $this->assertEquals(2, $learnTwo['order']);
     }
 
@@ -64,7 +65,7 @@ class CreateLearnsTest extends TestCase
         $this->withExceptionHandling();
         $this->signIn(factory('App\User')->states('administrator')->create());
         $learn = make('App\Learn', $overrides);
-        return $this->post(route('learn.store', ['course' => $learn->course_id]), $learn->toArray());
+        return $this->post(route('learn.store', ['course' => $learn->course->slug]), $learn->toArray());
     }
 
 

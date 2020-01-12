@@ -36,6 +36,7 @@ class VideoController extends Controller
      */
     public function store(Request $request, Lecture $lecture)
     {
+        dd('here');
         abort(422, 'URL Under maintenance');
         if (! auth()->user()->isAdmin()) {
             abort(403,'You do not have access to carry out this request');

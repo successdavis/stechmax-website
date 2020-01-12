@@ -18,8 +18,6 @@ class CreateInvoiceTest extends TestCase
          	$user = $this->signIn(factory('App\User')->states('administrator')->create());
          	$course = create('App\Course');
 
-         	// dd(auth()->user());
-
          	$this->assertCount(0, $course->whereInvoicedBy(auth()->user())->get());
 
   			  $course->createInvoice();

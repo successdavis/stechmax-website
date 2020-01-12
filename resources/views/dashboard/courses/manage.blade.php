@@ -11,9 +11,9 @@
             <li class="tabs-title"><a href="#setup-curriculum">Setup Curriculum</a></li>
             <li class="tabs-title "><a href="#course-landing-page">Course Landing Page</a></li>
             @if ($course->published)
-              <a href="/dashboard/{{$course->id}}/unpublish" class="mt-3 button medium expanded">Unpublish Course</a>
+              <a href="/dashboard/{{$course->slug}}/unpublish" class="mt-3 button medium expanded">Unpublish Course</a>
             @else
-              <a href="/dashboard/{{$course->id}}/publish" class="mt-3 button medium expanded">Publish Course</a>
+              <a href="/dashboard/{{$course->slug}}/publish" class="mt-3 button medium expanded">Publish Course</a>
             @endif
           </ul>
         </div>

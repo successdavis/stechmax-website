@@ -30,7 +30,7 @@ class AddCourseImageTest extends TestCase
         $this->signIn();
         $course = create('App\Course');
 
-        $this->json('POST', 'api/courses/'. $course->subject->slug .'/' . $course->title)
+        $this->json('POST', 'api/courses/'. $course->subject->slug .'/' . $course->slug)
             ->assertStatus(403);
     }
 
@@ -41,7 +41,7 @@ class AddCourseImageTest extends TestCase
         $this->withExceptionHandling()->signIn(factory('App\User')->states('administrator')->create());
         $course = create('App\Course');
 
-        $this->json('POST', 'api/courses/' . $course->subject->slug . '/' . $course->title, ['thumbnail' => 'not an image'])
+        $this->json('POST', 'api/courses/' . $course->subject->slug . '/' . $course->slug, ['thumbnail' => 'not an image'])
             ->assertStatus(422);
     }
 
@@ -56,7 +56,7 @@ class AddCourseImageTest extends TestCase
 
         storage::fake('public');
 
-        $this->json('POST', 'api/courses/' . $course->subject->slug . '/' . $course->title, ['thumbnail' => $file = UploadedFile::fake()->image('thumbnail.jpg', '750', '422')]);
+        $this->json('POST', 'api/courses/' . $course->subject->slug . '/' . $course->slug, ['thumbnail' => $file = UploadedFile::fake()->image('thumbnail.jpg', '750', '422')]);
 
         $this->assertEquals(asset('storage/thumbnails/'.$file->hashName()), $course->fresh()->thumbnail_path);
 

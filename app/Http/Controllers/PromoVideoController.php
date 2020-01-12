@@ -49,13 +49,13 @@ class PromoVideoController extends Controller
             'video_Path' => request()->file('video')->storeAs('promovideo', $course->title, 'public')
         ]);
 
-        $ffprobe = FFMpeg\FFProbe::create();
+        // $ffprobe = FFMpeg\FFProbe::create();
 
-        $duration = $ffprobe
-            ->format($course->video_path) // extracts file informations
-            ->get('duration');             // returns the duration property
+        // $duration = $ffprobe
+        //     ->format($course->video_path) // extracts file informations
+        //     ->get('duration');             // returns the duration property
 
-        dd($duration);
+        // dd($duration);
 
         return response($course->video_path, 204);
     }

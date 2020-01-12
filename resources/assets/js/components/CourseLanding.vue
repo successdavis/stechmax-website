@@ -98,7 +98,7 @@
         methods: {
             persist () {
                 this.save = false;
-              this.Form.patch(`/courses/${this.course.title}`)
+              this.Form.patch(`/courses/${this.course.slug}`)
                 .then(data => {
                         flash('Your changes have been saved');
                     }

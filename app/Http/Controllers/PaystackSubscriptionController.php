@@ -75,7 +75,7 @@ class PaystackSubscriptionController extends Controller
         // dd($paymentDetails);
         $course->createSubscription('', $invoice->id, $class = $paymentDetails['data']['metadata']['class']);
 
-        return redirect('/paid/' . $course->id)
+        return redirect('/paid/' . $course->slug)
             ->with('flash', 'Payment Successful');
     }
 }

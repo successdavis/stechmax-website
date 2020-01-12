@@ -7,7 +7,7 @@
             <div class="grid-x grid-margin-x small-up-1 medium-up-3">
                 @foreach($programs as $program)
                     <div class="cell">
-                        <div class="card" style="width: 300px;">
+                        <div class="card">
                           <img src="{{$program->thumbnail_path}}">
                           <div class="card-section">
                             <h4>{{$program->title}}</h4>

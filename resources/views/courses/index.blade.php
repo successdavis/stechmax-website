@@ -23,6 +23,7 @@
               <span data-toggle="subjects-dropdown">All Topics <i class="fas fa-angle-down"></i></span>
               <div class="dropdown-pane" id="subjects-dropdown" data-dropdown data-auto-focus="true">
                 <ul>
+
                   <li><a href="/courses">All Courses</a></li>
                   @foreach ($subjects as $subject)
                     <li><a href="/courses/{{$subject->slug}}">{{$subject->name}}</a></li>
