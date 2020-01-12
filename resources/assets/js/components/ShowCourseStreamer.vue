@@ -14,9 +14,9 @@
 	            <h3 class="mb-1 mt-1 course__streamer--title" v-text="course.title"></h3>
 	            <p class="mb-3 course-desc" v-text="course.sypnosis"></p>
 	            <div class="grid-x grid-padding-x mb-2">
-                    <div class="cell medium-4" v-for="learn in learns" v-text="learn.body"></div>
+                    <div style="color: black;" class="cell medium-4" v-for="learn in learns" v-text="learn.body"></div>
 	            </div> 
-	            <div class="grid-x">
+	            <div class="grid-x" v-if="! course.isSubscribedBy">
 	                <div class="medium-6 cell">
 	                    <h3 class="inline course__price">&#8358;<span v-text="course.amount / 100"></span></h3>
 	                </div>

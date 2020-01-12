@@ -67,6 +67,11 @@ trait Subscriber
             ->exists();
     }
 
+    public function getIsSubscribedByAttribute()
+    {
+        return $this->isSubscribedBy(auth()->user());
+    }
+
     // Return a subscription for this course by this user
     public function getSubscriptionsBy(User $user)
     {

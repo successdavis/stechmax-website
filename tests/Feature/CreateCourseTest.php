@@ -42,7 +42,7 @@ class CreateCourseTest extends TestCase
         $this->signIn(factory('App\User')->states('administrator')->create());
         $course = create('App\Course');
         
-        $this->get(route('courses.publish', ['course' => $course->id]));
+        $this->get(route('courses.publish', ['course' => $course->slug]));
         $this->assertTrue($course->fresh()->published);
         
     }
@@ -56,7 +56,7 @@ class CreateCourseTest extends TestCase
         $course->publish();
         $this->assertTrue($course->fresh()->published);
         
-        $this->get(route('courses.unPublish', ['course' => $course->id]));
+        $this->get(route('courses.unPublish', ['course' => $course->slug]));
         $this->assertFalse($course->fresh()->published);
 
         

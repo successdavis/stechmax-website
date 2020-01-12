@@ -31,14 +31,20 @@ class CourseTest extends TestCase
     public function it_can_generate_a_string_path()
     {
         $course = create('App\Course');
-        $this->assertEquals("/courses/{$course->subject->slug}/{$course->id}", $course->path());
+        $this->assertEquals("/courses/{$course->subject->slug}/{$course->slug}", $course->path());
     }
 
     /** @test */
     public function it_can_be_browse_by_subjects()
     {
         $subject = create('App\Subject');
-        $courseInSubject = create('App\Course', ['subject_id' => $subject->id, 'published' => true]);
+        $type = create('App\Type', ['name' => 'course']);
+        $courseInSubject    = create('App\Course', [
+            'subject_id'    => $subject->id, 
+            'published'     => true,
+            'type_id'       => $type->id
+        ]);
+
         $courseNotInSubject = create('App\Course');
 
         $this->get('/courses/' . $subject->slug)
@@ -69,13 +75,15 @@ class CourseTest extends TestCase
     /** @test */
     public function it_can_be_browse_by_difficulty()
     {
+        $type = create('App\Type', ['name' => 'course']);
+
         $beginner = create('App\Difficulty', ['level' => 'beginner',]);
         $intermediate = create('App\Difficulty', ['level' => 'intermediate',]);
         $advance = create('App\Difficulty', ['level' => 'advance',]);
 
-        $firstCourse = create('App\Course', ['difficulty_id' => $intermediate->id, 'published' => true]);
-        $secondCourse = create('App\Course', ['difficulty_id' => $beginner->id, 'published' => true]);
-        $thirdCourse = create('App\Course', ['difficulty_id' => $advance->id, 'published' => true]);
+        $firstCourse = create('App\Course', ['difficulty_id' => $intermediate->id, 'published' => true, 'type_id' => $type->id]);
+        $secondCourse = create('App\Course', ['difficulty_id' => $beginner->id, 'published' => true, 'type_id' => $type->id]);
+        $thirdCourse = create('App\Course', ['difficulty_id' => $advance->id, 'published' => true, 'type_id' => $type->id]);
 
 
         $this->get('/courses?difficulty=beginner')
@@ -90,7 +98,7 @@ class CourseTest extends TestCase
         $this->signIn(factory('App\User')->states('administrator')->create());
         $course = create('App\Course');
         $learn = make('App\Learn', ['course_id' => $course->id]);
-        $response = $this->post(route('learn.store', ['course' => $course->id]), $learn->toArray());
+        $response = $this->post(route('learn.store', ['course' => $course->slug]), $learn->toArray());
         
         $this->assertCount(1, $course->learns);
         // $this->assertInstanceOf('App\Course', $learn->course);
@@ -102,7 +110,7 @@ class CourseTest extends TestCase
         $this->signIn(factory('App\User')->states('administrator')->create());
 
         $requirement = make('App\Requirement', ['course_id' => $this->course->id]);
-        $this->post(route('requirement.store', ['course' => $this->course->id]), $requirement->toArray());
+        $this->post(route('requirement.store', ['course' => $this->course->slug]), $requirement->toArray());
         $this->assertCount(1, $this->course->requirements);
         
     }

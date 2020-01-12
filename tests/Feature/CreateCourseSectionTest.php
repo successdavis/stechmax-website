@@ -19,7 +19,7 @@ class CreateCourseSectionTest extends TestCase
         $section = make('App\Section');
         $course = create('App\Course');
 
-        $response = $this->post(route('section.store', ['course' => $course->id]), $section->toArray());
+        $response = $this->post(route('section.store', ['course' => $course->slug]), $section->toArray());
         $this->assertDatabaseHas('sections', ['title' => $section->title]);
 
     }
@@ -32,7 +32,7 @@ class CreateCourseSectionTest extends TestCase
 
         $course = create('App\Course');
 
-        $response = $this->post(route('section.store', ['course' => $course->id]), [])
+        $response = $this->post(route('section.store', ['course' => $course->slug]), [])
             ->assertStatus(403);
     }
 
@@ -56,6 +56,6 @@ class CreateCourseSectionTest extends TestCase
 
         $course = create('App\Course');
 
-        return $this->post(route('section.store', ['course' => $course->id]), $section->toArray());
+        return $this->post(route('section.store', ['course' => $course->slug]), $section->toArray());
     }
 }

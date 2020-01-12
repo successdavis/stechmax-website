@@ -16,16 +16,36 @@ class Course extends Model
         'published' => 'boolean'
     ];
 
-    // protected $with = ['subscriptions'];
+    protected $appends = ['isSubscribedBy'];
+    
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($course) {
+            $course->update(['slug' => $course->title]);
+        });
+    }
+
+    public function setSlugAttribute($value)
+    {
+        $slug = str_slug($value);
+
+        if (static::whereSlug($slug)->exists()) {
+            $slug = "{$slug}-" . $this->id;
+        }
+
+        $this->attributes['slug'] = $slug;
+    }
 
     public function getRouteKeyName()
     {
-        return 'title';
+        return 'slug';
     }
 
     public function path()
     {
-        return '/courses/' . $this->subject->slug . '/' . $this->title;
+        return '/courses/' . $this->subject->slug . '/' . $this->slug;
     }
 
     public function getPathAttribute()

@@ -19,7 +19,7 @@
                             <span class="subject-container__header">Course</span>
                             <ul>
                                 <li v-for="course in courses">
-                                    <a :href="'/courses/'+selected.name + '/' +course.title" v-text="course.title" v-if="course.type_id == 1"></a>
+                                    <a :href="'/courses/'+selected.name + '/' +course.slug" v-text="course.title" v-if="course.type_id == 1"></a>
                                 </li>
                             </ul>
                         </div>
@@ -28,7 +28,7 @@
                             <span class="subject-container__header">Learning Path</span>
                             <ul>
                                 <li v-for="course in courses">
-                                    <a :href="'/courses/'+selected.name + '/' +course.title" v-text="course.title" v-if="course.type_id == 2"></a>
+                                    <a :href="'/courses/'+selected.name + '/' +course.slug" v-text="course.title" v-if="course.type_id == 2"></a>
                                 </li>
                             </ul>
                         </div>

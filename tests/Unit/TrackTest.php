@@ -72,7 +72,7 @@ class TrackTest extends TestCase
 
         $track->attachCourseToTrack($courseTwo);
         $track->attachCourseToTrack($courseOne);
-        $courses = $this->getJson('api/courses/'. $track->id .'/getcourses')->json();
+        $courses = $this->getJson('api/courses/'. $track->slug .'/getcourses')->json();
         $this->assertCount(2, $courses);
     }
 
@@ -92,11 +92,11 @@ class TrackTest extends TestCase
         $track->attachCourseToTrack($courseTwo);
         $track->attachCourseToTrack($courseThree);
 
-        $response = $this->getJson(route('courses.getCourses', ['course' => $track->id]))->json();
+        $response = $this->getJson(route('courses.getCourses', ['course' => $track->slug]))->json();
         // dd($response);
         $this->assertEquals([1, 2, 3], array_column($response, 'id'));
 
-        $courses = $this->getJson('api/courses/'. $track->id .'/getcourses')->json();
+        $courses = $this->getJson('api/courses/'. $track->slug .'/getcourses')->json();
         $this->assertCount(3, $courses);
     }
 
@@ -108,11 +108,11 @@ class TrackTest extends TestCase
         $track = factory('App\Course')->states('track')->create();
         
         $track->attachCourseToTrack($course);;
-        $courses = $this->getJson('api/courses/'. $track->id .'/getcourses')->json();
+        $courses = $this->getJson('api/courses/'. $track->slug .'/getcourses')->json();
         $this->assertCount(1, $courses);   
 
-        $this->delete(route('track.destroy', ['course' => $track->id]), $course->toArray());
-        $courses = $this->getJson('api/courses/'. $track->id .'/getcourses')->json();
+        $this->delete(route('track.destroy', ['course' => $track->slug]), $course->toArray());
+        $courses = $this->getJson('api/courses/'. $track->slug .'/getcourses')->json();
         $this->assertCount(0, $courses);   
 
     }

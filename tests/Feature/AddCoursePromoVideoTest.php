@@ -22,7 +22,7 @@ class AddCoursePromoVideoTest extends TestCase
     	Storage::fake('public');
     	$course = create('App\Course');
 
-    	$this->json('POST', 'api/course/' . $course->title . '/promovideo', ['video' => $file = UploadedFile::fake()->create('promo-video.mp4', 90)]);
+    	$this->json('POST', 'api/course/' . $course->slug . '/promovideo', ['video' => $file = UploadedFile::fake()->create('promo-video.mp4', 90)]);
 
     	$this->assertEquals(asset('storage/promovideo/'.$course->title), $course->fresh()->video_path);
 

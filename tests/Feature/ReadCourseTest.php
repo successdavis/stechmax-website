@@ -15,7 +15,9 @@ class ReadCourseTest extends TestCase
     {
         parent::setUp();
 
-        $this->course = create('App\Course', ['published' => true]);
+        $this->type = create('App\Type', ['name' => 'course']);
+
+        $this->course = create('App\Course', ['published' => true, 'type_id' => $this->type->id]);
     }
     
     /** @test */
@@ -33,23 +35,12 @@ class ReadCourseTest extends TestCase
             ->assertSee($this->course->title);
     }
 
-    // /** @test */
-    // public function a_user_can_view_children_courses_assign_to_track()
-    // {
-    //     $courseChildren = create('App\Course');
-    //     $relationship = factory('App\Course_Track')->create(['course_id' => $courseChildren->id, 'track_id' => $this->course->id]);
-
-    //     $response = $this->assertCount(1, $this->course->childrenCourses);
-    //     $this->get($this->course->path())
-    //         ->assertSee($courseChildren->title); 
-    // }
-
     /** @test */
     public function a_user_can_browse_courses_by_subjects()
     {
         $subject = create('App\Subject');
-        $courseInSubject = create('App\Course', ['subject_id' => $subject->id, 'published' => true]);
-        $courseNotInSubject = create('App\Course', ['subject_id' => $subject->id, 'published' => true]);
+        $courseInSubject = create('App\Course', ['subject_id' => $subject->id, 'published' => true, 'type_id' => $this->type->id]);
+        $courseNotInSubject = create('App\Course', ['subject_id' => $subject->id, 'published' => true, 'type_id' => $this->type->id]);
 
         $this->get('/courses/' . $subject->slug)
             ->assertSee($courseInSubject->title);
@@ -60,9 +51,10 @@ class ReadCourseTest extends TestCase
     public function an_admin_can_retrive_all_courses()
     {
         $this->signIn(factory('App\User')->states('administrator')->create());
-        create('App\Type');
-        $course = create('App\Course');
+
+        $course = create('App\Course',['type_id' => 1]);
         $track = factory('App\Course')->states('track')->create();
+
         $courses = $this->getJson('api/courses/allcourses')->json();
         $this->assertCount(2, $courses);
     }

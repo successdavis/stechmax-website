@@ -5,9 +5,10 @@
 		<a class="overlay" href="/courses/developer"></a>
 		<div class="overlay__content white">
 			<h4><a href="/courses/developer" class="no-decoration white">Web Development</a></h4>
+			@isset ($subjectWithCounts["developer"])
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6 subject__details--left">
-					<p>{{$subjectWithCounts["developer"]["trackCount"]}}</p>
+						<p>{{$subjectWithCounts["developer"]["trackCount"]}}</p>
 					<div>Tracks</div>
 				</div>
 				<div class="small-6 subject__details--right">
@@ -15,14 +16,17 @@
 					<div>Courses</div>
 				</div>
 			</div>
+			@endisset
 			<a href="/courses/developer" class="btn__explore">Explore</a>
 		</div>
 	</div>
 	<div class="grid__item second has-overlay">
+
 		<div class="grid__item--background" style="background-image: url(/../images/subjects/graphics.jpg)"></div>
 		<a class="overlay" href="/courses/graphic-designs"></a>
 		<div class="overlay__content white">
 			<h4><a href="/courses/graphic-designs">Graphic Design</a></h4>
+			@isset ($subjectWithCounts["graphic-designs"])
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["graphic-designs"]["trackCount"]}}</p>
@@ -33,6 +37,7 @@
 					<div>Courses</div>
 				</div>
 			</div>
+			@endisset
 			<a href="/courses/graphic-designs" class="btn__explore">Explore</a>
 		</div>
 	</div>
@@ -41,6 +46,8 @@
 		<a class="overlay" href="/courses/photography"></a>
 		<div class="overlay__content white">
 			<h4><a href="/courses/photography">Photography</a></h4>
+			@isset ($subjectWithCounts["photography"])
+			    
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["photography"]["trackCount"]}}</p>
@@ -51,6 +58,7 @@
 					<div>Courses</div>
 				</div>
 			</div>
+			@endisset
 			<a href="/courses/photography" class="btn__explore">Explore</a>
 		</div>
 	</div>
@@ -59,6 +67,8 @@
 		<a class="overlay" href="/courses/video"></a>
 		<div class="overlay__content white">
 			<h4><a href="/courses/video">Video Editing</a></h4>
+			@isset ($subjectWithCounts["video"])
+			    
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["video"]["trackCount"]}}</p>
@@ -69,6 +79,7 @@
 					<div>Courses</div>
 				</div>
 			</div>
+			@endisset
 			<a href="/courses/video" class="btn__explore">Explore</a>
 		</div>
 	</div>
@@ -77,6 +88,7 @@
 		<a class="overlay" href="/courses/3d-animation"></a>
 		<div class="overlay__content white">
 			<h4><a href="/courses/3d-animation">3d + Animation</a></h4>
+			@isset ($subjectWithCounts["3d-animation"])    
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["3d-animation"]["trackCount"]}}</p>
@@ -87,6 +99,7 @@
 					<div>Courses</div>
 				</div>
 			</div>
+			@endisset
 			<a href="/courses/3d-animation" class="btn__explore">Explore</a>
 		</div>
 	</div>
@@ -95,6 +108,7 @@
 		<a class="overlay" href="/courses/it"></a>
 		<div class="overlay__content white">
 			<h4><a href="/courses/it">ICT Skills</a></h4>
+			@isset ($subjectWithCounts["it"])
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["it"]["trackCount"]}}</p>
@@ -105,6 +119,7 @@
 					<div>Courses</div>
 				</div>
 			</div>
+			@endisset
 			<a href="/courses/it" class="btn__explore">Explore</a>
 		</div>
 	</div>
@@ -113,6 +128,8 @@
 		<a class="overlay" href="/courses/compute-aided-designs"></a>
 		<div class="overlay__content white">
 			<h4><a href="/courses/compute-aided-designs">CAD</a></h4>
+			@isset ($subjectWithCounts["compute-aided-designs"])
+			    
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["compute-aided-designs"]["trackCount"]}}</p>
@@ -123,6 +140,7 @@
 					<div>Courses</div>
 				</div>
 			</div>
+			@endisset
 			<a href="/courses/compute-aided-designs" class="btn__explore">Explore</a>
 		</div>
 	</div>
@@ -131,6 +149,8 @@
 		<a class="overlay" href="/courses/database-managements"></a>
 		<div class="overlay__content white">
 			<h4><a href="/courses/database-managements">Database</a></h4>
+			@isset ($subjectWithCounts["database-managements"])
+			    
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["database-managements"]["trackCount"]}}</p>
@@ -141,6 +161,7 @@
 					<div>Courses</div>
 				</div>
 			</div>
+			@endisset
 		<a href="/courses/database-managements" class="btn__explore">Explore</a>
 		</div>
 	</div>

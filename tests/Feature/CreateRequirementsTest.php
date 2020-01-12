@@ -19,7 +19,7 @@ class CreateRequirementsTest extends TestCase
         $requirement = make('App\Requirement');
         $course = create('App\Course');
 
-        $response = $this->post(route('requirement.store', ['course' => $course->id]), $requirement->toArray());
+        $response = $this->post(route('requirement.store', ['course' => $course->slug]), $requirement->toArray());
         $this->assertDatabaseHas('requirements', ['body' => $requirement->body]);
 
     }
@@ -32,7 +32,7 @@ class CreateRequirementsTest extends TestCase
 
         $course = create('App\Course');
 
-        $response = $this->post(route('requirement.store', ['course' => $course->id]), [])
+        $response = $this->post(route('requirement.store', ['course' => $course->slug]), [])
             ->assertStatus(403);
     }
 
@@ -64,7 +64,7 @@ class CreateRequirementsTest extends TestCase
 
         $requirement = make('App\Requirement', $overrides);
 
-        return $this->post(route('requirement.store', ['course' => $requirement->course_id]), $requirement->toArray());
+        return $this->post(route('requirement.store', ['course' => $requirement->course->slug]), $requirement->toArray());
     }
 }
     

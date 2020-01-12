@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use FFMpeg;
+
 use App\Course;
 use Illuminate\Http\Request;
 
@@ -43,10 +45,17 @@ class PromoVideoController extends Controller
             'video' => 'required|mimetypes:video/avi,video/mpeg,video/mp4,video/quicktime'
         ]);
 
-
         $course->update([
             'video_Path' => request()->file('video')->storeAs('promovideo', $course->title, 'public')
         ]);
+
+        // $ffprobe = FFMpeg\FFProbe::create();
+
+        // $duration = $ffprobe
+        //     ->format($course->video_path) // extracts file informations
+        //     ->get('duration');             // returns the duration property
+
+        // dd($duration);
 
         return response($course->video_path, 204);
     }

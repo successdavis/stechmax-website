@@ -29,8 +29,14 @@ class CourseFilters extends Filters
     protected function difficulty($difficulty)
     {
         $this->builder->getQuery()->orders = [];
-        $difficulty = Difficulty::firstOrFail()->where('level', $difficulty)->get();
+        if (! Difficulty::where('level', $difficulty)->exists()) {
+            abort(400, 'Bad Request');
+        }
+
+        $difficulty = Difficulty::where('level', $difficulty)->get();
+
         return $this->builder->where('difficulty_id', $difficulty[0]['id']);
+        
     }
 
 }

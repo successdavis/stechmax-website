@@ -25,7 +25,7 @@
 
 	                    <form @submit.prevent="updatePassword" v-if="resetTokenSent">
 	                    	<label>Enter Token
-					          <input type="text" placeholder="Required" v-model="Form.token" required>
+					          <input type="text" placeholder v-model="Form.token" required>
 					          <p class="help-text" v-if="Form.errors.has('token')" v-text="Form.errors.get('token')"></p>
 					        </label>
 

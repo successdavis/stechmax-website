@@ -71,7 +71,7 @@
 
         methods: {
             fetchRequirements() {
-                axios.get('/courses/' + this.course.id + '/requirement')
+                axios.get('/courses/' + this.course.slug + '/requirement')
                     .then(data => {
                             this.requirements = data.data;
                         }
@@ -79,7 +79,7 @@
             },
 
             fetchLearns() {
-                axios.get('/courses/' + this.course.id + '/learn')
+                axios.get('/courses/' + this.course.slug + '/learn')
                     .then(data => {
                             this.learns = data.data;
                         }
@@ -87,7 +87,7 @@
             },
 
             addLearn () {
-                this.learnForm.post(`/courses/${this.course.id}/learn`)
+                this.learnForm.post(`/courses/${this.course.slug}/learn`)
                     .then(data => {
                             this.learns.push(data);
                             this.learnForm.reset();
@@ -99,7 +99,7 @@
                     learn.order = index + 1;
                 })
 
-                axios.put(`/courses/${this.course.id}/learn`, {
+                axios.put(`/courses/${this.course.slug}/learn`, {
                     learns: this.learns
                 }).then((response) => {
                     console.log(response);
@@ -115,7 +115,7 @@
             },
 
             addRequirement () {
-                this.requirementForm.post(`/courses/${this.course.id}/requirement`)
+                this.requirementForm.post(`/courses/${this.course.slug}/requirement`)
                     .then(data => {
                             this.requirements.push(data);
                             this.requirementForm.reset();
@@ -128,7 +128,7 @@
                     requirement.order = index + 1;
                 })
 
-                axios.put(`/courses/${this.course.id}/requirement`, {
+                axios.put(`/courses/${this.course.slug}/requirement`, {
                     requirements: this.requirements
                 }).then((response) => {
                     console.log(response);

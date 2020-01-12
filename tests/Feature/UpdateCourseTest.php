@@ -22,7 +22,7 @@ class UpdateCourseTest extends TestCase
         $data['title'] = 'Changed';
         $data['description'] = 'Changed description';
 
-        $this->patch('/courses/' . $course->id, $data);
+        $this->patch('/courses/' . $course->slug, $data);
 
         tap($course->fresh(), function ($course) {
             $this->assertEquals('Changed', $course->title);

@@ -87,7 +87,6 @@ class CreateThreadTest extends TestCase
         $thread = $this->postJson(route('threads'), $thread->toArray())->json();
 
         $this->assertEquals("foo-title-{$thread['id']}", $thread['slug']);
-
     }
 
     /** @test */
