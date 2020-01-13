@@ -1,4 +1,3 @@
-
 {{-- Title bar for Mobile Display --}}
 
  <div class="title-bar" data-responsive-toggle="responsive-menu" data-hide-for="medium">
