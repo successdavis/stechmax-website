@@ -21,6 +21,6 @@
        <div class="">
           @include('dashboard/partials/statusCard')
        </div>
-       <button class="button"><a target="_blank" href="/users/generatecmdcard/{{auth()->user()->username}}">Generate Photo Card</a></button>
+       
    </div>
 @endsection

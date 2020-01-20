@@ -23,6 +23,11 @@ class Invoice extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function subscription()
+    {
+        return $this->hasOne(Subscription::class);
+    }
+
     public function recordPayment($data)
     {
         $payment = $this->payments()->create([

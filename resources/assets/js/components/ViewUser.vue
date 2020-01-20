@@ -16,6 +16,7 @@
             <div class="grid-container">
               <div class="button experience-btn" type="button">
                 <span @click="toggleExperiencePane">Award EXP</span>
+
                 <div class="experience-pane" v-if="awardingExperience">
                     <form>
                         <h2 v-text="iPoints"></h2>
@@ -24,6 +25,7 @@
                     </form>
                 </div>
               </div>
+               <button class="button"><a style="color: white;" target="_blank" :href="'/users/generatecmdcard/' + username">Permit Card</a></button>
             </div>
 
             <div class="user-passport grid-container">
@@ -133,6 +135,7 @@
             date_joined: this.selectedUser.Date_Joined,
             email: this.selectedUser.email,
             user_id: this.selectedUser.user_id,
+            username: this.selectedUser.username,
             errorMsg: '',
             courses: '',
             points: '',

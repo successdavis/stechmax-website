@@ -232,6 +232,10 @@ class User extends Authenticatable
         $smartsms->message($this->phone, $message, 'S-TECHMAX');
     }
 
+    public function date_joined()
+    {
+        return Carbon::parse($this->created_at)->toDayDateTimeString();
+    }
 
 
     public function canSendNewToken()

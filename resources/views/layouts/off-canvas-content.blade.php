@@ -55,6 +55,7 @@
         <a href="#">Manage Student</a>
         <ul class="menu vertical nested">
           <li><a href="{{route('manage_user.index')}}">View Users</a></li>
+          <li><a target="_blank" href="{{route('permitcards')}}">Active Permit Card</a></li>
         </ul>
       </li>
 
