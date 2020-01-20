@@ -5,6 +5,7 @@ namespace App;
 use App\Events\SystemNoAssigned;
 use App\Mail\UnableToSetSystemNumber;
 use App\User;
+use App\Invoice;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
@@ -12,11 +13,17 @@ use Illuminate\Support\Facades\Mail;
 class Subscription extends Model
 {
     protected $guarded = [];
+    protected $appends = ['durationSpent'];
 
 
     public function subscriber()
     {
         return $this->morphTo();
+    }
+
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class);
     }
 
     public function deactivate()
@@ -69,9 +76,14 @@ class Subscription extends Model
     public function durationSpent($subscription = null)
     {
         if (!empty($subscription)) {
-            return $subscription->created_at->diffInMonths();
+            return $subscription->created_at->diffInWeeks();
         }
-        return $this->created_at->diffInMonths();
+        return $this->created_at->diffInWeeks();
+    }
+
+    public function getDurationSpentAttribute()
+    {
+        return $this->durationSpent();
     }
 
     public function status($subscription = null)
@@ -93,5 +105,20 @@ class Subscription extends Model
     public function owner()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function endsAt()
+    {
+        return Carbon::parse($this->created_at->addWeeks($this->duration))->toDayDateTimeString();
+    }
+
+    public function startsAt()
+    {
+        return Carbon::parse($this->created_at)->toDayDateTimeString();
+    }
+
+    public function getEndsAtAttribute()
+    {
+        return $this->endsAt();
     }
 }

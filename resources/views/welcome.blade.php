@@ -5,9 +5,9 @@
     @else 
         @include('layouts.regFormStreamerTwo')
     @endif
-   {{--  <div>
+    <div>
         @include('layouts.subjects')
-    </div> --}}
+    </div>
     <div class="grid-container">
         @include('layouts.what')
     </div>

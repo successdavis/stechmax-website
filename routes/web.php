@@ -125,7 +125,7 @@ Route::get('/courses/{subject}/{course}/register', 'ProgramController@create');
 Route::post('/subjects', 'SubjectController@store')->middleware('admin')->name('subjects.new');
 
 Route::get('api/difficulties', 'Api\DifficultyController@index');
-Route::get('api/types', 'Api\TypeController@index'); // Course Type
+Route::get('api/types', 'Api\TypeController@index');
 
 Route::get('/threads/new', 'ThreadController@create');
 Route::get('/threads', 'ThreadController@index')->name('threads');
@@ -158,6 +158,9 @@ Route::get('/profiles/{user}', 'ProfileController@show')->name('profile.show');
 Route::get('/profiles/{user}/notifications', 'UserNotificationController@index');
 Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotificationController@destroy');
 
+Route::get('/users/generatecmdcard/{user}', 'CmdCardController@index');
+Route::get('/users/activeusers', 'CmdCardController@activeusers')->middleware('admin')->name('permitcards');
+
 Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->name('register.confirm');
 Route::get('/register/resend', 'Auth\RegisterConfirmationController@resend')->name('register.resend_comfirmation');
 Route::get('/register/comfirm_email', 'Auth\RegisterConfirmationController@create')->middleware('cannot-see-resend-link-page')->name('register.confirm_email');
@@ -168,8 +171,6 @@ Route::post('/password/phonereset', 'Auth\RegisterConfirmationController@phoneRe
 Route::post('/password/resetUpdatePassword', 'Auth\RegisterConfirmationController@updatePassword')->name('password.update');
 
 Route::post('/register/new_user', 'ManageUserController@store')->middleware('admin')->name('manage_user.store');
-
-//Route::patch('/users/{user}', 'ManageUserController@store')->middleware('admin')->name('manage_user.store');
 
 Route::post('/follow', 'FollowersController@store');
 

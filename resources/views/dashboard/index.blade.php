@@ -21,5 +21,6 @@
        <div class="">
           @include('dashboard/partials/statusCard')
        </div>
+       
    </div>
 @endsection
