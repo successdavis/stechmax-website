@@ -59,7 +59,7 @@
             },
 
             createSection () {
-                this.Form.post(`/manage/${this.course.id}/section`).then(data => {
+                this.Form.post(`/manage/${this.course.slug}/section`).then(data => {
                     this.sections.push(data);
                     this.Form.reset();
                     this.addingSection = false;
@@ -72,7 +72,7 @@
                     section.order = index + 1;
                 })
 
-                axios.put(`/manage/${this.course.id}/sections`, {
+                axios.put(`/manage/${this.course.slug}/sections`, {
                     sections: this.sections
                 }).then((response) => {
                     console.log(response);
@@ -87,7 +87,7 @@
 
 
         mounted () {
-            axios.get(`/manage/${this.course.id}/sections`)
+            axios.get(`/manage/${this.course.slug}/sections`)
                 .then(response => this.sections = response.data)
         }
     }

@@ -66,14 +66,14 @@
             },
 
             deleteItem(index, course_id) {
-                axios.delete(`/tracks/${this.course.id}/delete`, { data: { id: course_id } });
+                axios.delete(`/tracks/${this.course.slug}/delete`, { data: { id: course_id } });
                 
                 this.trackCourses.splice(index, 1);
                 this.reOrderCourses();
             },
 
             addToTrackCourses (course) {
-                axios.post(`/tracks/${this.course.id}/addcourse`, {
+                axios.post(`/tracks/${this.course.slug}/addcourse`, {
                     id: course.id
                 }).then(data => {
                     flash(course.title + ' link to track')
@@ -87,7 +87,7 @@
                 this.trackCourses.map((course, index) => {
                     course.order = index + 1;
                 })
-                axios.put(`/tracks/${this.course.id}/reOrderCourses`, {
+                axios.put(`/tracks/${this.course.slug}/reOrderCourses`, {
                     courses: this.trackCourses
                 }).then((response) => {
                     console.log(response);
@@ -100,7 +100,7 @@
             axios.get(`/api/courses/allcourses`)
                 .then(response => this.courses = response.data),
 
-            axios.get(`/api/courses/${this.course.id}/getcourses`)
+            axios.get(`/api/courses/${this.course.slug}/getcourses`)
                 .then(response => this.trackCourses = response.data)
         }
     }
