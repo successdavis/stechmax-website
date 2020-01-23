@@ -72,7 +72,7 @@ trait Subscriber
         if (auth()->user()) {
             return $this->isSubscribedBy(auth()->user());
         }
-        return null;
+        return false;
     }
 
     // Return a subscription for this course by this user
