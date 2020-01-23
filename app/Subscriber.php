@@ -74,6 +74,7 @@ trait Subscriber
         }
         return false;
     }
+    // hello world
 
     // Return a subscription for this course by this user
     public function getSubscriptionsBy(User $user)
