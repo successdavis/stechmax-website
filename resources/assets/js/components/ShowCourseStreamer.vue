@@ -25,6 +25,7 @@
 	                    <a class="medium button course__info--sub-btn" :href="course_path + '/subscription?class=true'">Study Series Offline</a>
 	                </div>
 	            </div> 
+	            <!-- <login-register></login-register> -->
 	    </div>
 	    <div class="hero-image" :style="{backgroundImage: `url(${course.thumbnail_path})`}"></div>
 	</div>

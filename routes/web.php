@@ -24,6 +24,7 @@ Route::post('/completeregistration', 'Auth\CompleteRegistrationController@update
 Route::get('/threads/search', 'SearchController@show');
 
 Route::get('api/courses', 'Api\CoursesController@getSubjects');
+
 Route::get('api/courses/allcourses', 'Api\CoursesController@getCourses');
 Route::get('api/courses/allcoursesandtracks', 'Api\CoursesController@allcoursesandtracks')->middleware('admin');
 Route::get('api/courses/viewAllCourses', 'Api\CoursesController@index')->middleware(['admin'])->name('courses.index');

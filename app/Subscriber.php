@@ -69,7 +69,10 @@ trait Subscriber
 
     public function getIsSubscribedByAttribute()
     {
-        return $this->isSubscribedBy(auth()->user());
+        if (auth()->user()) {
+            return $this->isSubscribedBy(auth()->user());
+        }
+        return null;
     }
 
     // Return a subscription for this course by this user

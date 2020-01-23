@@ -53,6 +53,7 @@ Vue.component('data-table2', require('./components/datatable2.vue').default);
 Vue.component('home-streamer', require('./components/HomePageStreamer.vue').default);
 Vue.component('course-streamer', require('./components/ShowCourseStreamer.vue').default);
 Vue.component('promo-video', require('./components/CourseProVideo.vue').default);
+Vue.component('login-register', require('./components/loginRegister.vue').default);
 // Vue.component('test', require('./components/Test.vue').default);
 
 
