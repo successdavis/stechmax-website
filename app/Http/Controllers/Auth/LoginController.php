@@ -55,7 +55,14 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($request->only($email_type, 'password'))) {
+            if (request()->expectsJson()) {
+                return response('Login Successful', 200);
+            }
             return redirect()->intended($this->redirectPath());
+        }
+
+        if (request()->expectsJson()) {
+            return response('Your credentials are incorrect', 400);
         }
 
         return redirect()->back()

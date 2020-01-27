@@ -25,7 +25,7 @@
 	                    <a class="medium button course__info--sub-btn" :href="course_path + '/subscription?class=true'">Study Series Offline</a>
 	                </div>
 	            </div>
-	            <!-- <login-register></login-register> -->
+	            <login-register></login-register>
 	    </div>
 	    <div class="hero-image" :style="{backgroundImage: `url(${course.thumbnail_path})`}"></div>
 	</div>
@@ -41,7 +41,7 @@
 			learns: Array,
 			course_path: String,
 			type: String,
-			videoUrl: String
+			videourl: String
 		},
 		components: {
 	        VideoPlayer
@@ -59,7 +59,7 @@
 	                playbackRates: [0.2, 0.5, 1, 1.5, 2,3,4],
 	                sources: [
 	                    { 
-	                        src: this.video_path,
+	                        src: this.videoUrl,
 	                        type: "video/mp4"
 	                    }
 	                ],
@@ -70,7 +70,7 @@
 	    methods: {
 	    	
 	    }
-	}
+	};
 </script>
 
 <style scoped="true">

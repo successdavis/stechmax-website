@@ -54,7 +54,8 @@ Vue.component('home-streamer', require('./components/HomePageStreamer.vue').defa
 Vue.component('course-streamer', require('./components/ShowCourseStreamer.vue').default);
 Vue.component('promo-video', require('./components/CourseProVideo.vue').default);
 Vue.component('login-register', require('./components/loginRegister.vue').default);
-// Vue.component('test', require('./components/Test.vue').default);
+Vue.component('tab', require('./components/tab.vue').default);
+Vue.component('tabs', require('./components/tabs.vue').default);
 
 
 const app = new Vue({

@@ -30,7 +30,7 @@ Route::get('api/courses/allcoursesandtracks', 'Api\CoursesController@allcoursesa
 Route::get('api/courses/viewAllCourses', 'Api\CoursesController@index')->middleware(['admin'])->name('courses.index');
 Route::post('api/courses/{subject}/{course}', 'Api\CourseImageController@store')->middleware(['auth', 'admin']);
 
-// Route::post('api/course/{course}/promovideo', 'PromoVideoController@store');
+Route::post('api/course/{course}/promovideo', 'PromoVideoController@store');
 // Route::post('api/{lecture}/attachvideo', 'VideoController@store');
 
 Route::post('api/{user}/awardexperience', 'ExperienceController@store')->middleware('admin');
