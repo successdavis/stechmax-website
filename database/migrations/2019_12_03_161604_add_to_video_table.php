@@ -17,6 +17,8 @@ class AddToVideoTable extends Migration
             $table->unsignedInteger('lecture_id')->nullable();
             $table->string('url')->nullable();
             $table->string('duration')->nullable();
+            $table->string('language')->nullable();
+            $table->boolean('subtitled')->nullable();
             $table->string('type')->nullable();
             $table->boolean('billable')->nullable();
         });

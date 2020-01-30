@@ -17,10 +17,7 @@
 		                 @statechanged="playerStateChanged($event)"
 		                 @ready="playerReadied">
 				  	</video-player>
-            	</div>
-                <ul>
-                    <!-- <li v-for="error in errors.thumbnail" v-text="error"></li> -->
-                </ul>     
+            	</div>    
             </div>
             <div class="medium-4 grid-container">
                 <p>Important guidelines: </p>

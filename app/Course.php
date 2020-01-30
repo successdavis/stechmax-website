@@ -16,7 +16,7 @@ class Course extends Model
         'published' => 'boolean'
     ];
 
-    protected $appends = ['isSubscribedBy'];
+    // protected $appends = ['isSubscribedBy'];
     
     protected static function boot()
     {

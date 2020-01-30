@@ -1,7 +1,19 @@
 <template>
-    <div>
-        <video ref="videoPlayer" data-setup='{ "controls": true, "autoplay": true, "preload": "auto" }'class="video-js"></video>
-    </div>
+    <div v-if="playerOptions.sources[0].src">
+        <video-player  class="video-player-box"
+             ref="videoPlayer"
+             :options="playerOptions"
+             :playsinline="true"
+             customEventName="customstatechangedeventname"
+             @play="onPlayerPlay($event)"
+             @pause="onPlayerPause($event)"
+             @ended="onPlayerEnded($event)"
+             @timeupdate="onPlayerTimeupdate($event)"
+
+             @statechanged="playerStateChanged($event)"
+             @ready="playerReadied">
+        </video-player>
+    </div>    
 </template>
 
 <script>

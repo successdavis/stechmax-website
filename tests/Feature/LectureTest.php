@@ -22,7 +22,7 @@ class LectureTest extends TestCase
     	$lecture 	= create('App\Lecture');
     	$video		= create('App\Video', ['lecture_id' => $lecture->id]);
 
-        $this->get(route('lecture.show', ['lecture' => $lecture->title]))
+        $this->get(route('lecture.show', ['lecture' => $lecture->slug]))
         	->assertStatus(403);
     }
 
@@ -38,7 +38,7 @@ class LectureTest extends TestCase
             ->course
             ->createSubscription();
 
-        $this->get(route('lecture.show', ['lecture' => $lecture->title]))
+        $this->get(route('lecture.show', ['lecture' => $lecture->slug]))
             ->assertStatus(200);
     }
 

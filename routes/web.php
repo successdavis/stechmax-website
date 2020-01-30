@@ -29,6 +29,10 @@ Route::get('api/courses/allcourses', 'Api\CoursesController@getCourses');
 Route::get('api/courses/allcoursesandtracks', 'Api\CoursesController@allcoursesandtracks')->middleware('admin');
 Route::get('api/courses/viewAllCourses', 'Api\CoursesController@index')->middleware(['admin'])->name('courses.index');
 Route::post('api/courses/{subject}/{course}', 'Api\CourseImageController@store')->middleware(['auth', 'admin']);
+// api/' . $lecture->slug . '/video'
+Route::post('api/{lecture}/video', 'LectureVideoController@store')->middleware(['auth', 'admin']);
+Route::delete('api/{lecture}/deletevideo', 'LectureVideoController@destroy')->middleware(['auth', 'admin']);
+Route::patch('api/{lecture}/updatevideo', 'LectureVideoController@update')->middleware(['auth', 'admin']);
 
 Route::post('api/course/{course}/promovideo', 'PromoVideoController@store');
 // Route::post('api/{lecture}/attachvideo', 'VideoController@store');
