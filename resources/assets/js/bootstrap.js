@@ -36,6 +36,7 @@ import VueProgressBar from 'vue-progressbar'
 import VueVideoPlayer from 'vue-video-player'
 
 import 'video.js/dist/video-js.css'
+import 'videojs-playlist/dist/videojs-playlist.js'
 
 // import videojsPlaylist from 'videojs-playlist'
 // import playlistMaker from "videojs-playlist/src/playlist-maker";

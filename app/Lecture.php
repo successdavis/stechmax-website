@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Lecture extends Model
 {
     use SortOrdering;
+    protected $appends = ['path', 'VideoUrl', 'hasVideo'];
     protected $guarded = [];
 
     protected static function boot()
@@ -28,6 +29,16 @@ class Lecture extends Model
         }
 
         $this->attributes['slug'] = $slug;
+    }
+
+    public function path()
+    {
+        return '/api/' . $this->slug ;
+    }
+
+    public function getPathAttribute()
+    {
+        return $this->path();
     }
 
     public function getRouteKeyName()
@@ -53,6 +64,21 @@ class Lecture extends Model
         }
 
         return response('Sorry! This lecture has no associate video', 422);
+    }
+
+    public function getVideoUrlAttribute()
+    {
+        return $this->getVideoUrl();
+    }
+
+    public function hasVideo()
+    {
+        return !! $this->video;
+    }
+
+    public function getHasVideoAttribute()
+    {
+        return $this->hasVideo();
     }
 
     public function isBilled()

@@ -2,14 +2,16 @@
 	<div id="path-header" class="bg--dark-blue align-middle">
 		<div class="" v-if="playVideo" class="coursevideoplayer">
 			<button class="button small play-back-btn" @click="playVideo = false">Close Video</button>
-			<video-player :options="videoOptions"/> 
+			<div class="grid-container">
+            	<vid-player :playerdata="playerdata"></vid-player>
+			</div>
         </div>
 	    <div class="grid-container path-info" v-if="! playVideo">
 	             <a :href="'/courses/' + subject.slug" class="mb-3 tiny-button" v-text="subject.slug"></a>
 	             <a :href="'/courses/'" class="mb-3 tiny-button" v-text="type"></a>
 
 	             <div class="course__play--btn" :style="{backgroundImage: `url(${course.thumbnail_path})`}">
-	                <i class="fas fa-play" @click="playVideo = true"></i>
+	                <i class="fas fa-play" @click="togglePlay"></i>
 	            </div>
 	            <h3 class="mb-1 mt-1 course__streamer--title" v-text="course.title"></h3>
 	            <p class="mb-3 course-desc" v-text="course.sypnosis"></p>
@@ -31,7 +33,6 @@
 	</div>
 </template>
 <script>
-	import VideoPlayer from "../components/VideoPlayer.vue";
 
 	export default {
 		// props: ['course','subject','learns','course_path','videoUrl']
@@ -43,32 +44,23 @@
 			type: String,
 			videourl: String
 		},
-		components: {
-	        VideoPlayer
-	    },
 
 	    data() {
 	    	return {
 	    		playVideo: false,
-	    		videoOptions: {
+	    		playerdata: {
+	                poster: this.course.thumbnail_path,
+	                source: this.course.video_path,
 	                autoplay: true,
-	                controls: true,
-	                preload: 'auto',
-	                // aspectRatio:"16:9", 
-	                fluid: true,
-	                playbackRates: [0.2, 0.5, 1, 1.5, 2,3,4],
-	                sources: [
-	                    { 
-	                        src: this.videoUrl,
-	                        type: "video/mp4"
-	                    }
-	                ],
 	            },
 	    	}
 	    },
 
 	    methods: {
-	    	
+	    	togglePlay() {
+	        	Event.$emit('play');
+	    		this.playVideo = true;
+	    	}
 	    }
 	};
 </script>

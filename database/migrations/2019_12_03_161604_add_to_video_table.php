@@ -20,7 +20,7 @@ class AddToVideoTable extends Migration
             $table->string('language')->nullable();
             $table->boolean('subtitled')->nullable();
             $table->string('type')->nullable();
-            $table->boolean('billable')->nullable();
+            $table->boolean('billable')->default(true);
         });
     }
 
