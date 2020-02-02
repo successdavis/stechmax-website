@@ -49,9 +49,15 @@
 	    	return {
 	    		playVideo: false,
 	    		playerdata: {
-	                poster: this.course.thumbnail_path,
 	                source: this.course.video_path,
 	                autoplay: true,
+	                playlist: [{
+                		sources: [{
+                			src: this.course.video_path,
+		                    type: 'video/mp4'
+                		}],
+                		poster: this.course.thumbnail_path,
+                	}],
 	            },
 	    	}
 	    },
