@@ -35,6 +35,8 @@ videojs.registerPlugin("playlist", plugin);
         data() {
             return {
                 player: '',
+                nowPlaying: '',
+                playOnSelect: true,
                 playerOptions: {
                     autoplay: this.playerdata.autoplay,
                     language: 'en',
@@ -54,15 +56,26 @@ videojs.registerPlugin("playlist", plugin);
             }
         },
 
+        watch: {
+            nowPlaying() {
+                this.$emit('nowplaying', this.nowPlaying);
+            }
+        },
+
         mounted() {
             Event.$on('paused', () => this.pausePlayer(this.player));
         },
 
         created() {
             Event.$on('play', () => this.playPlayer(this.player));
+            Event.$on('skipto', (index) => this.skipTo(index));
         },
         
         methods: {
+            skipTo(index){
+                this.player.playlist.currentItem(index);
+                this.nowPlaying = this.player.playlist.currentItem();
+            },
             pausePlayer(player) {
                 console.log(player);
                 player.pause();
@@ -77,10 +90,14 @@ videojs.registerPlugin("playlist", plugin);
             
             prevVideo() {
                 this.player.playlist.previous()
+                this.nowPlaying = this.player.playlist.currentItem();
+                
             },
 
             nextVideo() {
-                this.player.playlist.next()
+                this.player.playlist.next();
+                this.nowPlaying = this.player.playlist.currentItem();
+
             },
 
             onPlayerPause(player) {
@@ -91,7 +108,8 @@ videojs.registerPlugin("playlist", plugin);
 
               // or listen state event
             playerStateChanged(playerCurrentState) {
-                // console.log('player current update state', playerCurrentState)
+
+                console.log('player current update state', playerCurrentState)
             },
 
               // or listen state event
@@ -102,20 +120,20 @@ videojs.registerPlugin("playlist", plugin);
               // player is ready
             playerReadied(player) {
                 this.player = player;
-                console.log('the player is readied', player)
-                // you can use it to do something...
-                // player.[methods]
-                // console.log(player.paused());
 
                 player.playlist(this.playerdata.playlist);
 
                 player.playlist.autoadvance(5);
+
+                this.$emit('readied', player);
             },
-              // player is ready
+            // player is ready
             onPlayerEnded(player) {
                 console.log('the player is ended', player);
                 // you can use it to do something...
                 // player.[methods]
+                this.nowPlaying++;
+                console.log(this.nowPlaying);
             }
         }
     };

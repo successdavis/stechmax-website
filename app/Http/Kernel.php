@@ -61,6 +61,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'must-be-confirmed' => \App\Http\Middleware\RedirectIfEmailNotConfirmed::class,
         'admin' => \App\Http\Middleware\Administrator::class,
-        'cannot-see-resend-link-page' => \App\Http\Middleware\RedirectIfEmailAlreadyConfirm::class
+        'cannot-see-resend-link-page' => \App\Http\Middleware\RedirectIfEmailAlreadyConfirm::class,
+        'must-be-subscribed' => \App\Http\Middleware\MustBeSubscribedToCourse::class
     ];
 }

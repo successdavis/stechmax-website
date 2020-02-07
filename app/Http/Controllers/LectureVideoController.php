@@ -55,4 +55,9 @@ class LectureVideoController extends Controller
 
         $lecture->video->delete();
     }
+
+    public function playlist(Course $course)
+    {
+        return $course->sections()->get();
+    }
 }

@@ -33,6 +33,7 @@ Route::post('api/courses/{subject}/{course}', 'Api\CourseImageController@store')
 Route::post('api/{lecture}/video', 'LectureVideoController@store')->middleware(['auth', 'admin']);
 Route::delete('api/{lecture}/deletevideo', 'LectureVideoController@destroy')->middleware(['auth', 'admin']);
 Route::patch('api/{lecture}/updatevideo', 'LectureVideoController@update')->middleware(['auth', 'admin']);
+Route::get('studyroom/{course}/getplaylist', 'LectureVideoController@playlist')->middleware(['auth', 'admin']);
 
 Route::post('api/course/{course}/promovideo', 'PromoVideoController@store');
 // Route::post('api/{lecture}/attachvideo', 'VideoController@store');
@@ -194,7 +195,8 @@ Route::post('/courses/{subject}/{course}/subscription', 'Payment\PaymentMethodCo
 Route::post('/courses/{subject}/{course}/paystack', 'PaystackSubscriptionController@makeFullPayment')->name('paystack.makeFullPayment');
 Route::post('/courses/{subject}/{course}/paystack/part', 'PaystackSubscriptionController@makePartPayment')->name('paystack.makePartPayment');
 
-Route::get('/dashboard/{course}/classroom', 'ClassroomController@index')->middleware('must-be-confirmed')->name('classroom.index');
+Route::get('/studyroom/{course}', 'StudyRoomController@index')->middleware('must-be-subscribed')->name('studyroom.index');
+
 Route::get('/api/{course}/lessonvideourl', 'ClassroomController@nextVideo')->middleware('must-be-confirmed');
 
 Route::get('/paid/submit_details', 'PaymentController@create')->name('pay.submitDetails');

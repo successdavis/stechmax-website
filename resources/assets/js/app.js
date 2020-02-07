@@ -31,7 +31,7 @@ Vue.component('site-registration', require('./pages/SiteRegistration.vue').defau
 Vue.component('account-confirmation', require('./pages/AccountConfirmation.vue').default);
 Vue.component('reset-passwords', require('./pages/ResetPassword.vue').default);
 Vue.component('billing', require('./pages/Billing.vue').default);
-Vue.component('classroom', require('./pages/Classroom.vue').default);
+Vue.component('study-room', require('./pages/StudyRoom.vue').default);
 Vue.component('invoice-payments', require('./components/ViewInvoicePayments.vue').default);
 Vue.component('add-payment', require('./components/AddPayment.vue').default);
 Vue.component('user-add-payment', require('./components/UserAddPayment.vue').default);
@@ -59,6 +59,7 @@ Vue.component('tab', require('./components/tab.vue').default);
 Vue.component('tabs', require('./components/tabs.vue').default);
 Vue.component('course-content', require('./components/content.vue').default);
 Vue.component('section-topic', require('./components/ContentTopic.vue').default);
+// Vue.component('studyroom-lecture', require('./components/studyroomLecture.vue').default);
 
 
 const app = new Vue({

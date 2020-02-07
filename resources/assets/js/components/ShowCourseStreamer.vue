@@ -18,6 +18,9 @@
 	            <div class="grid-x grid-padding-x mb-2">
                     <div style="color: black;" class="cell medium-4" v-for="learn in learns" v-text="learn.body"></div>
 	            </div> 
+	            <div v-if="course.isSubscribedBy">
+		            <a :href="'/studyroom/' + course.slug" class="button medium">Enter Study Room</a>
+	            </div>
 	            <div class="grid-x" v-if="! course.isSubscribedBy">
 	                <div class="medium-6 cell">
 	                    <h3 class="inline course__price">&#8358;<span v-text="course.amount / 100"></span></h3>
@@ -27,7 +30,7 @@
 	                    <a class="medium button course__info--sub-btn" :href="course_path + '/subscription?class=true'">Study Series Offline</a>
 	                </div>
 	            </div>
-	            <login-register></login-register>
+	            <!-- <login-register></login-register> -->
 	    </div>
 	    <div class="hero-image" :style="{backgroundImage: `url(${course.thumbnail_path})`}"></div>
 	</div>
