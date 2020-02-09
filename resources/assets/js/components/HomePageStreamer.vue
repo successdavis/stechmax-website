@@ -5,7 +5,9 @@
 			<img class="bottom-shadow mb-3" src="/public/images/shadow_2.png">
 			<div class="overlay__content">
 				<h1 class="overlay__content--head mb-2">Begin Your Journey to a Digital Innovation</h1>
-				<course-search></course-search>
+				<div class="search__form section">
+					<course-search class="form__field"></course-search>
+				</div>
 			</div>
 		</div>
 		
@@ -29,10 +31,18 @@
 	}
 
 	.search__form {
-	    max-width: 60%;
+	    display: flex;
+	    justify-content: center;
+	}
+
+	.form__field {
+		width: 60%
 	}
 
 	@media (max-width: 769px) {
+		.search__form {
+		    max-width: 100%;
+		}
 		.bottom-shadow {
 			display: none;
 		}

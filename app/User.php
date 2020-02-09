@@ -47,6 +47,11 @@ class User extends Authenticatable
 
     }
 
+    public function coporatetrainings()
+    {
+        return $this->hasMany(coporatetraining::class);
+    }   
+
     public function getRouteKeyName()
     {
         return 'username';
@@ -257,5 +262,16 @@ class User extends Authenticatable
     public function verified()
     {
         return $this->confirmed || $this->phone_confirmed;
+    }
+
+    public function createCoporateTraining($data)
+    {
+        return $this->coporatetrainings()->create([
+            'begin_at'      => $data['begin_at'],
+            'endgoal'       => $data['endgoal'],
+            'venue'         => $data['venue'],
+            'personal_pc'   => isset($data['personal_pc']) ? true : false,
+            'fee'           => $data['fee']
+        ]);
     }
 }

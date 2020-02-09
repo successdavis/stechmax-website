@@ -1,16 +1,10 @@
 @extends('layouts.app')
 @section('content')
-    @if (!Auth::check())
-        @include('layouts.regFormStreamerTwo')
-    @else 
-        @include('layouts.regFormStreamerTwo')
-    @endif
-    <div>
-        @include('layouts.subjects')
-    </div>
-    <div class="grid-container">
-        @include('layouts.what')
-    </div>
+    <home-streamer></home-streamer>
+    @include('layouts.subjects')
+    @include('layouts.what')
+
     @include('layouts.program')
     @include('layouts.advertBanner')
+    {{-- @include('layouts.testimonials') --}}
 @endsection

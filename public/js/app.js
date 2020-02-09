@@ -3018,7 +3018,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.homeStreamer[data-v-a95409dc]{\n\tmin-height: calc(100vh - 56px);\n\t/*min-height: 550px;*/\n\tbackground-image: url(/../images/banner.jpg);\n\tbackground-size: cover;\n    background-position: center;\n    background-repeat: no-repeat;\n}\n.bottom-shadow[data-v-a95409dc] {\n\tposition: absolute;\n    right: 0;\n    bottom: -69px;\n    z-index: -1;\n}\n.search__form[data-v-a95409dc] {\n    max-width: 60%;\n}\n@media (max-width: 769px) {\n.bottom-shadow[data-v-a95409dc] {\n\t\tdisplay: none;\n}\n}\n", ""]);
+exports.push([module.i, "\n.homeStreamer[data-v-a95409dc]{\n\tmin-height: calc(100vh - 56px);\n\t/*min-height: 550px;*/\n\tbackground-image: url(/../images/banner.jpg);\n\tbackground-size: cover;\n    background-position: center;\n    background-repeat: no-repeat;\n}\n.bottom-shadow[data-v-a95409dc] {\n\tposition: absolute;\n    right: 0;\n    bottom: -69px;\n    z-index: -1;\n}\n.search__form[data-v-a95409dc] {\n    display: flex;\n    justify-content: center;\n}\n.form__field[data-v-a95409dc] {\n\twidth: 60%\n}\n@media (max-width: 769px) {\n.search__form[data-v-a95409dc] {\n\t    max-width: 100%;\n}\n.bottom-shadow[data-v-a95409dc] {\n\t\tdisplay: none;\n}\n}\n", ""]);
 
 // exports
 
@@ -83655,18 +83655,18 @@ var render = function() {
         attrs: { src: "/public/images/shadow_2.png" }
       }),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "overlay__content" },
-        [
-          _c("h1", { staticClass: "overlay__content--head mb-2" }, [
-            _vm._v("Begin Your Journey to a Digital Innovation")
-          ]),
-          _vm._v(" "),
-          _c("course-search")
-        ],
-        1
-      )
+      _c("div", { staticClass: "overlay__content" }, [
+        _c("h1", { staticClass: "overlay__content--head mb-2" }, [
+          _vm._v("Begin Your Journey to a Digital Innovation")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "search__form section" },
+          [_c("course-search", { staticClass: "form__field" })],
+          1
+        )
+      ])
     ])
   ])
 }

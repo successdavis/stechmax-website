@@ -38,29 +38,18 @@
     @yield('head')
 </head>
 <body>
-
 <div id="app">
-<vue-progress-bar></vue-progress-bar>
     <div id="app">
+        <vue-progress-bar></vue-progress-bar>
         @include('layouts.navbar')
-        <home-streamer></home-streamer>
-        
-        {{-- @include('layouts.streamer') --}}
-
-        {{-- <flash message="{{ session('flash') }}"></flash> --}}
-        
-        
-
+        @yield('content')
+        <flash message="{{ session('flash') }}"></flash>
         {{-- @include('layouts.footer') --}}
     </div>
-
-    <flash message="{{ session('flash') }}"></flash>
+</div>
 </body>
 
 <!-- Scripts -->
-<script src="/js/vendor/jquery.js"></script>
-<script src="/js/vendor/what-input.js"></script>
-<script src="/js/vendor/foundation.js"></script>
 <script src="{{ asset('js/app.js') }}" ></script>
 <script src="{{ asset('js/remita-pay-inline.bundle.js') }}" ></script>
 
@@ -69,8 +58,5 @@
 
 @yield('body-close')
 
-<script type="text/javascript">
-    $(document).foundation();
-</script>
 </body>
 </html>

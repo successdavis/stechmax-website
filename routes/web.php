@@ -192,6 +192,8 @@ Route::post('/courses/{subject}/{course}/subscription', 'Payment\PaymentMethodCo
 //Route::get('/courses/{subject}/{course}/callback', 'Payment\CourseSubscriptionController@update')->name('course_subscription.update')->middleware('auth');
 
 
+Route::post('coporate/registration', 'CoporatetrainingController@store');
+
 Route::post('/courses/{subject}/{course}/paystack', 'PaystackSubscriptionController@makeFullPayment')->name('paystack.makeFullPayment');
 Route::post('/courses/{subject}/{course}/paystack/part', 'PaystackSubscriptionController@makePartPayment')->name('paystack.makePartPayment');
 
@@ -208,5 +210,7 @@ Route::post('/paid/savedetails', 'PaymentController@store')->name('pay.saveDetai
 
 Route::get('/settings/getSiteLogo', 'SiteController@getSiteLogo')->name('site.logo');
 Route::get('/settings/getTemplateLogo', 'SiteController@getTemplateLogo')->name('site.templates');
+
+
 
 

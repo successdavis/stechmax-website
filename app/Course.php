@@ -72,6 +72,11 @@ class Course extends Model
         }
     }
 
+    public function coporatetraining()
+    {
+        return $this->belongsToMany('App\coporatetraining');
+    }
+
     public function publish()
     {
         $this->update([

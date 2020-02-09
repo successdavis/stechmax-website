@@ -1,4 +1,4 @@
-<h3 class="mt-3 mb-2 text-center">BROWSE BY SUBJECT</h3>
+<h3 class="mt-3 mb-2 text-center"></h3>
 <div class="grid">
 	<div class="grid__item large has-overlay">
 		<div class="grid__item--background" style="background-image: url(/../images/subjects/web-development.jpg)"></div>
