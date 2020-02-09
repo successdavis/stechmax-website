@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<div class=" is-centered">
-		  <ul class="tabset">
+		<div class="tabs is-boxed is-active is-centered">
+		  <ul>
 		    <li v-for="tab in tabs" :class="{'is-active' : tab.isActive}">
 		    	<a :href="tab.href" @click="selectTab(tab)" v-text="tab.name"></a>
 		    </li>
@@ -34,19 +34,7 @@
 	};
 </script>
 
-<style>
-	.tabset {
-		display: flex;
-		justify-content: space-around;
-		color: black;
-		margin-left: 0;
-	}
-
-	ul li {
-		display: inline-block;
-		padding: .5em 0;
-	}
-
+<style scoped>
 	.tab-details {
 		color: black;
 	}

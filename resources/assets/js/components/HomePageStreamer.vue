@@ -1,12 +1,15 @@
 <template>
-	<div class="homeStreamer has-overlay">	
-		<div class="overlay"></div>
-		<img class="bottom-shadow mb-3" src="/public/images/shadow_2.png">
-		<div class="overlay__content">
-			<h1 class="overlay__content--head mb-3">Begin Your Journey to a Digital Innovation</h1>
-			<input class="search__form" type="text" name="q" placeholder="Watcha going to learn today?">
+	<section class="hero is-large">
+		<div class="homeStreamer has-overlay">	
+			<div class="overlay"></div>
+			<img class="bottom-shadow mb-3" src="/public/images/shadow_2.png">
+			<div class="overlay__content">
+				<h1 class="overlay__content--head mb-2">Begin Your Journey to a Digital Innovation</h1>
+				<course-search></course-search>
+			</div>
 		</div>
-	</div>
+		
+	</section>
 </template>
 
 <style scoped>
@@ -26,16 +29,10 @@
 	}
 
 	.search__form {
-	    padding: 1.5em;
 	    max-width: 60%;
-	    display: inline-block;
 	}
 
 	@media (max-width: 769px) {
-		.search__form {
-			max-width: 90%;
-		}
-
 		.bottom-shadow {
 			display: none;
 		}

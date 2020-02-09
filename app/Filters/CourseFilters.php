@@ -12,7 +12,7 @@ class CourseFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['amount', 'alphabet', 'difficulty'];
+    protected $filters = ['amount', 'alphabet', 'difficulty', 'search'];
 
     protected function amount($amount = 'desc')
     {
@@ -37,6 +37,13 @@ class CourseFilters extends Filters
 
         return $this->builder->where('difficulty_id', $difficulty[0]['id']);
         
+    }
+
+    public function search($s)
+    {
+        $this->builder->getQuery()->orders = [];
+        return $this->builder->where('title', 'LIKE', '%' . $s . '%');
+            // ->orWhere('description', 'LIKE', '%' . $s . '%');
     }
 
 }

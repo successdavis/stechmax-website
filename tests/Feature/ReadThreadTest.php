@@ -11,7 +11,7 @@ class ReadThreadTest extends TestCase
 {
     use DatabaseMigrations;
     
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -90,5 +90,18 @@ class ReadThreadTest extends TestCase
         $this->call('GET', $thread->path());
 
         $this->assertEquals(1, $thread->fresh()->visits);
+    }
+
+    /** @test */
+    public function a_user_can_search_through_threads()
+    {
+        $thread = create('App\Thread', ['title' => 'some search keywords']);
+        $threadtwo = create('App\Thread', ['title' => 'does not contain result result']);
+
+        $url = 'threads?search=search keywords';
+
+        $threads = $this->json('GET', $url)->json();
+
+        $this->assertCount(1, $threads['data']);  
     }
 }

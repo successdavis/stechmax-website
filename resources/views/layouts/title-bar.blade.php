@@ -30,7 +30,7 @@
 
       {{-- courses menu button --}}
       <li>
-        <mega-menu></mega-menu>
+        {{-- <mega-menu></mega-menu> --}}
       </li>
 
       <li><a href="{{ url('/threads') }}">FORUM</a></li>

@@ -12,7 +12,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class ThreadTest extends TestCase
 {
     use DatabaseMigrations;
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

@@ -29,8 +29,18 @@
 @import 'lower-nav';
 @import 'dashboard_card';
 @import 'showCourseStreamer';
+@import 'navbar';
 
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+
+// Bulma
+@import './node_modules/bulma/bulma.sass';
+// @import "./node_modules/bulma-o-steps/bulma-steps.sass";
+
+// Font Awesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';

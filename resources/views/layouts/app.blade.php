@@ -22,12 +22,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
     <!-- Styles -->
-    <link href="{{ asset('css/foundation.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <!-- Foundation Icons -->
-    <link rel="stylesheet" href="/css/foundation-icons.css">
-    <link rel="stylesheet" href="/foundation-icons/foundation-icons.css">
 
     <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
 
@@ -46,49 +41,20 @@
 
 <div id="app">
 <vue-progress-bar></vue-progress-bar>
+    <div id="app">
+        @include('layouts.navbar')
+        <home-streamer></home-streamer>
+        
+        {{-- @include('layouts.streamer') --}}
 
-    <div class="off-canvas-wrapper">
-        <div style="z-index: 10000;" class="off-canvas off-canvas_panel position-left bg--dark-blue @if ($displayMenu)
-          {{'reveal-for-medium'}} @endif" id="offCanvasLeftOverlap" data-off-canvas data-transition="overlap">
+        {{-- <flash message="{{ session('flash') }}"></flash> --}}
+        
+        
 
-            {{-- button to toggle off canvas --}}
-            <button class="close-button" aria-label="Close menu" type="button" data-close>
-              <span aria-hidden="true">&times;</span>
-            </button>
+        {{-- @include('layouts.footer') --}}
+    </div>
 
-          <!-- Your menu or Off-canvas content goes here -->
-          @guest
-            @include('layouts.off-canvas-content-guest')
-          @else
-            @include('layouts.off-canvas-content')
-          @endguest
-        </div>
-
-
-        {{-- Offcanvas page content goes here --}}
-        <div class="off-canvas-content" data-off-canvas-content>
-              
-           {{-- Include the title bar --}}
-           @include('layouts.title-bar')
-            
-            
-            <main class="py-4 margin-top-large" id="site-body">
-                @yield('content')
-                
-                <flash message="{{ session('flash') }}"></flash>
-            </main>
-
-        </div> {{-- closing off canvas content --}}
-    </div> {{-- closing wrapper div --}}
-
-</div>
-@if ($displayMenu !== true)
-    @include('layouts.footer')
-@else
-    <div class="mb-4"></div>
-@endif
-
-
+    <flash message="{{ session('flash') }}"></flash>
 </body>
 
 <!-- Scripts -->

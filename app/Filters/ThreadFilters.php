@@ -11,7 +11,7 @@ class ThreadFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['by', 'popular', 'unanswered'];
+    protected $filters = ['by', 'popular', 'unanswered', 'search'];
 
     /**
      * Filter the query by a given username.
@@ -30,5 +30,12 @@ class ThreadFilters extends Filters
     {
         $this->builder->getQuery()->orders = [];
         return $this->builder->orderBy('replies_count', 'desc');
+    }
+
+    public function search($s)
+    {
+        $this->builder->getQuery()->orders = [];
+        return $this->builder->where('title', 'LIKE', '%' . $s . '%');
+            // ->orWhere('description', 'LIKE', '%' . $s . '%');
     }
 }

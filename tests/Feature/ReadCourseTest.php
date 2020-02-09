@@ -11,7 +11,7 @@ class ReadCourseTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -57,5 +57,18 @@ class ReadCourseTest extends TestCase
 
         $courses = $this->getJson('api/courses/allcourses')->json();
         $this->assertCount(2, $courses);
+    }
+
+    /** @test */
+    public function a_user_can_search_through_courses_by_title()
+    {
+        $course = create('App\Course', ['title' => 'Mastering in CorelDraw', 'published' => true, 'type_id' => 2]);
+        $courseTwo = create('App\Course', ['title' => 'agriculture and farming']);
+
+        $url = 'courses?search=farming';
+
+        $courses = $this->json('GET', $url)->json();
+        // dd($courses);
+        $this->assertCount(1, $courses);  
     }
 }

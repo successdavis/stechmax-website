@@ -6,7 +6,6 @@ export default {
 			player: '',
 			playlist: '',
 			playVideo: false,
-			currentItem: 0,
 		}
 	},
 
@@ -47,10 +46,6 @@ export default {
 		skipto(lecture){
             this.playlist.currentItem(this.playlist.indexOf(lecture.VideoUrl));
 		},
-
-		updateNowPlaying(e) {
-			this.currentItem = e;
-		}
 	}
 };
 </script>
