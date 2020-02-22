@@ -29,69 +29,69 @@
 						</div>
 					</tab>
 					<tab name="Register">
-							<form @submit.prevent="generateRecaptcha" @keydown="RegForm.errors.clear()">
-								<div class="grid-container">
-									<div class="grid-x grid-padding-x">
-										<h3 class="pageTitle">Create an Account</h3>
-									  <div class="cell">
-									    <label>Email or Phone
-									      <input type="text" placeholder="Required" v-model="RegForm.emailOrPhone" required>
-									      <p class="help-text" v-if="RegForm.errors.has('emailOrPhone')" v-text="RegForm.errors.get('emailOrPhone')"></p>
-									    </label>
-									  </div>
-									  <div class="medium-6 cell">
-									    <label>Surname
-									      <input type="text" placeholder="Required" v-model="RegForm.surname" required>
-									      <p class="help-text" v-if="RegForm.errors.has('surname')" v-text="RegForm.errors.get('surname')"></p>
-									    </label>
-									  </div>
-									  <div class="medium-6 cell">
-									    <label>Last Name
-									      <input type="text" placeholder="Required" v-model="RegForm.lastname" required>
-									      <p class="help-text" v-if="RegForm.errors.has('lastname')" v-text="RegForm.errors.get('lastname')"></p>
-									    </label>
-									  </div>
-									  <div class="medium-6 cell">
-									    <label>Other Names
-									      <input type="text" placeholder="Optional" v-model="RegForm.middlename">
-									      <p class="help-text" v-if="RegForm.errors.has('middlename')" v-text="RegForm.errors.get('middlename')"></p>
-									    </label>
-									  </div>
-									  <div class="medium-6 cell">
-									    <label>Gender
-									      <select v-model="RegForm.gender" required>
-									      	<option selected value="" disabled>Click to pick</option>
-										    <option value="M">Male</option>
-										    <option value="F">Female</option>
-										  </select>
-									      <p class="help-text" v-if="RegForm.errors.has('gender')" v-text="RegForm.errors.get('gender')"></p>
-									    </label>
-									  </div>
-									  <div class="medium-6 cell">
-									    <label>Date of Birth
-									      <input type="date" placeholder="Required" v-model="RegForm.dateofbirth" required>
-									      <p class="help-text" v-if="RegForm.errors.has('dateofbirth')" v-text="RegForm.errors.get('dateofbirth')"></p>
-									    </label>
-									  </div>
-									  <div class="medium-6 cell">
-									    <label>Password
-									      <input type="password" placeholder="Required" v-model="RegForm.password" required>
-									      <p class="help-text" v-if="RegForm.errors.has('password')" v-text="RegForm.errors.get('password')"></p>
-									    </label>
-									  </div>
-									  <div class="medium-6 cell">
-									    <label>Confirm Password
-									      <input type="password" placeholder="Re-type password here" v-model="RegForm.password_confirmation" required>
-									      <p class="help-text" v-if="RegForm.errors.has('password_confirmation')" v-text="RegForm.errors.get('password_confirmation')"></p>
-									    </label>
-									  </div>
-									  <div class="cell">
-									      <div class="medium button" @click="$modal.hide('quick_login')">Cancel</div>
-									      <button :disabled="submitting" type="submit" class="medium button">Submit</button>
-									  </div>
-									</div>
+						<form @submit.prevent="generateRecaptcha" @keydown="RegForm.errors.clear()">
+							<div class="grid-container">
+								<div class="grid-x grid-padding-x">
+									<h3 class="pageTitle">Create an Account</h3>
+								  <div class="cell">
+								    <label>Email or Phone
+								      <input type="text" placeholder="Required" v-model="RegForm.emailOrPhone" required>
+								      <p class="help-text" v-if="RegForm.errors.has('emailOrPhone')" v-text="RegForm.errors.get('emailOrPhone')"></p>
+								    </label>
+								  </div>
+								  <div class="medium-6 cell">
+								    <label>Surname
+								      <input type="text" placeholder="Required" v-model="RegForm.surname" required>
+								      <p class="help-text" v-if="RegForm.errors.has('surname')" v-text="RegForm.errors.get('surname')"></p>
+								    </label>
+								  </div>
+								  <div class="medium-6 cell">
+								    <label>Last Name
+								      <input type="text" placeholder="Required" v-model="RegForm.lastname" required>
+								      <p class="help-text" v-if="RegForm.errors.has('lastname')" v-text="RegForm.errors.get('lastname')"></p>
+								    </label>
+								  </div>
+								  <div class="medium-6 cell">
+								    <label>Other Names
+								      <input type="text" placeholder="Optional" v-model="RegForm.middlename">
+								      <p class="help-text" v-if="RegForm.errors.has('middlename')" v-text="RegForm.errors.get('middlename')"></p>
+								    </label>
+								  </div>
+								  <div class="medium-6 cell">
+								    <label>Gender
+								      <select v-model="RegForm.gender" required>
+								      	<option selected value="" disabled>Click to pick</option>
+									    <option value="M">Male</option>
+									    <option value="F">Female</option>
+									  </select>
+								      <p class="help-text" v-if="RegForm.errors.has('gender')" v-text="RegForm.errors.get('gender')"></p>
+								    </label>
+								  </div>
+								  <div class="medium-6 cell">
+								    <label>Date of Birth
+								      <input type="date" placeholder="Required" v-model="RegForm.dateofbirth" required>
+								      <p class="help-text" v-if="RegForm.errors.has('dateofbirth')" v-text="RegForm.errors.get('dateofbirth')"></p>
+								    </label>
+								  </div>
+								  <div class="medium-6 cell">
+								    <label>Password
+								      <input type="password" placeholder="Required" v-model="RegForm.password" required>
+								      <p class="help-text" v-if="RegForm.errors.has('password')" v-text="RegForm.errors.get('password')"></p>
+								    </label>
+								  </div>
+								  <div class="medium-6 cell">
+								    <label>Confirm Password
+								      <input type="password" placeholder="Re-type password here" v-model="RegForm.password_confirmation" required>
+								      <p class="help-text" v-if="RegForm.errors.has('password_confirmation')" v-text="RegForm.errors.get('password_confirmation')"></p>
+								    </label>
+								  </div>
+								  <div class="cell">
+								      <div class="medium button" @click="$modal.hide('quick_login')">Cancel</div>
+								      <button :disabled="submitting" type="submit" class="medium button">Submit</button>
+								  </div>
 								</div>
-								</form>
+							</div>
+						</form>
 					</tab>
 				</tabs>
 			</div>

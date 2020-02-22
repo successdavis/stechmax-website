@@ -6,7 +6,7 @@
 				  	<input @keyup="courseSearch" v-model="CourseSearch" :class="isLoading ? 'isLoading' : ''" class="input is-medium" type="text" name="q" placeholder="Start typing to search through courses">
 				</div>
 			</tab>
-			<tab name="Forum" >
+			<tab name="Forum" v-if="enableForum">
 				<div class="control">
 				  <input @keyup="threadSearch" v-model="ForumSearch" class="input is-medium" type="text" name="q" placeholder="Type to search forum">
 				</div>
@@ -24,8 +24,12 @@
     // $url = 'threads?search=search keywords';
     import _ from 'lodash';
 	export default {
+		props: {
+			forum: true,
+		},
 		data () {
 			return {
+				enableForum: this.forum,
 				isLoading: false,
 				results: '',
 				CourseSearch: '',

@@ -264,14 +264,14 @@ class User extends Authenticatable
         return $this->confirmed || $this->phone_confirmed;
     }
 
-    public function createCoporateTraining($data)
+    public function createCoporateTraining()
     {
         return $this->coporatetrainings()->create([
-            'begin_at'      => $data['begin_at'],
-            'endgoal'       => $data['endgoal'],
-            'venue'         => $data['venue'],
-            'personal_pc'   => isset($data['personal_pc']) ? true : false,
-            'fee'           => $data['fee']
+            'begin_at'      => request('begin_at'),
+            'endgoal'       => request('endgoal'),
+            'venue'         => request('venue'),
+            'personal_pc'   => null !== request('personal_pc') ? true : false,
+            'fee'           => request('fee')
         ]);
     }
 }

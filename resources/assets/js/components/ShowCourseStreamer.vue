@@ -6,28 +6,28 @@
             	<vid-player :playerdata="playerdata"></vid-player>
 			</div>
         </div>
-	    <div class="grid-container path-info" v-if="! playVideo">
-	             <a :href="'/courses/' + subject.slug" class="mb-3 tiny-button" v-text="subject.slug"></a>
-	             <a :href="'/courses/'" class="mb-3 tiny-button" v-text="type"></a>
+	    <div class="container path-info" v-if="! playVideo">
+	            <a :href="'/courses/' + subject.slug" class="mb-3 tiny-button" v-text="subject.slug"></a>
+	            <a :href="'/courses/'" class="mb-3 tiny-button" v-text="type"></a>
 
-	             <div class="course__play--btn" :style="{backgroundImage: `url(${course.thumbnail_path})`}">
+	            <div class="course__play--btn" :style="{backgroundImage: `url(${course.thumbnail_path})`}">
 	                <i class="fas fa-play" @click="togglePlay"></i>
 	            </div>
-	            <h3 class="mb-1 mt-1 course__streamer--title" v-text="course.title"></h3>
-	            <p class="mb-3 course-desc" v-text="course.sypnosis"></p>
-	            <div class="grid-x grid-padding-x mb-2">
-                    <div style="color: black;" class="cell medium-4" v-for="learn in learns" v-text="learn.body"></div>
-	            </div> 
+	            <h3 class="is-size-4-mobile mt-1 is-size-3 course__streamer--title" v-text="course.title"></h3>
+	            <p class="mb-3 course-desc has-text-centered" v-text="course.sypnosis"></p>
+<!-- 	            <div class="columns mb-2">
+                    <div style="color: black;" class="column" v-for="learn in learns" v-text="learn.body"></div>
+	            </div>  -->
 	            <div v-if="course.isSubscribedBy">
 		            <a :href="'/studyroom/' + course.slug" class="button medium">Enter Study Room</a>
 	            </div>
-	            <div class="grid-x" v-if="! course.isSubscribedBy">
-	                <div class="medium-6 cell">
+	            <div class="columns" v-if="! course.isSubscribedBy">
+	                <div class="column is-6">
 	                    <h3 class="inline course__price">&#8358;<span v-text="course.amount / 100"></span></h3>
 	                </div>
-	                <div class="medium-6 cell">
-	                    <a class="medium button course__info--sub-btn" :href="course_path + '/subscription?class=false'">Study Series Online</a>
-	                    <a class="medium button course__info--sub-btn" :href="course_path + '/subscription?class=true'">Study Series Offline</a>
+	                <div class="column buttons are-medium is-6">
+	                    <a class="mb_x-small button is-link is-rounded" :href="course_path + '/subscription?class=false'">Study Series Online</a>
+	                    <a class="button is-link is-rounded" :href="course_path + '/subscription?class=true'">Study Series Offline</a>
 	                </div>
 	            </div>
 	            <!-- <login-register></login-register> -->

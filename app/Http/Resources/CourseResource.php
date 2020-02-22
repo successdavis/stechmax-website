@@ -26,6 +26,10 @@ class CourseResource extends JsonResource
             'duration' => $this->duration,
             'published' => $this->published ? 'Published' : 'Unpublished',
             'path' => $this->path,
+            'type' => $this->type->name,
+            'difficulty' => $this->difficulty->level,
+            'amount' => $this->getAmount(),
+
         ];
     }
 }

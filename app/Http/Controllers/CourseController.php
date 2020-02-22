@@ -6,6 +6,7 @@ use Paystack;
 use App\Type;
 use App\Course;
 use App\Subject;
+use App\Http\Resources\CourseResource;
 use Illuminate\Http\Request;
 use App\Filters\CourseFilters;
 
@@ -25,8 +26,9 @@ class CourseController extends Controller
         $courses = $this->getCourses($subject, $filters);
         $subjects = Subject::all();
 
+
         if (request()->wantsJson()) {
-            return $courses;
+            return CourseResource::collection($courses);
         }
 
         return view('courses.index', compact('courses','subjects'));
@@ -88,7 +90,9 @@ class CourseController extends Controller
             return view('courses.program.index', compact('course'));        
         }
 
-        return view('courses.show', compact('course'));    
+        $sections = $course->sections;
+
+        return view('courses.show', compact('course', 'sections'));    
 
     }
 

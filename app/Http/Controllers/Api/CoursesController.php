@@ -124,4 +124,9 @@ class CoursesController extends Controller
         
         return $courses;
     }
+
+    public function getSubjectCourses()
+    {
+        return $users = Course::whereIn('subject_id', request('subjects'))->get();
+    }
 }

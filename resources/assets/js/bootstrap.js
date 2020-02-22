@@ -34,6 +34,8 @@ import VModal from 'vue-js-modal';
 import Croppa from 'vue-croppa'
 import VueProgressBar from 'vue-progressbar'
 import VueVideoPlayer from 'vue-video-player'
+import { Table, Input, Collapse, Steps, Carousel } from 'buefy'
+// import bulmaCalendar from 'bulma-calendar'
 
 import 'video.js/dist/video-js.css'
 
@@ -41,6 +43,19 @@ import videojsPlaylist from 'videojs-playlist'
 import videojs from 'video.js'
 
 videojs.registerPlugin('videojs-playlist', videojsPlaylist);
+
+
+import 'buefy/dist/buefy.css'
+
+Vue.use(Table)
+Vue.use(Input)
+Vue.use(Collapse, {
+  defaultIconComponent: 'vue-fontawesome',
+  defaultIconPack: 'fas',
+})
+Vue.use(Steps)
+Vue.use(Carousel)
+
 
 
 window.Form = Form;
@@ -56,6 +71,7 @@ Vue.use(VueProgressBar, {
   failedColor: 'red',
   height: '10px'
 });
+
 
 Vue.use(VueVideoPlayer, /* {
   options: global default options,
@@ -86,5 +102,7 @@ window.events = new Vue();
 window.flash = function (message, level = 'success') {
     window.events.$emit('flash', {message, level});
 };
+
+
 
 

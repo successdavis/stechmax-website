@@ -30,6 +30,7 @@
 @import 'dashboard_card';
 @import 'showCourseStreamer';
 @import 'navbar';
+@import 'siteRegPage';
 
 .navbar-laravel {
   background-color: #fff;
@@ -39,7 +40,10 @@
 
 // Bulma
 @import './node_modules/bulma/bulma.sass';
-// @import "./node_modules/bulma-o-steps/bulma-steps.sass";
+@import "./node_modules/bulma-o-steps/bulma-steps.sass";
+// @import	"~bulma-calendar/dist/css/bulma-calendar.min.css";
+
+// @import "bulma-steps.sass"
 
 // Font Awesome
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';

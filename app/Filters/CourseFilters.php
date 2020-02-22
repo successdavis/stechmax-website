@@ -2,6 +2,7 @@
 
 namespace App\Filters;
 
+use App\Type;
 use App\Difficulty;
 use App\User;
 
@@ -12,12 +13,25 @@ class CourseFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['amount', 'alphabet', 'difficulty', 'search'];
+    protected $filters = ['amount', 'alphabet', 'difficulty', 'search', 'type'];
 
     protected function amount($amount = 'desc')
     {
         $this->builder->getQuery()->orders = [];
         return $this->builder->orderBy('amount', $amount);
+    }
+
+    protected function type($type = '')
+    {
+        $this->builder->getQuery()->orders = [];
+        
+        if (! Type::where('name', $type)->exists()) {
+            abort(400, 'Bad Request');
+        }
+
+        $type = Type::where('name', $type)->get();
+
+        return $this->builder->where('type_id', $type[0]['id']);
     }
 
     protected function alphabet($alphabet)

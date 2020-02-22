@@ -43,8 +43,8 @@ class ReadCourseTest extends TestCase
         $courseNotInSubject = create('App\Course', ['subject_id' => $subject->id, 'published' => true, 'type_id' => $this->type->id]);
 
         $this->get('/courses/' . $subject->slug)
-            ->assertSee($courseInSubject->title);
-            // ->assertDontSee($courseNotInSubject->title);
+            ->assertSee($courseInSubject->title)
+            ->assertDontSee($courseNotInSubject->title);
     }
 
     /** @test */

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Subject;
 use App\coporatetraining;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class CoporatetrainingController extends Controller
      */
     public function index()
     {
-        //
+        $subjects = Subject::all();
+        return view('coporate.index', compact('subjects'));
     }
 
     /**
@@ -36,13 +38,15 @@ class CoporatetrainingController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'coporate'      => 'required|array',
+            'begin_at'      => 'required|string',
+            'endgoal'       => 'required|string',
+            'venue'         => 'required|string',
             'courses'       =>  'required|array',
         ]);
         
-        $coporate = auth()->user()->createCoporateTraining($request->coporate);
+        $coporate = auth()->user()->createCoporateTraining();
         $coporate->addCourses($request->courses);
-        
+
         if (!empty($request->schedule)) {
             $coporate->addSchedule($request->schedule);
         }

@@ -11,6 +11,14 @@
           {{-- <li class="disabled">Gene Splicing</li> --}}
           <li>
             <span class="show-for-sr">Course Registration: </span> Course Registration
+
+            <a href="{{ route('logout') }}"
+           onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+            <!-- {{ __('Logout') }} -->
+        <i class="fas fa-power-off" title="End your login Session " style="color: red"></i>
+        </a>
+
           </li>
         </ul>
       </nav>
@@ -23,4 +31,6 @@
        </div>
        
    </div>
+
+   
 @endsection

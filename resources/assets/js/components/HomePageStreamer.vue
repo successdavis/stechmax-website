@@ -6,7 +6,7 @@
 			<div class="overlay__content">
 				<h1 class="overlay__content--head mb-2">Begin Your Journey to a Digital Innovation</h1>
 				<div class="search__form section">
-					<course-search class="form__field"></course-search>
+					<course-search :forum="true" class="form__field"></course-search>
 				</div>
 			</div>
 		</div>

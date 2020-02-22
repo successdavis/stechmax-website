@@ -24,6 +24,7 @@ Route::post('/completeregistration', 'Auth\CompleteRegistrationController@update
 Route::get('/threads/search', 'SearchController@show');
 
 Route::get('api/courses', 'Api\CoursesController@getSubjects');
+Route::get('/api/subjectcourses', 'Api\CoursesController@getSubjectCourses');
 
 Route::get('api/courses/allcourses', 'Api\CoursesController@getCourses');
 Route::get('api/courses/allcoursesandtracks', 'Api\CoursesController@allcoursesandtracks')->middleware('admin');
@@ -193,6 +194,7 @@ Route::post('/courses/{subject}/{course}/subscription', 'Payment\PaymentMethodCo
 
 
 Route::post('coporate/registration', 'CoporatetrainingController@store');
+Route::get('coporate/registration', 'CoporatetrainingController@index');
 
 Route::post('/courses/{subject}/{course}/paystack', 'PaystackSubscriptionController@makeFullPayment')->name('paystack.makeFullPayment');
 Route::post('/courses/{subject}/{course}/paystack/part', 'PaystackSubscriptionController@makePartPayment')->name('paystack.makePartPayment');

@@ -20,7 +20,7 @@ class CreateCoporatetrainingsTable extends Migration
             $table->string('venue');
             $table->unsignedInteger('user_id');
             $table->boolean('personal_pc')->default(false);
-            $table->integer('fee');
+            $table->integer('fee')->nullable();
             $table->timestamps();
         });
     }
