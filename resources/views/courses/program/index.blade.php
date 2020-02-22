@@ -6,23 +6,23 @@
 
    @include('courses.program.partials.lower-nav')
 
-   <div class="grid-container" id="overview">
-      <div class="grid-x grid-padding-x">
-         <div class="medium-8 cell " >
+   <div class="container" id="overview">
+      <div class="columns">
+         <div class="column" >
             @include('courses.program.partials.details')
          </div>
-         <div class="medium-4 cell">
+         <div class="column is-3">
             @include('courses.program.partials.aside')
          </div>
       </div>
    </div>
 
    <div class="program-course-curriculum" id="curriculum">
-      <div class="grid-container">
+      <div class="container">
          <h2 class="center-text">Program Curriculum</h2>
          <hr>
-         <div class="grid-x grid-padding-x mb-3">
-            @foreach ($course->childrenCourses as $curriculum)
+         <div class="columns grid-padding-x mb-3">
+            @foreach ($linked_courses as $curriculum)
                @include('courses.program.partials.course')
             @endforeach
 

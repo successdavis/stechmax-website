@@ -25,29 +25,31 @@
         </div>
         <div class="column is-3">
             <div class="is-size-5 mb-2"><strong>Course Content</strong></div>
-            @foreach ($sections as $section)
-                @if ($loop->first)
-                    <collapse title="{{$section->title}}" :open="true">
-                        @foreach ($section->lectures as $lecture)
-                            <div class="columns is-multiline" slot="content">
-                                <div class="column is-narrow"><i class="fas fa-caret-right"></i></div>
-                                <div class="column">{{$lecture->title}}</div>
-                            </div>
-                        @endforeach
-                    </collapse>
-                    @continue
-                @endif
+            <div>
+                
+                @foreach ($sections as $section)
+                    @if ($loop->first)
+                        <collapse title="{{$section->title}}" :open="true">
+                            @foreach ($section->lectures as $lecture)
+                                <div class="columns is-multiline" slot="content">
+                                    <div class="column is-narrow"><i class="fas fa-caret-right"></i></div>
+                                    <div class="column">{{$lecture->title}}</div>
+                                </div>
+                            @endforeach
+                        </collapse>
+                        @continue
+                    @endif
 
-    
-                <collapse title="{{$section->title}}">
-                        @foreach ($section->lectures as $lecture)
-                            <div class="columns is-multiline" slot="content">
-                                <div class="column is-narrow"><i class="fas fa-caret-right"></i></div>
-                                <div class="column">{{$lecture->title}}</div>
-                            </div>
-                        @endforeach
-                </collapse>
-            @endforeach
+                    <collapse title="{{$section->title}}">
+                            @foreach ($section->lectures as $lecture)
+                                <div class="columns is-multiline" slot="content">
+                                    <div class="column is-narrow"><i class="fas fa-caret-right"></i></div>
+                                    <div class="column">{{$lecture->title}}</div>
+                                </div>
+                            @endforeach
+                    </collapse>
+                @endforeach
+            </div>
         </div>
     </div>
 </div>

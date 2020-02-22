@@ -1,5 +1,3 @@
-{{-- {{dd($courses)}}; --}}
-
 @extends('layouts.app')
 
 @section('content')

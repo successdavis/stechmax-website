@@ -201,6 +201,8 @@ Route::post('/courses/{subject}/{course}/paystack/part', 'PaystackSubscriptionCo
 
 Route::get('/studyroom/{course}', 'StudyRoomController@index')->middleware('must-be-subscribed')->name('studyroom.index');
 
+Route::get('/pricing', 'BusinessController@index')->name('pricing.index');
+
 Route::get('/api/{course}/lessonvideourl', 'ClassroomController@nextVideo')->middleware('must-be-confirmed');
 
 Route::get('/paid/submit_details', 'PaymentController@create')->name('pay.submitDetails');

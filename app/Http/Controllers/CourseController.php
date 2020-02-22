@@ -86,8 +86,16 @@ class CourseController extends Controller
      */
     public function show($subjectId, Course $course)
     {
+            // dd($course->childrenCourses()->get());     
         if (strtolower($course->type->name) === 'program') {
-            return view('courses.program.index', compact('course'));        
+            $linked_courses = $course->childrenCourses()->orderBy('order')->get();
+            return view('courses.program.index', compact('course', 'linked_courses'));   
+        }
+
+        if (strtolower($course->type->name) === 'track') {
+            $linked_courses = $course->childrenCourses()->orderBy('order')->get();
+            // dd($linked_courses);
+            return view('courses.track.index', compact('course', 'linked_courses'));   
         }
 
         $sections = $course->sections;
