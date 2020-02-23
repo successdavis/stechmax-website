@@ -34,7 +34,7 @@
           </a>
 
           <div class="navbar-dropdown">
-            <a class="navbar-item">
+            <a href="/studentshowcase" class="navbar-item">
               Student Showcase
             </a>
             <a class="navbar-item">

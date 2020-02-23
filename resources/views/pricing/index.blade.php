@@ -20,10 +20,10 @@
 					    <div class="content">
 					    </div>
 					  </div>
-					  <footer class="card-footer">
+{{-- 					  <footer class="card-footer">
 					    <a href="#" class="card-footer-item">Showcase</a>
 					    <a href="#" class="card-footer-item">View Prices</a>
-					  </footer>
+					  </footer> --}}
 					</div>
 					 <div class="card-content">
 				  			@foreach ($business->pricing as $price)

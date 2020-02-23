@@ -14,7 +14,7 @@ class Business extends Model
 	protected $guarded  = [];
     public $pathPrefix  = '/business/';
     public $findWith    =   'slug';
-    // public $excerpt    =   ['description', 23];
+    public $excerpt    =   ['description', 23];
 
     protected static function boot()
     {

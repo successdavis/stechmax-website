@@ -2,14 +2,17 @@
 
 namespace App;
 
-use Laravel\Scout\Searchable;
 use App\Events\ThreadHasNewReply;
 use App\Notifications\ThreadWasUpdated;
+use App\Traits\ModelFunctions;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Thread extends Model
 {
     use RecordsActivity;
+    use ModelFunctions;
+    
 
     // protected $fillable = ['user_id', 'title', 'body','channel_id'];
 
@@ -18,6 +21,8 @@ class Thread extends Model
     protected $with = ['creator','channel'];
 
     protected $appends = ['isSubscribedTo'];
+
+    public $excerpt    =   ['body', 23];
 
     protected $casts = [
         'locked' => 'boolean'
