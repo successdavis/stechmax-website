@@ -12,6 +12,11 @@ class businessTest extends TestCase
 {
     use DatabaseMigrations;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->business = create('App\Business');
+    }
 
     /** @test */
     public function business_table_has_expected_columns()
@@ -20,5 +25,12 @@ class businessTest extends TestCase
             'id', "name", "image_path"
           ]), 1);
     }
+
+    /** @test */
+    public function it_generate_a_string_path()
+    {
+        $this->assertEquals("/business/{$this->business->slug}", $this->business->path());
+    }
+
 
 }

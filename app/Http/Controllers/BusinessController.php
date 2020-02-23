@@ -83,4 +83,17 @@ class BusinessController extends Controller
     {
         //
     }
+
+    public function thumbnail(Business $business)
+    {
+        $this->validate(request(), [
+            'thumbnail' => ['required', 'image']
+        ]);
+
+        $business->update([
+            'thumbnail_path' => request()->file('thumbnail')->store('business', 'public')
+        ]);
+
+        return response([], 204);
+    }
 }
