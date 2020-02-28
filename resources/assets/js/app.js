@@ -69,6 +69,7 @@ Vue.component('step', require('./components/step.vue').default);
 Vue.component('coporate-registration', require('./components/coporateRegistration.vue').default);
 Vue.component('collapse', require('./components/collapse.vue').default);
 Vue.component('forum-page', require('./pages/ForumPage.vue').default);
+Vue.component('new-thread', require('./components/NewThread.vue').default);
 
 
 const app = new Vue({

@@ -18,6 +18,8 @@ class ThreadController extends Controller
 
         $threads = $this->getThreads($channel, $filters);
 
+        // return $threads;
+
         if (request()->wantsJson()) {
             return $threads;
         }
@@ -46,7 +48,7 @@ class ThreadController extends Controller
         ]);
 
         if (request()->wantsJson()) {
-            return response($thread, 201);
+            return response($thread->path(), 201);
         }
 
         return redirect($thread->path())

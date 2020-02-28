@@ -1855,6 +1855,10 @@ a.navbar-burger.burger {
   align-items: center;
 }
 
+.rm-txt-area-border {
+  border: none;
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

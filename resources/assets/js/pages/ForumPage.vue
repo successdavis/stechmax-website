@@ -1,56 +1,64 @@
 <script>
 	
 	export default {
-		props: ['channels'],
+		props: ['channels', 'user'],
 		data () {
 			return {
+				working: false,
 				sortItem: '',
-
+				sortChannel: '',
+				
 				sortList: [
 					{
 						value: "All Threads",
-						destination: "threads"
+						destination: "all"
 					},
 					{
-						value: "Solved",
-						destination: "threads?answered=1"
+						value: "solved",
+						destination: "?solved=1"
 					},
 					{
 						value: "Unsolved",
-						destination: "threads?unanswered=1"
+						destination: "?unsolved=1"
 					},
-					{
-						value: "Popular All time",
-						destination: "threads?popular=1"
-					},
-					{
-						value: "Popular this week",
-						destination: "threads?popular=1"
-					},
+					// {
+					// 	value: "Popular All time",
+					// 	destination: "?popular=1"
+					// },
+					// {
+					// 	value: "Popular this week",
+					// 	destination: "?popular=1"
+					// },
 					{
 						value: "No replies Yet",
-						destination: "threads?noreplies=true"
+						destination: "?unanswered=true"
 					},
 				],
 				loginsortlist: [
 					{
 						value: "My threads",
-						destination: "threads?by=intermediate"
+						destination: "threads?by=JohnDoe4"
 					},
 					{
 						value: "My Participation",
-						destination: "threads?participation="
+						destination: "?participation=JohnDoe4"
 					},
-					{
-						value: "My Best Answers",
-						destination: "threads?participation="
-					},
-					{
-						value: "Following",
-						destination: "threads?following=true"
-					},
+					// {
+					// 	value: "My Best Answers",
+					// 	destination: "?bestanswer=JohnDoe4"
+					// },
+					// {
+					// 	value: "Following",
+					// 	destination: "?following=true"
+					// },
 
 				]
+			}
+		},
+
+		computed: {
+			username () {
+				return window.user;
 			}
 		},
 
@@ -66,6 +74,16 @@
 					this.working = false;
 					flash("Something isn\'t right please check your connection");
 				})
+			},
+
+			SortThreadsByList () {
+				this.working = true;
+				window.location.href = `${this.sortItem}`;
+			},
+
+			sortthreadbychanel () {
+				this.working = true;
+				window.location.href = `/threads/${this.sortChannel}`
 			}
 		}
 	}
