@@ -1011,6 +1011,12 @@ span.medium-2.track.floating-button.buttons-right {
   border-radius: 5px;
 }
 
+.show_tr_title {
+  background: rgba(202, 20, 0, 0.1);
+  padding: 0.5em;
+  border-radius: 0.3em;
+}
+
 .blue {
   color: blue;
 }

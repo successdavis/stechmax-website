@@ -1,7 +1,7 @@
 <template>
     <span>
         <button :class="classes" v-if="active" @click="subscribe">Unsubscribe</button>
-        <button class="classes" v-if="! active" @click="subscribe">Subscribe</button>
+        <button :class="classes" v-if="! active" @click="subscribe">Subscribe</button>
     </span>
 </template>
 
@@ -11,7 +11,7 @@
 
         computed: {
             classes() {
-                return ['small', this.active ? 'blue' : ''];
+                return ['button', this.active ? 'has-background-success' : ''];
             }
         },
 

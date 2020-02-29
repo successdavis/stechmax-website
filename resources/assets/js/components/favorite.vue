@@ -1,8 +1,8 @@
 <template>
-    <button :class="classes" type="submit" @click="toggle">
-        <i class="fi-heart"></i>
+    <span :class="classes" @click="toggle" class="icon is-small">
+        <i class="fas fa-heart"></i>
         <span v-text="favoritesCount"></span>
-    </button>
+    </span>
 </template>
 
 <script>
@@ -18,7 +18,7 @@
 
         computed: {
             classes() {
-                return ['small button', this.isFavorited ? 'success' : 'secondary'];
+                return [this.isFavorited ? 'success' : 'secondary'];
             },
 
             endpoint() {
