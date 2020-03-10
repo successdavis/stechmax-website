@@ -470,6 +470,18 @@ span.medium-2.track.floating-button.buttons-right {
   text-decoration: none;
 }
 
+.profile-page-card {
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.align-sf-ct {
+  align-self: center;
+}
+
 .course {
   box-shadow: -1px 2px 10px -1px rgba(71, 69, 71, 0.6);
 }
@@ -528,6 +540,12 @@ span.medium-2.track.floating-button.buttons-right {
   flex-flow: column wrap;
   justify-content: center;
   align-items: flex-start;
+}
+
+.card-cen-v {
+  display: flex;
+  align-items: center;
+  padding-right: 0.3em;
 }
 
 .banner {
@@ -1863,6 +1881,11 @@ a.navbar-burger.burger {
 
 .rm-txt-area-border {
   border: none;
+}
+
+.aside {
+  padding: 2em 0.2em 0 1em;
+  min-height: 100vh;
 }
 
 .navbar-laravel {

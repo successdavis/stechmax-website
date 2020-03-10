@@ -1,10 +1,9 @@
 <template>
-    <div class="square-box thumbnail">
-        <img :src="avatar">
+    <div>
+        <img :src="avatar" class="is-rounded">
         <form v-if="canUpdate" method="POST" enctype="multipart/form-data">
-            <image-upload name="avatar" class="none" @loaded="onLoad"></image-upload>
+            <image-upload name="avatar" class="is-rounded none" @loaded="onLoad"></image-upload>
         </form>
-
     </div>
 </template>
 

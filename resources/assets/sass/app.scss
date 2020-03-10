@@ -8,6 +8,7 @@
 @import 'components';
 @import 'course'; 
 @import 'course_show';
+@import 'cards';
 @import 'banner';
 @import 'buttons';
 @import 'timeline';
@@ -32,6 +33,7 @@
 @import 'navbar';
 @import 'siteRegPage';
 @import 'helpers';
+@import 'dashboard-aside';
 
 .navbar-laravel {
   background-color: #fff;

@@ -226,3 +226,16 @@ span.medium-2.track.floating-button.buttons-right {
 .no-decoration:hover {
     text-decoration: none;
 }
+
+.profile-page-card {
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.align-sf-ct {
+    align-self: center;
+}

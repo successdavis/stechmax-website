@@ -274,4 +274,16 @@ class User extends Authenticatable
             'fee'           => request('fee')
         ]);
     }
+
+    static public function totalUsers()
+    {
+        return self::count();
+    }
+
+    static public function totalThisMonth()
+    {
+        return self::whereYear('created_at', Carbon::now()->year)
+                    ->whereMonth('created_at', Carbon::now()->month)
+                    ->count();
+    }
 }

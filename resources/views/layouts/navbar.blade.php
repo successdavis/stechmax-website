@@ -51,17 +51,60 @@
         </div>
       </div>
 
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <a href="{{ route('register') }}" class="button is-primary">
-              <strong>Sign up</strong>
+      <div class="navbar-end has-divider">
+        @if (auth()->check())
+
+          <a title="Updates" class="navbar-item has-divider is-desktop-icon-only">
+            <user-notifications></user-notifications>
+            {{-- <span class="icon has-update-mark"><i class="fas fa-bell default"></i></span> --}}
+          </a>
+          <hr class="navbar-divider">
+          <div class="navbar-item has-dropdown has-divider is-hoverable">
+            <a class="navbar-link">
+              <figure class="is-user-avatar image is-24x24" style="margin-right: .75rem;">
+                <img class="is-rounded" 
+                  src="{{auth()->user()->avatar_path}}" 
+                  alt="{{auth()->user()->username}}">
+              </figure>
+              {{auth()->user()->username}}
             </a>
-            <a href="{{ route('login') }}" class="button is-light">
-              <i class="fas fa-sign-in-alt"> </i> {{ __(' Login') }}
-            </a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="/profiles/{{Auth::user()->username}}">
+                <span class="icon"><i class="fas fa-user"></i></span>
+                <span>{{ Auth::user()->f_name . ' ' . Auth::user()->l_name }}</span>
+              </a>
+              <a class="navbar-item" href="{{route('dashboard')}}">
+                <span class="icon"><i class="fas fa-angle-double-right"></i></span>
+                <span>Dashboard</span>
+              </a>
+              <a class="navbar-item">
+                <span class="icon"><i class="fas fa-cogs"></i></span>
+                <span>Settings</span>
+              </a>
+              <a class="navbar-item" href="{{ route('logout') }}"onclick="event.preventDefault(); 
+                document.getElementById('logout-form').submit();
+              ">
+                <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                <span>Logout</span>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+              </a>
+            </div>
           </div>
-        </div>
+        @else
+            <div class="navbar-item">
+              <div class="buttons">
+                <a href="{{ route('register') }}" class="button is-primary">
+                  <strong>Sign up</strong>
+                </a>
+                <a href="{{ route('login') }}" class="button is-light">
+                  <i class="fas fa-sign-in-alt"> </i> {{ __(' Login') }}
+                </a>
+              </div>
+            </div>
+        @endif
       </div>
     </div>
 

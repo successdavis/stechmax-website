@@ -70,6 +70,7 @@ Vue.component('coporate-registration', require('./components/coporateRegistratio
 Vue.component('collapse', require('./components/collapse.vue').default);
 Vue.component('forum-page', require('./pages/ForumPage.vue').default);
 Vue.component('new-thread', require('./components/NewThread.vue').default);
+Vue.component('menu-dropdown', require('./components/menuDropDown.vue').default);
 
 
 const app = new Vue({
