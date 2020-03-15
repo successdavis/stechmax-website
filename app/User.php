@@ -275,6 +275,11 @@ class User extends Authenticatable
         ]);
     }
 
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
+    }
+
     static public function totalUsers()
     {
         return self::count();

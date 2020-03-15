@@ -17,23 +17,26 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
+        $subscriptions = $this->subscriptions()->get();
+
         return [
             'id' => $this->id,
-            'f_name' => $this->f_name,
-            'l_name' => $this->l_name,
-            'm_name' => $this->m_name,
-            'user_id' => $this->user_id,
-            'gender' => $this->gender,
-            'phone' => $this->phone,
-            'dob' => $this->dob,
-            'points' => $this->experienceLevel(),
-            'email' => $this->email,
-            'r_address' => $this->r_address,
+            'f_name'            => $this->f_name,
+            'l_name'            => $this->l_name,
+            'm_name'            => $this->m_name,
+            'user_id'           => $this->user_id,
+            'gender'            => $this->gender,
+            'phone'             => $this->phone,
+            'dob'               => $this->dob,
+            'points'            => $this->experienceLevel(),
+            'email'             => $this->email,
+            'r_address'         => $this->r_address,
             'alternative_phone' => $this->alternative_phone,
-            'username' => $this->username,
-            'passport_path' => $this->passport_path,
-            'Date_Joined' => Carbon::parse($this->created_at)->toDayDateTimeString(),
-            'Guardian' => $this->guardians,
+            'username'          => $this->username,
+            'passport_path'     => $this->passport_path,
+            'Date_Joined'       => Carbon::parse($this->created_at)->toDayDateTimeString(),
+            'Guardian'          => $this->guardians,
+            'courses'           => SubscriptionResource::collection($subscriptions),
         ];
     }
 }

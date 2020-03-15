@@ -1,122 +1,180 @@
 <template>
     <div>
-        <button @click="$modal.show(modal)" class="small button">View User</button>
+        <a @click="$modal.show(modal)" href="#/client/15" class="button is-small is-primary">
+          <span class="icon is-small"><i class="mdi mdi-account-edit"></i></span>
+        </a>
         <modal :name="modal" height="auto" draggable=".window-header" class="scroll">
-              <div class="user-header">
-                <h3 v-text="Form.surname + ' ' + Form.last_name"></h3>
-                <div class="switch">
-                    <p class="text" v-text="editing ? 'Done' : 'Edit User' "></p>
-                    <input class="switch-input" id="exampleSwitch" type="checkbox" name="exampleSwitch" v-model="editing" @change="update">
-                  <label class="switch-paddle" for="exampleSwitch">
-                    <span class="show-for-sr">Edit User</span>
-                  </label>
+             <div class="card">
+              <header class="card-header">
+                <p class="uppercasewords card-header-title" v-text="Form.surname + ' ' + Form.last_name"></p>
+                <div class="field card-header-icon">
+                  <b-switch :value="false" v-model="editing" @change="update">
+                      <span v-text="editing ? 'Save' : 'Edit' "></span>
+                  </b-switch>
+              </div>
+                <!-- <a href="#" class="card-header-icon" aria-label="more options">
+                  <span class="icon">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </a> -->
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  <div class="columns">
+                    <div class="column is-offset-one-fifth">
+                      <div class="columns">
+                        <div class="column is-3">
+                          <passport-form :user="selecteduser"></passport-form>
+                        </div>
+                        <div class="column">
+                          <div class="user-passport--info">
+                            <p><strong>Member Since:</strong> <br> {{date_joined}} </p>
+                            <div class="grid-x grid-padding-x">
+                              <p class="cell medium-6"><strong>Email:</strong> <br> {{email}} </p>
+                              <p class="cell medium-6"><strong>User Id:</strong> <br> {{user_id}} </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="columns is-multiline">
+                    <div class="column is-4">
+                      <div class="field">
+                        <label class="label">Surname</label>
+                        <p class="control has-icons-right">
+                          <input placeholder="Surname" class="input" type="text" v-model="Form.surname" :readonly="!editing">
+                          <span class="icon is-small is-right" v-if="editing">
+                            <span class="mdi mdi-close-circle-outline" v-if="Form.errors.has('surname')"></span>
+                            <span class="mdi mdi-check" v-if="! Form.errors.has('surname')"></span>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="column is-4">
+                      <div class="field">
+                        <label class="label">Middle Name</label>
+                        <p class="control has-icons-right">
+                          <input placeholder="Middle Name" class="input" type="text" v-model="Form.middle_name" :readonly="!editing">
+                          <span class="icon is-small is-right" v-if="editing">
+                            <span class="mdi mdi-close-circle-outline" v-if="Form.errors.has('middle_name')"></span>
+                            <span class="mdi mdi-check" v-else></span>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <!--  -->
+                    <div class="column is-4">
+                      <div class="field">
+                        <label class="label">Last Name</label>
+                        <p class="control has-icons-right">
+                          <input placeholder="Last Name" class="input" type="text" v-model="Form.last_name" :readonly="!editing">
+                          <span class="icon is-small is-right" v-if="editing">
+                            <span class="mdi mdi-close-circle-outline" v-if="Form.errors.has('last_name')"></span>
+                            <span class="mdi mdi-check" v-if="! Form.errors.has('last_name')"></span>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <!--  -->
+                    <div class="column is-4">
+                      <div class="field">
+                        <label class="label">Gender</label>
+                        <p class="control has-icons-right">
+                          <input placeholder="Gender" class="input" type="text" v-model="Form.gender" :readonly="!editing">
+                          <span class="icon is-small is-right" v-if="editing">
+                            <span class="mdi mdi-close-circle-outline" v-if="Form.errors.has('gender')"></span>
+                            <span class="mdi mdi-check" v-if="! Form.errors.has('gender')"></span>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <!--  -->
+                    <div class="column is-4">
+                      <div class="field">
+                        <label class="label">Username</label>
+                        <p class="control has-icons-right">
+                          <input placeholder="Username" class="input" type="text" v-model="Form.username" readonly>
+                          <span class="icon is-small is-right" v-if="editing">
+                            <span class="mdi mdi-check"></span>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <!--  -->
+                    <div class="column is-4">
+                      <div class="field">
+                        <label class="label">Date of Birth</label>
+                        <p class="control has-icons-right">
+                          <input placeholder="Date of Birth" class="input" type="date" v-model="Form.dob" :readonly="!editing">
+                          <span class="icon is-small is-right" v-if="editing">
+                            <span class="mdi mdi-close-circle-outline" v-if="Form.errors.has('dob')"></span>
+                            <span class="mdi mdi-check" v-if="! Form.errors.has('dob')"></span>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <!--  -->
+                    <div class="column is-4">
+                      <div class="field">
+                        <label class="label">Phone 1</label>
+                        <p class="control has-icons-right">
+                          <input placeholder="Phone 1" class="input" type="text" v-model="Form.phone" :readonly="!editing">
+                          <span class="icon is-small is-right" v-if="editing">
+                            <span class="mdi mdi-close-circle-outline" v-if="Form.errors.has('phone')"></span>
+                            <span class="mdi mdi-check" v-if="! Form.errors.has('phone')"></span>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <!--  -->
+                    <div class="column is-4">
+                      <div class="field">
+                        <label class="label">Phone 2</label>
+                        <p class="control has-icons-right">
+                          <input placeholder="Phone 2" class="input" type="text" v-model="Form.alternative_phone" :readonly="!editing">
+                          <span class="icon is-small is-right" v-if="editing">
+                            <span class="mdi mdi-close-circle-outline" v-if="Form.errors.has('alternative_phone')"></span>
+                            <span class="mdi mdi-check" v-if="! Form.errors.has('alternative_phone')"></span>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <!--  -->
+                    <div class="column is-4">
+                      <div class="field">
+                        <label class="label">Address</label>
+                        <p class="control has-icons-right">
+                          <input placeholder="Address" class="input" type="text" v-model="Form.address" :readonly="!editing">
+                          <span class="icon is-small is-right" v-if="editing">
+                            <span class="mdi mdi-close-circle-outline" v-if="Form.errors.has('address')"></span>
+                            <span class="mdi mdi-check" v-if="! Form.errors.has('address')"></span>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div>Subscription History</div>
+                  <div>
+                    <table class="mt-1">
+                      <thead>
+                        <th>Active</th>
+                        <th>Title</th>
+                        <th>Subscribed On</th>
+                        <th>Subscription Ends at</th>
+                      </thead>
+                      <tbody>
+                        <tr v-for="data in courses">
+                          <td v-text="data.status"></td>
+                          <td><a :href="data.path" v-text="data.course.title"></a></td>
+                          <td v-text="data.subscribedOn"></td>
+                          <td v-text="data.subscribtionEndAt"></td> 
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-
-            <div class="grid-container">
-              <div class="button experience-btn" type="button">
-                <span @click="toggleExperiencePane">Award EXP</span>
-
-                <div class="experience-pane" v-if="awardingExperience">
-                    <form>
-                        <h2 v-text="iPoints"></h2>
-                        <input type="number" name="points" v-model="points" placeholder="Specify points to Award">
-                        <button class="medium button" @click.prevent="awardExperience">Award</button>
-                    </form>
-                </div>
-              </div>
-               <button class="button"><a style="color: white;" target="_blank" :href="'/users/generatecmdcard/' + username">Permit Card</a></button>
-            </div>
-
-            <div class="user-passport grid-container">
-                <passport-form :user="selectedUser"></passport-form>
-                <div class="user-passport--info">
-                  <p style="padding-left: 15px"><strong>Member Since:</strong> <br> {{date_joined}} </p>
-                  <div class="grid-x grid-padding-x">
-                    <p class="cell medium-6"><strong>Email:</strong> <br> {{email}} </p>
-                    <p class="cell medium-6"><strong>User Id:</strong> <br> {{user_id}} </p>
-                  </div>
-                </div>
-            </div>
-            <form class="mb-4">
-              <div class="grid-container">
-                <div class="grid-x grid-padding-x">
-                  <div class="medium-4 cell">
-                    <label>Surname Name
-                      <input type="text" v-model="Form.surname" :disabled="!editing">
-                      <p class="help-text" v-if="Form.errors.has('surname')" v-text="Form.errors.get('surname')" id="subjectHelpText"></p>
-
-                    </label>
-                  </div>
-                  <div class="medium-4 cell">
-                    <label>Middle Name
-                      <input type="text" v-model="Form.middle_name" :disabled="!editing">
-                      <p class="help-text" v-if="Form.errors.has('middle_name')" v-text="Form.errors.get('middle_name')" id="subjectHelpText"></p>
-                    </label>
-                  </div>
-                  <div class="medium-4 cell">
-                    <label>Last Name
-                      <input type="text" v-model="Form.last_name" :disabled="!editing">
-                      <p class="help-text" v-if="Form.errors.has('last_name')" v-text="Form.errors.get('last_name')" id="subjectHelpText"></p>
-                    </label>
-                  </div>
-                  <div class="medium-4 cell">
-                    <label>Gender
-                      <input type="text" v-model="Form.gender" :disabled="!editing">
-                      <p class="help-text" v-if="Form.errors.has('gender')" v-text="Form.errors.get('gender')" id="subjectHelpText"></p>
-                    </label>
-                  </div>
-                  <div class="medium-4 cell">
-                    <label>Username
-                      <input type="text" v-model="Form.username" disabled>
-                      <p class="help-text" v-if="Form.errors.has('username')" v-text="Form.errors.get('username')" id="subjectHelpText"></p>
-                    </label>
-                  </div>
-                  <div class="medium-4 cell">
-                    <label>Date of Birth
-                      <input type="date" v-model="Form.dob" :disabled="!editing">
-                      <p class="help-text" v-if="Form.errors.has('dob')" v-text="Form.errors.get('dob')" id="subjectHelpText"></p>
-                    </label>
-                  </div>
-                  <div class="medium-4 cell">
-                    <label>Phone 1
-                      <input type="text" v-model="Form.phone" :disabled="!editing">
-                      <p class="help-text" v-if="Form.errors.has('phone')" v-text="Form.errors.get('phone')" id="subjectHelpText"></p>
-                    </label>
-                  </div>
-                  <div class="medium-4 cell">
-                    <label>Phone 2
-                      <input type="text" v-model="Form.alternative_phone" :disabled="!editing">
-                      <p class="help-text" v-if="Form.errors.has('alternative_phone')" v-text="Form.errors.get('alternative_phone')" id="subjectHelpText"></p>
-                    </label>
-                  </div>
-                  <div class="medium-4 cell">
-                    <label>Address
-                      <input type="text" v-model="Form.address" :disabled="!editing">
-                      <p class="help-text" v-if="Form.errors.has('address')" v-text="Form.errors.get('address')" id="subjectHelpText"></p>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </form>
-            <div class="grid-container">
-              <h4>Subscription History</h4>
-              <table class="mt-1">
-                <thead>
-                  <th>Active</th>
-                  <th>Title</th>
-                  <th>Subscribed On</th>
-                  <th>Subscription Ends at</th>
-                </thead>
-                <tbody>
-                  <tr v-for="data in courses">
-                    <td v-text="data.status"></td>
-                    <td><a :href="data.path" v-text="data.course.title"></a></td>
-                    <td v-text="data.subscribedOn"></td>
-                    <td v-text="data.subscribtionEndAt"></td> 
-                  </tr>
-                </tbody>
-              </table>
             </div>
         </modal>
     </div>
@@ -125,50 +183,42 @@
 
 <script>
     export default {
-        props: ['modal', 'selectedUser'],
+        props: ['modal', 'selecteduser'],
         name: "ViewUser",
 
         data () {
           return {
-            iPoints: this.selectedUser.points,
+            iPoints: this.selecteduser.points,
             editing: false,
-            date_joined: this.selectedUser.Date_Joined,
-            email: this.selectedUser.email,
-            user_id: this.selectedUser.user_id,
-            username: this.selectedUser.username,
+            date_joined: this.selecteduser.Date_Joined,
+            email: this.selecteduser.email,
+            user_id: this.selecteduser.user_id,
+            username: this.selecteduser.username,
             errorMsg: '',
-            courses: '',
+            courses: this.selecteduser.courses,
             points: '',
             awardingExperience: false,
 
             Form: new Form ({
-                surname: this.selectedUser.f_name,
-                last_name: this.selectedUser.l_name,
-                middle_name: this.selectedUser.m_name,
-                gender: this.selectedUser.gender,
-                phone: this.selectedUser.phone,
-                dob: this.selectedUser.dob,
-                address: this.selectedUser.r_address,
-                alternative_phone: this.selectedUser.alternative_phone,
-                username: this.selectedUser.username,
-                passport_path: this.selectedUser.passport_path,
+                surname: this.selecteduser.f_name,
+                last_name: this.selecteduser.l_name,
+                middle_name: this.selecteduser.m_name,
+                gender: this.selecteduser.gender,
+                phone: this.selecteduser.phone,
+                dob: this.selecteduser.dob,
+                address: this.selecteduser.r_address,
+                alternative_phone: this.selecteduser.alternative_phone,
+                username: this.selecteduser.username,
+                passport_path: this.selecteduser.passport_path,
             })
             
           }
         },
 
-        created () {
-          axios.get(`/dashboard/${this.selectedUser.username}/getusercourses`)
-            .then(response => {
-              this.courses = response.data.data
-            }
-          );
-        },
-
         methods: {
           update () {
             if (!this.editing) {
-              this.Form.patch(`/users/${this.selectedUser.username}/update`)
+              this.Form.patch(`/users/${this.selecteduser.username}/update`)
                 .then(() => {
                       flash('User updated Successfully')
                       this.$emit('userUpdated')
@@ -189,7 +239,7 @@
           },
 
           awardExperience() {
-            axios.post(`/api/${this.selectedUser.username}/awardexperience`, {points: this.points})
+            axios.post(`/api/${this.selecteduser.username}/awardexperience`, {points: this.points})
               .then(() => {
                 flash('Points Awarded');
                 this.awardingExperience = false;

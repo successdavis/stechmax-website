@@ -34,7 +34,7 @@ import VModal from 'vue-js-modal';
 import Croppa from 'vue-croppa'
 import VueProgressBar from 'vue-progressbar'
 import VueVideoPlayer from 'vue-video-player'
-import { Table, Input, Collapse, Steps, Carousel } from 'buefy'
+import { Input, Steps, Carousel, Switch, Dropdown } from 'buefy'
 // import bulmaCalendar from 'bulma-calendar'
 
 import 'video.js/dist/video-js.css'
@@ -47,14 +47,10 @@ videojs.registerPlugin('videojs-playlist', videojsPlaylist);
 
 import 'buefy/dist/buefy.css'
 
-Vue.use(Table)
 Vue.use(Input)
-Vue.use(Collapse, {
-  defaultIconComponent: 'vue-fontawesome',
-  defaultIconPack: 'fas',
-})
 Vue.use(Steps)
-Vue.use(Carousel)
+Vue.use(Switch)
+Vue.use(Dropdown)
 
 
 

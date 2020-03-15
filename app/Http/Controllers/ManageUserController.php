@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\UserFilters;
 use App\Http\Resources\UserResource;
 use App\User;
 use Illuminate\Http\Request;
@@ -90,10 +91,13 @@ class ManageUserController extends Controller
         return $users;
     }
 
-    public function getUsersForDataTable(Request $request)
+    public function getUsersForDataTable(Request $request, UserFilters $filters)
     {
-        $query = User::orderBy($request->column, $request->order);
+
+        $query = User::orderBy($request->column, $request->order)->filter($filters);
+        // $query = User::orderBy($request->column, $request->order);
         $user = $query->paginate($request->per_page);
+
 
         return UserResource::collection($user);
     }
