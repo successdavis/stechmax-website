@@ -46,7 +46,7 @@
                         per_page: this.per_page,
                         published: this.status,
                         subject: this.subject,
-                        // search: this.search,
+                        search: this.search,
                     }
                 }).then(({data}) => {
                     if (data.data.length) {
@@ -62,11 +62,12 @@
                 });
             },
 
-            // userSearch: _.debounce(function(page) {
-            //     this.isLoading = true;
-            //     this.reset();
-            //     this.fetch();
-            // }, 600),
+            userSearch: _.debounce(function(page) {
+                this.isLoading = true;
+                this.subject  = '';
+                this.status   = '';
+                this.refreshtable();
+            }, 600),
 
             // sortByColumn(column, order = 'asc') {
             //     this.reset();
@@ -95,47 +96,11 @@
                 this.fetch();
             },
 
-
-
-
-
-            // fetch(page) {
-            //     axios.get(this.url(page)).then(this.refresh);
-            // },
-
-            // url(page) {
-            //     if (! page) {
-            //         let query = location.search.match(/page=(\d+)/);
-
-            //         page = query ? query[1] : 1;
-            //     }
-            //     return `${location.pathname}/datatable?page=${page}&column=${this.sortedColumn}&published=${this.status}&type_id=${this.type}&order=${this.order}&per_page=${this.perPage}`;
-            // },
-
-            // sortByColumn(column) {
-            //     if (column === this.sortedColumn) {
-            //         this.order = (this.order === 'asc') ? 'desc' : 'asc'
-            //     } else {
-            //         this.sortedColumn = column;
-            //         this.order = 'asc'
-            //     }
-
-            //     this.fetch()
-            // },
-
-            // refresh({data}) {
-            //     this.dataSet = {
-            //         next_page_url : data.links.next,
-            //         current_page: data.meta.current_page,
-            //         per_page: data.meta.per_page,
-            //         total: data.meta.total,
-            //         prev_page_url: data.links.prev
-            //     };
-            //     this.items = data.data;
-            //     this.pagination = data;
-
-            //     window.scrollTo(0, 0);
-            // },
+            unsetsort(){
+              this.subject  = '';
+              this.status   = '';
+              this.search   = '';
+            },
         }
     }
 </script>

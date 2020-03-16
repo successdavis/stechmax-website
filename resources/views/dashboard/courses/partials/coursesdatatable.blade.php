@@ -33,7 +33,7 @@
 					<form>
 						<div class="field has-addons">
 							<div class="control">
-								<input v-model="search" type="text" placeholder="Name | Id_No | Email" class="input">
+								<input @keyup="userSearch" v-model="search" type="text" placeholder="Name | Id_No | Email" class="input">
 							</div>
 							<div class="control">
 								<button type="submit" class="button is-primary" :class="isLoading ? 'is-loading' : '' ">
@@ -147,12 +147,16 @@
 								</td>
 								<td class="is-actions-cell">
 									<div class="buttons is-right">
-										{{-- <view-user :modal="user.id + 'a'" :selecteduser="user" @userUpdated="fetch"></view-user> --}}
-										<button type="button" class="button is-small is-danger">
+										<a title="view Course" :href="course.path" type="button" class="button is-small is-danger">
 											<span class="icon is-small">
-												<i class="mdi mdi-trash-can"></i>
+												<i class="mdi mdi-eye"></i>
 											</span>
-										</button>
+										</a>
+										<a title="Edit course" :href="'/dashboard/' + course.slug + '/manage'" type="button" class="button is-small is-danger">
+											<span class="icon is-small">
+												<i class="mdi mdi-folder-edit-outline"></i>
+											</span>
+										</a>
 									</div>
 								</td> 
 							</tr>
