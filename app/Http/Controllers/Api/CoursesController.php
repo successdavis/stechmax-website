@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Type;
 use App\Course;
-use App\Subject;
-use App\Http\Resources\CourseResource;
-use Illuminate\Http\Request;
+use App\Filters\CourseFilters;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CourseResource;
+use App\Subject;
+use App\Type;
+use Illuminate\Http\Request;
 
 class CoursesController extends Controller
 {
@@ -17,16 +18,6 @@ class CoursesController extends Controller
             'displayMenu' => true
         ]);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-   public function getSubjects()
-    {
-        $subjects = Subject::all();
-        return $subjects;
-    } 
     
     public function getCourses()
     {
@@ -100,18 +91,18 @@ class CoursesController extends Controller
         //
     }
 
-    public function getCoursesForDataTable(Request $request)
+    public function getCoursesForDataTable(Request $request, CourseFilters $filter)
     {
         $query = Course::orderBy($request->column, $request->order);
-        if ($request->has('published') && strtolower($request->published) != "all") {
-            $query->wherePublished(
-                    filter_var($request->published, FILTER_VALIDATE_BOOLEAN)
-                );
-        }
+        // if ($request->has('published') && strtolower($request->published) != "all") {
+        //     $query->wherePublished(
+        //             filter_var($request->published, FILTER_VALIDATE_BOOLEAN)
+        //         );
+        // }
 
-        if ($request->has('type_id') && strtolower($request->type_id) != "all") {
-            $query->whereType_id($request->type_id);
-        }
+        // if ($request->has('type_id') && strtolower($request->type_id) != "all") {
+        //     $query->whereType_id($request->type_id);
+        // }
         
         $courses = $query->paginate($request->per_page);
 

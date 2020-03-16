@@ -17,4 +17,10 @@ class SubjectController extends Controller
             'name' => request('name')
         ]);
     }
+
+    public function getSubjects()
+    {
+        $subjects = Subject::all();
+        return $subjects;
+    } 
 }

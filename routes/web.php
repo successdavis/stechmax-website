@@ -23,7 +23,7 @@ Route::post('/completeregistration', 'Auth\CompleteRegistrationController@update
 
 Route::get('/threads/search', 'SearchController@show');
 
-Route::get('api/courses', 'Api\CoursesController@getSubjects');
+Route::get('api/subjects', 'SubjectController@getSubjects');
 Route::get('/api/subjectcourses', 'Api\CoursesController@getSubjectCourses');
 
 Route::get('api/courses/allcourses', 'Api\CoursesController@getCourses');
