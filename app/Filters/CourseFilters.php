@@ -2,8 +2,9 @@
 
 namespace App\Filters;
 
-use App\Type;
 use App\Difficulty;
+use App\Subject;
+use App\Type;
 use App\User;
 
 class CourseFilters extends Filters
@@ -13,7 +14,7 @@ class CourseFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['amount', 'alphabet', 'difficulty', 'search', 'type'];
+    protected $filters = ['amount', 'alphabet', 'difficulty', 'search', 'type', 'published', 'subject'];
 
     protected function amount($amount = 'desc')
     {
@@ -60,4 +61,30 @@ class CourseFilters extends Filters
             // ->orWhere('description', 'LIKE', '%' . $s . '%');
     }
 
+    public function published($s)
+    {
+        if (!isset($s)) {
+            return;
+        }
+        $this->builder->getQuery()->orders = [];
+        return $this->builder->where('published', $s);
+            // ->orWhere('description', 'LIKE', '%' . $s . '%');
+    }
+
+    public function subject($subject)
+    {
+        if (!isset($subject)) {
+            return;
+        }
+
+        $this->builder->getQuery()->orders = [];
+        
+        if (! Subject::where('slug', $subject)->exists()) {
+            abort(400, 'Bad Request');
+        }
+
+        $subject = Subject::where('slug', $subject)->get();
+
+        return $this->builder->where('subject_id', $subject[0]['id']);
+    }
 }

@@ -21,24 +21,22 @@
                 currentPage: 1,
                 perPage: 25,
                 sortedColumn: 'title',
-                order: 'asc' 
+                order: 'asc',
+                subjects: [],
+                subject: 'graphics',
             };
         },
 
         created() {
+            axios.get('/api/subjects').then(response => 
+                this.subjects = response.data
+            );
+
             this.fetch();
-            this.fetchSubjects();
             // Event.$on('newUserCreated', (user) => this.items.unshift(user));
         },
 
         methods: {
-              fetchSubjects(){
-                axios.get('/api/subjects')
-                .then((data) => {
-                  console.log(data);
-                })
-              },
-
               fetch($state) {
                 axios.get(`${location.pathname}/datatable`, {
                     params: {
@@ -46,6 +44,8 @@
                         column: this.sortedColumn,
                         order: this.order,
                         per_page: this.per_page,
+                        published: this.status,
+                        subject: this.subject,
                         // search: this.search,
                     }
                 }).then(({data}) => {
@@ -80,14 +80,20 @@
             //     this.fetch()
             // },
 
-            // reset() {
-            //     this.items = [];
-            //     this.page = 1;
-            // },
+            reset() {
+                this.items = [];
+                this.page = 1;
+            },
 
-            // updatesorttab(tab) {
-            //     this.sorttab = tab
-            // },
+            updatestatus(status) {
+                this.refreshtable();
+                this.status = status;
+            },
+
+            refreshtable() {
+                this.reset();
+                this.fetch();
+            },
 
 
 

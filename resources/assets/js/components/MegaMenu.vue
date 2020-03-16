@@ -60,7 +60,7 @@
         },
 
         created() {
-            axios.get('/api/courses').then(response => this.setSelected(response.data));
+            axios.get('/api/subjects').then(response => this.setSelected(response.data));
         },
 
         methods: {

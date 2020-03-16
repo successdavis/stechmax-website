@@ -93,17 +93,8 @@ class CoursesController extends Controller
 
     public function getCoursesForDataTable(Request $request, CourseFilters $filter)
     {
-        $query = Course::orderBy($request->column, $request->order);
-        // if ($request->has('published') && strtolower($request->published) != "all") {
-        //     $query->wherePublished(
-        //             filter_var($request->published, FILTER_VALIDATE_BOOLEAN)
-        //         );
-        // }
-
-        // if ($request->has('type_id') && strtolower($request->type_id) != "all") {
-        //     $query->whereType_id($request->type_id);
-        // }
-        
+        $filter = Course::filter($filter);
+        $query = $filter->orderBy($request->column, $request->order);
         $courses = $query->paginate($request->per_page);
 
         return CourseResource::collection($courses);

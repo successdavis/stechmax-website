@@ -14,16 +14,16 @@
 			<div class="level-left">
 				<div class="level-item">
 					<div class="buttons has-addons">
-						<button class="button">All</button>
-						<button class="button">Active</button>
-						<button class="button">Disabled</button>
+						<button @click="updatestatus('')" class="button">All</button>
+						<button @click="updatestatus(1)" class="button">Active</button>
+						<button @click="updatestatus(0)" class="button">Disabled</button>
 					</div>
 				</div>
 				<div class="level-item">
 					<div class="select">
-					  <select>
-					    <option>Sort By Subject</option>
-					    <option>With options</option>
+					  <select v-model="subject" @change="refreshtable">
+					    <option value="">Sort By Subject</option>
+					    <option v-for="subject in subjects" v-text="subject.name" :value="subject.slug"></option>
 					  </select>
 					</div>
 				</div>
