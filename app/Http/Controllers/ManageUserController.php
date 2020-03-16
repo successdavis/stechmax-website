@@ -94,7 +94,8 @@ class ManageUserController extends Controller
     public function getUsersForDataTable(Request $request, UserFilters $filters)
     {
 
-        $query = User::orderBy($request->column, $request->order)->filter($filters);
+        $query = User::filter($filters)->orderBy($request->column, $request->order);
+        // $query = User::orderBy($request->column, $request->order)->filter($filters);
         // $query = User::orderBy($request->column, $request->order);
         $user = $query->paginate($request->per_page);
 

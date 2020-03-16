@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Video;
 use App\Lecture;
+use App\Video;
+use FFMpeg\FFMpeg;
+use FFMpeg\FFProbe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,10 +23,10 @@ class LectureVideoController extends Controller
             'url'           => request()->file('video')->storeAs('lecturevideo', $lecture->slug, 'public')
         ]);
 
-        // $ffprobe = FFMpeg\FFProbe::create();
+        // $ffprobe = FFProbe::create();
 
         // $duration = $ffprobe
-        //     ->format($course->video_path) // extracts file informations
+        //     ->format($video->getVideoUrl()) // extracts file informations
         //     ->get('duration');             // returns the duration property
 
         // dd($duration);

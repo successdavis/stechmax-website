@@ -1,7 +1,5 @@
- @extends('layouts.app')
+ @extends('dashboard.partials.dashboardlayout')
 
-@section('content')
-<div class="grid-container">
+@section('dashboardcontent')
     <billing :user="{{auth()->user()}}"></billing>
-</div>
 @endsection

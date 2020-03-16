@@ -7,67 +7,96 @@
 	    >
 			<p v-if="errorMessage" class="errorMessage" v-text="errorMessage"></p>
 		</transition>
-	  <div class="grid-container">
-	    <div class="grid-x grid-padding-x">
-	      <div class="medium-6 cell">
-	        <label>Who is paying this Invoice?
-			  <select v-model="Form.user" required>
-			  	<option selected value="">Click to select a a User</option>
-			    <option v-for="user in Data.users" :value="user.id" v-text="user.f_name + ' ' + user.l_name"></option>
-			  </select>
-			</label>
-	      </div>
-	      <div class="medium-6 cell">
-	        <label>Whats is the user paying for?
-			  <select v-model="paying" required>
-			  	<option selected value="">Click to select a payment category</option>
-			    <option v-for="item in PayingFor" :value="item" v-text="item"></option>
-			  </select>
-			</label>
-	      </div>
-	      <div class="medium-6 cell" v-if="paying == 'Course'">
-	        <label>Select Course?
-			  <select v-model="Form.course" required>
-			  	<option selected value="">Pick a course</option>
-			    <option v-for="course in Data.courses" :value="course.id" v-text="course.title"></option>
-			  </select>
-			</label>
-	      </div>
-	      <div class="medium-6 cell" v-if="paying == 'Other'">
+	  <div class="columns is-multiline">
+			<div class="column is-6">
+				<div class="field">
+				  <label class="label">Who is paying this Invoice?</label>
+				  <div class="control">
+				  	<div class="select is-fullwidth">
+					  <select class="is-fullwidth" v-model="Form.user" required>
+					    <option value="">Click to select a a User</option>
+				    	<option v-for="user in Data.users" :value="user.id" v-text="user.f_name + ' ' + user.l_name"></option>
+					  </select>
+					</div>
+				  </div>
+				</div>
+			</div>
+			<div class="column is-6">
+				<div class="field">
+				  <label class="label">Whats is the user paying for?</label>
+				  <div class="control">
+				  	<div class="select is-fullwidth">
+					  <select v-model="paying" required class="is-fullwidth">
+					    <option selected value="">Click to select a payment category</option>
+						<option v-for="item in PayingFor" :value="item" v-text="item"></option>
+					  </select>
+					</div>
+				  </div>
+				</div>
+			</div>
+	      	<div class="column is-6" v-if="paying == 'Course'">
+	      		<div class="field">
+			  		<label class="label">Select Course</label>
+					<div class="control">
+					  	<div class="select is-fullwidth">
+						  <select v-model="Form.course" required class="is-fullwidth">
+						  	<option selected value="">Pick a course</option>
+						    <option v-for="course in Data.courses" :value="course.id" v-text="course.title"></option>
+						  </select>
+						</div>
+					</div>
+				</div>
+			</div>
+
+	      <div class="column is-6" v-if="paying == 'Other'">
 	        <label>Amount
 	          <input type="number" placeholder="Type the Invoice Amount Here" required>
 	        </label>
 	      </div>
-	      <div class="medium-6 cell">
-	        <label>Does this invoice support part-payments?
-			  <select v-model="Form.partpayment" required>
-			  	<option selected value="">Click to select an Option</option>
-			    <option value="1" v-text="'Yes'">Yes</option>
-			    <option value="0" v-text="'No'">No</option>
-			  </select>
-			</label>
+	      <div class="column is-6">
+	      	<div class="field">
+		  		<label class="label">Does this invoice support part-payments?</label>
+				<div class="control">
+				  	<div class="select is-fullwidth">
+					  <select v-model="Form.partpayment" required class="is-fullwidth">
+						<option selected value="">Click to select an Option</option>
+					    <option value="1" v-text="'Yes'">Yes</option>
+					    <option value="0" v-text="'No'">No</option>
+					  </select>
+					</div>
+				</div>
+			</div>
 	      </div>
-	      <div class="medium-6 cell" v-if="paying == 'Course'">
-	        <label>Should the user be subscribe to this course?
-			  <select v-model="Form.subscribeToCourse" required>
-			  	<option selected value="">Click to select an Option</option>
-			    <option value="1" >Yes</option>
-			    <option value="0" >No</option>
-			  </select>
-			</label>
+	      <div class="column is-6" v-if="paying == 'Course'">
+	      	<div class="field">
+		  		<label class="label">Should the user be subscribe to this course?</label>
+				<div class="control">
+				  	<div class="select is-fullwidth">
+					  <select v-model="Form.subscribeToCourse" required class="is-fullwidth">
+					  	<option selected value="">Click to select an Option</option>
+					    <option value="1" >Yes</option>
+					    <option value="0" >No</option>
+					  </select>
+					</div>
+				</div>
+			</div>
 	      </div>
-	      <div class="medium-6 cell" v-if="paying == 'Course'">
-	        <label>Is the user taking classroom lectures?
-			  <select v-model="Form.classroom" required>
-			  	<option selected value="">Click to select an Option</option>
-			    <option value="1" >Yes</option>
-			    <option value="0" >No</option>
-			  </select>
-			</label>
-	      </div>
-	    </div>
-	    <button class="medium button" :disabled="submitting">Submit</button>
-	  </div>
+	      <div class="column is-6" v-if="paying == 'Course'">
+			<div class="field">
+		  		<label class="label">Is the user taking classroom lectures?</label>
+				<div class="control">
+				  	<div class="select is-fullwidth">
+					  <select v-model="Form.classroom" required class="is-fullwidth">
+						<option selected value="">Click to select an Option</option>
+					    <option value="1" >Yes</option>
+					    <option value="0" >No</option>
+					  </select>
+					</div>
+				</div>
+			</div>
+	    	</div>
+	  	</div>
+    	<button class="medium button" :disabled="submitting">Submit</button>
 	</form>
 	
 </template>

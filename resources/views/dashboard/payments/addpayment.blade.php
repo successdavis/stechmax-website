@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('dashboard.partials.dashboardlayout')
 
-@section('content')
+@section('dashboardcontent')
     <div class="grid-container">
         {{-- Breadcrumbs --}}
         <div class="grid-container">

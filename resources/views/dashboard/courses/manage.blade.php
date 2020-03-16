@@ -1,7 +1,6 @@
+@extends('dashboard.partials.dashboardlayout')
 
-@extends('layouts.app')
-
-@section('content')
+@section('dashboardcontent')
 <div class="mt-3">
     <div class="grid-container">
       <div class="grid-x grid-margin-x">

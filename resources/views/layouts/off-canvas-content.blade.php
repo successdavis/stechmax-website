@@ -72,14 +72,6 @@
     @endif
 
 
- {{--    <li>
-      <a href="#">Fee</a>
-      <ul class="menu vertical nested">
-        <li><a href="#">Pay Fee</a></li>
-        <li><a href="{{route('mypayments.index', ['user' => auth()->user()->username])}}">View all Payments</a></li>
-      </ul>
-    </li> --}}
-
     <li>
       <a href="#">Projects</a>
       <ul class="menu vertical nested">

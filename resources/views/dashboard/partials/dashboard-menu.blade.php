@@ -4,7 +4,7 @@
   <div class="mb-2">{{auth()->user()->user_id}}</div>
   <div class="mb-2">
       <span class="thumbnail--icon dark-gray">
-        <a href="{{route('profile.show', ['user' => auth()->user()->email])}}">
+        <a href="{{route('profile.show', ['user' => auth()->user()->username])}}">
           <i class="fas fa-user-tie" title="Access your profile here" style="color: white"></i>
         </a>
       </span>
@@ -61,12 +61,12 @@
     ADMIN CONTROL
   </p>
     <menu-dropdown name="Course Management">
-      <li><a class="has-icon has-text-white">
+      <li><a href="{{route('courses.create')}}" class="has-icon has-text-white">
             <span class="icon"><i class="fas fa-video"></i></span>
             <span class="menu-label-item">Create Course</span>
           </a>
       </li>
-      <li><a class="has-icon has-text-white">
+      <li><a href="{{route('courses.index')}}" class="has-icon has-text-white">
             <span class="icon"><i class="fas fa-pen-alt"></i></span>
             <span class="menu-label-item">Update Course</span>
           </a>
@@ -78,27 +78,27 @@
               <span class="menu-label-item">View all Users</span>
           </a>
       </li>
-      <li><a class="has-icon has-text-white">
+      <li><a href="{{route('permitcards')}}" target="_blank" class="has-icon has-text-white">
             <span class="icon"><i class="fas fa-id-card-alt"></i></span>
-            <span class="menu-label-item">Active Permit Card</span>
+            <span class="menu-label-item">Active PMT Cards</span>
           </a>
       </li>
     </menu-dropdown>
     <menu-dropdown name="Cashier">
       <li>
-          <a class="has-icon has-text-white">
+          <a href="{{route('manage_invoice.create', ['user' => auth()->user()->username])}}" class="has-icon has-text-white">
             <span class="icon"><i class="far fa-credit-card"></i></span>
             <span class="menu-label-item">Create Invoice</span>
           </a>
       </li>
       <li>
-        <a class="has-icon has-text-white">
+        <a href="{{route('manage_invoice.index', ['user' => auth()->user()->username])}}" class="has-icon has-text-white">
           <span class="icon"><i class="fas fa-receipt"></i></span>
           <span class="menu-label-item">View Invoice</span>
         </a>
       </li>
       <li>
-        <a class="has-icon has-text-white">
+        <a href="{{route('manage_invoice.addpayment')}}" class="has-icon has-text-white">
           <span class="icon"><i class="fas fa-money-bill-wave"></i></span>
           <span class="menu-label-item">Add Payment</span>
         </a>

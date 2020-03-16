@@ -18,7 +18,7 @@
                                     <div>Courses</div>
                                     <ul>
                                         <li v-for="course in courses">
-                                            <a href="" v-text="course.title"></a>
+                                            <a :href="'/courses/'+selected.slug + '/' +course.slug" v-text="course.title"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -26,7 +26,7 @@
                                     <div>Tracks</div>
                                     <ul>
                                         <li v-for="track in tracks">
-                                            <a href="" v-text="track.title"></a>
+                                            <a :href="'/courses/'+selected.slug + '/' +track.slug" v-text="track.title"></a>
                                         </li>
                                     </ul>
                                 </div>

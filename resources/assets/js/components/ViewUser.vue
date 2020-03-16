@@ -22,6 +22,22 @@
                 <div class="content">
                   <div class="columns">
                     <div class="column is-offset-one-fifth">
+                      <div>
+                        <div class="button experience-btn" type="button">
+                          <span @click="toggleExperiencePane">Award EXP</span>
+
+                          <div class="experience-pane" v-if="awardingExperience">
+                              <form>
+                                  <h2 v-text="iPoints"></h2>
+                                  <input type="number" name="points" v-model="points" placeholder="Specify points to Award">
+                                  <button class="medium button" @click.prevent="awardExperience">Award</button>
+                              </form>
+                          </div>
+                        </div>
+                        <button class="button">
+                          <a style="color: white;" target="_blank" :href="'/users/generatecmdcard/' + username">PMT CARD</a>
+                        </button>
+                      </div>
                       <div class="columns">
                         <div class="column is-3">
                           <passport-form :user="selecteduser"></passport-form>
@@ -250,7 +266,7 @@
               })
           }
         }
-    }
+    };
 </script>
 
 <style scoped>

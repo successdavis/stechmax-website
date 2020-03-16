@@ -9,7 +9,7 @@
     @endif
 
     {{-- @include('dashboard.partials.RecentRegisteredStudents') --}}
-    @include('dashboard.partials.CommentsCard')
+    {{-- @include('dashboard.partials.CommentsCard') --}}
   </div>
 
    

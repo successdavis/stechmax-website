@@ -8,7 +8,7 @@
     <div class="container">
         <div class="section">
             <div class="section" style="background: white">
-                <site-registration mode="login" loginroute="/coporate/registration"></site-registration>
+                <site-registration mode="login" loginroute="/dashboard"></site-registration>
             </div>
         </div>
     </div>

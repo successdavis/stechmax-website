@@ -1,23 +1,9 @@
-@extends('layouts.app')
+@extends('dashboard.partials.dashboardlayout')
 
-@section('content')
-    <div class="grid-container">
-        {{-- Breadcrumbs --}}
-        <div class="grid-container">
-            <nav aria-label="You are here:" role="navigation" class="mt-2">
-                <ul class="breadcrumbs">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Payments</a></li>
-<!--                     <li>
-                        <span class="show-for-sr">Course Registration: </span> Course Registration
-                    </li> -->
-                </ul>
-            </nav>
+@section('dashboardcontent')
+    <div class="grid-container mt-2">
+        <div class="bg-white">
+            <user-payments :user="{{auth()->user()}}"></user-payments>
         </div>
-        {{-- Content --}}
-        <div class="grid-container mt-2">
-            <div class="bg-white">
-                <user-payments :user="{{auth()->user()}}"></user-payments>
-            </div>
-        </div>
+    </div>
 @endsection
