@@ -1,19 +1,18 @@
 <template>
     <div class="mt-2"> 
-        <p class="grid-container">Course Image</p>     
-        <div class="grid-x grid-container grid-padding-x">
-            <div class="medium-8 thumbnail">
+        <p class="">Course Image</p>     
+        <div class="columns">
+            <div class="column is-8 thumbnail">
                 <img :src="thumbnail" class="mb-2">
                 <ul>
                     <li v-for="error in errors.thumbnail" v-text="error"></li>
                 </ul>     
             </div>
-            <div class="medium-4 grid-container">
+            <div class="column">
                 <p>Important guidelines: </p>
                 750x422 pixels; .jpg, .jpeg,. gif, or .png. no text on the image.
                 <form method="POST" enctype="multipart/form-data">
                     <input type="file" accept="image/*" @change="onChange" name="thumbnail">
-
                 </form>
             </div>
         </div>

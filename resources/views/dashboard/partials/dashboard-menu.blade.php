@@ -38,12 +38,12 @@
   </p>
 
   <ul class="menu-list has-text-white">
-    <li><a class="has-icon has-text-grey-lighter">
+    <li><a href="{{route('mycourses.index', ['user' => auth()->user()->username])}}" class="has-icon has-text-grey-lighter">
         <span class="icon has-update-mark"><i class="fas fa-folder-open"></i></span>
         <span class="menu-label-item">My Courses</span>
       </a>
     </li>
-    <li><a class="has-icon has-text-grey-lighter">
+    <li><a href="{{route('billing.home')}}" class="has-icon has-text-grey-lighter">
           <span class="icon"><i class="fas fa-receipt"></i></span>
           <span class="menu-label-item">Billing</span>
         </a>
@@ -68,7 +68,7 @@
       </li>
       <li><a href="{{route('courses.index')}}" class="has-icon has-text-white">
             <span class="icon"><i class="fas fa-pen-alt"></i></span>
-            <span class="menu-label-item">Update Course</span>
+            <span class="menu-label-item">All Courses</span>
           </a>
       </li>
     </menu-dropdown>

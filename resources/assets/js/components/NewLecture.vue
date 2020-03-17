@@ -2,11 +2,17 @@
 <template>
     <div>
         <form @submit.prevent="create" @keydown="Form.errors.clear()" @keydown.enter.prevent="create">
-            <label for="title">New Lecture</label>
-            <input id="title" type="text" v-model="Form.title">
-            <p class="help-text" v-if="Form.errors.has('title')" v-text="Form.errors.get('title')" id="title"></p>
-            <button @click.prevent="cancel">Cancel</button>
-            <button class="button small">Add</button>
+
+            <div class="field">
+                <label class="label">New Lecture</label>
+                <div class="control">
+                    <input class="input" id="title" type="text" v-model="Form.title">
+                </div>
+                 <p class="help is-danger" v-if="Form.errors.has('title')" v-text="Form.errors.get('title')" id="title"></p>
+            </div>
+
+            <button class="button" @click.prevent="cancel">Cancel</button>
+            <button class="button">Add</button>
         </form>
     </div>
 </template>

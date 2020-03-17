@@ -1,11 +1,11 @@
 <template>
 	<div class="mt-2"> 
-        <p class="grid-container">Course Video Details</p>     
-        <div class="grid-x grid-container grid-padding-x">
-            <div class="medium-8 thumbnail">
+        <p>Course Video Details</p>     
+        <div class="columns">
+            <div class="column is-8 thumbnail">
             	<vid-player :playerdata="playerdata"></vid-player>
             </div>
-            <div class="medium-4 grid-container">
+            <div class="column grid-container">
                 <p>Important guidelines: </p>
                 File must be in Mp4 format
                 <form method="POST" enctype="multipart/form-data" @submit.prevent="persist">

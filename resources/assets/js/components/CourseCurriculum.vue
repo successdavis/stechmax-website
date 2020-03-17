@@ -8,16 +8,25 @@
         </draggable>
             <div class="course-section" v-if="addingSection">
                 <form @submit.prevent="createSection" @keydown="Form.errors.clear()" @keydown.enter.prevent="createSection">
-                    <label>Enter Section Title</label>
-                    <input type="text" v-model="Form.title">
-                    <p class="help-text" v-if="Form.errors.has('title')" v-text="Form.errors.get('title')" id="description"></p>
 
-                    <label>What will students be able to do at the end of this section?</label>
-                    <input type="text" v-model="Form.description" placeholder="Enter a learning objective">
-                    <p class="help-text" v-if="Form.errors.has('description')" v-text="Form.errors.get('description')" id="description"></p>
+                    <div class="field">
+                      <label class="label">Enter Section Title</label>
+                      <div class="control">
+                        <input class="input" type="text" v-model="Form.title">
+                      </div>
+                      <p class="help is-danger" v-if="Form.errors.has('title')" v-text="Form.errors.get('title')" id="description"></p>
+                    </div>
 
-                    <button @click.prevent="cancel" type="cancel">Cancel</button>
-                    <button type="submit" class="small button" :disabled="Form.errors.any()">Create</button>
+                    <div class="field">
+                      <label class="label">What will students be able to do at the end of this section?</label>
+                      <div class="control">
+                        <input class="input" type="text" v-model="Form.description" placeholder="Enter a learning objective">
+                      </div>
+                      <p class="help is-danger" v-if="Form.errors.has('description')" v-text="Form.errors.get('description')" id="description"></p>
+                    </div>
+
+                    <button class="button" @click.prevent="cancel" type="cancel">Cancel</button>
+                    <button type="submit" class="button" :disabled="Form.errors.any()">Create</button>
                 </form>
                 
             </div>

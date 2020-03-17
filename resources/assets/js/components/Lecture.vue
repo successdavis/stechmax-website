@@ -2,11 +2,23 @@
     <div class="course-lecture ">
         <div v-if="editing">
             <form @submit.prevent="update" @keydown="Form.errors.clear()">
-                <label for="title">Edit Lecture</label>
-                <input id="title" type="text" v-model="Form.title">
-                <p class="help-text" v-if="Form.errors.has('title')" v-text="Form.errors.get('title')" id="title"></p>
-                <button @click.prevent="cancel">Cancel</button>
-                <button class="button small">Update</button>
+
+                <div class="field">
+                  <label class="label">Edit Lecture</label>
+                  <div class="control">
+                    <input class="input" id="title" type="text" v-model="Form.title">
+                  </div>
+                    <p class="help is-danger" v-if="Form.errors.has('title')" v-text="Form.errors.get('title')" id="title"></p>
+                </div>
+
+                <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button" @click.prevent="cancel">Cancel</button>
+                        </div>
+                        <div class="control">
+                            <button class="button">Update</button>
+                        </div>
+                </div>
             </form>
         </div>
         <div class="display-mini-icons" v-else>

@@ -1,68 +1,49 @@
-@extends('dashboard.partials.dashboardlayout')
+@extends('layouts.app')
 
-@section('dashboardcontent')
-<div class="mt-3">
-    <div class="grid-container">
-      <div class="grid-x grid-margin-x">
-        <div class="cell medium-3">
-          <ul class="vertical tabs" data-tabs id="example-tabs">
-            <li class="tabs-title is-active"><a href="#target-student" aria-selected="true">Target your students</a></li>
-            <li class="tabs-title"><a href="#setup-curriculum">Setup Curriculum</a></li>
-            <li class="tabs-title "><a href="#course-landing-page">Course Landing Page</a></li>
-            @if ($course->published)
-              <a href="/dashboard/{{$course->slug}}/unpublish" class="mt-3 button medium expanded">Unpublish Course</a>
-            @else
-              <a href="/dashboard/{{$course->slug}}/publish" class="mt-3 button medium expanded">Publish Course</a>
-            @endif
-          </ul>
+@section('content')
+<div class="container">
+  <div class="section">
+    <a class="button" href="/api/courses/viewAllCourses">Return to index</a>
+    <tabs :vertical="true">
+      <tab name="Target your students" :selected="true">
+        <div class="tabs-panel is-active" id="target-student">
+            <div class=" grid-container mb-3">
+                <h4 class="has-text-centered is-size-4">Target Your Audience</h4>
+            </div>
+                <hr>
+            <target-student :course="{{$course}}"></target-student>
         </div>
-        <div class="cell medium-9">
-          <div class="tabs-content" data-tabs-content="example-tabs">
-            <div class="tabs-panel is-active" id="target-student">
-                <div class=" grid-container mb-3">
-                    <h4>Target Your Audience</h4>
-                </div>
-                    <hr>
-                <target-student :course="{{$course}}"></target-student>
-            </div>
-
-            <div class="tabs-panel " id="setup-curriculum">
-              <div class="grid-container mb-3">
-                <h4>{{$course->type->name }} Curriculum</h4>
-              </div>
-              <hr>
-              @if (strtolower($course->type->name) === 'course')
-                <course-curriculum :course="{{$course}}"></course-curriculum>
-              @else 
-                <track-curriculum :course="{{$course}}"></track-curriculum>
-              @endif
-            </div>
-
-            <div class="tabs-panel relative-body" id="course-landing-page">
-              <div class="grid-container mb-3">
-                <h4>Course landing page</h4>
-              </div>
-              <hr>
-              
-              <course-landing 
-                :course="{{$course}}" 
-                :path="'{{$course->path()}}'"
-              ></course-landing>
-            </div>
-
-            <div class="tabs-panel" id="panel4v">
-              <p>Four</p>
-              <img class="thumbnail" src="assets/img/generic/rectangle-2.jpg">
-            </div>
-          </div>
+      </tab>
+      <tab name="Curriculum">
+        <div class="grid-container mb-3">
+          <h4>{{$course->type->name }} Curriculum</h4>
         </div>
-      </div>
-    </div>
+        <hr>
+        @if (strtolower($course->type->name) === 'course')
+          <course-curriculum :course="{{$course}}"></course-curriculum>
+        @else 
+          <track-curriculum :course="{{$course}}"></track-curriculum>
+        @endif
+      </tab>
+      <tab name="Landing Page">
+        <course-landing 
+          :course="{{$course}}" 
+          :path="'{{$course->path()}}'"
+        ></course-landing>
+      </tab>
+      <tab name="Visibility">
+         @if ($course->published)
+          <h3>Unplish {{$course->title}}</h3>
+          <p>Are you sure about this? Proceed with caution</p>
+          <p>Unpublishing a course will keep it hidden from users</p>
+          <a href="/dashboard/{{$course->slug}}/unpublish" class="mt-3 button medium expanded">Unpublish Course</a>
+        @else
+          <p class="is-size-5">Proceed with Caution!</p>
+          <p>Publising a course will make it visible to users and available for subscription, be sure to cross check all aspect of your course before click the button below</p>
+          <a href="/dashboard/{{$course->slug}}/publish" class="mt-3 button medium expanded">Publish Course</a>
+        @endif
+      </tab>
+    </tabs>
+  </div>
 </div>
 @endsection
-
-{{-- 
-<li class="tabs-title is-active"><a href="#panel1v" aria-selected="true">Target your students</a></li>
-                    <li class="tabs-title"><a href="#panel2v">Setup Curriculum</a></li>
-                    <li class="tabs-title"><a href="#panel3v">Course Landing Page</a></li>
-                    <li class="tabs-title"><a href="#panel4v">Publish Course</a></li> --}}

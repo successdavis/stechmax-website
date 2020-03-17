@@ -1,7 +1,12 @@
 <template>
     <div class="grid-x">
         <div class="floating-button-body medium-11">
-            <input type="text" v-model="body" class="cell" @change="update()">
+            <div class="field">
+              <div class="control">
+                <input class="input" type="text" v-model="body" @change="update()">
+              </div>
+            </div>
+
             <span class="medium-2 floating-button buttons-right">
                 <i class="far fa-trash-alt c_buttons" @click="deleteItem()"></i>
                 <i class="fas fa-arrows-alt c_buttons--move handle" title="Drag this button to re-order items"></i>

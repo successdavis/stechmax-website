@@ -1,6 +1,6 @@
 <template>
-    <div class="grid-container">
-        <p class="mb-3">The descriptions you write here will help students decide if this course/track is the one for them.</p>
+    <div>
+        <p class="mb-3">The information you write here will help students decide if this course/track is the one for them.</p>
         <p>What will students learn in your course?</p>
             <draggable :list="learns" handle=".handle" :element="'div'" @change="reOrderLearns">
                 <transition-group type="transition" name="flip-list">
@@ -10,12 +10,17 @@
                 </transition-group>
             </draggable>
         <form action="" @submit.prevent="addLearn" @keydown="learnForm.errors.clear()">
-            <div class="cell">
-                <label>
-                    <input class="input border-bottom-only" placeholder="Example: Basic of Photoshop" type="text" aria-describedby="courseBenefitHelpText" v-model="learnForm.body" required>
-                </label>
+            <div class="field">
+              <label class="label"></label>
+              <div class="control">
+                <input class="input is-static input_bt" type="text" placeholder="Example: Basic of Photoshop" v-model="learnForm.body" required>
+              </div>
             </div>
-            <button type="submit" class="small button success" :disabled="learnForm.errors.any()">Add Learn</button>
+
+            <div class="control">
+                <button type="submit" class="button is-link" :disabled="learnForm.errors.any()">Add Learn</button>
+            </div>
+            <!--  -->
         </form>
         
         <p class="mt-3">Are there any course requirements or prerequisites?</p>
@@ -28,12 +33,16 @@
         </draggable>
 
         <form action="" @submit.prevent="addRequirement" @keydown="requirementForm.errors.clear()">
-            <div class="cell">
-                <label>Add a requirement
-                    <input type="text" class="input border-bottom-only" aria-describedby="courseRequirementHelpText" v-model="requirementForm.body" required>
-                </label>
+            <div class="field">
+              <label class="label">Add a requirement</label>
+              <div class="control">
+                <input class="input is-static input_bt" type="text" v-model="requirementForm.body" required>
+              </div>
             </div>
-            <button type="submit" class="small button success" :disabled="requirementForm.errors.any()">Add Requirement</button>
+            <!--  -->
+            <div class="control">
+                <button type="submit" class="button is-link" :disabled="requirementForm.errors.any()">Add Requirement</button>
+            </div>
         </form>
     </div>
 
@@ -139,6 +148,13 @@
                 console.log(learn);
             }
         }
-    }
+    };
 
 </script>
+
+<style scoped>
+    .input_bt {
+        border-bottom: 1px solid black;
+        padding: 1.5em 0;
+    }
+</style>
