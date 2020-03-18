@@ -10,6 +10,11 @@
 			<tab name="Instructors">
 				@include('courses.partials._instructorsTab')
 			</tab>
+			<tab name="Reviews">
+				<div class="container">
+					<course-review :course="{{$course}}"></course-review>
+				</div>
+			</tab>
 
 			
 	        {{-- @if (auth()->check() && $course->isSubscribedBy(auth()->user()))

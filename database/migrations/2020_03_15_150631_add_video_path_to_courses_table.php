@@ -14,7 +14,7 @@ class AddVideoPathToCoursesTable extends Migration
     public function up()
     {
         Schema::table('courses', function (Blueprint $table) {
-            $table->string('video_path')->nullable();
+            // $table->string('video_path')->nullable();
         });
     }
 

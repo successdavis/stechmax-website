@@ -6,5 +6,6 @@
 
     @include('layouts.program')
     @include('layouts.advertBanner')
+    @include('layouts.testimonials')
     {{-- @include('layouts.testimonials') --}}
 @endsection

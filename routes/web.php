@@ -204,6 +204,8 @@ Route::get('/studyroom/{course}', 'StudyRoomController@index')->middleware('must
 Route::get('/pricing', 'BusinessController@index')->name('pricing.index');
 Route::post('/business/{business}/thumbnail', 'BusinessController@thumbnail')->name('pricing.thumbnail');
 
+Route::post('testimonial/{course}', 'TestimonialsController@store');
+
 Route::get('/api/{course}/lessonvideourl', 'ClassroomController@nextVideo')->middleware('must-be-confirmed');
 
 Route::get('/paid/submit_details', 'PaymentController@create')->name('pay.submitDetails');

@@ -110,6 +110,11 @@ class Course extends Model
         return $this->sections()->orderBy('order')->get();   
     }
 
+    public function testimonials()
+    {
+        return $this->hasMany('App\Testimonial');
+    }
+
     public function parentCourse()
     {
         return $this->belongsToMany('App\Course', 'track_courses','course_id','track_id')->withPivot('order');
