@@ -72,6 +72,7 @@ Vue.component('new-thread', require('./components/NewThread.vue').default);
 Vue.component('menu-dropdown', require('./components/menuDropDown.vue').default);
 Vue.component('menu-dropdown', require('./components/menuDropDown.vue').default);
 Vue.component('course-review', require('./components/courseReview.vue').default);
+Vue.component('image-carousel', require('./components/carousel.vue').default);
 
 
 const app = new Vue({

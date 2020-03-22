@@ -26,9 +26,9 @@
 
 <p style="padding: .5em 1em; width: 105%;" class="has-text-white has-background-black-ter">Dashboard</p>
 <aside class="menu aside ">
-  <p class="menu-label has-text-white">
+  <a href="/dashboard" class="menu-label has-text-white">
     Dashboard
-  </p>
+  </a>
   {{-- <ul class="menu-list">
     <li><a>Dashboard</a></li>
     <li><a>Customers</a></li>
@@ -81,6 +81,11 @@
       <li><a href="{{route('permitcards')}}" target="_blank" class="has-icon has-text-white">
             <span class="icon"><i class="fas fa-id-card-alt"></i></span>
             <span class="menu-label-item">Active PMT Cards</span>
+          </a>
+      </li>
+      <li><a href="{{route('user_rankings')}}" class="has-icon has-text-white">
+            <span class="icon"><i class="fas fa-id-card-alt"></i></span>
+            <span class="menu-label-item">Rankings</span>
           </a>
       </li>
     </menu-dropdown>

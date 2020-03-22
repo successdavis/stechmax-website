@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Filters\TestimonialFilters;
+use App\Http\Resources\TestimonialResource;
+use App\Testimonial;
 use App\Testimonials;
 use Illuminate\Http\Request;
 
@@ -13,9 +16,11 @@ class TestimonialsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Course $course, TestimonialFilters $filter)
     {
-        //
+        $testimonials = Testimonial::filter($filter)->inRandomOrder();
+
+        return TestimonialResource::collection($testimonials->get());
     }
 
     /**
@@ -91,5 +96,12 @@ class TestimonialsController extends Controller
     public function destroy(Testimonials $testimonials)
     {
         //
+    }
+
+    public function coursetestimonial(Course $course)
+    {
+        $testimonials = $course->testimonials;
+
+        return TestimonialResource::collection($testimonials);
     }
 }

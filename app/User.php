@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable
 {
@@ -290,5 +291,12 @@ class User extends Authenticatable
         return self::whereYear('created_at', Carbon::now()->year)
                     ->whereMonth('created_at', Carbon::now()->month)
                     ->count();
+    }
+
+    static public function totalUsersWithSub()
+    {
+        return self::whereHas('subscriptions', function (Builder $query) {
+            $query->where('active', true);
+        })->count();
     }
 }

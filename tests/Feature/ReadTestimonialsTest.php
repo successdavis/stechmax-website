@@ -19,10 +19,32 @@ class ReadTestimonialsTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_can_retrieve_all_testimonials()
+    public function all_testimonials_can_be_retrieved()
     {
-        $response = $this->get('/testimonials');
+        $testimonials = create('App\Testimonial',[],30);
+        $response = $this->get('/testimonials')
+            ->assertSee($this->testimonial->testimonial);
+    }
 
-        dd($response);
+    /** @test */
+    public function only_approved_testimonials_can_be_retrieved()
+    {
+        $this->testimonial->approve();
+        $testimonialTwo = create('App\Testimonial');
+
+        $response = $this->json('GET', '/testimonials?approve=true')->json();
+
+        $this->assertCount(1, $response['data']);
+    }
+
+    /** @test */
+    public function testimonials_can_be_retrieved_for_any_course()
+    {
+        $course = create('App\Course');
+        $testimonialTwo = create('App\Testimonial', ['course_id' => $course->id]);
+
+        $response = $this->json('GET', '/testimonials/' . $course->slug)->json();
+
+        $this->assertCount(1, $response['data']);
     }
 }

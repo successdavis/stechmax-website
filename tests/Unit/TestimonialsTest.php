@@ -39,4 +39,11 @@ class TestimonialsTest extends TestCase
     {
     	$this->assertInstanceOf('App\Course', $this->testimonial->course);
     }
+
+    /** @test */
+    public function a_testimonial_can_be_approved()
+    {
+        $this->testimonial->approve();
+        $this->assertTrue($this->testimonial->status());        
+    }
 }

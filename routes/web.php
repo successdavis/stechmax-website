@@ -95,6 +95,7 @@ Route::patch('/dashboard/{user}/updateprofile', 'UserController@update')->name('
 Route::patch('/dashboard/{user}/updatepassword', 'UserController@updatePassword')->name('update.setting.password');
 Route::get('/dashboard/{user}/mycourses', 'UserSubscribedCoursesController@index')->name('mycourses.index');
 Route::get('/dashboard/{user}/getusercourses', 'UserSubscribedCoursesController@getDataForDataTable')->name('mycourses.datatable');
+Route::get('/dashboard/user-rankings', 'ManageUserController@rankusers')->name('user_rankings');
 
 Route::get('/dashboard/{user}/mypayments', 'UserPaymentsController@index')->name('mypayments.index');
 Route::get('/dashboard/{user}/getuserpayments', 'UserPaymentsController@getDataForDataTable')->name('mypayments.datatable');
@@ -204,7 +205,9 @@ Route::get('/studyroom/{course}', 'StudyRoomController@index')->middleware('must
 Route::get('/pricing', 'BusinessController@index')->name('pricing.index');
 Route::post('/business/{business}/thumbnail', 'BusinessController@thumbnail')->name('pricing.thumbnail');
 
-Route::post('testimonial/{course}', 'TestimonialsController@store');
+Route::post('newtestimonial/{course}', 'TestimonialsController@store');
+Route::get('testimonials/{course}', 'TestimonialsController@coursetestimonial');
+Route::get('/testimonials', 'TestimonialsController@index');
 
 Route::get('/api/{course}/lessonvideourl', 'ClassroomController@nextVideo')->middleware('must-be-confirmed');
 

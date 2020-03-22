@@ -16,4 +16,21 @@ class Testimonial extends Model
     {
     	return $this->belongsTo('App\Course');
     }
+
+    public function approve()
+    {
+    	return $this->update([
+    		'approve' => true,
+    	]);
+    }
+
+    public function status()
+    {
+    	return !! $this->approve;
+    }
+
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
+    }
 }

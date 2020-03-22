@@ -96,7 +96,9 @@
                   Remember me
                 </label>
                             </div>
-                            <button class="button is-block is-info is-large is-fullwidth">Login <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                            <button :class="submitting ? 'is-loading' : '' " class="button is-block is-info is-large is-fullwidth">Login 
+                            	<i class="fa fa-sign-in" aria-hidden="true"></i>
+                            </button>
                         </form>
                     </div>
                     <p class="has-text-grey has-text-centered">

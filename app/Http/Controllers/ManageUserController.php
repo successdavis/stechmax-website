@@ -102,4 +102,11 @@ class ManageUserController extends Controller
 
         return UserResource::collection($user);
     }
+
+    public function rankusers()
+    {
+        $users = User::all()->sortByDesc('points')->take(20);
+
+        return view('dashboard.users.rankings', compact('users'));
+    }
 }

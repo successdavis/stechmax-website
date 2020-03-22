@@ -15,7 +15,7 @@
 					<div class="level-item">
 						<div class="is-widget-label">
 							<h3 class="subtitle is-spaced"> Students </h3>
-							<h1 class="title"><div> {{App\User::totalUsers()}} </div></h1>
+							<h1 class="title"><div> {{$totalUsers}}</div></h1>
 						</div>
 					</div>
 					<div class="level-item has-widget-icon">
@@ -34,7 +34,7 @@
 			<header class="card-header card-cen-v">
 				<p class="card-header-title">
 					<span class="icon"><i class="fas fa-code-branch"></i></i></span>
-					<span><b>0</b> of 0 projects</span>
+					<span>{{$totalUsersWithSub}} Users</span>
 				</p>
 				<button type="button" class="button is-small align-sf-ct">
 					<span class="icon"><i class="fas fa-history"></i></span>
@@ -44,14 +44,14 @@
 				<div class="level is-mobile">
 					<div class="level-item">
 						<div class="is-widget-label">
-							<h3 class="subtitle is-spaced"> Projects </h3>
-							<h1 class="title"><div> 0 </div></h1>
+							<h3 class="subtitle is-spaced"> Active Subscription </h3>
+							<h1 class="title"><div>{{$countActiveSub}}</div></h1>
 						</div>
 					</div>
 					<div class="level-item has-widget-icon">
 						<div class="is-widget-icon">
 							<span class="icon has-text-info is-large">
-								<i class="fas fa-project-diagram"></i>
+								<i class="fas fa-project-diagram " style="font-size: 2em"></i>
 							</span>
 						</div>
 					</div>
@@ -66,7 +66,7 @@
 					<span class="icon">
 						<i class="fab fa-discourse"></i>
 					</span>
-					<span><b>Active Subscriptions</b></span>
+					<span><b>{{$yearTotalPay}} this Year</b></span>
 				</p>
 				<button type="button" class="button is-small align-sf-ct">
 					<span class="icon"><i class="fas fa-history"></i></span>
@@ -76,14 +76,14 @@
 				<div class="level is-mobile">
 					<div class="level-item">
 						<div class="is-widget-label">
-							<h3 class="subtitle is-spaced"> Courses </h3>
-							<h1 class="title"><div> {{auth()->user()->totalActiveCourse()}} </div></h1>
+							<h3 class="subtitle is-spaced">{{date('M')}} Total Income </h3>
+							<h1 class="title"><div> N {{$monthlyTotalPay}} </div></h1>
 						</div>
 					</div>
 					<div class="level-item has-widget-icon">
 						<div class="is-widget-icon">
 							<span class="icon has-text-success is-large">
-								<i class="fas fa-window-restore"></i>
+								<i class="fas fa-window-restore" style="font-size: 2em"></i>
 							</span>
 						</div>
 					</div>
@@ -116,7 +116,7 @@
 					<div class="level-item has-widget-icon">
 						<div class="is-widget-icon">
 							<span class="icon has-text-danger is-large">
-								<i class="fas fa-bell"></i>
+								<i class="fas fa-bell" style="font-size: 2em"></i>
 							</span>
 						</div>
 					</div>

@@ -40,8 +40,8 @@
             <a class="navbar-item">
               Upcoming Events
             </a>
-            <a class="navbar-item">
-              Contact
+            <a href="/coporate/registration" class="navbar-item">
+              Coporate Training
             </a>
             <hr class="navbar-divider">
             <a class="navbar-item">

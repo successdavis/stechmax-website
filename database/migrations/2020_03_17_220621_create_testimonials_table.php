@@ -20,6 +20,8 @@ class CreateTestimonialsTable extends Migration
             $table->unsignedInteger('course_id');
             $table->boolean('approve')->default(false);
             $table->timestamps();
+
+            $table->unique(['user_id', 'course_id']);
         });
     }
 

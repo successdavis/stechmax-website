@@ -7,7 +7,6 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-
 class CreateTestimonalTest extends TestCase
 {
     use DatabaseMigrations;
@@ -28,7 +27,7 @@ class CreateTestimonalTest extends TestCase
             'course_id' => $this->course->id, 
             'user_id'   => $user->id
         ]);
-        $this->json('POST', 'testimonial/' . $this->course->slug, $data->toArray())
+        $this->json('POST', 'newtestimonial/' . $this->course->slug, $data->toArray())
             ->assertStatus(200);
         $this->assertDatabaseHas('testimonials', ['testimonial' => $data->testimonial]);
     }
@@ -45,5 +44,25 @@ class CreateTestimonalTest extends TestCase
         ]);
         return $this->post('testimonial/' . $this->course->slug, $data->toArray())
             ->assertSessionHasErrors('testimonial');
+    }
+
+        /** @test */
+    public function an_authenticated_user_can_add_testimonial_for_a_course_only_once()
+    {
+        $user = factory('App\User')->states('administrator')->create();
+        $this->signIn($user);
+        $data = make('App\Testimonial',[
+            'course_id' => $this->course->id, 
+            'user_id'   => $user->id
+        ]);
+
+        $this->json('POST', 'testimonial/' . $this->course->slug, $data->toArray())
+            ->assertStatus(200);
+
+        $this->expectException(\Exception::class);
+        
+        $this->json('POST', 'testimonial/' . $this->course->slug, $data->toArray());
+
+        // $this->assertCount(1, $reply->favorites);
     }
 }

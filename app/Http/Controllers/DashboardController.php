@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Aloha\Twilio\Twilio;
+use App\Subscription;
 use App\User;
+use App\payments;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -34,7 +36,11 @@ class DashboardController extends Controller
 
 //        $twilio->message('+2348076727008', 'Pink Elephants and Happy Rainbows');
 
-        $displayMenu = true;
-        return view('dashboard.index', compact('displayMenu'));
+        $totalUsers = User::totalUsers();
+        $totalUsersWithSub = User::totalUsersWithSub();
+        $countActiveSub = Subscription::countActiveSub();
+        $monthlyTotalPay = payments::monthlyTotalPay();
+        $yearTotalPay = payments::yearTotalPay();
+        return view('dashboard.index', compact('totalUsers','totalUsersWithSub','countActiveSub','monthlyTotalPay','yearTotalPay'));
     }
 }

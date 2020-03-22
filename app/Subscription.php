@@ -121,4 +121,9 @@ class Subscription extends Model
     {
         return $this->endsAt();
     }
+
+    static public function countActiveSub()
+    {
+        return self::where('active', true)->count();
+    }
 }

@@ -239,3 +239,13 @@ span.medium-2.track.floating-button.buttons-right {
 .align-sf-ct {
     align-self: center;
 }
+
+.testimonial-child {
+    width: 50%;
+}
+
+@media (max-width: 769px) {
+    .testimonial-child {
+        width: 100%;
+    }
+}

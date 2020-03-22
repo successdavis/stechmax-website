@@ -51,6 +51,7 @@ Vue.use(Input)
 Vue.use(Steps)
 Vue.use(Switch)
 Vue.use(Dropdown)
+Vue.use(Carousel)
 
 
 

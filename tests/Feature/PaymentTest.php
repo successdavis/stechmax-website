@@ -65,10 +65,4 @@ class PaymentTest extends TestCase
 
    		$this->assertEquals($course->amount, $total);
     }
-
-    /** @test */
-    public function it_sends_an_email_once_payment_is_recieved()
-    {
-      
-    }
 }
