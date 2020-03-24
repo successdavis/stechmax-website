@@ -35,64 +35,6 @@ class CourseTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_browse_by_subjects()
-    {
-        $subject = create('App\Subject');
-        $type = create('App\Type', ['name' => 'course']);
-        $courseInSubject    = create('App\Course', [
-            'subject_id'    => $subject->id, 
-            'published'     => true,
-            'type_id'       => $type->id
-        ]);
-
-        $courseNotInSubject = create('App\Course');
-
-        $this->get('/courses/' . $subject->slug)
-            ->assertSee($courseInSubject->title);
-            // ->assertDontSee($courseNotInSubject->title);
-    }
-
-
-    /** @test */
-    public function it_can_be_browse_by_price_lowest_to_highess()
-    {
-        $firstCourse = create('App\Course', ['amount' => '3000', 'created_at' => Carbon::now()->subWeek(), 'published' => true]);
-        $secondCourse = $this->course; 
-        $response = $this->getJson('/courses?amount=asc')->json();
-        $this->assertEquals([3000, 145000], array_column($response, 'amount'));
-    }
-
-    /** @test */
-    public function it_can_be_browse_by_price_highest_to_lowest()
-    {
-        $firstCourse = create('App\Course', ['amount' => '3000', 'created_at' => Carbon::now()->subWeek(), 'published' => true]);
-        $secondCourse = $this->course; 
-
-        $response = $this->getJson('/courses?amount=desc')->json();
-        $this->assertEquals([145000, 3000], array_column($response, 'amount'));
-    }
-
-    /** @test */
-    public function it_can_be_browse_by_difficulty()
-    {
-        $type = create('App\Type', ['name' => 'course']);
-
-        $beginner = create('App\Difficulty', ['level' => 'beginner',]);
-        $intermediate = create('App\Difficulty', ['level' => 'intermediate',]);
-        $advance = create('App\Difficulty', ['level' => 'advance',]);
-
-        $firstCourse = create('App\Course', ['difficulty_id' => $intermediate->id, 'published' => true, 'type_id' => $type->id]);
-        $secondCourse = create('App\Course', ['difficulty_id' => $beginner->id, 'published' => true, 'type_id' => $type->id]);
-        $thirdCourse = create('App\Course', ['difficulty_id' => $advance->id, 'published' => true, 'type_id' => $type->id]);
-
-
-        $this->get('/courses?difficulty=beginner')
-            ->assertSee($secondCourse->title);
-            // ->assertDontSee($firstCourse->title)
-            // ->assertDontSee($thirdCourse->title);
-    }
-
-    /** @test */
     public function it_should_consist_with_what_the_user_will_learn()
     {
         $this->signIn(factory('App\User')->states('administrator')->create());
@@ -144,5 +86,19 @@ class CourseTest extends TestCase
         $course->unPublish();
 
         $this->assertFalse($course->published);
+    }
+
+    /** @test */
+    public function a_user_can_get_a_properly_formatted_course_amount()
+    {
+        $course = create('App\Course');
+        $this->assertEquals("1,450.00", $course->getAmount());
+    }
+
+    /** @test */
+    public function a_classroom_fee_is_added_to_course_amount_when_classroom_fee_is_requested()
+    {
+        $siteconfig = create('App\siteconfig');
+        $this->assertEquals("2,450.00", $this->course->getAmountWithClassroom());
     }
 }

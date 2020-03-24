@@ -27,7 +27,7 @@
 	            			<a disabled :href="course_path + '/subscription?class=false'" class="button is-link is-rounded is-fullwidth">Study Series Online</a>
 	            		</div>
 	            		<div class="column is-6">
-		                    <div class="has-text-black is-size-4">&#8358;<span v-text="course.amount / 100"></span></div>
+		                    <div class="has-text-black is-size-4">&#8358;<span v-text="amount"></span></div>
 	            		</div>
 	            	</div>
 	            	<div class="columns is-mobile">
@@ -35,7 +35,7 @@
 	            			<a :href="course_path + '/subscription?class=true'" class="button is-link is-rounded is-fullwidth">Study Series Offline</a>
 	            		</div>
 	            		<div class="column is-6">
-		                    <div class="has-text-black is-size-4">&#8358;<span v-text="course.amount / 100"></span></div>
+		                    <div class="has-text-black is-size-4">&#8358;<span v-text="classroomamount"></span></div>
 	            		</div>
 	            	</div>
 	            </div>
@@ -54,7 +54,9 @@
 			learns: Array,
 			course_path: String,
 			type: String,
-			videourl: String
+			videourl: String,
+			amount: Number,
+			classroomamount: Number
 		},
 
 	    data() {

@@ -224,8 +224,6 @@ class Course extends Model
         ]);
     }
 
-
-
     public function getFirstInstallment($course = null)
     {
         return !empty($course) ? $course->amount * 60 / 100 : $this->amount * 60 / 100;
@@ -234,5 +232,14 @@ class Course extends Model
     public function getAmount()
     {
         return number_format($this->amount / 100,2);
+    }
+
+    public function getAmountWithClassroom()
+    {
+        $classroomfee = siteconfig::getclassroomfee();
+
+        $amount = $this->amount + $classroomfee;
+        
+        return number_format($amount / 100, 2);
     }
 }
