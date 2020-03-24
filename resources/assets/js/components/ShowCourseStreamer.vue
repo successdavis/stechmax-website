@@ -21,14 +21,23 @@
 	            <div v-if="course.isSubscribedBy">
 		            <a :href="'/studyroom/' + course.slug" class="button medium">Enter Study Room</a>
 	            </div>
-	            <div class="columns" v-if="! course.isSubscribedBy">
-	                <div class="column is-6">
-	                    <h3 class="inline course__price">&#8358;<span v-text="course.amount / 100"></span></h3>
-	                </div>
-	                <div class="column buttons are-medium is-6">
-	                    <a class="mb_x-small button is-link is-rounded" :href="course_path + '/subscription?class=false'">Study Series Online</a>
-	                    <a class="button is-link is-rounded" :href="course_path + '/subscription?class=true'">Study Series Offline</a>
-	                </div>
+	            <div v-if="! course.isSubscribedBy">
+	            	<div class="columns is-mobile">
+	            		<div class="column is-6" title="Sorry! Not available for online training yet">
+	            			<a disabled :href="course_path + '/subscription?class=false'" class="button is-link is-rounded is-fullwidth">Study Series Online</a>
+	            		</div>
+	            		<div class="column is-6">
+		                    <div class="has-text-black is-size-4">&#8358;<span v-text="course.amount / 100"></span></div>
+	            		</div>
+	            	</div>
+	            	<div class="columns is-mobile">
+	            		<div class="column is-6">
+	            			<a :href="course_path + '/subscription?class=true'" class="button is-link is-rounded is-fullwidth">Study Series Offline</a>
+	            		</div>
+	            		<div class="column is-6">
+		                    <div class="has-text-black is-size-4">&#8358;<span v-text="course.amount / 100"></span></div>
+	            		</div>
+	            	</div>
 	            </div>
 	            <!-- <login-register></login-register> -->
 	    </div>

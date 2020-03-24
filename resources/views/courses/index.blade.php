@@ -29,7 +29,7 @@
             </div>
           </div>
         </div>
-        <p v-show="working" class="has-text-centered is-size-4">Wait a second, and let me do my job</p>
+        <p v-show="working" class="has-text-centered is-size-4">Wait a second, while I fetch available courses</p>
         <div>
           <div class="columns is-multiline" >
               @include('courses.partials.course')

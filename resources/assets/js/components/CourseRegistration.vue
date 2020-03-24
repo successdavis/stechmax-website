@@ -153,7 +153,7 @@
         },
 
         created () {
-            axios.get('/api/courses')
+            axios.get('/api/subjects')
                 .then(response => this.Data.subjects = response.data);
 
             axios.get('/api/difficulties')

@@ -15,6 +15,10 @@
           <div class="column">
             <span v-text="course.type"></span>
           </div>
+          <div class="column">
+            <span v-if="course.subject.length<9" v-text="course.subject"></span>
+            <span v-else v-text="course.subject.substring(0,7)+'..'"></span>
+          </div>
         </div>
           <h4 v-text="course.title"></h4>
           {{-- <p v-text="course.sypnosis"></p> --}}

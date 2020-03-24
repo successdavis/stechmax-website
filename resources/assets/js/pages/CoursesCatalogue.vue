@@ -54,16 +54,20 @@
 		},
 
 		mounted () {
-			this.getCourses();
+			axios.get(location.href).then(data => {
+				this.courses = data.data.data;
+			})
 		},
 
 		methods: {
 			sortItems(e) {
 				this.working = true;
-				axios.get(`/courses${'/' + this.sortedSubject}?${this.sortItem}`)
+				const url = `/courses${'/' + this.sortedSubject}?${this.sortItem}`;
+				axios.get(url)
 				.then(data => {
 					this.courses = data.data.data;
 					this.working = false;
+					history.pushState(null, null, url);
 				})
 				.catch(data => {
 					this.working = false;

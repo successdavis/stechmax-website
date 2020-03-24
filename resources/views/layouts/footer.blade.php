@@ -5,19 +5,19 @@
                 <div class="column">
                     <div class="level">
                         <div class="level-item">
-                            <figure class="image is-48x48">
-                              <img class="is-rounded" src="https://bulma.io/images/placeholders/48x48.png">
-                            </figure>
+                              <a target="_blank" href="https://web.facebook.com/stechmax">
+                                <i style="font-size: 3em" class="mdi mdi-facebook"></i>
+                              </a>
                         </div>
                         <div class="level-item">
-                            <figure class="image is-48x48">
-                              <img class="is-rounded" src="https://bulma.io/images/placeholders/48x48.png">
-                            </figure>
+                              <a target="_blank" href="https://www.youtube.com/channel/UCxlNUZ65XlNSokNDZQrV6sg">
+                                <i style="font-size: 3em" class="mdi mdi-youtube"></i>
+                              </a>
                         </div>
                         <div class="level-item">
-                            <figure class="image is-48x48">
-                              <img class="is-rounded" src="https://bulma.io/images/placeholders/48x48.png">
-                            </figure>
+                              <a target="_blank" href="https://twitter.com/S_techmax">
+                                <i style="font-size: 3em" class="mdi mdi-twitter"></i>
+                              </a>
                         </div>
                     </div>
                     {{-- ============= --}}

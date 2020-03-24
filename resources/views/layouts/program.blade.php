@@ -1,5 +1,5 @@
 <div class="container">
-  <div>
+  <div class="section">
     <div class="has-text-centered">
         <p class="is-size-3 has-text-centered">Your Dream Job is wating for you!</p>
         <h3 class="is-size-4 pb-3">START A CAREER PROGRAMME</h3>

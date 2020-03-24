@@ -6,7 +6,6 @@
           </div>
         </div>
         <p class="block has-text-centered" v-text="testimonial.testimonial"></p>
-        <h5 class="title has-text-centered is-5">Colin</h5>
         <a :href="'/profiles/'+testimonial.user.username" class="subtitle has-text-centered" 
         	v-text="testimonial.user.f_name + ' ' + testimonial.user.m_name "
         ></a>
