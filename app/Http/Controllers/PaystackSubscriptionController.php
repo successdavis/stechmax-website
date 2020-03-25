@@ -18,25 +18,13 @@ class PaystackSubscriptionController extends Controller
 
         $class = filter_var(request()->class, FILTER_VALIDATE_BOOLEAN);
 
-        $data = [
+        $payload = [
             "amount" => $class ? $course->getAmountWithClassroom() : $course->amount,
-            "reference" => Paystack::genTranxRef(),
-            "key" => config('paystack.secretKey'),
-            "email" => auth()->user()->email,
-            "first_name" => auth()->user()->f_name,
-            "last_name" => auth()->user()->l_name,
-            "callback_url" => request()->callback_url,
-            "metadata" => [
-                'course_id' => $course->id,
-                'purpose' => 'Course Subscription',
-                'method' => 'Paystack',
-                'class' => $class,
-            ],
+            'purpose' => 'Full Payment of Course Subscription',
+            'class' => $class,
         ];
 
-        dd($data);
-
-        return Paystack::getAuthorizationUrl($data)->redirectNow();
+        $this->requestAuthorization($course, $payload);
     }
 
     public function makePartPayment(Subject $subject, Course $course, Request $request)
@@ -47,28 +35,18 @@ class PaystackSubscriptionController extends Controller
 
         $class = filter_var(request()->class, FILTER_VALIDATE_BOOLEAN);
 
-        $data = [
-            "amount" => $course->getFirstInstallment('', true),
-            "reference" => Paystack::genTranxRef(),
-            "key" => config('paystack.secretKey'),
-            "email" => auth()->user()->email,
-            "first_name" => auth()->user()->f_name,
-            "last_name" => auth()->user()->l_name,
-            "callback_url" => request()->callback_url,
-            "metadata" => [
-                'course_id' => $course->id,
-                'purpose' => '60% payment of Course Subscription',
-                'method' => 'Paystack',
-                'class' => $class
-            ],
+        $payload = [
+            "amount"    => $course->getFirstInstallment('', true),
+            'purpose'   => '60% payment of Course Subscription',
+            'class'     => $class
         ];
-        return Paystack::getAuthorizationUrl($data)->redirectNow();
+        $this->requestAuthorization($course, $payload);
     }
 
-    public function requestAuthorization($payload)
+    public function requestAuthorization($course, $payload)
     {
         $data = [
-            "amount" => $payload['amount'],
+            "amount" => 100000,
             "reference" => Paystack::genTranxRef(),
             "key" => config('paystack.secretKey'),
             "email" => auth()->user()->email,
@@ -77,9 +55,9 @@ class PaystackSubscriptionController extends Controller
             "callback_url" => request()->callback_url,
             "metadata" => [
                 'course_id' => $course->id,
-                'purpose' => '60% payment of Course Subscription',
+                'purpose' => $payload['purpose'],
                 'method' => 'Paystack',
-                'class' => $class
+                'class' => $payload['class']
             ],
         ];
         return Paystack::getAuthorizationUrl($data)->redirectNow();

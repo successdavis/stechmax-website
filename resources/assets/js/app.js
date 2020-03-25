@@ -1,10 +1,3 @@
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
 const compiler = require('vue-template-compiler');
@@ -73,6 +66,7 @@ Vue.component('menu-dropdown', require('./components/menuDropDown.vue').default)
 Vue.component('menu-dropdown', require('./components/menuDropDown.vue').default);
 Vue.component('course-review', require('./components/courseReview.vue').default);
 Vue.component('image-carousel', require('./components/carousel.vue').default);
+Vue.component('paystack-payment', require('./components/paystack.vue').default);
 
 
 const app = new Vue({

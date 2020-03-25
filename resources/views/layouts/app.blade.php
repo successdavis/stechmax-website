@@ -35,6 +35,7 @@
             'signedIn'  => Auth::check()      
         ]) !!};
     </script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
     @yield('head')
 </head>
 <body>

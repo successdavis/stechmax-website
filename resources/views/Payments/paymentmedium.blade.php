@@ -29,10 +29,14 @@
           <div class="columns is-multiline">
             <div class="column is-6">
               <div class="is-size-3">(1) Method 1: Paystack</div>
-              <p>Click button below to pay using your credit card with paystack</p>
+
+              <paystack-payment image="{{asset('/images/paystack.png')}}"></paystack-payment>
+
+
+{{--  --}}
+              {{-- <p>Click button below to pay using your credit card with paystack</p>
                 <div class="mb-2">
 
-                  {{-- Make a full payment request --}}
 
                   <form method="post" action="{{$course->path()}}/paystack">
                       @csrf
@@ -41,8 +45,8 @@
                         <img src="{{asset('/images/paystack.png')}}">
                       </button>
                   </form>
-                </div>
-
+                </div> --}}
+{{--  --}}
                 {{-- Check if course support part payment then display --}}
 
                 @if ($course->supportPartPayment())
@@ -78,6 +82,8 @@
             </div>
             
           </div>
+
+          <paystack-payment></paystack-payment>
       </div>
     </div>
 @endsection
