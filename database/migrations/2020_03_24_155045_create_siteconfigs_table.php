@@ -16,6 +16,9 @@ class CreateSiteconfigsTable extends Migration
         Schema::create('siteconfigs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('classroom_fee');
+            $table->integer('handout_fee');
+            $table->integer('certificate_fee');
+            $table->integer('diploma_fee');
             $table->timestamps();
         });
     }

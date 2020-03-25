@@ -101,4 +101,13 @@ class CourseTest extends TestCase
         $siteconfig = create('App\siteconfig');
         $this->assertEquals("2,450.00", $this->course->getAmountWithClassroom());
     }
+
+    /** @test */
+    public function a_course_may_support_part_payment()
+    {
+        $this->assertFalse($this->course->supportPartPayment());
+
+        $this->course->enablePartPayment();
+        $this->assertTrue($this->course->supportPartPayment());
+    }
 }

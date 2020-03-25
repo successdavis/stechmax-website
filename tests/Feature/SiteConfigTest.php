@@ -22,7 +22,7 @@ class SiteConfigTest extends TestCase
     public function siteconfigs_table_has_expected_columns()
     {
         $this->assertTrue(Schema::hasColumns('siteconfigs', [
-            'id', "classroom_fee",
+            'id', "classroom_fee", "handout_fee","certificate_fee","diploma_fee"
           ]), 1);
     }
 }

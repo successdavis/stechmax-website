@@ -198,7 +198,8 @@ Route::post('coporate/registration', 'CoporatetrainingController@store');
 Route::get('coporate/registration', 'CoporatetrainingController@index');
 
 Route::post('/courses/{subject}/{course}/paystack', 'PaystackSubscriptionController@makeFullPayment')->name('paystack.makeFullPayment');
-Route::post('/courses/{subject}/{course}/paystack/part', 'PaystackSubscriptionController@makePartPayment')->name('paystack.makePartPayment');
+
+Route::post('/courses/{subject}/{course}/paystackpart', 'PaystackSubscriptionController@makePartPayment')->name('paystack.makePartPayment');
 
 Route::get('/studyroom/{course}', 'StudyRoomController@index')->middleware('must-be-subscribed')->name('studyroom.index');
 
