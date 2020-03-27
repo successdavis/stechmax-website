@@ -9,10 +9,14 @@
    <div class="container" id="overview">
       <div class="columns">
          <div class="column" >
-            @include('courses.program.partials.details')
+            <div class="section">
+               @include('courses.program.partials.details')
+            </div>
          </div>
          <div class="column is-3">
-            @include('courses.program.partials.aside')
+            <div class="section">
+               @include('courses.program.partials.aside')
+            </div>
          </div>
       </div>
    </div>

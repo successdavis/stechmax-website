@@ -11,7 +11,7 @@
 
             <h5 class="is-size-5 mb-2"><strong>Course Requirement(s)</strong></h5>
 
-            <div class="columns is-mobile is-multiline">
+            <div class="columns is-multiline">
                 @foreach ($course->requirements as $requirement)
                     <li class="column"><i class="fas fa-plus"></i> {{$requirement->body}}</li>
                 @endforeach
