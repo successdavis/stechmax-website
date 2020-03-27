@@ -1,6 +1,6 @@
 <template>
 	<div :class="vertical ? 'columns' : ''">
-		<div :class="vertical ? 'column is-3 mt-3' : '' " class="tabs is-boxed is-active is-centered">
+		<div :class="vertical ? 'column is-3' : '' " class="tabs is-boxed is-active is-centered">
 		  <ul :class="vertical ? 'vertical' : ''">
 		    <li v-for="tab in tabs" :class="{'is-active' : tab.isActive}">
 		    	<a :href="tab.href" @click="selectTab(tab)" v-text="tab.name"></a>

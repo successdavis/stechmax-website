@@ -78,7 +78,7 @@
                 <span class="icon"><i class="fas fa-angle-double-right"></i></span>
                 <span>Dashboard</span>
               </a>
-              <a class="navbar-item">
+              <a href="/dashboard/updateprofile" class="navbar-item">
                 <span class="icon"><i class="fas fa-cogs"></i></span>
                 <span>Settings</span>
               </a>

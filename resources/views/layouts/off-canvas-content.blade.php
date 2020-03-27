@@ -25,16 +25,6 @@
 </div>
 
 
-{{-- <div class="grid-x grid-padding-x mt-2">
-  <div class="small-4">
-  </div>
-  <div class="small-8 auto">
-    <div>{{ucfirst(auth()->user()->f_name) . ' ' . ucfirst(auth()->user()->l_name)}}
-      <br><strong>Role:</strong> Admin
-    </div>
-  </div>
-</div> --}}
-
 <ul class="white vertical menu accordion-menu" id="off-canvas_panel-links" data-accordion-menu>
     <li class="dark-gray"><a href="/dashboard">Dashboard</a></li>
     <li><a href="{{route('mycourses.index', ['user' => auth()->user()->username])}}">My Courses</a></li>

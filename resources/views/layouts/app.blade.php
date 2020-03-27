@@ -27,6 +27,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <script src="https://js.paystack.co/v1/inline.js"></script>
     
     <script>
         window.App = {!! json_encode([
@@ -35,7 +36,6 @@
             'signedIn'  => Auth::check()      
         ]) !!};
     </script>
-    <script src="https://js.paystack.co/v1/inline.js"></script>
     @yield('head')
 </head>
 <body>
@@ -51,7 +51,7 @@
 </body>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}" ></script>
+<script type="application/javascript" src="{{ asset('js/app.js') }}" ></script>
 <script src="{{ asset('js/remita-pay-inline.bundle.js') }}" ></script>
 
 <script src="{{ asset('videojs-playlist/dist/videojs-playlist.js') }}"></script>
