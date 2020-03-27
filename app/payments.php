@@ -19,14 +19,14 @@ class payments extends Model
     {
     	$amount = self::whereYear('created_at', Carbon::now()->year)
                     ->whereMonth('created_at', Carbon::now()->month)
-                    ->sum('amount');
-        return $newAmount = str_replace('-', '', $amount);
+                    ->sum('amount') / 100;
+        return $newAmount = number_format(str_replace('-', '', $amount), 2);
     }
 
     static public function yearTotalPay()
     {
     	$amount = self::whereYear('created_at', Carbon::now()->year)
-                    ->sum('amount');
-        return $newAmount = str_replace('-', '', $amount);
+                    ->sum('amount') / 100;
+        return $newAmount = number_format(str_replace('-', '', $amount),2);
     }
 }

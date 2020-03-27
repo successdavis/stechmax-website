@@ -66,7 +66,7 @@
 					<span class="icon">
 						<i class="fab fa-discourse"></i>
 					</span>
-					<span><b>{{$yearTotalPay}} this Year</b></span>
+					<span><b>&#8358;{{$yearTotalPay}} this Year</b></span>
 				</p>
 				<button type="button" class="button is-small align-sf-ct">
 					<span class="icon"><i class="fas fa-history"></i></span>
@@ -77,7 +77,7 @@
 					<div class="level-item">
 						<div class="is-widget-label">
 							<h3 class="subtitle is-spaced">{{date('M')}} Total Income </h3>
-							<h1 class="title"><div> N {{$monthlyTotalPay}} </div></h1>
+							<h1 class="title"><div> &#8358;{{$monthlyTotalPay}} </div></h1>
 						</div>
 					</div>
 					<div class="level-item has-widget-icon">
