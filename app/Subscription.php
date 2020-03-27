@@ -47,6 +47,7 @@ class Subscription extends Model
                 ]);  
                 $owner      = $this->owner;
                 $subscriber = $this->subscriber;
+
                 event(new SystemNoAssigned($this, $owner, $subscriber));
                 return true;
             }

@@ -31,6 +31,9 @@ class EmailSystemNumber
         $owner = $event->subscription->owner;
         $subscriber = $event->subscription->subscriber;
         $subscription = $event->subscription;
-        Mail::to($owner)->send(new EmailSystenNumber($subscription, $owner, $subscriber));
+
+        if (isset($owner->email)) {
+            Mail::to($owner)->send(new EmailSystenNumber($subscription, $owner, $subscriber));
+        }
     }
 }

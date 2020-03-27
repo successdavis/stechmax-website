@@ -24,4 +24,20 @@ class CreateInvoiceTest extends TestCase
 
          	$this->assertCount(1, $course->whereInvoicedBy(auth()->user())->get());
        }
+
+       /** @test */
+       public function extra_charges_can_be_added_to_an_invoice()
+       {
+            $user = $this->signIn(factory('App\User')->states('administrator')->create());
+            $course = create('App\Course');
+
+            $this->assertCount(0, $course->whereInvoicedBy(auth()->user())->get());
+
+            $charge = 200000;
+            $invoice = $course->createInvoice('', '', $charge);
+
+            $invoiceFee = $course->amount + $charge;
+
+            $this->assertEquals($invoiceFee, $invoice->amount);
+       }
 }

@@ -10,7 +10,8 @@ class Invoice extends Model
     protected $fillable = ['user_id', 'amount', 'invoiceNo'];
 
     protected $casts = [
-        'paid' => 'boolean'
+        'completed' => 'boolean',
+        'freeze' => 'boolean'
     ];
 
     public function payments()
@@ -87,7 +88,7 @@ class Invoice extends Model
 
     public function openInvoice()
     {
-        $this->paid = false;  
+        $this->completed = false;  
 
         return $this->save();
     }

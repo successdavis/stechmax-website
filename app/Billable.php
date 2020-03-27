@@ -25,12 +25,12 @@ trait Billable
     }
 
 //  to create invoice for a user in a particular module e.g. $course->createInvoice(1);
-    public function createInvoice($userId = null, $installmental = null)
+    public function createInvoice($userId = null, $installmental = null, $charge = null)
     {
         return $this->invoices()->save(
             new Invoice([
                 'user_id' => $userId ?: auth()->id(),
-                'amount' => $this->amount,
+                'amount' => $this->amount + $charge,
                 'invoiceNo' => Invoice::generateInvoiceNo(),
                 'installmental' => $installmental ?: true,
             ])

@@ -224,15 +224,15 @@ class Course extends Model
         ]);
     }
 
-    public function getFirstInstallment($course = null, $classroomfee = null)
+    public function getFirstInstallment($course = null, $classroomfee = null, $format = true)
     {
         $amount = !empty($course) ? $course->amount * 60 / 100 : $this->amount * 60 / 100;
         if (filter_var($classroomfee, FILTER_VALIDATE_BOOLEAN)) {
             $classroomfee = siteconfig::getclassroomfee();
-             return number_format(($amount + $classroomfee) / 100,2);
+            $amount = $amount + $classroomfee;
         }
 
-        return number_format($amount / 100, 2);
+        return $format ? number_format($amount / 100, 2) : $amount;
     }
 
     public function getAmount()
@@ -240,13 +240,13 @@ class Course extends Model
         return number_format($this->amount / 100,2);
     }
 
-    public function getAmountWithClassroom()
+    public function getAmountWithClassroom($format = true)
     {
         $classroomfee = siteconfig::getclassroomfee();
 
         $amount = $this->amount + $classroomfee;
         
-        return number_format($amount / 100, 2);
+        return $format ? number_format($amount / 100, 2) : $amount;
     }
 
     public function supportPartPayment()

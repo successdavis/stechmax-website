@@ -81,7 +81,7 @@
                         <form @submit.prevent="loginForm" @keydown="LogForm.errors.clear()">
                             <div class="field">
                                 <div class="control">
-                                    <input v-model="LogForm.email" class="input is-large" type="email" placeholder="Your Email" autofocus="">
+                                    <input v-model="LogForm.email" class="input is-large" type="text" placeholder="Your Email" autofocus="">
                                 </div>
                             </div>
 

@@ -58,7 +58,7 @@ class InvoiceTest extends TestCase
         $user = $this->signIn(create('App\User'));
         $invoice = create('App\Invoice');
         $invoiceNo = $invoice->generateInvoiceNo();
-        $this->assertEquals($invoiceNo, 'STM-2019-0002');
+        $this->assertEquals('STM-2020-0002', $invoiceNo);
     }
 
     /** @test */
@@ -77,7 +77,7 @@ class InvoiceTest extends TestCase
         $user = $this->signIn(create('App\User'));
         $invoice = create('App\Invoice');
         $invoice->closeInvoice();
-        $this->assertTrue($invoice->paid);
+        $this->assertTrue($invoice->completed);
     }
 
     /** @test */
@@ -86,9 +86,9 @@ class InvoiceTest extends TestCase
         $user = $this->signIn(create('App\User'));
         $invoice = create('App\Invoice');
         $invoice->closeInvoice();
-+        $this->assertTrue($invoice->paid);
++        $this->assertTrue($invoice->completed);
         $invoice->openInvoice();
-+        $this->assertFalse($invoice->paid);
++        $this->assertFalse($invoice->completed);
     }
 
     /** @test */
@@ -104,6 +104,6 @@ class InvoiceTest extends TestCase
         $data['reference'] = '7343ffe89';
 
         $invoice->recordPayment($data);
-+        $this->assertTrue($invoice->fresh()->paid);
++        $this->assertTrue($invoice->fresh()->completed);
     }
 }

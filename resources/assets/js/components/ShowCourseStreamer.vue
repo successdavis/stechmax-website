@@ -24,7 +24,9 @@
 	            <div v-if="! course.isSubscribedBy">
 	            	<div class="columns is-mobile">
 	            		<div class="column is-6" title="Sorry! Not available for online training yet">
-	            			<a disabled :href="course_path + '/subscription?class=false'" class="button is-link is-rounded is-fullwidth">Study Series Online</a>
+	            			<!-- Add this href attribute to button if online training is allowed -->
+	            			<!-- :href="course_path + '/subscription?class=false'" -->
+	            			<a disabled  class="button is-link is-rounded is-fullwidth">Study Series Online</a>
 	            		</div>
 	            		<div class="column is-6">
 		                    <div class="has-text-black is-size-4">&#8358;<span v-text="amount"></span></div>

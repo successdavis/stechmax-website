@@ -29,12 +29,8 @@
           <div class="columns is-multiline">
             <div class="column is-6">
               <div class="is-size-3">(1) Method 1: Paystack</div>
-
-              <paystack-payment image="{{asset('/images/paystack.png')}}"></paystack-payment>
-
-
 {{--  --}}
-              {{-- <p>Click button below to pay using your credit card with paystack</p>
+              <p>Click button below to pay using your credit card with paystack</p>
                 <div class="mb-2">
 
 
@@ -45,7 +41,7 @@
                         <img src="{{asset('/images/paystack.png')}}">
                       </button>
                   </form>
-                </div> --}}
+                </div>
 {{--  --}}
                 {{-- Check if course support part payment then display --}}
 
@@ -82,8 +78,6 @@
             </div>
             
           </div>
-
-          <paystack-payment></paystack-payment>
       </div>
     </div>
 @endsection
