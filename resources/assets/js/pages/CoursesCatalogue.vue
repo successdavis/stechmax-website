@@ -70,25 +70,13 @@
 				.then(data => {
 					this.courses = data.data.data;
 					this.working = false;
-					history.pushState(null, null, url);
+					// history.pushState(null, null, url);
 				})
 				.catch(data => {
 					this.working = false;
 					flash(':) Something went wrong with sorting, please contact admin', 'failed');
 				})
 			}
-			// getCourses() {
-			// 	this.working = true;
-			// 	axios.get('/courses')
-			// 	.then(data => {
-			// 		this.working = false;
-			// 		this.courses = data.data.data;
-			// 	})
-			// 	.catch(error => {
-			// 		this.working = false;
-			// 		flash("Something isn\'t right please check your connection");
-			// 	})
-			// }
 		}
 	}
 </script>
