@@ -54,13 +54,15 @@
 		},
 
 		mounted () {
-			// axios.get(location.href).then(data => {
-			// 	this.courses = data.data.data;
-			// })
-			this.getCourses();
+			this.getSubjectQuery();
 		},
 
 		methods: {
+			getSubjectQuery () {
+				let subject = location.pathname.split('/')[2];
+				subject ? this.sortedSubject = subject : this.sortedSubject = '';
+				this.sortItems();
+			},
 			sortItems(e) {
 				this.working = true;
 				const url = `/courses${'/' + this.sortedSubject}?${this.sortItem}`;
@@ -74,19 +76,19 @@
 					this.working = false;
 					flash(':) Something went wrong with sorting, please contact admin', 'failed');
 				})
-			},
-			getCourses() {
-				this.working = true;
-				axios.get('/courses')
-				.then(data => {
-					this.working = false;
-					this.courses = data.data.data;
-				})
-				.catch(error => {
-					this.working = false;
-					flash("Something isn\'t right please check your connection");
-				})
 			}
+			// getCourses() {
+			// 	this.working = true;
+			// 	axios.get('/courses')
+			// 	.then(data => {
+			// 		this.working = false;
+			// 		this.courses = data.data.data;
+			// 	})
+			// 	.catch(error => {
+			// 		this.working = false;
+			// 		flash("Something isn\'t right please check your connection");
+			// 	})
+			// }
 		}
 	}
 </script>
