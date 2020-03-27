@@ -54,10 +54,10 @@
 		},
 
 		mounted () {
-			axios.get(location.href).then(data => {
-				this.courses = data.data.data;
-			})
-			// this.getCourses();
+			// axios.get(location.href).then(data => {
+			// 	this.courses = data.data.data;
+			// })
+			this.getCourses();
 		},
 
 		methods: {

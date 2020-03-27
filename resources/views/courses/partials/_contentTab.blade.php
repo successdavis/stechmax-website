@@ -31,7 +31,7 @@
                     @if ($loop->first)
                         <collapse title="{{$section->title}}" :open="true">
                             @foreach ($section->lectures as $lecture)
-                                <div class="columns is-multiline" slot="content">
+                                <div class="columns is-mobile is-multiline" slot="content">
                                     <div class="column is-narrow"><i class="fas fa-caret-right"></i></div>
                                     <div class="column">{{$lecture->title}}</div>
                                 </div>
