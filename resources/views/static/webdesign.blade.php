@@ -21,7 +21,7 @@
         <div class="card">
           <div class="card-content">
           <figure class="image is-256x256">
-            <img class="" src="{{asset('/images/payment-gateway.jpg')}}">
+            <img class="" src="{{asset('/images/Payment-Gateway-Feature-01.png')}}" alt="We integrate payment on your site ">
           </figure>
           <header class="card-header">
             <p class="card-header-title is-centered">
@@ -30,9 +30,6 @@
           </header>
           <div class="content">
             We Integrate Payment Gateway Reliable and Provide Save Checkout Experience.
-            <a href="#">@Stechmax</a>. 
-            <br>
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
           </div>
         </div>
         <!-- <footer class="card-footer">
@@ -46,18 +43,16 @@
         
         <div class="card-content">
           <figure class="image is-256x256">
-        <img class="" src="{{ asset('/images/eCommerce.jpg') }}">
+        <img class="" src="{{ asset('/images/build-e-commerce-portal.jpg') }}" alt="building e-commerce portals">
       </figure>
 
       <header class="card-header">
           <p class="card-header-title is-centered">
             <a>eCommerce</a>
           </p>
-        </header>          <div class="content">
+        </header>          
+        <div class="content">
             Sell Your Products or Ideas Online. Get Your Store Running and Ready to Receive Payments.
-            <a href="#">@Stechmax</a>. 
-            <br>
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
           </div>
         </div>
         <!-- <footer class="card-footer">
@@ -71,7 +66,7 @@
         
         <div class="card-content">
           <figure class="image is-256x256">
-        <img class="" src="{{asset('/images/Development-Fast.png')}}">
+        <img class="" src="{{asset('/images/Development-Fast.png')}}" alt="we offer webdesign and development services">
           </figure>
           <header class="card-header">
               <p class="card-header-title is-centered">
@@ -80,9 +75,6 @@
             </header>
               <div class="content">
             Learn to Build Websites from beginer-Experts, Using In-demand Tchnologies.
-            <a href="#">@Stechmax</a>. 
-            <br>
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
           </div>
         </div>
         <!-- <footer class="card-footer">
@@ -97,7 +89,7 @@
         
         <div class="card-content">
           <figure class="image is-256x256">
-            <img class="" src="{{asset('/images/SEO.png')}}">
+            <img class="" src="{{asset('/images/Optimize-website-to-Increase-Sales-Using-SEO.jpg')}}" alt="we grow your business with page SEO">
           </figure>
           <header class="card-header">
           <p class="card-header-title is-centered">
@@ -106,9 +98,6 @@
         </header>
           <div class="content">
             Increase Your Site Traffic and Visibility to Users on Search Engines.
-            <a href="#">@Stechmax</a>. 
-            <br>
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
           </div>
         </div>
         <!-- <footer class="card-footer">
@@ -121,7 +110,7 @@
       <div class="card">
         <div class="card-content">
           <figure class="image is-256x256">
-            <img class="" src="{{asset('/images/header.png')}}">
+            <img class="" src="{{asset('/images/build-a-website-portal.jpg')}}" alt="your website needs a good portal">
           </figure>
           <header class="card-header">
             <p class="card-header-title is-centered">
@@ -130,9 +119,6 @@
           </header>
           <div class="content">
             With our UI/UX and Server Side Experts, we Design Great Portals for Registration, Login, Dashboards, and More.
-            <a href="#">@Stechmax</a>. 
-            <br>
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
           </div>
         </div>
         <!-- <footer class="card-footer">
@@ -145,7 +131,7 @@
       <div class="card">
         <div class="card-content">
           <figure class="image is-256x256">
-            <img class="" src="{{asset('/images/webdev.jpg')}}">
+            <img class="" src="{{asset('/images/webdev.jpg')}}" alt="learn to build websites with us">
           </figure>
         <header class="card-header">
           <p class="card-header-title is-centered">
@@ -154,9 +140,6 @@
         </header>
           <div class="content">
              Learn to Build Websites from beginer-Experts, Using In-demand Tchnologies.
-            <a href="#">@Stechmax</a>. 
-            <br>
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
           </div>
         </div>
         <!-- <footer class="card-footer">
@@ -166,4 +149,6 @@
     </div>
   </div>
 </div>
+
+@include('layouts.footer')
 @endsection
