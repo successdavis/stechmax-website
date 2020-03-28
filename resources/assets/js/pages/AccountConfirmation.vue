@@ -3,8 +3,8 @@
 <div class="overlay background">
 		<div class="overlay"></div>
 		<div class="row">
-			<div class="grid-x grid-container overlay__content reg-form" style="max-width: 750px;">
-				<div class="medium-8 text-align-left mt-3">
+			<div class="columns overlay__content reg-form" style="max-width: 750px;">
+				<div class="column is-8 text-align-left mt-3">
 					<div class="grid-container">
 						<!-- ============ -->
 						<h3 class="pageTitle">You're almost there...</h3>
@@ -12,20 +12,21 @@
 						<!-- Display If the user has an email addres and its not yet confirmed -->
 						<div v-if="user.email && user.confirmed === false">
 					        <p>Please click on the link sent to your email address to confirm your account</p>
-					        <p class="center-text">Haven't received the confirmation email yet? <a class="small button" @click="resendConfirmLink">Resend Email</a></p>
+					        <p class="center-text">Haven't received the confirmation email yet?</p> 
+					        <button class="button" @click="resendConfirmLink">Resend Email</button>
 				        </div>
 
 						<!-- Display If the user has a phone and its not yet confirmed -->
 				        <div v-if="user.phone && user.phone_confirmed === false">
 				        	<form @keyup.prevent="verifyToken">
 				        		<p>Please provide token sent to <span v-text="user.phone"></span></p>
-				        		<input type="text" v-model="token" maxlength="6">
+				        		<input class="input" type="text" v-model="token" maxlength="6">
 				        	</form>
 				        	<span class="center-text white"><a @click.prevent="resendToken" style="color: white">Resend Token</a></span>            
 				        </div>
 					</div>
 				</div>
-				<div class="medium-4 white mt-3">
+				<div class="column is-4 white mt-3">
 					<div class="mb-3">
 						<a href=""><img :src="logo" alt="Stechmax Logo"></a>
 						<p class="center-text">One Account for all Services</p>

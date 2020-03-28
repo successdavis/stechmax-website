@@ -3,7 +3,7 @@
         <div class="section">
             <div class="columns">
                 <div class="column">
-                    <div class="level">
+                    <div class="level is-mobile">
                         <div class="level-item">
                               <a target="_blank" href="https://web.facebook.com/stechmax">
                                 <i style="font-size: 3em" class="mdi mdi-facebook"></i>
