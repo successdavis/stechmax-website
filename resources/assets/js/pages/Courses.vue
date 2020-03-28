@@ -23,7 +23,7 @@
                 sortedColumn: 'title',
                 order: 'asc',
                 subjects: [],
-                subject: 'graphics',
+                subject: '',
             };
         },
 
