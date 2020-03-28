@@ -23,7 +23,9 @@
     <div class="column">
       <div class="field">
         <div class="control">
-          <input class="input is-rounded" type="text" placeholder="Start typing to search">
+          <form method="GET" action="threads/search">
+            <input name="q" class="input is-rounded" type="text" placeholder="Start typing to search">
+          </form>
         </div>
       </div>
     </div>

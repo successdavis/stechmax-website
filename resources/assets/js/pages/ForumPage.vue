@@ -11,7 +11,7 @@
 				sortList: [
 					{
 						value: "All Threads",
-						destination: "all"
+						destination: ""
 					},
 					{
 						value: "solved",

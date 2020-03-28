@@ -65,7 +65,7 @@
                     <h2 class="is-size-4">Sitemap</h2>
                     <li><a href="/threads">Community</a></li>
                     <li><a href="/courses">All Courses</a></li>
-                    <li><a href="/build-a-wesite">Build a website</a></li>
+                    <li><a href="/build-a-website">Build a website</a></li>
                     <li><a href="/pricing">Service & Pricing</a></li>
                 </div>
                 <div class="column is-2">

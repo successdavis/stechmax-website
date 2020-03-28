@@ -212,6 +212,8 @@ Route::get('/testimonials', 'TestimonialsController@index');
 
 Route::get('/api/{course}/lessonvideourl', 'ClassroomController@nextVideo')->middleware('must-be-confirmed');
 
+Route::get('/build-a-website', 'StaticPageController@websiteDesign');
+
 Route::get('/paid/submit_details', 'PaymentController@create')->name('pay.submitDetails');
 
 
