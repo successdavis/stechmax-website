@@ -28,7 +28,6 @@ class CreateCoursesTable extends Migration
             $table->boolean('custom_course')->default(false);
             $table->integer('development_stage')->default(0); // 1 stage one, 2 stage two, 3 stage three
             $table->boolean('published')->default(false); // is the course visible to the users
-
             $table->timestamps();
         });
     }

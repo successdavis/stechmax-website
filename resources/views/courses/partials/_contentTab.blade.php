@@ -34,6 +34,11 @@
                                 <div class="columns is-mobile is-multiline" slot="content">
                                     <div class="column is-narrow"><i class="fas fa-caret-right"></i></div>
                                     <div class="column">{{$lecture->title}}</div>
+                                    @if ($lecture->hasVideo())
+                                        <div class="column is-narrow">
+                                            <i class="mdi mdi-film"></i>
+                                        </div>
+                                    @endif
                                 </div>
                             @endforeach
                         </collapse>
@@ -43,8 +48,13 @@
                     <collapse title="{{$section->title}}">
                             @foreach ($section->lectures as $lecture)
                                 <div class="columns is-mobile is-multiline" slot="content">
-                                    <div class="column is-narrow"><i class="fas fa-caret-right"></i></div>
+                                    <div class="column is-narrow">
+                                        <i class="fas fa-caret-right"></i>
+                                    </div>
                                     <div class="column">{{$lecture->title}}</div>
+                                    <div class="column is-narrow">
+                                        <i class="mdi mdi-film"></i>
+                                    </div>
                                 </div>
                             @endforeach
                     </collapse>

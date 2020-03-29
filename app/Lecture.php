@@ -8,8 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Lecture extends Model
 {
     use SortOrdering;
-    protected $appends = ['path', 'VideoUrl', 'hasVideo'];
+    protected $appends = ['hasVideo'];
     protected $guarded = [];
+
+    protected $hidden = [
+        'disk', 'video_path', 'stream_path', 'converted_for_streaming_at'
+    ];
+
 
     protected static function boot()
     {
@@ -50,30 +55,25 @@ class Lecture extends Model
     {
         return $this->belongsTo(Section::class);
     }
-
-    public function video()
-    {
-    	return $this->hasOne(Video::class);
-    }
     
 
-    public function getVideoUrl()
-    {
-        if ($this->video) {
-        	return asset('storage/' . $this->video->url);
-        }
+    // public function getVideoUrl()
+    // {
+    //     if ($this->video) {
+    //     	return asset('storage/' . $this->video->url);
+    //     }
 
-        return response('Sorry! This lecture has no associate video', 422);
-    }
+    //     return response('Sorry! This lecture has no associate video', 422);
+    // }
 
-    public function getVideoUrlAttribute()
-    {
-        return $this->getVideoUrl();
-    }
+    // public function getVideoUrlAttribute()
+    // {
+    //     return $this->getVideoUrl();
+    // }
 
     public function hasVideo()
     {
-        return !! $this->video;
+        return !! $this->video_path;
     }
 
     public function getHasVideoAttribute()

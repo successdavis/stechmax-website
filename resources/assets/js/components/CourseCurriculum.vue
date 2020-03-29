@@ -97,7 +97,7 @@
 
         mounted () {
             axios.get(`/manage/${this.course.slug}/sections`)
-                .then(response => this.sections = response.data)
+                .then(response => this.sections = response.data.data)
         }
     }
 

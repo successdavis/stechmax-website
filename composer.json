@@ -11,10 +11,11 @@
         "barryvdh/laravel-dompdf": "^0.8.5",
         "fideloper/proxy": "^4.0",
         "kitetail/zttp": "^0.6.0",
-        "laravel/framework": "^6.2",
+        "laravel/framework": "^6.4",
         "laravel/helpers": "^1.1",
         "laravel/scout": "^7.1",
         "laravel/tinker": "^1.0",
+        "pbmedia/laravel-ffmpeg": "^5.0",
         "php-ffmpeg/php-ffmpeg": "^0.14.0",
         "unicodeveloper/laravel-paystack": "1.0.*"
     },

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Section extends Model
 {
     protected $guarded = [];
-    protected $with = ['lectures'];
+    // protected $with = ['lectures'];
 
     use SortOrdering;
 

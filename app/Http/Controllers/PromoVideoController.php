@@ -34,32 +34,21 @@ class PromoVideoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Course $course)
+    public function store(StoreVideoRequest $request, Course $course)
     {
-        if (! auth()->user()->isAdmin()) {
-            abort(403,'You do not have access to carry out this request');
-        }
-
-        $request->validate([
-            'video' => 'required|mimetypes:video/avi,video/mpeg,video/mp4,video/quicktime'
-        ]);
-
-
-        $course->update([
-            'video_path' => request()->file('video')->store('promovideo', 'public')
-        ]);
- 
-        $ffmpeg = FFMpeg\FFMpeg::create();
-        $video = $ffmpeg->open();
-        $video
-            ->filters()
-            ->resize(new FFMpeg\Coordinate\Dimension(320, 240))
-            ->synchronize();
-        $video
-            ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(10))
-            ->save('frame.jpg');
-
-        return response($course->video_path, 204);
+            $path = str_random(16) . '.' . $request->video->getClientOriginalExtension();
+            $request->video->storeAs('public', $path);
+     
+            $video = Video::create([
+                'disk'          => 'public',
+                'original_name' => $request->video->getClientOriginalName(),
+                'path'          => $path,
+                'title'         => $request->title,
+            ]);
+     
+            ConvertVideoForStreaming::dispatch($video);
+     
+            return $video;
     }
 
     /**

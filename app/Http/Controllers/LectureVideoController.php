@@ -2,36 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreVideoRequest;
+use App\Jobs\ConvertVideoForStreaming;
 use App\Lecture;
 use App\Video;
-use FFMpeg\FFMpeg;
 use FFMpeg\FFProbe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+// use Pbmedia\LaravelFFMpeg\FFMpegFacade as FFMpeg;
+
 
 class LectureVideoController extends Controller
 {
-    public function store(Request $request, Lecture $lecture)
+    public function store(StoreVideoRequest $request, Lecture $lecture)
     {
-        $request->validate([
-            'video' => 'required|mimetypes:video/avi,video/mpeg,video/mp4,video/quicktime'
+        $path = str_random(16) . '.' . $request->video->getClientOriginalExtension();
+        $request->video->storeAs('public', $path);
+
+        $lectureUpdate = $lecture->update([
+            'disk'          => 'public',
+            'original_video_name' => $request->video->getClientOriginalName(),
+            'video_path'          => $path,
+            'title'         => $lecture->title,
         ]);
-
-        $video = Video::create([
-            'lecture_id'    => $lecture->id,
-            'language'      => 'English',
-            'url'           => request()->file('video')->storeAs('lecturevideo', $lecture->slug, 'public')
-        ]);
-
-        // $ffprobe = FFProbe::create();
-
-        // $duration = $ffprobe
-        //     ->format($video->getVideoUrl()) // extracts file informations
-        //     ->get('duration');             // returns the duration property
-
-        // dd($duration);
-
-        return response($lecture->getVideoUrl(), 204);
+ 
+        ConvertVideoForStreaming::dispatch($lecture);
+ 
+        return response(200);
     }
 
     public function update(Request $request, Lecture $lecture)

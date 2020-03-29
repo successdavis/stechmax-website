@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Section;
 use Illuminate\Http\Request;
+use App\Http\Resources\SectionResource;
 
 class SectionController extends Controller
 {
@@ -17,7 +18,7 @@ class SectionController extends Controller
     {
         $sections = $course->sections;
 
-        return $sections;
+        return SectionResource::collection($sections);
     }
 
     /**

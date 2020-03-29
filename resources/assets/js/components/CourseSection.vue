@@ -64,7 +64,7 @@
 
         data () {
             return {
-                lectures: [],
+                lectures: this.section.lectures,
                 editing: false,
                 addingLecture: false,
                 id: this.section.id,
@@ -74,10 +74,10 @@
                 })
             }
         },
-        mounted () {
-            axios.get(`/manage/${this.section.id}/lectures`)
-                .then(response => this.lectures = response.data)
-        },
+        // mounted () {
+        //     axios.get(`/manage/${this.section.id}/lectures`)
+        //         .then(response => this.lectures = response.data)
+        // },
         methods: {
             addLecture (lecture) {
                 this.lectures.push(lecture);

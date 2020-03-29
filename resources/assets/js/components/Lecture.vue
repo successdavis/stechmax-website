@@ -28,10 +28,9 @@
                 <i class="far fa-edit mini-icons" @click="editing = true"></i>
                 <i class="fas fa-trash mini-icons" @click="remove"></i>
                 <form method="POST" enctype="multipart/form-data">
-                    <label for="video"><i class="cursor fas fa-video"><span v-show="showUpload"> Update Video</span></i></label>
+                    <label for="video"><i class="mdi mdi-film"><span v-show="showUpload"> Update Video</span></i></label>
                     <input @change="attachVideo" type="file" id="video" accept="video/*">
                 </form>
-                
             </span>
         </div>
     </div>
@@ -43,7 +42,7 @@
         data () {
             return {
                 editing: false,
-                hasVideo: this.lecture.hasVideo,
+                hasVideo: this.lecture.has_video,
                 id: this.lecture.id,
                 slug: this.lecture.slug,
                 Form: new Form ({
