@@ -10,13 +10,13 @@
 				<div class="is-size-4 has-text-centered"><strong>Course Content</strong></div>
 			    <ul class="steps is-vertical">
 			    	<?php $count = 1 ?>
-			    	@foreach ($linked_courses as $course)
+			    	@foreach ($linked_courses as $linkedcourse)
 				      <li class="steps-segment">
 				        <span href="#" class="steps-marker">{{$count}}</span>
 				        <div class="steps-content">
-				          <p class="is-size-4">{{$course->title}}</p>
-				          <p>{{$course->sypnosis}}</p>
-				          <a class="button" href="{{$course->path()}}">Go to course</a>
+				          <p class="is-size-4">{{$$linkedcourse->title}}</p>
+				          <p>{{$$linkedcourse->sypnosis}}</p>
+				          <a class="button" href="{{$$linkedcourse->path()}}">Go to course</a>
 				        </div>
 				      </li>
 				      <?php $count++ ?>
@@ -36,14 +36,14 @@
 
 			        <h5 class="is-size-5 mb-2"><strong>Course Requirement(s)</strong></h5>
 
-			        <div class="columns is-mobile is-multiline">
+			        <div class="columns is-multiline">
 			            @foreach ($course->requirements as $requirement)
 			                <li class="column is-4"><i class="fas fa-plus"></i> {{$requirement->body}}</li>
 			            @endforeach
 			        </div>
 			        <hr>
 
-			        <div>
+			        <div class="section">
 			            <h5 class="is-size-5 mb-2"><strong>Course Description</strong></h5>
 			            <p class="double-line-height">{{$course->description}} </p>
 			        </div>

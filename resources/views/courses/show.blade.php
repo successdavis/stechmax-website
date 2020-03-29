@@ -8,3 +8,5 @@
 	@include("courses.partials._courseStreamer")
 	@include("courses.partials._tabs")
 @endsection
+
+@include('layouts.footer')

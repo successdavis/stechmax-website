@@ -13,7 +13,7 @@
 
             <div class="columns is-multiline">
                 @foreach ($course->requirements as $requirement)
-                    <li class="column"><i class="fas fa-plus"></i> {{$requirement->body}}</li>
+                    <li class="column "><i class="fas fa-plus"></i> {{$requirement->body}}</li>
                 @endforeach
             </div>
             <hr>
