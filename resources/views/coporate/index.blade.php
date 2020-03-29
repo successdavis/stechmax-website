@@ -2,6 +2,11 @@
 @section('head')
 	<script src="https://www.google.com/recaptcha/api.js?render=6LeawrcUAAAAAIrA-LQ-kytjPFEBcedXDLcWHHHM"></script>
 @endsection
+
+@section('pageTitle')
+  Apply for Coporate/Special ICT Training
+@endsection
+
 @section('content')
 	<input type="hidden" name="token" id="token" value="">
 

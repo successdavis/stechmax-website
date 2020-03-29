@@ -5,7 +5,7 @@
 			name="new-thread" 
 			:pivotY="1"
 			height="auto"
-			width= "50%" 
+
 			:adaptive="true"
 			scrollable="scrollable"
 

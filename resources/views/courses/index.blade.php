@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
+@section('pageTitle')
+  List courses offered at s-techmax
+@endsection
 @section('content')
 
-  <div class="container">
+  <div class="container mb-3">
     <courses-catalogue :subjectscatalogue="{{$subjects}}" inline-template>
       <div>
         <div class="section">
@@ -42,4 +45,8 @@
       </div>
     </courses-catalogue>
   </div>
+<div class="section">
+  
+</div>
+@include('layouts.footer')
 @endsection

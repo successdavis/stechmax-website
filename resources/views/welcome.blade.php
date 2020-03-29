@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('pageTitle')
+  Success Techmax - Best ICT Training Centre Obudu, Cross River State
+@endsection
 @section('content')
     <home-streamer></home-streamer>
     @include('layouts.subjects')

@@ -4,17 +4,13 @@ namespace App;
 
 use App\Video;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Lecture extends Model
 {
     use SortOrdering;
-    protected $appends = ['hasVideo'];
+    protected $appends = ['hasVideo','videoUrl'];
     protected $guarded = [];
-
-    protected $hidden = [
-        'disk', 'video_path', 'stream_path', 'converted_for_streaming_at'
-    ];
-
 
     protected static function boot()
     {
@@ -57,19 +53,19 @@ class Lecture extends Model
     }
     
 
-    // public function getVideoUrl()
-    // {
-    //     if ($this->video) {
-    //     	return asset('storage/' . $this->video->url);
-    //     }
+    public function getVideoUrl()
+    {
+        if ($this->hasVideo) {
+        	return Storage::disk('s3')->url($this->video_path);
+        }
 
-    //     return response('Sorry! This lecture has no associate video', 422);
-    // }
+        // return response('Sorry! This lecture has no associate video', 422);
+    }
 
-    // public function getVideoUrlAttribute()
-    // {
-    //     return $this->getVideoUrl();
-    // }
+    public function getVideoUrlAttribute()
+    {
+        return $this->getVideoUrl();
+    }
 
     public function hasVideo()
     {

@@ -84,5 +84,9 @@
   <p>There are no relevant results at this time</p>
 @endforelse
 {{$threads->render()}}
-
+<div class="is-hidden-tablet">
+  @if (Auth::check())
+      <new-thread :channels="{{$channels}}"></new-thread>
+  @endif
+</div>
 @endsection

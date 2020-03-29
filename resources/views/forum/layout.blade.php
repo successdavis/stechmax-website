@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('pageTitle')
+  Stechmax IT and Web Development forum 
+@endsection
+
 @section('head')
   <script src="https://www.google.com/recaptcha/api.js?render=6LeawrcUAAAAAIrA-LQ-kytjPFEBcedXDLcWHHHM"></script>
 @endsection
@@ -21,4 +25,5 @@
     </div>
   </div>
 </div>
+@include('layouts.footer')
 @endsection

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('pageTitle')
+  Services and prices offered at s-techmax
+@endsection
+
 @section('content')
 	<div class="container">
 		<div class="section">

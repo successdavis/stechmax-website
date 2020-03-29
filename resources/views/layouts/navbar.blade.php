@@ -11,8 +11,11 @@
       <a class="navbar-item" href="{{ url('/') }}">
         <img src="{{ asset('storage/site-images/logo.png') }}" width="112" height="28">
       </a>
-
-      <a class="navbar-item is-hidden-desktop" href="{{ route('login') }}">Login</a>
+      @if (auth()->check())
+        <span class="navbar-item is-hidden-desktop"><i style="font-size: 25px;" class="mdi mdi-select-search"></i></span>
+      @else
+        <a class="navbar-item is-hidden-desktop" href="{{ route('login') }}">Login</a>
+      @endif
     </div>
 
     <div id="navbarBasicExample" class="navbar-menu">
@@ -108,7 +111,7 @@
       </div>
     </div>
 
-        <div v-if="drIsOpen" @click.prevent="drIsOpen = false" class="dr_overlay" v-cloak></div>
+    <div v-if="drIsOpen" @click.prevent="drIsOpen = false" class="dr_overlay" v-cloak></div>
 
     <div :class="drIsOpen ? 'is-open' : 'not-open'" class="n_drawer open-left">
       <i @click.prevent="drIsOpen = false" class="fas fa-times n_drawer_close"></i>

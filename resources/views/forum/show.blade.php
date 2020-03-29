@@ -1,4 +1,8 @@
 @extends('forum.layout')
+@section('pageTitle')
+  {{$thread->title}}
+@endsection
+
 	@section('forum_content')
 	<thread-view :thread="{{$thread}}" inline-template>
 			<div> 

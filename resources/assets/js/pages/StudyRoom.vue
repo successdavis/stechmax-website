@@ -16,7 +16,7 @@ export default {
 				section.lectures.map((lecture) => {
 					playlist.push({
 						sources: [{
-							src: lecture.VideoUrl,
+							src: lecture.videoUrl,
 							type: 'video/mp4'
 						}],
 		                poster: this.course.thumbnail_path,
@@ -46,6 +46,10 @@ export default {
 		skipto(lecture){
             this.playlist.currentItem(this.playlist.indexOf(lecture.VideoUrl));
 		},
+
+		updateNowPlaying(e){
+			console.log(e);
+		}
 	}
 };
 </script>

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
 <study-room :sections="{{$sections}}" :course="{{$course}}" inline-template>
-	<div class="grid-x">
-		<div class="cell medium-9">
-	    	<vid-player @readied="readied" @nowplaying="updateNowPlaying" :playerdata="playerdata"></vid-player>
+	<div class="columns">
+		<div class="column is-9">
+	    	<vid-player @readied="readied" @nowplaying="updateNowPlaying(e)" :playerdata="playerdata"></vid-player>
 		</div>
-		<div class="cell medium-3">
+		<div class="column is is-3">
 			<div v-for="(section, index) in sections" :key="section.id">
 				
 				<div class="study_section mb_small" v-text="section.title" ></div>
@@ -22,4 +22,4 @@
 		</div>
 	</div>
 </study-room>
-@endsection;
+@endsection

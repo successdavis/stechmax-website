@@ -16,14 +16,15 @@ class LectureVideoController extends Controller
 {
     public function store(StoreVideoRequest $request, Lecture $lecture)
     {
-        $path = str_random(16) . '.' . $request->video->getClientOriginalExtension();
-        $request->video->storeAs('public', $path);
+        $ext = $request->video->getClientOriginalExtension();
+        $name = $lecture->slug.'.'.$ext;
+        $path = $request->video->storeAs('lectures', $name, 's3');
 
         $lectureUpdate = $lecture->update([
-            'disk'          => 'public',
-            'original_video_name' => $request->video->getClientOriginalName(),
-            'video_path'          => $path,
-            'title'         => $lecture->title,
+            'disk'                  => 's3',
+            'original_video_name'   => $request->video->getClientOriginalName(),
+            'video_path'            => $path,
+            'title'                 => $lecture->title,
         ]);
  
         ConvertVideoForStreaming::dispatch($lecture);
