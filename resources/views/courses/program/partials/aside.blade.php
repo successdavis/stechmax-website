@@ -9,6 +9,11 @@
                </div>
 
                <div class="mb-3">
+                  <h4 class="program-headlines">Course Price (Classroom)</h4>
+                  <p>  &#8358;  {{$course->getAmountWithClassroom()}}</p>
+               </div>
+
+               <div class="mb-3">
                   <h4 class="program-headlines">Category</h4>
                   <p>{{$course->subject->name}}</p>
                </div>
