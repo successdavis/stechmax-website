@@ -228,7 +228,7 @@ class Course extends Model
     {
         $amount = !empty($course) ? $course->amount * 60 / 100 : $this->amount * 60 / 100;
         if (filter_var($classroomfee, FILTER_VALIDATE_BOOLEAN)) {
-            $classroomfee = siteconfig::getclassroomfee();
+            $classroomfee = $this->classroomfee();
             $amount = $amount + $classroomfee;
         }
 
@@ -242,11 +242,16 @@ class Course extends Model
 
     public function getAmountWithClassroom($format = true)
     {
-        $classroomfee = siteconfig::getclassroomfee();
+        $classroomfee = $this->classroomfee();
 
         $amount = $this->amount + $classroomfee;
         
         return $format ? number_format($amount / 100, 2) : $amount;
+    }
+
+    public function classroomfee()
+    {
+        return siteconfig::getclassroomfee() * $this->duration;
     }
 
     public function supportPartPayment()
