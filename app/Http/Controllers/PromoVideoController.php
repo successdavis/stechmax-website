@@ -34,21 +34,24 @@ class PromoVideoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreVideoRequest $request, Course $course)
+    public function store(Request $request, Course $course)
     {
-            $path = str_random(16) . '.' . $request->video->getClientOriginalExtension();
-            $request->video->storeAs('public', $path);
-     
-            $video = Video::create([
-                'disk'          => 'public',
-                'original_name' => $request->video->getClientOriginalName(),
-                'path'          => $path,
-                'title'         => $request->title,
-            ]);
-     
-            ConvertVideoForStreaming::dispatch($video);
-     
-            return $video;
+        if (! auth()->user()->isAdmin()) {
+            abort(403,'You do not have access to carry out this request');
+        }
+
+        $request->validate([
+            'video' => 'required|mimetypes:video/avi,video/mpeg,video/mp4,video/quicktime'
+        ]);
+
+        $ext = $request->video->getClientOriginalExtension();
+        $name = $course->slug.'.'.$ext;
+
+        $course->update([
+            'video_path' => request()->file('video')->storeAs('promovideo', $name, 'public')
+        ]);
+
+        return response($course->video_path, 204);
     }
 
     /**

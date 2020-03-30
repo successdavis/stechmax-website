@@ -65,14 +65,14 @@
 				<div class="cell medium-4"><strong>InvoiceNo: </strong> <p v-text="selected.invoiceNo"></p></div>
 				<div class="cell medium-4"><strong>Invoice Amount: </strong><p v-text="selected.amount"></p></div>
 				<div class="cell medium-4"><strong>Amount Owed: </strong><p v-text="selected.status"></p></div>
-				<table class="stack">
+				<table class="table">
 			      <thead>
 			        <tr>
 			          	<th>Date</th>
 						<th>Transaction</th>
 						<th>Purpose</th>
 						<th>Amount Paid</th>
-			        	</tr>
+			        </tr>
 			      </thead>
 			      <tbody>
 			        <tr v-for="payment in selected.payments">
