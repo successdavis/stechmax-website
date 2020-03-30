@@ -9,8 +9,8 @@
     
 	{{-- Display the course content here --}}
 	<div class="container bg-white">
-		<div class="columns">
-			<div class="column is-6 section">     
+		<div class="">
+			<div class="">     
 				<div class="is-size-4 has-text-centered"><strong>Course Content</strong></div>
 			    <ul class="steps is-vertical">
 			    	<?php $count = 1 ?>
@@ -28,7 +28,7 @@
 
 			    </ul>
 			</div>
-			<div class="column section">	
+			<div class="section">	
 			    <div class="double-line-height ">
 			        <h5 class="is-size-5 mb-2"><strong>What you will learn</strong></h5>
 			        <div class="columns is-multiline">
