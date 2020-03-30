@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('pageTitle')
+  Learn {{$course->title}} at Stechmax
+@endsection
+
 @section('content')
 	@include("courses.partials._courseStreamer")
     
@@ -47,7 +51,7 @@
 
 			        <div class="section">
 			            <h5 class="is-size-5 mb-2"><strong>Course Description</strong></h5>
-			            <p class="double-line-height">{{$course->description}} </p>
+			            <p class="double-line-height">{!! nl2br($course->description) !!}</p>
 			        </div>
 			    </div>
 			</div>
