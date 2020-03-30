@@ -28,9 +28,7 @@ class PaymentController extends Controller
 
     public function addpayment()
     {
-        return view('dashboard.payments.addpayment', [
-            'displayMenu' => true
-        ]);
+        return view('dashboard.payments.addpayment');
     }
 
     public function savepayments()

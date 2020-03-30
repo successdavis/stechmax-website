@@ -1,45 +1,61 @@
 <template>
-	<div class="grid-container">
+	<div>
 		<form @submit.prevent="proccessPayment" @change="errorMessage=''" >
-			<!-- To display Error Message -->
 			<p v-if="errorMessage" class="errorMessage" v-text="errorMessage"></p>
 
-		  <div class="grid-container">
-		    <div class="grid-x grid-padding-x" >
-		      <div class="cell">
-		        <label>Select an Invoice?
-				  <select v-model="selected" required @change="setFormInvoice">
-				  	<option selected value="">Click to select an Invoice</option>
-				    <option v-for="invoice in Data.invoices" :value="invoice" v-text="invoice.invoiceNo + ' == ' + invoice.billedTo.f_name + ' ' + invoice.billedTo.l_name">
-				    </option>
-				  </select>
-				</label>
-		      </div>
-		      <div class="cell medium-6">
-		        <label>Purpose of Payment?
-				  <select v-model="Form.purpose" required>
-				  	<option selected value="">Click to select</option>
-				    <option v-for="purpose in Data.Purpose" :value="purpose" v-text="purpose"></option>
-				  </select>
-				</label>
-		      </div>
-		      <div class="cell medium-6" v-if="Form.purpose != 'Refund'">
-		        <label>Whats the Amount?
-				  <input type="number" min="0" name="amount" v-model="Form.amount">
-				</label>
-		      </div>
-		       <div class="cell medium-6" v-if="Form.purpose == 'Refund'">
-		        <label>Select Payment to refund?
-				  <select v-model="RefundForm.paymentId" required>
-				  	<option selected value="">Click to select a payment to refund</option>
-				    <option v-for="payment in selected.payments" :value="payment.id" v-text="payment.transaction_ref"></option>
-				  </select>
-				</label>
-		      </div>
-
-		    </div>
-		    <button class="medium button" :disabled="submitting">Add Payment</button>
-		  </div>
+		  	<div class="columns is-multiline">
+		    	<div class="column is-6">
+		    		<div class="field">
+			    		<label class="label">Select an Invoice?</label>
+			    		<div class="control">
+			    			<div class="select is-fullwidth">
+							  	<select v-model="selected" required @change="setFormInvoice">
+							  		<option selected value="">Click to select an Invoice</option>
+							    	<option v-for="invoice in Data.invoices" :value="invoice" v-text="invoice.invoiceNo + ' == ' + invoice.billedTo.f_name + ' ' + invoice.billedTo.l_name">
+							    	</option>
+							  	</select>
+							</div>
+					  	</div>
+					</div>
+		      	</div>
+		    	<div class="column is-6">
+		    		<div class="field">	
+			        	<label class="label">Purpose of Payment?</label>
+			        	<div class="control">
+				        	<div class="select is-fullwidth">
+							  	<select v-model="Form.purpose" required>
+							  		<option selected value="">Click to select</option>
+							    	<option 
+							    	v-for="purpose in Data.Purpose" :value="purpose" 
+							    	v-text="purpose"></option>
+							  	</select>
+						  	</div>
+					  	</div>
+		    		</div>
+		      	</div>
+		    	<div class="column is-6" v-if="Form.purpose != 'Refund'">
+		    		<div class="field">
+				    	<label class="label">Whats the Amount?</label>
+				    	<div class="control">
+							<input class="input" type="number" min="0" name="amount" v-model="Form.amount">
+						</div>
+					</div>
+		      	</div>
+		       	<div class="column is-6" v-if="Form.purpose == 'Refund'">
+		       		<div class="field">
+			        	<label class="label">Select Payment to refund?</label>
+			        	<div class="control">
+			        		<div class="select">
+							  	<select v-model="RefundForm.paymentId" required>
+							  		<option selected value="">Click to select a payment to refund</option>
+							    	<option v-for="payment in selected.payments" :value="payment.id" v-text="payment.transaction_ref"></option>
+							  	</select>
+						  	</div>
+					  	</div>
+					</div>
+		    	</div>
+		    	<button class="medium button" :disabled="submitting">Add Payment</button>
+		  	</div>
 		</form>
 		<div class="grid-container mt-3" v-if="selected">
 			<div class="grid-x grid-padding-x">
