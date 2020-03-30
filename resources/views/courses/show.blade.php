@@ -7,6 +7,7 @@
 @section('content')
 	@include("courses.partials._courseStreamer")
 	@include("courses.partials._tabs")
+	
+	@include('layouts.footer')
 @endsection
 
-@include('layouts.footer')

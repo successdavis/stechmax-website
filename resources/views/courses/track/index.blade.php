@@ -14,14 +14,14 @@
 				      <li class="steps-segment">
 				        <span href="#" class="steps-marker">{{$count}}</span>
 				        <div class="steps-content">
-				          <p class="is-size-4">{{$$linkedcourse->title}}</p>
-				          <p>{{$$linkedcourse->sypnosis}}</p>
-				          <a class="button" href="{{$$linkedcourse->path()}}">Go to course</a>
+				          <p class="is-size-4">{{$linkedcourse->title}}</p>
+				          <p>{{$linkedcourse->sypnosis}}</p>
+				          <a class="button" href="{{$linkedcourse->path()}}">Go to course</a>
 				        </div>
 				      </li>
 				      <?php $count++ ?>
 			    	@endforeach
-			      
+
 			    </ul>
 			</div>
 			<div class="column section">	
@@ -38,7 +38,9 @@
 
 			        <div class="columns is-multiline">
 			            @foreach ($course->requirements as $requirement)
-			                <li class="column is-4"><i class="fas fa-plus"></i> {{$requirement->body}}</li>
+			                <li class="column is-4">
+			                	<i class="fas fa-plus"></i> {{$requirement->body}}
+			            	</li>
 			            @endforeach
 			        </div>
 			        <hr>
