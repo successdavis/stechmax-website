@@ -1,4 +1,4 @@
-<div class="program-header">
+<div class="program-header" style="background-image: url({{$course->thumbnail_path}})">
   <div class="overlay"></div>
   <div class="header-content">
      <div class="header-content__hero">{{$course->title}}</div>

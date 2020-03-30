@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+
+@section('pageTitle')
+  Study {{$course->title}} at Stechmax
+@endsection
+
+
 @section('content')
 <div >
    @include('courses.program.partials.streamer')
