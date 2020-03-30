@@ -10,7 +10,7 @@
 	{{-- Display the course content here --}}
 	<div class="container bg-white">
 		<div class="">
-			<div class="">     
+			<div class="section">     
 				<div class="is-size-4 has-text-centered"><strong>Course Content</strong></div>
 			    <ul class="steps is-vertical">
 			    	<?php $count = 1 ?>
