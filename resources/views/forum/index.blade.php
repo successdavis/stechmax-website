@@ -31,28 +31,30 @@
     </div>
   </div>
 @forelse ($threads as $thread)
-    <div class="is-hidden-desktop">
-      <article class="media is-flex align-center" style="align-items: center">
-        <figure class="media-left">
-          <p class="image is-48x48">
-            <img class="is-rounded" src="{{$thread->creator->avatar_path}}">
-          </p>
-        </figure>
-        <a href="{{$thread->path()}}" class="has-text-black media-content">
-          <div class="content">
-            <p>
-              <strong>{{$thread->creator->f_name . ' ' . $thread->creator->l_name}}</strong>
-              <br>
+    <div class="is-hidden-desktop card">
+      <div class="card-content">
+        <article class="media is-flex align-center" style="align-items: center; justify-content: space-between;">
+          <figure class="media-left">
+            <p class="image is-48x48">
+              <img class="is-rounded" src="{{$thread->creator->avatar_path}}">
             </p>
-          </div>
+          </figure>
+            <div class="content">
+              <p>
+                <strong>{{$thread->creator->f_name . ' ' . $thread->creator->l_name}}</strong>
+                <br>
+              </p>
+            </div>
+            <div class="media-right">
+              <span class="tag is-light is-rounded"><i class="fas fa-comment"></i> {{$thread->replies_count}}</span>
+              <span class="tag is-light is-rounded">{{$thread->channel->name}}</span>
+            </div>
+        </article>
+        <a class="has-text-black" href="{{$thread->path()}}">
+          <div class="mb-2 mt-1"><strong>{{$thread->title}}</strong></div>
+          <p class="mb-2">{{$thread->excerpt()}}</p>
         </a>
-        <div class="media-right">
-          <span class="tag is-light is-rounded"><i class="fas fa-comment"></i> {{$thread->replies_count}}</span>
-          <span class="tag is-light is-rounded">{{$thread->channel->name}}</span>
-        </div>
-      </article>
-      <div class="mb-2 mt-1"><strong>{{$thread->title}}</strong></div>
-      <p class="mb-2">{{$thread->excerpt()}}</p>
+      </div>
     </div>
     <div class="is-hidden-touch">
       <article class="has-text-black media is-flex align-center" style="align-items: center">

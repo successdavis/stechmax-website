@@ -2,58 +2,54 @@
 
 <div class="overlay background">
 		<div class="overlay"></div>
-		<div class="row">
-			<div class="grid-x grid-container overlay__content reg-form" style="max-width: 750px;">
-				<div class="medium-8 text-align-left mt-3">
-					<div class="grid-container">
-						<!-- ============ -->
-						<h3 class="pageTitle mb-2">Password Reset...</h3>
-						<form method="POST" @submit.prevent="resetPassword">
+		<div class="container">
+			<div class="section">
+				<div class="columns">
+					<div class="column is-8 text-align-left mt-3">
+						<div class="section">
+							<!-- ============ -->
+							<h3 class="pageTitle mb-2 has-text-black is-size-4">Password Reset...</h3>
+							<form method="POST" @submit.prevent="resetPassword">
 
-			        		<p v-if="!phoneReset">Please provide your email address here</p>
-			        		<p v-if="phoneReset">Please provide your Phone Number here</p>
+				        		<p class="has-text-black" v-if="!phoneReset">Please provide your email address here</p>
+				        		<p class="has-text-black" v-if="phoneReset">Please provide your Phone Number here</p>
 
-							<input :disabled="resetTokenSent" id="checkbox1" type="checkbox" v-model="phoneReset"><label for="checkbox1">Use Phone Number Instead</label>
+								<input :disabled="resetTokenSent" id="checkbox1" type="checkbox" v-model="phoneReset"><label class="has-text-black" for="checkbox1">Use Phone Number Instead</label>
 
-                            <input v-if="!phoneReset" type="email" placeholder="Email here" v-model="email" required>
-                            <input :disabled="resetTokenSent" v-if="phoneReset" type="text" placeholder="Phone Number Here" maxlength="11" v-model="phone" required>
+	                            <input class="input" v-if="!phoneReset" type="email" placeholder="Email here" v-model="email" required>
+	                            <input class="input" :disabled="resetTokenSent" v-if="phoneReset" type="text" placeholder="Phone Number Here" maxlength="11" v-model="phone" required>
 
-                            <button :disabled="resetTokenSent" type="submit" class="button medium" v-text="phoneReset ? 'Send Token' : 'Send Reset Link' ">
-                            </button>
-						      <span style="color: white">Already have an account? </span><a href="/login" class="login_link"> Login</a>
-	                    </form>
+	                            <button :disabled="resetTokenSent" type="submit" class="button medium" v-text="phoneReset ? 'Send Token' : 'Send Reset Link' ">
+	                            </button>
+							      <span style="color: white">Already have an account? </span><a href="/login" class="login_link"> Login</a>
+		                    </form>
 
-	                    <form @submit.prevent="updatePassword" v-if="resetTokenSent">
-	                    	<label>Enter Token
-					          <input type="text" placeholder v-model="Form.token" required>
-					          <p class="help-text" v-if="Form.errors.has('token')" v-text="Form.errors.get('token')"></p>
-					        </label>
+		                    <form @submit.prevent="updatePassword" v-if="resetTokenSent">
+		                    	<label>Enter Token
+						          <input type="text" placeholder v-model="Form.token" required>
+						          <p class="help-text" v-if="Form.errors.has('token')" v-text="Form.errors.get('token')"></p>
+						        </label>
 
-	                    	<label>New Password
-					          <input type="text" placeholder="Required" v-model="Form.password" required>
-					          <p class="help-text" v-if="Form.errors.has('password')" v-text="Form.errors.get('password')"></p>
-					        </label>
+		                    	<label>New Password
+						          <input type="text" placeholder="Required" v-model="Form.password" required>
+						          <p class="help-text" v-if="Form.errors.has('password')" v-text="Form.errors.get('password')"></p>
+						        </label>
 
-	                    	<label>Re-enter New Password
-					          <input type="text" placeholder="Required" v-model="Form.password_confirmation" required>
-					          <p class="help-text" v-if="Form.errors.has('password_confirmation')" v-text="Form.errors.get('password_confirmation')"></p>
-					        </label>
+		                    	<label>Re-enter New Password
+						          <input type="text" placeholder="Required" v-model="Form.password_confirmation" required>
+						          <p class="help-text" v-if="Form.errors.has('password_confirmation')" v-text="Form.errors.get('password_confirmation')"></p>
+						        </label>
 
-					        <button type="submit" class="button medium">Reset Password</button>
-						    <span style="color: white">Already have an account? </span><a href="/login" class="login_link"> Login</a>
-
-	                    </form>
+						        <button type="submit" class="button medium">Reset Password</button>
+							    <span style="color: white">Already have an account? </span><a href="/login" class="login_link"> Login</a>
+		                    </form>
+						</div>
 					</div>
-				</div>
-				<div class="medium-4 white mt-3">
-					<div class="mb-3">
-						<a href=""><img :src="logo" alt="Stechmax Logo"></a>
-						<p class="center-text">One Account for all Services</p>
+					<div class="column is-4 white mt-3 has-text-black">
+						<p class="has-text-black">A reset link will be send to your registered email address</p>
+						<p class="has-text-black" v-if="sent == 1">We have sent a reset link to your email, please check your inbox</p>
+						<p class="red-text has-text-black" v-if="sent == 2">You do not have an account with us please <a href="/register" class="login_link has-text-black">Register</a></p>
 					</div>
-
-					<p>A reset link will be send to your registered email address</p>
-					<p v-if="sent == 1">We have sent a reset link to your email, please check your inbox</p>
-					<p class="red-text" v-if="sent == 2">You do not have an account with us please <a href="/register" class="login_link">Register</a></p>
 				</div>
 			</div>
 		</div>
@@ -154,7 +150,7 @@
 			}
 
 		}
-	}
+	};
 </script>
 
 <style scoped>

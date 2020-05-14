@@ -39,9 +39,9 @@
 
                   <!-- <span class="icon is-small"><i class="fas fa-retweet"></i></span> -->
                 </a>
-                <a class="level-item" v-if="authorize('owns', reply)">
+                <!-- <a class="level-item" v-if="authorize('owns', reply)">
                     <span class="icon is-small"><i class="fas fa-trash"></i></span>
-                </a>
+                </a> -->
               </div>
             </nav>
 

@@ -251,7 +251,7 @@ class Course extends Model
 
     public function classroomfee()
     {
-        return siteconfig::getclassroomfee() * $this->duration;
+        return Fee::getClassroomFee() * $this->duration;
     }
 
     public function supportPartPayment()

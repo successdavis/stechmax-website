@@ -1,4 +1,4 @@
-<nav-bar inline-template>
+ <nav-bar inline-template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand is-flex-touch justify-content-touch" style="justify-content: space-between;">
 
@@ -37,7 +37,7 @@
           </a>
 
           <div class="navbar-dropdown">
-            <a href="/studentshowcase" class="navbar-item">
+            <a class="navbar-item">
               Student Showcase
             </a>
             <a class="navbar-item">
@@ -129,7 +129,7 @@
                         </li>
                         <li class="n_drawer_items--child">
                           <span><i class="fas fa-pen"></i></span>
-                          <a href="/exams">DASHBOARD</a>
+                          <a href="{{route('dashboard')}}">DASHBOARD</a>
                         </li>
                     @endauth
                 </div>

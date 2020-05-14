@@ -5,14 +5,14 @@
 @endsection
 
 @section('body-close')
-	{{-- <script>
+	<script>
 	  grecaptcha.ready(function() {
 	      grecaptcha.execute('6LeawrcUAAAAAIrA-LQ-kytjPFEBcedXDLcWHHHM', {action: 'homepage'}).then(function(token) {
 	      	window.App.token = token
 	      });
 	  });
 	  
-	</script> --}}
+	</script>
 @endsection
 
 @section('content')

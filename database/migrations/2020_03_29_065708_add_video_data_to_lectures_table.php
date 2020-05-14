@@ -16,7 +16,7 @@ class AddVideoDataToLecturesTable extends Migration
         Schema::table('lectures', function (Blueprint $table) {
             $table->string('duration')->nullable();
             $table->string('type')->nullable();
-            $table->string('original_video_name');
+            $table->string('original_video_name')->nullable();
             $table->string('disk')->nullable();
             $table->string('video_path')->nullable();
             $table->string('stream_path')->nullable();

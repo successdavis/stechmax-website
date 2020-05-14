@@ -75,6 +75,9 @@ class ThreadController extends Controller
 
      public function destroy($channel, Thread $thread)
     {
+        if (!auth()->user()->isAdmin()) {
+            return back()->with('flash', 'Please contact an administrator');
+        }
         $this->authorize('update', $thread);
 
         $thread->delete();

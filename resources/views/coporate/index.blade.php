@@ -15,9 +15,9 @@
 				<div class="columns">
 					<div class="column is-three-fifths section" style="background: white">
 						@auth
-							<div>Please return to this page after signing in</div>
 							<coporate-registration :subjects="{{$subjects}}"></coporate-registration>
 						@else
+							<div>Please return to this page after signing in/creating an account</div>
 						    <site-registration mode="register" loginroute="/coporate/registration"></site-registration>
 						@endauth
 					</div>
