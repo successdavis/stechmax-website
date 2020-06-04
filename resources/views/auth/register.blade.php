@@ -6,11 +6,11 @@
 
 @section('body-close')
 	<script>
-	  grecaptcha.ready(function() {
-	      grecaptcha.execute('6LeawrcUAAAAAIrA-LQ-kytjPFEBcedXDLcWHHHM', {action: 'homepage'}).then(function(token) {
-	      	window.App.token = token
-	      });
-	  });
+	  // grecaptcha.ready(function() {
+	  //     grecaptcha.execute('6LeawrcUAAAAAIrA-LQ-kytjPFEBcedXDLcWHHHM', {action: 'homepage'}).then(function(token) {
+	  //     	window.App.token = token
+	  //     });
+	  // });
 	  
 	</script>
 @endsection

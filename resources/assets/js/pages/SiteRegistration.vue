@@ -132,7 +132,7 @@
 					dateofbirth:'',
 					password:'',
 					password_confirmation:'',
-					token:'',
+					// token:'',
 				}),
 				LogForm: new Form ({
 					email: '',
@@ -184,7 +184,7 @@
 				grecaptcha.ready(() => {
 			      	grecaptcha.execute('6LeawrcUAAAAAIrA-LQ-kytjPFEBcedXDLcWHHHM', {action: 'homepage'})
 			      	.then((token) => {
-			      		this.RegForm.token = token;
+			      		// this.RegForm.token = token;
 			      		this.submitForm();
 			      	});
 				});

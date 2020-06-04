@@ -54,7 +54,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-
+        dd('here');
         return Validator::make($data, [
             'emailOrPhone' => 'required|unique:users,email|emailorphone',
             'surname' => 'required|string|max:50|min:3',
@@ -63,7 +63,7 @@ class RegisterController extends Controller
             'gender' => 'required|string|max:1',
             'dateofbirth' => 'required|max:255',
             'password' => 'required|string|min:8|confirmed',
-            'token' => ['required', new Recaptcha()],
+            // 'token' => ['required', new Recaptcha()],
         ]);
         
     }

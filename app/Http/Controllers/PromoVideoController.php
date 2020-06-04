@@ -44,13 +44,14 @@ class PromoVideoController extends Controller
             'video' => 'required|mimetypes:video/avi,video/mpeg,video/mp4,video/quicktime'
         ]);
 
+
         $ext = $request->video->getClientOriginalExtension();
         $name = $course->slug.'.'.$ext;
 
         $course->update([
             'video_path' => request()->file('video')->storeAs('promovideo', $name, 'public')
         ]);
-
+        
         return response($course->video_path, 204);
     }
 
