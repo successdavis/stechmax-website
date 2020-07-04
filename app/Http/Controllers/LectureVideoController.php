@@ -27,7 +27,7 @@ class LectureVideoController extends Controller
             'title'                 => $lecture->title,
         ]);
  
-        ConvertVideoForStreaming::dispatch($lecture);
+        // ConvertVideoForStreaming::dispatch($lecture);
  
         return response(200);
     }

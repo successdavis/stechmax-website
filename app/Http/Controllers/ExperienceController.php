@@ -10,9 +10,10 @@ class ExperienceController extends Controller
     public function store(Request $request, User $user)
     {
     	$request->validate([
-    		'points' => 'required|int',
+    		'points' 		=> 'required|int',
+    		'description'	=> 'required|string'
     	]);
 
-    	$user->awardExperience(request()->points);
+    	$user->awardExperience(request()->points,request()->description);
     }
 }

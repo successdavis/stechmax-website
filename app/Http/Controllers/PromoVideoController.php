@@ -44,7 +44,6 @@ class PromoVideoController extends Controller
             'video' => 'required|mimetypes:video/avi,video/mpeg,video/mp4,video/quicktime'
         ]);
 
-
         $ext = $request->video->getClientOriginalExtension();
         $name = $course->slug.'.'.$ext;
 

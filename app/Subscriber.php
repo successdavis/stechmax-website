@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Events\SystemNoAssigned;
+use App\Events\UserSubscribedToCourse;
 use Carbon\Carbon;
 
 trait Subscriber
@@ -36,7 +37,9 @@ trait Subscriber
             if ($class) {
                 $subscription->setSystemNumber();
             }
-            
+
+            UserSubscribedToCourse::dispatch($user = $userId ?: auth()->id());
+
             return $subscription;
 
         };

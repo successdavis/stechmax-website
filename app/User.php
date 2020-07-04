@@ -3,20 +3,20 @@
 namespace App;
 
 use App\Course;
+use App\Events\UserEarnedExperience;
 use App\Experience;
 use App\Http\Resources\CourseSubscriptionsResource;
 use App\SmartSms\SmartSms;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    use Experience;
 
     protected $with = ['guardians'];
 
@@ -75,7 +75,7 @@ class User extends Authenticatable
 
     public function experience()
     {
-        return $this->hasOne(Experience::class);
+        return $this->hasMany(Experience::class);
     }
 
     public function assignId()
@@ -298,5 +298,34 @@ class User extends Authenticatable
         return self::whereHas('subscriptions', function (Builder $query) {
             $query->where('active', true);
         })->count();
+    }
+
+    public function awardExperience($points, $description)
+    {
+        $experience = new Experience;
+        $experience->points = $points;
+        $experience->description = $description;
+        $this->experience()->save($experience);
+
+        UserEarnedExperience::dispatch($this, $this->experienceLevel());
+
+        return $this;
+    }
+
+    public function stripExperience($points)
+    {
+        $experience                = new Experience;
+        $experience->points        = -$points;
+        $experience->description   = "Experience strip off";
+        $this->experience()->save($experience);
+
+        // UserEarnedExperience::dispatch($this, $this->points);
+
+        return $this;
+    }
+
+    public function experienceLevel()
+    {
+        return $this->experience()->sum('points');
     }
 }

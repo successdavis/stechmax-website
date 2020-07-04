@@ -28,7 +28,7 @@ class ExperienceTest extends TestCase
 
     	$this->signIn();
 
-        $this->user->awardExperience(400);
+        $this->user->awardExperience(400,'Best Performing Student');
 
     	Event::assertDispatched(UserEarnedExperience::class);	
     }
@@ -38,7 +38,7 @@ class ExperienceTest extends TestCase
     {
     	$this->signIn(factory('App\User')->states('administrator')->create());
 
-    	$this->json('POST', 'api/'. $this->user->username .'/awardexperience', ['points' => 300])
+    	$this->json('POST', 'api/'. $this->user->username .'/awardexperience', ['points' => 300,'description' => 'Assignment Completed'])
     		->assertStatus(200);
     	$this->assertEquals(300, $this->user->fresh()->experienceLevel());
     }
@@ -51,15 +51,27 @@ class ExperienceTest extends TestCase
     		->assertStatus(403);
     }
 
-    // /** @test */
-    // public function a_user_earns_experience_when_they_subscribe_to_lesson()
-    // {
-    // 	$this->signIn();
-    // 	$invoice = create('App\Invoice');
-    //     $course = create('App\Course');
+    /** @test */
+    public function a_user_earns_experience_when_they_subscribe_to_lesson()
+    {
+    	$this->signIn($this->user);
+    	$invoice = create('App\Invoice');
+        $course = create('App\Course');
 
-    // 	$course->createSubscription('',$invoice->id);
+    	$course->createSubscription('',$invoice->id);
 
-    // 	$this->assertEquals(100, $this->user->userExperience());
-    // }
+    	$this->assertEquals(100, $this->user->experienceLevel());
+    }
+
+    /** @test */
+    public function a_user_earns_experience_when_they_post_a_thread()
+    {
+        $this->signIn($this->user);
+        $invoice = create('App\Invoice');
+        $course = create('App\Course');
+
+        $course->createSubscription('',$invoice->id);
+
+        $this->assertEquals(100, $this->user->experienceLevel());
+    }
 }

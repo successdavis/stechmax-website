@@ -23,11 +23,21 @@ class ExperienceTest extends TestCase
     }
 
     /** @test */
+    public function an_experience_belongs_to_a_user()
+    {
+        $this->signIn($this->user);
+        $exp = $this->user->awardExperience(300, 'Best Answer');
+
+        $this->assertInstanceOf('App\User', $exp);
+
+    }
+
+    /** @test */
     public function experience_can_be_awarded_to_a_user()
     {
         $this->signIn();
 
-        $this->user->awardExperience(500);
+        $this->user->awardExperience(500, 'Asked a Question');
         $this->assertEquals(500, $this->user->experienceLevel());
     }
 
@@ -36,7 +46,7 @@ class ExperienceTest extends TestCase
     {
         $this->signIn();
 
-        $this->user->awardExperience(500);
+        $this->user->awardExperience(500, 'Best Performing Student');
         $this->user->stripExperience(200);
         $this->assertEquals(300, $this->user->experienceLevel());
     }

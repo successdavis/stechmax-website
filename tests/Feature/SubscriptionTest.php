@@ -2,11 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Mail\UnableToSetSystemNumber;
+use App\Events\UserSubscribedToCourse;
 use App\Mail\EmailSystenNumber;
+use App\Mail\UnableToSetSystemNumber;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
@@ -123,5 +125,17 @@ class SubscriptionTest extends TestCase
         $subscription = $course->createSubscription('', '', $class = true);      
 
         Mail::assertQueued(EmailSystenNumber::class); 
+    }
+
+    /** @test */
+    public function an_annoucement_is_made_when_a_subscription_is_made()
+    {
+        Event::fake();
+
+        $user = $this->signIn();
+        $course  = create('App\Course');
+        $course->createSubscription();
+
+        Event::assertDispatched(UserSubscribedToCourse::class);   
     }
 }

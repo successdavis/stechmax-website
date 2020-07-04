@@ -51,7 +51,7 @@
 	                axios.post(`/api/course/${this.course.slug}/promovideo`, data)
                     .then(data => {
                     	flash('Video Uploaded Successfully!');
- 						// location.reload();
+ 						location.reload();
                     })
                     .catch(error => {
                     	flash('There are some errors with the video you provided','failed');
