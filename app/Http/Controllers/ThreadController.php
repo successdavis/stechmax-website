@@ -46,6 +46,7 @@ class ThreadController extends Controller
             'channel_id' => request('channel_id'),
             'body' => request('body'),
         ]);
+        auth()->user()->awardExperience(10,'Post New Thread');
 
         if (request()->wantsJson()) {
             return response($thread->path(), 201);

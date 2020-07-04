@@ -67,11 +67,24 @@ class ExperienceTest extends TestCase
     public function a_user_earns_experience_when_they_post_a_thread()
     {
         $this->signIn($this->user);
-        $invoice = create('App\Invoice');
-        $course = create('App\Course');
+        $thread = make('App\Thread');
 
-        $course->createSubscription('',$invoice->id);
+        $response = $this->post('/threads', $thread->toArray());
 
-        $this->assertEquals(100, $this->user->experienceLevel());
+        $this->assertEquals(10, $this->user->experienceLevel());
+    }
+
+    /** @test */
+    public function a_user_earns_experience_when_they_reply_to_a_thread()
+    {
+        $this->signIn($this->user);
+        $thread = create('App\Thread');
+
+        $reply = $thread->addReply([
+                'body'      => 'some dummy text',
+                'user_id'   => auth()->id()
+            ]);
+
+        $this->assertEquals(5, $this->user->experienceLevel());
     }
 }

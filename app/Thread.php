@@ -67,6 +67,8 @@ class Thread extends Model
         $this->notifySubscribers($reply);
         // event(new ThreadHasNewReply($this, $reply));
 
+        auth()->user()->awardExperience(5,'Reply to a thread');
+
         return $reply;
     }
 

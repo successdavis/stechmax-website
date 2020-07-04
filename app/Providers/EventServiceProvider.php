@@ -27,7 +27,6 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\UserSubscribedToCourse' => [
             'App\Listeners\OnUserSubscribedToCourse',
         ],
-
     ];
 
     /**

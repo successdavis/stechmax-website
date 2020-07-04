@@ -2,12 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Thread;
 use App\Activity;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Thread;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Event;
+use Tests\TestCase;
 
 class CreateThreadTest extends TestCase
 {
@@ -155,6 +156,7 @@ class CreateThreadTest extends TestCase
         return $this->post('/threads', $thread->toArray());
 
     }
+
 
 }
 
