@@ -16,7 +16,7 @@ class CreateExperiencesTable extends Migration
         Schema::create('experiences', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('points')->default(0);
-            $table->integer('description');
+            $table->string('description');
             $table->unsignedInteger('user_id');
             $table->timestamps();
         });

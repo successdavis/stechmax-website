@@ -41,6 +41,7 @@ class DashboardController extends Controller
         $countActiveSub = Subscription::countActiveSub();
         $monthlyTotalPay = payments::monthlyTotalPay();
         $yearTotalPay = payments::yearTotalPay();
-        return view('dashboard.index', compact('totalUsers','totalUsersWithSub','countActiveSub','monthlyTotalPay','yearTotalPay'));
+        $experiences = auth()->user()->experience()->latest()->limit(10)->get();
+        return view('dashboard.index', compact('totalUsers','totalUsersWithSub','countActiveSub','monthlyTotalPay','yearTotalPay','experiences'));
     }
 }
