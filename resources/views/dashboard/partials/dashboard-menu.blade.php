@@ -48,11 +48,11 @@
           <span class="menu-label-item">Billing</span>
         </a>
     </li>
-    <li><a class="has-icon has-text-grey-lighter">
+{{--     <li><a class="has-icon has-text-grey-lighter">
             <span class="icon"><i class="fas fa-tag"></i></span>
             <span class="menu-label-item">My Payments</span>
         </a>
-    </li>
+    </li> --}}
 
 
 

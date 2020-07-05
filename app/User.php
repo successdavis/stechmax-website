@@ -328,4 +328,25 @@ class User extends Authenticatable
     {
         return $this->experience()->sum('points');
     }
+
+    // Get all invoices by a user and sum the total Amount
+    public function getTotalAmountOfOpenInvoices()
+    {
+        $amount = $this->invoices()->whereCompleted(false)->sum('amount') / 100;
+        
+        return number_format(str_replace('-', '', $amount), 2);
+    }
+
+    // Get the total amount of debt a user is owing for all open invoices
+    public function totalDebtForInvoices()
+    {
+        $openInvoices = $this->invoices()->whereCompleted(false)->get();
+        $totalDebt = 0;
+        foreach ($openInvoices as $invoice) {
+            $totalDebt += $invoice->amountOwed();
+        }
+
+        return number_format(str_replace('-', '', $totalDebt / 100), 2);
+        
+    }
 }

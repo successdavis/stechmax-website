@@ -87,4 +87,18 @@ class ExperienceTest extends TestCase
 
         $this->assertEquals(5, $this->user->experienceLevel());
     }
+
+    /** @test */
+    public function experience_is_awarded_to_best_reply_user()
+    {
+        $this->signIn();
+
+        $thread = create('App\Thread', ['user_id' => auth()->id()]);
+        $reply = create('App\Reply', ['thread_id' => $thread->id, 'user_id' => $this->user->id]);
+
+        $this->postJson(route('best-replies.store', [$reply->id]));
+
+        $this->assertEquals(10, $this->user->experienceLevel());
+
+    }
 }

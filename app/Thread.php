@@ -146,6 +146,8 @@ class Thread extends Model
     public function markBestReply($reply)
     {
         $this->update(['best_reply_id' => $reply->id]);
+        $user = User::find($reply->user_id);
+        $user->awardExperience(10, 'Best Reply');
     }
 
 }

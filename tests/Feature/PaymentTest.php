@@ -65,4 +65,26 @@ class PaymentTest extends TestCase
 
    		$this->assertEquals($course->amount, $total);
     }
+
+    /** @test */
+    public function retrieve_total_amount_owed_for_all_invoices_for_a_user()
+    {
+        $user = $this->signIn(factory('App\User')->states('administrator')->create());
+        $course = create('App\Course',['amount' => 500000]);
+        $courseTwo = create('App\Course',['amount' => 1000000]);
+        $invoice    = $course->createInvoice();
+        $invoiceTwo = $courseTwo->createInvoice();
+
+        $data = [];
+        $data['amount'] = '300000';
+        $data['metadata']['method'] = 'Office';
+        $data['metadata']['purpose'] = 'course payment';
+        $data['reference'] = '7343ffe89';
+
+        $invoice->recordPayment($data);
+
+        
+        $this->assertEquals('12,000.00', auth()->user()->totalDebtForInvoices()); 
+      
+    }
 }
