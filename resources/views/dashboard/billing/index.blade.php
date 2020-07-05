@@ -3,10 +3,6 @@
 @section('dashboardcontent')
 	<div class="section">
 		@include('dashboard.partials.userBillingStatusCard')
-            <user-payments :user="{{auth()->user()}}"></user-payments>
-		
-      {{-- @include('dashboard.partials.studentStatusCard') --}}
-		
+        <user-payments :user="{{auth()->user()}}"></user-payments>
 	</div>
-    {{-- <billing :user="{{auth()->user()}}"></billing> --}}
 @endsection
