@@ -1,15 +1,20 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
+Event::listen(\App\Events\UserEarnedExperience::class, function ($event){
+	$achievementToAwardTheUser = app('achievements')->filter(function ($achievement) use ($event) {
+		return $achievement->qualifier($event->user);
+	})->map(function ($achievement) {
+		return $achievement->modelKey();
+	});
+
+	$event->user->achievements()->sync($achievementToAwardTheUser);
+});
+
+
+
+
+
 
 
 Route::get('/', 'HomepageController@index')->name('homepage.index');

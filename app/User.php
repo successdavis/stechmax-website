@@ -349,4 +349,9 @@ class User extends Authenticatable
         return number_format(str_replace('-', '', $totalDebt / 100), 2);
         
     }
+
+    public function achievements()
+    {
+        return $this->belongsToMany(Achievement::class, 'user_achievements');
+    }
 }

@@ -174,6 +174,7 @@
 					</div> 
 					<div class="level-right">
 						<div class="level-item">
+					        <paginator :dataSet="dataSet" @changed="fetch"></paginator>
 							
 						</div>
 					</div>

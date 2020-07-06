@@ -162,6 +162,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
         Pbmedia\LaravelFFMpeg\FFMpegServiceProvider::class,
+        App\Providers\AchievementServiceProvider::class,
+
 
     ],
 
