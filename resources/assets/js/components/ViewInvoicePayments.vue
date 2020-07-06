@@ -32,12 +32,12 @@
 
 <script>
     export default {
-        props: ['modal', 'selectedInvoice'],
+        props: ['modal', 'selectedinvoice'],
         name: "ViewInvoice",
 
         data () {
           return {
-            payments: this.selectedInvoice.payments,
+            payments: this.selectedinvoice.payments,
           }
         },
 

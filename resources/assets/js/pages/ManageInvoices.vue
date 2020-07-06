@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div>
         <div class="grid-x grid-padding-x grid-container">
             <div class="small-2 medium-2">
@@ -30,7 +30,7 @@
 
         <table>
 
-            <thead>
+        <thead>
             <tr>
                 <td v-for="t_head in headers">
                     {{t_head.name}}
@@ -57,13 +57,14 @@
         <paginator :dataSet="dataSet" @changed="fetch"></paginator>
     </div>
 
-</template>
+</template> -->
 
 <script>
     export default {
         props: ['user'],
         data () {
             return {
+                isLoading: false,
                 dataSet: false,
                 invoices: {},
                 
