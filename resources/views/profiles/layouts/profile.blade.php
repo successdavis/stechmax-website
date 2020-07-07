@@ -60,10 +60,18 @@
                         </div>
                       </div>
                     </div>
-                {{-- </p> --}}
+                
               </div>
             </nav>
         </div>
+      </div>
+      <div>
+        @foreach ($achievements as $achievement)
+          <div class="achievement">
+              <img src="/images/badges/{{$achievement->icon}}" alt="{{$achievement->name}}">
+              <h4>{{$achievement->name}}</h4>
+          </div>
+        @endforeach
       </div>
     </section>
 

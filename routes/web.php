@@ -1,22 +1,5 @@
 <?php
 
-
-Event::listen(\App\Events\UserEarnedExperience::class, function ($event){
-	$achievementToAwardTheUser = app('achievements')->filter(function ($achievement) use ($event) {
-		return $achievement->qualifier($event->user);
-	})->map(function ($achievement) {
-		return $achievement->modelKey();
-	});
-
-	$event->user->achievements()->sync($achievementToAwardTheUser);
-});
-
-
-
-
-
-
-
 Route::get('/', 'HomepageController@index')->name('homepage.index');
 
 
