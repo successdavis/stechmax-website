@@ -333,8 +333,8 @@ class User extends Authenticatable
         $experience->description   = "Experience strip off";
         $this->experience()->save($experience);
 
-        // UserEarnedExperience::dispatch($this, $this->points);
-
+        UserEarnedExperience::dispatch($this, $this->experienceLevel());
+        
         return $this;
     }
 
