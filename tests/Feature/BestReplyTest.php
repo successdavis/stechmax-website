@@ -54,6 +54,18 @@ class BestReplyTest extends TestCase
 
         $this->assertNull($reply->thread->fresh()->best_reply_id);
     }
+
+    /** @test */
+    public function a_user_can_get_the_total_number_of_best_replies_earned()
+    {
+        DB::statement('PRAGMA foreign_keys=on');
+        $user = create('App\User');
+        $this->signIn($user);
+        $reply = create('App\Reply', ['user_id' => auth()->id()]);
+
+        $reply->thread->markBestReply($reply);
+        $this->assertEquals(1, $user->bestReplyCount());
+    }
 }
 
 

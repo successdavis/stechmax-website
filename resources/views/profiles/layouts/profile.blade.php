@@ -42,7 +42,7 @@
                               {{-- <p class="title">Middle tile</p> --}}
                               {{-- <p class="subtitle">With an image</p> --}}
                               <figure class="profile-page-card has-background-white image is-128x128">
-                                <p class="title has-text-dark">55</p>
+                                <p class="title has-text-dark">{{$profileUser->experienceLevel()}}</p>
                                 <p>Exp Points</p>
                               </figure>
                             </article>
@@ -65,11 +65,11 @@
             </nav>
         </div>
       </div>
-      <div>
+      <div class="achievements">
         @foreach ($achievements as $achievement)
-          <div class="achievement">
-              <img src="/images/badges/{{$achievement->icon}}" alt="{{$achievement->name}}">
-              <h4>{{$achievement->name}}</h4>
+          <div class="{{$awarded_achievements->contains($achievement) ? 'has-been-awarded' : 'has-not-been-awarded'}} achievements__item" title="{{$achievement->name . '. ' . $achievement->description}}">
+              <img class="achievement-logo" src="/images/badges/{{$achievement->icon}}" alt="{{$achievement->name}}">
+              {{-- <h4>{{$achievement->name}}</h4> --}}
           </div>
         @endforeach
       </div>

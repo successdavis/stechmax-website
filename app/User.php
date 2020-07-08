@@ -68,6 +68,16 @@ class User extends Authenticatable
         return $this->hasOne(Reply::class)->latest();
     }
 
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
+    public function bestReplyCount()
+    {
+        return $this->replies->filter(function ($reply){ return $reply->isBest();})->count();
+    }
+
     public function guardians()
     {
         return $this->hasOne(Guardian::class)->latest();
@@ -314,6 +324,10 @@ class User extends Authenticatable
 
     public function stripExperience($points)
     {
+        if ($points > $this->experienceLevel()) {
+            abort(406, 'The user does not have upto this points');
+        }
+        
         $experience                = new Experience;
         $experience->points        = -$points;
         $experience->description   = "Experience strip off";
@@ -353,5 +367,16 @@ class User extends Authenticatable
     public function achievements()
     {
         return $this->belongsToMany(Achievement::class, 'user_achievements');
+    }
+
+    public function markedAsPreacher()
+    {
+        $this->preacher = true;
+        $this->save();
+    }
+
+    public function isPreacher()
+    {
+        return !! $this->preacher;
     }
 }

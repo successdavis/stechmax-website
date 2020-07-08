@@ -29,7 +29,8 @@ Route::get('studyroom/{course}/getplaylist', 'LectureVideoController@playlist')-
 Route::post('api/course/{course}/promovideo', 'PromoVideoController@store');
 // Route::post('api/{lecture}/attachvideo', 'VideoController@store');
 
-Route::post('api/{user}/awardexperience', 'ExperienceController@store')->middleware('admin');
+Route::post('api/{user}/awardexperience', 'ExperienceController@award')->middleware('admin');
+Route::post('api/{user}/stripexperience', 'ExperienceController@strip')->middleware('admin');
 
 Route::get('api/courses/{course}/getcourses', 'TrackController@getTrackCourses')->middleware('admin')->name('courses.getCourses');
 Route::post('tracks/{course}/addcourse', 'TrackController@store')->middleware('admin')->name('track.store');

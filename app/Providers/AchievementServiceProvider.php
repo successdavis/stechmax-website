@@ -3,15 +3,30 @@
 namespace App\Providers;
 
 use App\Achievements\FirstThousandPoints;
-use App\Achievements\StechmaxMasteryPoints;
+use App\Achievements\StartUp;
+use App\Achievements\Bingo;
+use App\Achievements\SchoolInSession;
+use App\Achievements\FullTimeLearner;
+use App\Achievements\WelcomeToTheCommunity;
+use App\Achievements\StechmaxEvangelist;
+use App\Achievements\StechmaxVeteran;
+use App\Achievements\StechmaxMaster;
+use App\Achievements\StechmaxTutor;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class AchievementServiceProvider extends ServiceProvider
 {
     protected $achievements = [
-        FirstThousandPoints::class,
-        StechmaxMasteryPoints::class
+        StartUp::class,
+        Bingo::class,
+        SchoolInSession::class,
+        FullTimeLearner::class,
+        WelcomeToTheCommunity::class,
+        StechmaxEvangelist::class,
+        StechmaxVeteran::class,
+        StechmaxMaster::class,
+        StechmaxTutor::class,
     ];
 
 

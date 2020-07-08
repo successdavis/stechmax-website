@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ExperienceController extends Controller
 {
-    public function store(Request $request, User $user)
+    public function award(Request $request, User $user)
     {
     	$request->validate([
     		'points' 		=> 'required|int',
@@ -15,5 +15,15 @@ class ExperienceController extends Controller
     	]);
 
     	$user->awardExperience(request()->points,request()->description);
+    }
+
+    public function strip(Request $request, User $user)
+    {
+    	$request->validate([
+    		'points' 		=> 'required|int',
+    		'description'	=> 'required|string'
+    	]);
+
+    	$user->stripExperience(request()->points,request()->description);
     }
 }

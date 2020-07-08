@@ -112,4 +112,13 @@ class UserTest extends TestCase
 
             $this->assertEquals($userId, $user->user_id);
         }
+
+        /** @test */
+        public function a_user_can_be_marked_as_a_preacher()
+        {
+            $user = create('App\User');
+            $user->markedAsPreacher();
+
+            $this->assertTrue($user->fresh()->isPreacher());
+        }
 }

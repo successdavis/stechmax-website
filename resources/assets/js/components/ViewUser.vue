@@ -23,43 +23,7 @@
                   <div class="columns">
                     <div class="column is-offset-one-fifth">
                       <div>
-                        <div class="button experience-btn" type="button">
-                          <span @click="toggleExperiencePane">Award EXP</span>
-
-                          <div class="experience-pane" v-if="awardingExperience">
-                              <form>
-                                  <h2 style="color: yellow;" v-text="iPoints"></h2>
-                                  <div class="field">
-                                    <div class="control">
-                                      <div class="select is-primary is-fullwidth">
-                                        <select v-model="expdescription">
-                                          <option value="" disabled>Description</option>
-                                          <option>Attendance</option>
-                                          <option>Completed a classwork</option>
-                                          <option>Completed an assignment</option>
-                                          <option value="examscore">Exam score</option>
-                                          <option>Presentation</option>
-                                          <option>Administrator Giveaway</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="field" v-show="expdescription == 'examscore'">
-                                    <div class="control">
-                                      <input v-model="examtitle" class="input is-primary" type="text" placeholder="Please Type Course Title">
-                                    </div>
-                                  </div>
-                                  <div class="columns">
-                                    <div class="column is-9">
-                                      <input class="input" type="number" name="points" v-model="points" placeholder="Specify points to Award">
-                                    </div>
-                                    <div class="column is-3">
-                                      <button :class="processing ? 'is-loading' : ''" class="medium button" @click.prevent="awardExperience">Award</button>
-                                    </div>
-                                  </div>
-                              </form>
-                          </div>
-                        </div>
+                        <Experience :user="selecteduser"></Experience>
                         <button class="button">
                           <a target="_blank" :href="'/users/generatecmdcard/' + username">PMT CARD</a>
                         </button>
@@ -224,13 +188,15 @@
 </template>
 
 <script>
+import Experience from './UserExperience.vue';
+
     export default {
         props: ['modal', 'selecteduser'],
         name: "ViewUser",
+        components: {Experience},
 
         data () {
           return {
-            iPoints: this.selecteduser.points,
             editing: false,
             date_joined: this.selecteduser.Date_Joined,
             email: this.selecteduser.email,
@@ -238,10 +204,6 @@
             username: this.selecteduser.username,
             errorMsg: '',
             courses: this.selecteduser.courses,
-            points: '',
-            expdescription: '',
-            examtitle: '',
-            awardingExperience: false,
             processing: false,
 
             Form: new Form ({
@@ -260,12 +222,6 @@
           }
         },
 
-        computed: {
-          getExpDescription() {
-            return this.expdescription != 'examscore' ? this.expdescription : 'Exam: ' + this.examtitle;
-          }
-        },
-
         methods: {
           update () {
             if (!this.editing) {
@@ -281,29 +237,6 @@
                 });
             }
           },
-
-          toggleExperiencePane() {
-            if (this.awardingExperience) {
-                return this.awardingExperience = false
-            }
-            return this.awardingExperience = true
-          },
-
-          awardExperience() {
-            this.processing = true;
-            axios.post(`/api/${this.selecteduser.username}/awardexperience`, {points: this.points, description: this.getExpDescription})
-              .then(() => {
-                flash('Points Awarded');
-                this.awardingExperience = false;
-                this.processing = false;
-                this.iPoints = +this.iPoints + +this.points;
-                this.points = '';
-              })
-              .catch(error => {
-                this.processing = false;
-                flash('Unable to award Experience Points', 'failed');
-              })
-          }
         }
     };
 </script>

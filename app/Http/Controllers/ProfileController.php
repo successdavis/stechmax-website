@@ -15,7 +15,10 @@ class ProfileController extends Controller
             'profileUser'   => $user,
             'activities'    => Activity::feed($user),
             'achievements'  => Achievement::all(),
+            'awarded_achievements'  => auth()->user()->achievements,
         ]);
+
+
     }
 
     public function getInvoices()
