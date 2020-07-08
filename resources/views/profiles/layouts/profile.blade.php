@@ -52,7 +52,7 @@
                               {{-- <p class="title">Middle tile</p> --}}
                               {{-- <p class="subtitle">With an image</p> --}}
                               <figure class="profile-page-card has-background-white image is-128x128">
-                                <p class="title has-text-dark">100</p>
+                                <p class="title has-text-dark">Null</p>
                                 <p>Projects</p>
                               </figure>
                             </article>
