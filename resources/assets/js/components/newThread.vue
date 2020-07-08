@@ -55,7 +55,7 @@
 						  <!-- Right side -->
 						  <div class="level-right">
 						    <p class="level-item"><a class="button is-success" @click="$modal.hide('new-thread')">Cancel</a></p>
-						    <button :disabled="submitting" class="level-item"><a class="button is-success">Post</a></button>
+						    <button  class="level-item"><a :class="submitting ? 'is-loading' : '' " class="button is-success">Post</a></button>
 						  </div>
 						</nav>
 					  </div>
