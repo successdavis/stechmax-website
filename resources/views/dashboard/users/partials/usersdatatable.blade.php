@@ -121,13 +121,15 @@
 							<tbody>
 								<tr draggable="false" class="" v-for="user in items">
 									<td class="has-no-head-mobile is-image-cell">
-										<div class="image">
-											<img 
-											:src="user.passport_path" 
-											class="is-rounded"
-											style="width: 24px; height: 24px" 
-										>
-										</div>
+										<a :href="'/profiles/' + user.username">
+											<div class="image">
+												<img 
+												:src="user.passport_path" 
+												class="is-rounded"
+												style="width: 24px; height: 24px" 
+											>
+											</div>
+										</a>
 									</td>
 									<td data-label="Name" class="" 
 										v-text="user.f_name + ' ' + user.m_name + ' ' + user.l_name "

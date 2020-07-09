@@ -18,7 +18,7 @@
                 currentPage: 1,
                 perPage: 25,
                 sortedColumn: 'created_at',
-                order: 'asc'  
+                order: 'desc'  
             };
         },
 
