@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App;
@@ -16,12 +17,12 @@ trait RecordsActivity
             static::deleting(function ($model) {
                 $model->activity()->delete();
             });
-         } 
+         }
     }
 
     protected static function getActivitiesToRecord()
     {
-        return ['created'];    
+        return ['created'];
     }
 
     protected function recordActivity($event)
@@ -34,7 +35,7 @@ trait RecordsActivity
 
     public function activity()
     {
-        return $this->morphMany('App\Activity', 'subject'); 
+        return $this->morphMany('App\Activity', 'subject');
     }
 
     protected function getActivityType($event)

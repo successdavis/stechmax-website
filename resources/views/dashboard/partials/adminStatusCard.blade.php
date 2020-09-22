@@ -125,3 +125,72 @@
 		</div>
 	</div>
 </div>
+
+<div class="tile is-ancestor">
+	<div class="tile is-parent">
+		<div class="card is-card-widget tile is-child">
+			<header class="card-header card-cen-v">
+				<p class="card-header-title ">
+					<span class="icon"><i class="mdi mdi-history"></i></span>
+					<span>Admin Activity History</b></span>
+				</p>
+				<button type="button" class="button is-small align-sf-ct">
+					<span class="icon"><i class="fas fa-history"></i></span>
+				</button>
+			</header>
+			<div class="card-content">
+				<div class="level is-mobile">
+					<div class="level-item">
+						<div class="is-widget-label">
+							<h3 class="subtitle is-spaced"> Students </h3>
+							<h1 class="title"><div> {{$totalUsers}}</div></h1>
+						</div>
+					</div>
+					<div class="level-item has-widget-icon">
+						<div class="is-widget-icon">
+							<span class="icon has-text-primary is-large">
+								<i class="fas fa-users" style="font-size: 2em"></i>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{{--    Latest Students Record--}}
+	<div class="tile is-parent">
+		<div class="card is-card-widget tile is-child">
+			<header class="card-header card-cen-v">
+				<p class="card-header-title">
+					<span class="icon"><i class="mdi mdi-account-heart"></i></i></span>
+					<span>Most Recent Users</span>
+				</p>
+				<button type="button" class="button is-small align-sf-ct">
+					<span class="icon"><i class="fas fa-history"></i></span>
+				</button>
+			</header>
+			<div class="card-content">
+				<table class="table is-fullwidth">
+                    <tbody>
+                        @foreach($mostRecentUsers as $user)
+                            <tr>
+                                <td class="has-no-head-mobile is-image-cell">
+                                    <div class="image">
+                                        <img
+                                        src="{{$user->passport_path}}"
+                                        class="is-rounded"
+                                        style="width: 24px; height: 24px"
+                                    >
+                                    </div>
+                                </td>
+                                <td>{{$user->f_name}} {{$user->m_name}}</td>
+                                <td>{{$user->gender}}</td>
+                                <td>{{$user->created_at->diffForHumans()}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+			</div>
+		</div>
+	</div>
+</div>
