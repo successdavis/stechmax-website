@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App;
@@ -29,7 +28,8 @@ trait RecordsActivity
     {
         $this->activity()->create([
             'user_id' => auth()->id(),
-            'type' => $this->getActivityType($event)
+            'type' => $this->getActivityType($event),
+            'priority' => $this->activityPriority ? $this->activityPriority : 0,
         ]);
     }
 
@@ -44,4 +44,5 @@ trait RecordsActivity
         $type = strtolower((new \ReflectionClass($this))->getShortName());
        return "{$event}_{$type}";
     }
+
 }

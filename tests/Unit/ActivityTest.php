@@ -12,7 +12,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class ActivityTest extends TestCase
 {
     use DatabaseMigrations;
-    
+
     /** @test */
     public function it_records_activity_when_a_thread_is_created()
     {
@@ -56,5 +56,27 @@ class ActivityTest extends TestCase
         $this->assertTrue($feed->keys()->contains(
             Carbon::now()->subWeek()->format('Y-m-d')
         ));
+    }
+
+    /** @test */
+    public function it_has_priority_of_low_medium_and_high()
+    {
+        $this->signIn();
+        create('App\Thread', ['user_id' => auth()->id()], 1);
+
+        $feed = Activity::first();
+        $this->assertNotNull($feed->priority);
+    }
+
+    /** @test */
+    public function it_records_activity_when_a_payment_has_been_added_with_priority_set_to_high()
+    {
+        $this->signIn();
+        $invoice = create('App\Invoice');
+        $paymentOne = create('App\Payments', ['invoice_id' => $invoice->id], 2);
+
+        $feed = Activity::first();
+        $this->assertEquals(2, Activity::count());
+        $this->assertEquals($feed->priority, 1);
     }
 }

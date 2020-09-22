@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class payments extends Model
 {
 
+    use RecordsActivity;
     protected $guarded = [];
+    protected $activityPriority = 1;
 
     public function invoice()
     {
@@ -29,4 +31,5 @@ class payments extends Model
                     ->sum('amount') / 100;
         return $newAmount = number_format(str_replace('-', '', $amount),2);
     }
+
 }

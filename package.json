@@ -29,7 +29,7 @@
     "bulma-calendar": "^6.0.9",
     "bulma-o-steps": "^1.0.9",
     "flickity": "^2.2.1",
-    "moment": "^2.28.0",
+    "moment": "^2.29.0",
     "portal-vue": "^1.5.1",
     "video.js": "^7.8.4",
     "videojs-chapter-nav": "^1.0.0",

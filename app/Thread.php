@@ -12,7 +12,7 @@ class Thread extends Model
 {
     use RecordsActivity;
     use ModelFunctions;
-    
+
 
     // protected $fillable = ['user_id', 'title', 'body','channel_id'];
 
@@ -87,7 +87,7 @@ class Thread extends Model
         $this->subscriptions
             ->where('user_id', '!=', $reply->user_id)
             ->each
-            ->notify($reply); 
+            ->notify($reply);
     }
 
     public function channel()
