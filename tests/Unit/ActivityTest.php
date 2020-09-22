@@ -73,10 +73,24 @@ class ActivityTest extends TestCase
     {
         $this->signIn();
         $invoice = create('App\Invoice');
-        $paymentOne = create('App\Payments', ['invoice_id' => $invoice->id], 2);
+        $payments = create('App\Payments', ['invoice_id' => $invoice->id], 2);
 
         $feed = Activity::first();
         $this->assertEquals(2, Activity::count());
         $this->assertEquals($feed->priority, 1);
+    }
+
+
+    /** @test */
+    public function it_fetches_a_feed_that_has_priority_of_1_for_an_administrator()
+    {
+        $this->signIn();
+        $invoice = create('App\Invoice');
+        $payments = create('App\Payments', ['invoice_id' => $invoice->id], 2);
+
+        $feed = Activity::adminFeed();
+        $this->assertTrue($feed->keys()->contains(
+            Carbon::now()->format('Y-m-d')
+        ));
     }
 }
