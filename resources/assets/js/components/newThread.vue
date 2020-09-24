@@ -1,10 +1,11 @@
 <template>
 	<div>
 		<a @click="$modal.show('new-thread')" class="button mb-3">POST A QUESTION</a>
-		<modal 
-			name="new-thread" 
+		<modal
+			name="new-thread"
 			:pivotY="1"
 			height="auto"
+            width="820px"
 
 			:adaptive="true"
 			scrollable="scrollable"
@@ -17,7 +18,7 @@
 					    NEW THREAD
 					  </p>
 					  <div class="panel-block">
-					    <article style="width: 100%" class="media">
+					    <article style="width: 100%; padding: .6em 1em; align-items: center" class="columns">
 						  <div class="media-content">
 						    <div class="content is-fullwidth">
 						      	<div class="field">
@@ -27,8 +28,8 @@
 								</div>
 						    </div>
 						  </div>
-						  <div class="media-right">
-						    <div class="select is-rounded is-static">
+						  <div class="media-right" style="margin-left: 0;">
+						    <div class="select is-rounded is-static is-fullwidth">
 							  <select v-model="threadform.channel_id" class="is-static">
 							    <option value="">Channel</option>
 							    <option v-for="channel in channels" :value="channel.id" v-text="channel.name"></option>
@@ -38,7 +39,7 @@
 						</article>
 					  </div>
 					  <div class="panel-block">
-						  <textarea v-model="threadform.body" class="rm-txt-area-border textarea" placeholder="What's on your mind." rows="8"></textarea>
+						  <textarea v-model="threadform.body" class="rm-txt-area-border textarea" placeholder="What's on your mind." rows="15"></textarea>
 					  </div>
 					  <div class="panel-block">
 					    <!-- Main container -->

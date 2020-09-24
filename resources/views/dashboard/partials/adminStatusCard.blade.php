@@ -127,33 +127,33 @@
 </div>
 
 <div class="tile is-ancestor">
-	<div class="tile is-parent">
+	<div class="tile is-parent" >
 		<div class="card is-card-widget tile is-child">
 			<header class="card-header card-cen-v">
 				<p class="card-header-title ">
 					<span class="icon"><i class="mdi mdi-history"></i></span>
-					<span>Admin Activity History</b></span>
+					<span>Activity History</b></span>
 				</p>
 				<button type="button" class="button is-small align-sf-ct">
 					<span class="icon"><i class="fas fa-history"></i></span>
 				</button>
 			</header>
-			<div class="card-content">
-				<div class="level is-mobile">
-					<div class="level-item">
-						<div class="is-widget-label">
-							<h3 class="subtitle is-spaced"> Students </h3>
-							<h1 class="title"><div> {{$totalUsers}}</div></h1>
-						</div>
-					</div>
-					<div class="level-item has-widget-icon">
-						<div class="is-widget-icon">
-							<span class="icon has-text-primary is-large">
-								<i class="fas fa-users" style="font-size: 2em"></i>
-							</span>
-						</div>
-					</div>
-				</div>
+			<div class="card-content" style="max-height: 400px; overflow-y: scroll">
+                    @forelse ($adminActivities as $date => $activity)
+                        <h4><strong>{{ $date }}</strong></h4>
+                        <table class="table is-striped is-fullwidth">
+                            @foreach ($activity as $record)
+                                <tr>
+                                    @if (view()->exists("dashboard.activities.{$record->type}"))
+                                        @include ("dashboard.activities.{$record->type}", ['activity' => $record])
+                                    @endif
+                                </tr>
+                            @endforeach
+                        </table>
+                        <hr>
+                    @empty
+                        <p>There is no activity for you yet</p>
+                    @endforelse
 			</div>
 		</div>
 	</div>
@@ -169,7 +169,7 @@
 					<span class="icon"><i class="fas fa-history"></i></span>
 				</button>
 			</header>
-			<div class="card-content">
+			<div class="card-content" style="max-height: 400px; overflow-y: auto">
 				<table class="table is-fullwidth">
                     <tbody>
                         @foreach($mostRecentUsers as $user)

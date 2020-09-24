@@ -1916,6 +1916,10 @@ a.navbar-burger.burger {
   text-transform: uppercase;
 }
 
+.pre-formatted {
+  white-space: pre-wrap;
+}
+
 .aside {
   padding: 2em 0.2em 0 1em;
   min-height: 100vh;

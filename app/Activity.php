@@ -25,9 +25,13 @@ class Activity extends Model
         return $this->morphTo();
     }
 
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
     public static function feed($user, $take = 50)
     {
-        return static::where('user_id', $user->id)
+        return static::where('user_id', $user->id)->where('priority', 0)
         ->latest()
         ->with('subject')
         ->take($take)

@@ -80,6 +80,28 @@ class ActivityTest extends TestCase
         $this->assertEquals($feed->priority, 1);
     }
 
+    /** @test */
+    public function it_records_activity_when_an_invoice_has_been_created_with_priority_set_to_high()
+    {
+        $this->signIn();
+        $invoice = create('App\Invoice');
+
+        $feed = Activity::first();
+        $this->assertEquals(1, Activity::count());
+        $this->assertEquals($feed->priority, 1);
+    }
+
+    /** @test */
+    public function it_records_activity_when_points_are_awarded()
+    {
+        $this->signIn();
+        $invoice = create('App\Invoice');
+
+        $feed = Activity::first();
+        $this->assertEquals(1, Activity::count());
+        $this->assertEquals($feed->priority, 1);
+    }
+
 
     /** @test */
     public function it_fetches_a_feed_that_has_priority_of_1_for_an_administrator()

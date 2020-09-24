@@ -1,5 +1,11 @@
 @if (Auth::check())
-    <new-thread :channels="{{$channels}}"></new-thread>
+    @if(! auth()->user()->confirmed && !auth()->user()->phone_confirmed)
+        <p class="block">One Step! Please <a href="/register/comfirm_email">confirm</a> your account</p>
+    @else
+        <new-thread :channels="{{$channels}}"></new-thread>
+    @endif
+@else
+    <p class="block">Hi! Please <a href="/login">SignIn</a> to Ask a Question</p>
 @endif
 
 <div class="">

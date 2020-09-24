@@ -51,7 +51,7 @@ class User extends Authenticatable
     public function coporatetrainings()
     {
         return $this->hasMany(coporatetraining::class);
-    }   
+    }
 
     public function getRouteKeyName()
     {
@@ -92,7 +92,7 @@ class User extends Authenticatable
     {
         $this->update([
             'user_id' => 'STM/' . date('Y') . '/B' . date('n') . '/' . sprintf('%04d', $this->id)
-        ]);    
+        ]);
     }
 
     public function activity()
@@ -102,7 +102,7 @@ class User extends Authenticatable
 
     public function confirm()
     {
-        $this->confirmed = true; 
+        $this->confirmed = true;
         $this->confirmation_token = null;
 
         $this->save();
@@ -110,7 +110,7 @@ class User extends Authenticatable
 
     public function confirmToken()
     {
-        $this->phone_confirmed = true; 
+        $this->phone_confirmed = true;
         $this->phone_token = null;
 
         $this->save();
@@ -197,27 +197,16 @@ class User extends Authenticatable
         return $this->admin;
     }
 
-    public function retriveMyCourses() 
+    public function retriveMyCourses()
     {
         $subscriptions = Course::WhereSubscribeBy($this)->get();
             return CourseSubscriptionsResource::collection($subscriptions);
     }
 
-    public function twilioSendMessage()
-    {
-        $accountId  =   config('services.twilio.account_sid');
-        $token      =   config('services.twilio.token');
-        $fromNumber =   '+17204596176';
-
-        $twilio = new \Aloha\Twilio\Twilio($accountId, $token, $fromNumber);
-
-        $twilio->message($this->phone, 'Hello World');
-    }
-
     public function MessageSystemNumber($subscription)
     {
-        $message = 'You have subscribe to "' 
-            . $subscription->subscriber->title 
+        $message = 'You have subscribe to "'
+            . $subscription->subscriber->title
             . '" you are assigned to use System '
             . $subscription->system_no;
 
@@ -226,8 +215,8 @@ class User extends Authenticatable
 
 
     public function smartSendToken()
-    {   
-            $token = $randomid = mt_rand(100000,999999); 
+    {
+            $token = $randomid = mt_rand(100000,999999);
             $this->update([
                 'phone_token' => $token
             ]);
@@ -244,7 +233,7 @@ class User extends Authenticatable
     public function smartSendMessage($message)
     {
         $smartsms = new SmartSms();
-        
+
         $smartsms->message($this->phone, $message, 'S-TECHMAX');
     }
 
@@ -259,7 +248,7 @@ class User extends Authenticatable
         if ($this->updated_at->diffInMinutes() >= 5) {
             return true;
         }
-       
+
        return false;
     }
 
@@ -327,14 +316,14 @@ class User extends Authenticatable
         if ($points > $this->experienceLevel()) {
             abort(406, 'The user does not have upto this points');
         }
-        
+
         $experience                = new Experience;
         $experience->points        = -$points;
         $experience->description   = "Experience strip off";
         $this->experience()->save($experience);
 
         UserEarnedExperience::dispatch($this, $this->experienceLevel());
-        
+
         return $this;
     }
 
@@ -347,7 +336,7 @@ class User extends Authenticatable
     public function getTotalAmountOfOpenInvoices()
     {
         $amount = $this->invoices()->whereCompleted(false)->sum('amount') / 100;
-        
+
         return number_format(str_replace('-', '', $amount), 2);
     }
 
@@ -361,7 +350,7 @@ class User extends Authenticatable
         }
 
         return number_format(str_replace('-', '', $totalDebt / 100), 2);
-        
+
     }
 
     public function achievements()

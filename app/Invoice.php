@@ -7,12 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
+    use RecordsActivity;
+
     protected $fillable = ['user_id', 'amount', 'invoiceNo'];
 
     protected $casts = [
         'completed' => 'boolean',
         'freeze' => 'boolean'
     ];
+
+    protected $activityPriority = 1;
 
     public function payments()
     {
@@ -88,7 +92,7 @@ class Invoice extends Model
 
     public function openInvoice()
     {
-        $this->completed = false;  
+        $this->completed = false;
 
         return $this->save();
     }
