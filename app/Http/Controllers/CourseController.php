@@ -14,7 +14,7 @@ class CourseController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index','show']);  
+        $this->middleware('auth')->except(['index','show']);
     }
     /**
      * Display a listing of the resource.
@@ -48,9 +48,9 @@ class CourseController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -86,21 +86,21 @@ class CourseController extends Controller
      */
     public function show($subjectId, Course $course)
     {
-            // dd($course->childrenCourses()->get());     
+            // dd($course->childrenCourses()->get());
         if (strtolower($course->type->name) === 'program') {
             $linked_courses = $course->childrenCourses()->orderBy('order')->get();
-            return view('courses.program.index', compact('course', 'linked_courses'));   
+            return view('courses.program.index', compact('course', 'linked_courses'));
         }
 
         if (strtolower($course->type->name) === 'track') {
             $linked_courses = $course->childrenCourses()->orderBy('order')->get();
             // dd($linked_courses);
-            return view('courses.track.index', compact('course', 'linked_courses'));   
+            return view('courses.track.index', compact('course', 'linked_courses'));
         }
 
         $sections = $course->sections;
 
-        return view('courses.show', compact('course', 'sections'));    
+        return view('courses.show', compact('course', 'sections'));
 
     }
 

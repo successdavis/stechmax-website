@@ -27,9 +27,7 @@
         <a class="navbar-item" href="{{ url('/threads') }}">
           FORUM
         </a>
-        <a class="navbar-item" href="{{ url('/pricing') }}">
-          PRICING
-        </a>
+
 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
@@ -65,8 +63,8 @@
           <div class="navbar-item has-dropdown has-divider is-hoverable">
             <a class="navbar-link">
               <figure class="is-user-avatar image is-24x24" style="margin-right: .75rem;">
-                <img class="is-rounded" 
-                  src="{{auth()->user()->avatar_path}}" 
+                <img class="is-rounded"
+                  src="{{auth()->user()->avatar_path}}"
                   alt="{{auth()->user()->username}}">
               </figure>
               {{auth()->user()->username}}
@@ -85,7 +83,7 @@
                 <span class="icon"><i class="fas fa-cogs"></i></span>
                 <span>Settings</span>
               </a>
-              <a class="navbar-item" href="{{ route('logout') }}"onclick="event.preventDefault(); 
+              <a class="navbar-item" href="{{ route('logout') }}"onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();
               ">
                 <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
@@ -144,16 +142,12 @@
             </li>
             <li class="n_drawer_items--child">
               <span><i class="fas fa-pen"></i></span>
-              <a href="{{ url('/pricing') }}">PRICING</a>
-            </li>
-            <li class="n_drawer_items--child">
-              <span><i class="fas fa-pen"></i></span>
               <a href="/exams">QUICK LINKS</a>
             </li>
         </ul>
         {{-- <ask-question style="width: 100%"></ask-question> --}}
         @auth
-        <a class="button is-fullwidth mt-small" href="{{ route('logout') }}" 
+        <a class="button is-fullwidth mt-small" href="{{ route('logout') }}"
           onclick="event.preventDefault();
             document.getElementById('logout-form').submit();"
 
@@ -161,7 +155,7 @@
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
-        @else 
+        @else
 
           <a class="button is-fullwidth mt-small" href="{{ route('login') }}">Login</a>
 

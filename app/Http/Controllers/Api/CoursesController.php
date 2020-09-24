@@ -18,7 +18,7 @@ class CoursesController extends Controller
             'displayMenu' => true
         ]);
     }
-    
+
     public function getCourses()
     {
         $courses = Type::find(1)->courses;
@@ -94,6 +94,7 @@ class CoursesController extends Controller
     public function getCoursesForDataTable(Request $request, CourseFilters $filter)
     {
         $filter = Course::filter($filter);
+
         $query = $filter->orderBy($request->column, $request->order);
         $courses = $query->paginate($request->per_page);
 
@@ -103,7 +104,7 @@ class CoursesController extends Controller
     public function allcoursesandtracks()
     {
         $courses = Course::latest()->get();
-        
+
         return $courses;
     }
 

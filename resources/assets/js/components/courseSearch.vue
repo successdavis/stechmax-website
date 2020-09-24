@@ -1,20 +1,14 @@
 <template>
-	<div class="">
-		<tabs>
-			<tab name="Course" :selected="true">
-				<div class="control">
-				  	<input @keyup="courseSearch" v-model="CourseSearch" :class="isLoading ? 'isLoading' : ''" class="input is-medium" type="text" name="q" placeholder="Start typing to search through courses">
-				</div>
-			</tab>
-			<tab name="Forum" v-if="enableForum">
-				<div class="control">
-				  <input @keyup="threadSearch" v-model="ForumSearch" class="input is-medium" type="text" name="q" placeholder="Type to search forum">
-				</div>
-			</tab>
-		</tabs>
+	<div class="width-modifier">
+        <div class="field">
+          <div class="control" :class="isLoading ? 'is-loading' : ''">
+            <input @keyup="courseSearch" v-model="CourseSearch"  class="input is-rounded is-medium" type="text" placeholder="Search through courses">
+          </div>
+        </div>
+
 		<div class="searchResult" v-if="results">
 			<ul>
-				<li v-for="result in results" v-text="result.title"></li>
+				<li class="result-item" v-for="result in results"><a class="has-text-black	" :href="result.path"  v-text="result.title"></a></li>
 			</ul>
 		</div>
 	</div>
@@ -37,6 +31,10 @@
 			}
 		},
 
+        computed: {
+
+        },
+
 		methods: {
 			courseSearch: _.debounce(function(page) {
                 this.isLoading = true;
@@ -49,27 +47,16 @@
             }, 600),
 
 			courseFetch() {
-				if (this.CourseSearch == '') {this.results = ''; return}
+				if (this.CourseSearch === '') {this.results = ''; return}
 				axios.get(`/courses?search=${this.CourseSearch}`)
 				.then(data => {
-					this.results = data.data;
+					this.results = data.data.data;
+                    this.isLoading = false;
 				})
 				.catch(error => {
 					console.log(error);
 				})
 			},
-			
-			threadFetch() {
-				if (this.ForumSearch == '') {this.results = ''; return}
-				axios.get(`/threads?search=${this.ForumSearch}`)
-				.then(data => {
-					console.log(data.data);
-					this.results = data.data.data;
-				})
-				.catch(error => {
-					console.log(error);
-				})
-			}
 		}
 	};
 </script>
@@ -77,6 +64,22 @@
 <style scoped>
 	.searchResult {
 		background: #baffd2;
-		padding: 1em;
+		padding: 1.5em;
 	}
+    .result-item {
+        padding: 1em .5em;
+        cursor: pointer;
+    }
+    .result-item:hover {
+        background: rgba(255,255,255,.7);
+    }
+
+
+
+    @media (min-width: 769px) {
+        .width-modifier {
+            width: 50%;
+        }
+    }
+    /*.width-modifier*/
 </style>

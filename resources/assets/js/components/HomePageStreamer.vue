@@ -1,18 +1,20 @@
-<template>
-	<section class="hero is-large">
-		<div class="homeStreamer has-overlay">	
-			<div class="overlay"></div>
-			<img class="bottom-shadow mb-3" src="/public/images/shadow_2.png">
-			<div class="overlay__content">
-				<h1 class="overlay__content--head mb-2">Begin Your Journey to a Digital Innovation</h1>
-				<div class="search__form section">
-					<course-search :forum="true" class="form__field"></course-search>
-				</div>
-			</div>
-		</div>
-		
-	</section>
-</template>
+
+
+<!--<template>-->
+<!--	<section class="hero is-large">-->
+<!--		<div class="homeStreamer has-overlay">	-->
+<!--			<div class="overlay"></div>-->
+<!--			<img class="bottom-shadow mb-3" src="/public/images/shadow_2.png">-->
+<!--			<div class="overlay__content">-->
+<!--				<h1 class="overlay__content&#45;&#45;head mb-2">Begin Your Journey to a Digital Innovation</h1>-->
+<!--				<div class="search__form section">-->
+<!--					<course-search :forum="true" class="form__field"></course-search>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--		-->
+<!--	</section>-->
+<!--</template>-->
 
 <style scoped>
 	.homeStreamer{
@@ -21,7 +23,7 @@
 		background-image: url(/../images/banner.jpg);
 		background-size: cover;
 	    background-position: center;
-	    background-repeat: no-repeat; 
+	    background-repeat: no-repeat;
 	}
 	.bottom-shadow {
 		position: absolute;
