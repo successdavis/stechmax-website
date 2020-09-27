@@ -17,7 +17,8 @@ class Course extends Model
     ];
 
     protected $appends = ['isSubscribedBy'];
-    
+//    private $type;
+
     protected static function boot()
     {
         parent::boot();
@@ -107,7 +108,7 @@ class Course extends Model
 
     public function getSections()
     {
-        return $this->sections()->orderBy('order')->get();   
+        return $this->sections()->orderBy('order')->get();
     }
 
     public function testimonials()
@@ -152,7 +153,7 @@ class Course extends Model
     {
         return $this->belongsTo(Type::class);
     }
-    
+
     public function checkType()
     {
         return $this->type->name;
@@ -245,7 +246,7 @@ class Course extends Model
         $classroomfee = $this->classroomfee();
 
         $amount = $this->amount + $classroomfee;
-        
+
         return $format ? number_format($amount / 100, 2) : $amount;
     }
 

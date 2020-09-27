@@ -1325,26 +1325,14 @@ body {
   background: #c8ebfb;
 }
 
-.streamer {
-  min-height: calc(100vh - 56px);
-  position: relative;
-}
-
-.streamer__banner {
-  background-image: url(/../images/banner.jpg);
+.has-background-image {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.streamer__courses {
-  overflow: hidden;
-}
-
-.streamer__courses--card {
-  overflow: hidden;
-  height: 33%;
-  margin: 1.6% 0;
+.homepage-hero {
+  background-image: url(/../images/stechmax-hero.jpg);
 }
 
 .card-sibling {

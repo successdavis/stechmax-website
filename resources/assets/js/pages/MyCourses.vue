@@ -17,7 +17,8 @@
 									<td v-text="data.status"></td>
 									<td><a :href="data.path" v-text="data.course.title"></a></td>
 									<td v-text="data.subscribedOn"></td>
-									<td v-text="data.subscribtionEndAt"></td> 
+									<td v-text="data.subscribtionEndAt"></td>
+									<td><a :href="'/' +data.course.slug + '/outline'">Download Outline</a></td>
 								</tr>
 							</tbody>
 						</table>

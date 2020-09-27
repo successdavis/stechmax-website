@@ -157,8 +157,10 @@ Route::get('/profiles/{user}', 'ProfileController@show')->name('profile.show');
 Route::get('/profiles/{user}/notifications', 'UserNotificationController@index');
 Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotificationController@destroy');
 
-Route::get('/users/generatecmdcard/{user}', 'CmdCardController@index');
-Route::get('/users/activeusers', 'CmdCardController@activeusers')->middleware('admin')->name('permitcards');
+Route::get('/users/generatecmdcard/{user}', 'PdfController@index');
+Route::get('/users/activeusers', 'PdfController@activeusers')->middleware('admin')->name('permitcards');
+
+Route::get('/{course}/outline', 'PdfController@outline')->name('courseoutline');
 
 Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->name('register.confirm');
 Route::get('/register/resend', 'Auth\RegisterConfirmationController@resend')->name('register.resend_comfirmation');
