@@ -1,7 +1,9 @@
-<nav class="panel bg-white" style="max-height: 400px; overflow-y: auto">
+<nav class="panel bg-white">
   <p class="panel-heading">
     <strong>Your Performance</strong>
   </p>
+
+    <div style="max-height: 400px; overflow-y: auto">
 
   @forelse ($experiences as $experience)
     <a class="panel-block is-active" >
@@ -15,7 +17,8 @@
       </div>
 
     </a>
-  @empty
-    <p class="section">No Experience earned yet</p>
-  @endforelse
+      @empty
+        <p class="section">No Experience earned yet</p>
+      @endforelse
+    </div>
 </nav>

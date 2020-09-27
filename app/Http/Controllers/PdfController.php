@@ -14,7 +14,7 @@ class PdfController extends Controller
     {
     	$subscriptions = $user->subscriptions()->with(['subscriber','invoice'])->get();
 
-        $pdf = PDF::loadView('pdfs.studentcard', compact('user','subscriptions'));
+        $pdf = PDF::loadView('pdfs.studentcard', compact('user','subscriptions'))->setPaper('a4', 'portrait');
         return $pdf->stream('medium.pdf');
     }
 

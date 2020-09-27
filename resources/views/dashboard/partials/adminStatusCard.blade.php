@@ -184,8 +184,9 @@
                                     </div>
                                 </td>
                                 <td>{{$user->f_name}} {{$user->m_name}}</td>
-                                <td>{{$user->gender}}</td>
                                 <td>{{$user->created_at->diffForHumans()}}</td>
+                                <td><a href="/users/generatecmdcard/{{$user->username}}">PMT</a></td>
+{{--                                :href="'/users/generatecmdcard/' + username">PMT CARD--}}
                             </tr>
                         @endforeach
                     </tbody>

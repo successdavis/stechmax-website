@@ -84,13 +84,14 @@
 	        <td></td>
 	    </tr>
 	</table>
+        <p>Note: Amount Owe must be paid on or before midpoint </p>
         <h4 style="text-align: center">Code of Conduct</h4>
         <h4>Members shall:</h4>
         <ol type="a">
             <li>Act with integrity and shall not intentionally bring the Institute, staff or other members of the institute, into disrepute </li>
             <li>Exhibit honesty, integrity and transparency. </li>
             <li>Ensure that any professional activities do not unnecessarily put at risk the health or welfare of any person and they shall have due regard for the sustainability of any resource </li>
-            <li>Exercise all reasonable due diligence, in presenting quality work to the best of their ability and avoiding bias or unfair influence.</li>
+{{--            <li>Exercise all reasonable due diligence, in presenting quality work to the best of their ability and avoiding bias or unfair influence.</li>--}}
             <li>Handle any equipment/gadgets carefully to avoid damage.</li>
             <li>Replace any equipment damaged by him or her on or within the next 3 days</li>
         </ol>
