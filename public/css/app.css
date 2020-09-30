@@ -1335,6 +1335,10 @@ body {
   background-image: url(/../images/stechmax-hero.jpg);
 }
 
+.build-a-website-hero {
+  background-image: url(/../images/build-a-website-stechmax.svg);
+}
+
 .card-sibling {
   display: flex;
   flex-direction: column;

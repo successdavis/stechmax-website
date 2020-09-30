@@ -15,13 +15,13 @@
                 </div>
                 <div class="card-content">
                   <div class="content">
-                    <h4>{{$program->title}}</h4>
+                    <h5>{{$program->title}}</h5>
                     <p>{{$program->sypnosis}}</p>
                   </div>
                 </div>
                 <footer class="card-footer">
-                  <a href="#" class="card-footer-item">Add to Wish</a>
-                  <a href="{{$program->path()}}" class="card-footer-item">LETS BEGIN</a>
+{{--                  <a href="#" class="card-footer-item">Add to Wish</a>--}}
+                  <a href="{{$program->path()}}" class="card-footer-item">VIEW COURSE</a>
                 </footer>
               </div>
           </div>

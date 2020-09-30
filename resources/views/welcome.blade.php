@@ -8,7 +8,9 @@
     @include('layouts.subjects')
     @include('layouts.what')
 
-{{--    @include('layouts.program')--}}
+    @include('layouts.servicesoffered')
+
+    @include('layouts.program')
     @include('layouts.advertBanner')
      <testimonial-carousels></testimonial-carousels>
     @include('layouts.testimonials')

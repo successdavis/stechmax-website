@@ -64,7 +64,7 @@ class RegisterController extends Controller
             'password' => 'required|string|min:8|confirmed',
             // 'token' => ['required', new Recaptcha()],
         ]);
-        
+
     }
 
     /**
@@ -81,7 +81,7 @@ class RegisterController extends Controller
 
         do {
             $username = $data['surname'] . $data['lastname'] . rand(2,5);
-        } while ( user::where('confirmation_token', $username)->exists());
+        } while ( user::where('username', $username)->exists());
 
         $storeData = [
             'f_name' => $data['surname'],

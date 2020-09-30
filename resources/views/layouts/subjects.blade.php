@@ -1,4 +1,4 @@
-<h3 class="mt-3 mb-2 text-center"></h3>
+<h3 class="mt-3 mb-2 has-text-center"></h3>
 <div class="grid">
 	<div class="grid__item large has-overlay">
 		<div class="grid__item--background" style="background-image: url(/../images/subjects/web-development.jpg)"></div>
@@ -47,7 +47,7 @@
 		<div class="overlay__content white">
 			<h4><a href="/courses/photography">Photography</a></h4>
 			@isset ($subjectWithCounts["photography"])
-			    
+
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["photography"]["trackCount"]}}</p>
@@ -68,7 +68,7 @@
 		<div class="overlay__content white">
 			<h4><a href="/courses/video">Video Editing</a></h4>
 			@isset ($subjectWithCounts["video"])
-			    
+
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["video"]["trackCount"]}}</p>
@@ -88,7 +88,7 @@
 		<a class="overlay" href="/courses/3d-animation"></a>
 		<div class="overlay__content white">
 			<h4><a href="/courses/3d-animation">3d + Animation</a></h4>
-			@isset ($subjectWithCounts["3d-animation"])    
+			@isset ($subjectWithCounts["3d-animation"])
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["3d-animation"]["trackCount"]}}</p>
@@ -129,7 +129,7 @@
 		<div class="overlay__content white">
 			<h4><a href="/courses/compute-aided-designs">CAD</a></h4>
 			@isset ($subjectWithCounts["compute-aided-designs"])
-			    
+
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["compute-aided-designs"]["trackCount"]}}</p>
@@ -150,7 +150,7 @@
 		<div class="overlay__content white">
 			<h4><a href="/courses/database-managements">Database</a></h4>
 			@isset ($subjectWithCounts["database-managements"])
-			    
+
 			<div class="grid-x grid-padding-x subject__details">
 				<div class="small-6">
 					<p>{{$subjectWithCounts["database-managements"]["trackCount"]}}</p>

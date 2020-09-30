@@ -54,6 +54,7 @@ Vue.component('course-search', require('./components/courseSearch.vue').default)
 Vue.component('course-streamer', require('./components/ShowCourseStreamer.vue').default);
 Vue.component('promo-video', require('./components/CourseProVideo.vue').default);
 Vue.component('vid-player', require('./components/Player.vue').default);
+Vue.component('contactform', require('./components/contactform.vue').default);
 
 Vue.component('course-content', require('./components/content.vue').default);
 Vue.component('section-topic', require('./components/ContentTopic.vue').default);
@@ -74,4 +75,4 @@ Vue.component('paystack-payment', require('./components/paystack.vue').default);
 const app = new Vue({
     el: '#app'
 });
- 
+

@@ -182,6 +182,12 @@ Route::post('/testing', 'TestingController@store'); // will be here temporary
 Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth')->name('avatar');
 Route::post('api/users/{user}/passport', 'Api\UserAvatarController@storePassport')->middleware('auth')->name('passport');
 
+
+Route::post('api/createclient', 'ClientController@store')->middleware('admin');
+Route::post('api/client/{client}/image', 'ClientController@storePassport')->middleware('admin')->name('passport');
+Route::delete('api/deleteclient/{client}', 'ClientController@destroy')->middleware('admin');
+Route::patch('api/updateclient/{client}', 'ClientController@update')->middleware('admin');
+
 Route::get('/courses/{subject}/{course}/subscription', 'Payment\PaymentMethodController@index')->name('course_subscription.index')->middleware('auth', 'must-be-confirmed');
 Route::post('/courses/{subject}/{course}/subscription', 'Payment\PaymentMethodController@store')->name('course_subscription.store')->middleware('auth', 'must-be-confirmed');
 //Route::get('/courses/{subject}/{course}/callback', 'Payment\CourseSubscriptionController@update')->name('course_subscription.update')->middleware('auth');
@@ -202,6 +208,8 @@ Route::post('/business/{business}/thumbnail', 'BusinessController@thumbnail')->n
 Route::post('newtestimonial/{course}', 'TestimonialsController@store');
 Route::get('testimonials/{course}', 'TestimonialsController@coursetestimonial');
 Route::get('/testimonials', 'TestimonialsController@index');
+Route::get('/clienttestimonial/{token}', 'ClienttestimonialController@show');
+Route::post('/clienttestimonial/{token}', 'ClienttestimonialController@store');
 
 Route::get('/api/{course}/lessonvideourl', 'ClassroomController@nextVideo')->middleware('must-be-confirmed');
 

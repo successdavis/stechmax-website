@@ -2,6 +2,9 @@
 
 use Faker\Generator as Faker;
 
+
+// A user can also be a client
+// One Account for all purposes.
 $factory->define(App\User::class, function (Faker $faker) {
     return [
         'f_name' => $faker->word,
@@ -20,13 +23,13 @@ $factory->define(App\User::class, function (Faker $faker) {
 
 $factory->state(App\User::class, 'unconfirmed', function () {
     return [
-        'confirmed' => false 
+        'confirmed' => false
     ];
 });
 
 $factory->state(App\User::class, 'administrator', function () {
     return [
-        'admin' => true 
+        'admin' => true
     ];
 });
 
@@ -40,7 +43,7 @@ $factory->define(App\Subject::class, function (Faker $faker) {
 });
 
 $factory->define(App\Guardian::class, function (Faker $faker) {
-    
+
     return [
         'user_id' => function() {
             return factory('App\User')->create()->id;

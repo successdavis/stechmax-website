@@ -95,7 +95,7 @@
             <li>Handle any equipment/gadgets carefully to avoid damage.</li>
             <li>Replace any equipment damaged by him or her on or within the next 3 days</li>
         </ol>
-        <h4>members shall not</h4>
+        <h4>Members shall not</h4>
         <ol type="a">
             <li>Recklessly attempt to harm, directly or indirectly, the reputation or businesses of others</li>
             <li>Claim expertise or skill in any area of knowledge or professional practice in which they have insufficient competence or experience</li>
