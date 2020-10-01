@@ -36,6 +36,7 @@ Vue.component('add-payment', require('./components/AddPayment.vue').default);
 Vue.component('user-add-payment', require('./components/UserAddPayment.vue').default);
 Vue.component('avatar-form', require('./components/AvatarForm.vue').default);
 Vue.component('passport-form', require('./components/PassportForm.vue').default);
+Vue.component('client-passport', require('./components/ClientPassport.vue').default);
 Vue.component('mega-menu', require('./components/MegaMenu.vue').default);
 Vue.component('lower-nav', require('./components/LowerNav.vue').default);
 Vue.component('course-registration', require('./components/CourseRegistration.vue').default);
@@ -70,6 +71,7 @@ Vue.component('menu-dropdown', require('./components/menuDropDown.vue').default)
 Vue.component('course-review', require('./components/courseReview.vue').default);
 Vue.component('image-carousel', require('./components/carousel.vue').default);
 Vue.component('paystack-payment', require('./components/paystack.vue').default);
+Vue.component('clientsdatatable', require('./pages/Clients.vue').default);
 
 
 const app = new Vue({

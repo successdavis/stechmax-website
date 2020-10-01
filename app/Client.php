@@ -34,7 +34,12 @@ class Client extends Model
         if ($image) {
             return asset('storage/' . $image);
         }else {
-            return asset('storage/clientimages/default.jpg');
+            return asset('storage/clientimages/default.png');
         }
+    }
+
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
     }
 }

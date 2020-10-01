@@ -17,6 +17,7 @@ class CreateClientsTable extends Migration
             $table->bigIncrements('id');
             $table->string('fullname');
             $table->string('phone');
+            $table->string('email')->nullable();
             $table->string('image_path')->nullable();
             $table->string('alt_phone')->nullable();
             $table->string('gender');

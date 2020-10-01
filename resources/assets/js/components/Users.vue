@@ -10,8 +10,8 @@
         data() {
             return {
                 isLoading: '',
-                sorttab: '',   
-                infiniteId: +new Date(),          
+                sorttab: '',
+                infiniteId: +new Date(),
                 dataSet: false,
                 items: [],
                 total: '',
@@ -20,7 +20,7 @@
                 },
                 offset: 4,
                 currentPage: 1,
-                perPage: 25,
+                perPage: 50,
                 sortedColumn: 'f_name',
                 order: 'asc',
                 page: 1,

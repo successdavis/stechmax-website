@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Filters\ClientFilters;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -12,9 +13,17 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, ClientFilters $filters)
     {
-        //
+        if (request()->wantsJson()){
+            $query = Client::filter($filters)->orderBy($request->column, $request->order);
+
+            $clients = $query->paginate($request->per_page);
+            return $clients;
+        }
+
+        return view('dashboard.clients.index');
+
     }
 
     /**
@@ -39,6 +48,7 @@ class ClientController extends Controller
             'fullname'      => 'required',
             'gender'        => 'required',
             'phone'         => 'required',
+            'email'         => 'email:rfc,dns|nullable',
         ]);
 
         $client = new Client();
@@ -46,10 +56,11 @@ class ClientController extends Controller
         $client->gender     = $request->gender;
         $client->phone      = $request->phone;
         $client->alt_phone  =  $request->alt_phone;
+        $client->email      =  $request->email;
 
         $client->save();
 
-        return response(200);
+        return $client;
     }
 
     /**
@@ -114,7 +125,7 @@ class ClientController extends Controller
 
     public function storePassport(Request $request, Client $client) {
         $this->validate(request(), [
-            'avatar' => ['required', 'image']
+            'avatar' => ['required', 'image','max:3000']
         ]);
 
         if (auth()->user()->isAdmin())

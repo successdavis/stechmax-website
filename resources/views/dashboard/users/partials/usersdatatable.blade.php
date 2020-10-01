@@ -56,61 +56,61 @@
 										<!----><!---->
 									</select>
 								</span> <!---->
-							</div> 
+							</div>
 							<div class="control">
 								<button class="button is-primary">
 									<span class="icon is-small"><i class="fas fa-arrow-up"></i></span>
 								</button>
 							</div>
 						</div>
-					</div> 
-					<!----> 
+					</div>
+					<!---->
 					<div class="table-wrapper">
 						<table class="table is-striped has-mobile-cards is-hoverable">
 							<thead>
 								<tr>
 									<th class="">
-										<div class="th-wrap"> 
+										<div class="th-wrap">
 											<span class="icon is-small" style="display: none;">
 												<i class="mdi mdi-arrow-up"></i>
 											</span>
 										</div>
 									</th>
 									<th class="is-current-sort is-sortable">
-										<div class="th-wrap">Name 
+										<div class="th-wrap">Name
 											<span class="icon is-small"><i class="fas fa-arrow-up"></i></span>
 										</div>
 									</th>
 									<th class="is-sortable">
-										<div class="th-wrap">Gender 
+										<div class="th-wrap">Gender
 											<span class="icon is-small" style="display: none;">
 												<i class="mdi mdi-arrow-up"></i>
 											</span>
 										</div>
 									</th>
 									<th class="is-sortable">
-										<div class="th-wrap">Phone 
+										<div class="th-wrap">Phone
 											<span class="icon is-small" style="display: none;">
 												<i class="mdi mdi-arrow-up"></i>
 											</span>
 										</div>
 									</th>
 									<th class="is-sortable">
-										<div class="th-wrap">Date_Joined 
+										<div class="th-wrap">Date_Joined
 											<span class="icon is-small" style="display: none;">
 												<i class="mdi mdi-arrow-up"></i>
 											</span>
 										</div>
 									</th>
 									<th class="">
-										<div class="th-wrap">User_id 
+										<div class="th-wrap">User_id
 											<span class="icon is-small" style="display: none;">
 												<i class="mdi mdi-arrow-up"></i>
 											</span>
 										</div>
 									</th>
 									<th class="">
-										<div class="th-wrap"> 
+										<div class="th-wrap">
 											<span class="icon is-small" style="display: none;">
 												<i class="mdi mdi-arrow-up"></i>
 											</span>
@@ -123,15 +123,15 @@
 									<td class="has-no-head-mobile is-image-cell">
 										<a :href="'/profiles/' + user.username">
 											<div class="image">
-												<img 
-												:src="user.passport_path" 
+												<img
+												:src="user.passport_path"
 												class="is-rounded"
-												style="width: 24px; height: 24px" 
+												style="width: 24px; height: 24px"
 											>
 											</div>
 										</a>
 									</td>
-									<td data-label="Name" class="" 
+									<td data-label="Name" class=""
 										v-text="user.f_name + ' ' + user.m_name + ' ' + user.l_name "
 									></td>
 									<td data-label="Gender" v-text="user.gender" class=""></td>
@@ -150,21 +150,21 @@
 												</span>
 											</button>
 										</div>
-									</td> 
+									</td>
 								</tr>
 							</tbody>
 						</table>
 					  	<infinite-loading :identifier="infiniteId" @infinite="fetch"></infinite-loading>
-					</div> 
+					</div>
 					<div class="level">
 						<div class="level-left">
 							<div class="level-item">
 								<span>Total Users: <span v-text="total"></span></span>
 							</div>
-						</div> 
+						</div>
 						<div class="level-right">
 							<div class="level-item">
-								
+
 							</div>
 						</div>
 					</div>

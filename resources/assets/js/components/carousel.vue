@@ -2,7 +2,7 @@
 	<div>
 		<slot></slot>
 	</div>
-	
+
 </template>
 
 <script>
@@ -13,6 +13,8 @@
 		props: {
 			autoplay: {default: false},
 			wraparound: {default: false},
+			pageDots: {default: true},
+			prevNextButtons: {default: true},
 		},
 
 		mounted() {
@@ -21,6 +23,8 @@
 				autoPlay: this.autoplay,
 				contain: true,
 				cellAlign: 'left',
+                pageDots: this.pageDots,
+                prevNextButtons: this.prevNextButtons,
 				// groupCells: true
 			});
 		}

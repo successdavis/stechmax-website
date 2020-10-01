@@ -12,6 +12,7 @@ $factory->define(Client::class, function (Faker $faker) {
        'gender'         => $faker->name('male'),
        'phone'          => $faker->phoneNumber,
        'alt_phone'     => $faker->phoneNumber,
+       'email'          => $faker->email,
    ];
 });
 
