@@ -27,7 +27,7 @@ class ClienttestimonialController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**

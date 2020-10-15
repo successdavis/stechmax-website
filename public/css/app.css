@@ -158,6 +158,10 @@ THEME COLOR SETUP
   line-height: 2em;
 }
 
+.mr {
+  margin: 0;
+}
+
 .mb-reset {
   margin-bottom: 0;
 }
@@ -172,6 +176,10 @@ THEME COLOR SETUP
 
 .mb-4 {
   margin-bottom: 4em;
+}
+
+.mt-reset {
+  margin-top: 0;
 }
 
 .mt-1 {
@@ -204,6 +212,10 @@ THEME COLOR SETUP
 
 .pb-4 {
   padding-bottom: 4em;
+}
+
+.pt-reset {
+  padding-top: 0;
 }
 
 .pt-1 {
@@ -1910,6 +1922,10 @@ a.navbar-burger.burger {
 
 .pre-formatted {
   white-space: pre-wrap;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 .aside {
@@ -15821,7 +15837,7 @@ label.panel-block:hover {
 }
 
 /*!
- * Font Awesome Free 5.14.0 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 
@@ -16084,10 +16100,6 @@ readers do not read off random characters that represent icons */
 
 .fa-adn:before {
   content: "\F170";
-}
-
-.fa-adobe:before {
-  content: "\F778";
 }
 
 .fa-adversal:before {
@@ -17140,6 +17152,10 @@ readers do not read off random characters that represent icons */
 
 .fa-cloud-upload-alt:before {
   content: "\F382";
+}
+
+.fa-cloudflare:before {
+  content: "\E07D";
 }
 
 .fa-cloudscale:before {
@@ -18466,6 +18482,10 @@ readers do not read off random characters that represent icons */
   content: "\F3AD";
 }
 
+.fa-guilded:before {
+  content: "\E07E";
+}
+
 .fa-guitar:before {
   content: "\F7A6";
 }
@@ -18698,6 +18718,10 @@ readers do not read off random characters that represent icons */
   content: "\F1DA";
 }
 
+.fa-hive:before {
+  content: "\E07F";
+}
+
 .fa-hockey-puck:before {
   content: "\F453";
 }
@@ -18870,12 +18894,20 @@ readers do not read off random characters that represent icons */
   content: "\F05A";
 }
 
+.fa-innosoft:before {
+  content: "\E080";
+}
+
 .fa-instagram:before {
   content: "\F16D";
 }
 
 .fa-instagram-square:before {
   content: "\E055";
+}
+
+.fa-instalod:before {
+  content: "\E081";
 }
 
 .fa-intercom:before {
@@ -19570,6 +19602,10 @@ readers do not read off random characters that represent icons */
   content: "\F248";
 }
 
+.fa-octopus-deploy:before {
+  content: "\E082";
+}
+
 .fa-odnoklassniki:before {
   content: "\F263";
 }
@@ -19752,6 +19788,10 @@ readers do not read off random characters that represent icons */
 
 .fa-pepper-hot:before {
   content: "\F816";
+}
+
+.fa-perbyte:before {
+  content: "\E083";
 }
 
 .fa-percent:before {
@@ -21314,6 +21354,10 @@ readers do not read off random characters that represent icons */
   content: "\F5CA";
 }
 
+.fa-uncharted:before {
+  content: "\E084";
+}
+
 .fa-underline:before {
   content: "\F0CD";
 }
@@ -21518,6 +21562,14 @@ readers do not read off random characters that represent icons */
   content: "\F228";
 }
 
+.fa-vest:before {
+  content: "\E085";
+}
+
+.fa-vest-patches:before {
+  content: "\E086";
+}
+
 .fa-viacoin:before {
   content: "\F237";
 }
@@ -21638,6 +21690,10 @@ readers do not read off random characters that represent icons */
   content: "\F494";
 }
 
+.fa-watchman-monitoring:before {
+  content: "\E087";
+}
+
 .fa-water:before {
   content: "\F773";
 }
@@ -21736,6 +21792,10 @@ readers do not read off random characters that represent icons */
 
 .fa-wizards-of-the-coast:before {
   content: "\F730";
+}
+
+.fa-wodu:before {
+  content: "\E088";
 }
 
 .fa-wolf-pack-battalion:before {
@@ -21864,7 +21924,7 @@ readers do not read off random characters that represent icons */
 }
 
 /*!
- * Font Awesome Free 5.14.0 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 
@@ -21873,8 +21933,8 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?89bd2e38475e441a5cd70f663f921d61);
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?89bd2e38475e441a5cd70f663f921d61) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff2?c500da19d776384ba69573ae6fe274e7) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff?ee09ad7553b8ad3d81150d609d5341a0) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.ttf?781e85bb50c8e8301c30de56b31b1f04) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.svg?03ba7cb710104df27f1c9c46d64bee4e) format("svg");
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?8ac3167427b1d5d2967646bd8f7a0587);
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?8ac3167427b1d5d2967646bd8f7a0587) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff2?8e1ed89b6ccb8ce41faf5cb672677105) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff?4451e1d86df7491dd874f2c41eee1053) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.ttf?205f07b3883c484f27f40d21a92950d4) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.svg?664de3932dd6291b4b8a8c0ddbcb4c61) format("svg");
 }
 
 .fa,

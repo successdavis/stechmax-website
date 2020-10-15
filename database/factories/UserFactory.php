@@ -3,7 +3,7 @@
 use Faker\Generator as Faker;
 
 
-// A user can also be a client
+// A user can can be a student or an admin
 // One Account for all purposes.
 $factory->define(App\User::class, function (Faker $faker) {
     return [

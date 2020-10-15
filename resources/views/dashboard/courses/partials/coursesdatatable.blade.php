@@ -64,40 +64,40 @@
 									<!----><!---->
 								</select>
 							</span> <!---->
-						</div> 
+						</div>
 						<div class="control">
 							<button class="button is-primary">
 								<span class="icon is-small"><i class="fas fa-arrow-up"></i></span>
 							</button>
 						</div>
 					</div>
-				</div> 
-				<!----> 
-				<div class="table-wrapper">
+				</div>
+				<!---->
+				<div class="table-wrapper has-mobile-cards">
 					<table class="table is-striped has-mobile-cards is-hoverable">
 						<thead>
 							<tr>
 								<th class="">
-									<div class="th-wrap"> 
+									<div class="th-wrap">
 										<span class="icon is-small" style="display: none;">
 											<i class="mdi mdi-arrow-up"></i>
 										</span>
 									</div>
 								</th>
 								<th class="is-current-sort is-sortable">
-									<div class="th-wrap">Title 
+									<div class="th-wrap">Title
 										<span class="icon is-small"><i class="fas fa-arrow-up"></i></span>
 									</div>
 								</th>
 								<th class="is-sortable">
-									<div class="th-wrap">Type 
+									<div class="th-wrap">Type
 										<span class="icon is-small" style="display: none;">
 											<i class="mdi mdi-arrow-up"></i>
 										</span>
 									</div>
 								</th>
 								<th class="is-sortable">
-									<div class="th-wrap">Duration 
+									<div class="th-wrap">Duration
 										<span class="icon is-small" style="display: none;">
 											<i class="mdi mdi-arrow-up"></i>
 										</span>
@@ -118,7 +118,7 @@
 									</div>
 								</th>
 								<th class="">
-									<div class="th-wrap"> 
+									<div class="th-wrap">
 										<span class="icon is-small" style="display: none;">
 											<i class="mdi mdi-arrow-up"></i>
 										</span>
@@ -130,10 +130,10 @@
 							<tr draggable="false" class="" v-for="(course, index) in items">
 								<td class="has-no-head-mobile is-image-cell">
 									<div class="image">
-										<img 
-										:src="course.thumbnail_path" 
+										<img
+										:src="course.thumbnail_path"
 										class="is-rounded"
-										style="width: 24px; height: 24px" 
+										style="width: 24px; height: 24px"
 									>
 									</div>
 								</td>
@@ -158,21 +158,21 @@
 											</span>
 										</a>
 									</div>
-								</td> 
+								</td>
 							</tr>
 						</tbody>
 					</table>
 				  	{{-- <infinite-loading :identifier="infiniteId" @infinite="fetch"></infinite-loading> --}}
-				</div> 
+				</div>
 				<div class="level">
 					<div class="level-left">
 						<div class="level-item">
 							<span>Total Courses: <span v-text="total"></span></span>
 						</div>
-					</div> 
+					</div>
 					<div class="level-right">
 						<div class="level-item">
-							
+
 						</div>
 					</div>
 				</div>

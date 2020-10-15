@@ -1,23 +1,22 @@
 <script>
-    import collection from '../mixins/collection';
     import InfiniteLoading from 'vue-infinite-loading';
     import _ from 'lodash';
-    // import NewClient from './NewClient.vue';
+    import Client from '../components/client.vue';
     import NewClient from '../pages/NewClient.vue';
+    import collection from '../mixins/collection';
+    export default {
 
-    export  default {
-        components: {
-            InfiniteLoading,
-            NewClient,
-        },
+        components: { Client, NewClient, InfiniteLoading},
+
+        mixins: [collection],
+
         data() {
             return {
-                addingClient: false,
+                addingClient:'',
                 isLoading: '',
                 sorttab: '',
                 infiniteId: +new Date(),
                 dataSet: false,
-                items: [],
                 total: '',
                 pagination: {
                     meta: { to: 1, from: 1 }
@@ -29,12 +28,14 @@
                 order: 'asc',
                 page: 1,
                 search: ''
-            };
+            }
         },
 
         created() {
             Event.$on('newClientCreated', (client) => this.items.unshift(client));
+            Event.$on('clientupdated', (client) => this.clientupdated());
         },
+
         methods: {
             fetch($state) {
                 axios.get(`/clients`, {
@@ -48,7 +49,7 @@
                 }).then(({data}) => {
                     console.log(data)
                     if (data.data.length) {
-                        // this.total = data.total,
+                        this.total = data.total,
                         this.page += 1;
                         this.items.push(...data.data);
                         $state.loaded();
@@ -58,6 +59,17 @@
                         $state.complete();
                     }
                 });
+            },
+
+            deleteClient(client, index) {
+                axios.delete('api/deleteclient/' + client.id)
+                .then(() => {
+                    flash('Client deleted successfully', 'success');
+                    this.remove(index);
+                    this.total -=1;
+                }).catch(() => {
+                    flash("Sorry! we couldn\'t delete this client", 'failed' );
+                })
             },
 
             clientSearch: _.debounce(function(page) {
@@ -86,10 +98,32 @@
             updatesorttab(tab) {
                 this.sorttab = tab
             },
+
+            generatelink(client, index) {
+                axios.get(`generateclienttoken/${client.id}`)
+                .then (data => {
+                    console.log(data.data);
+                    this.doCopy(window.location.origin + data.data);
+                })
+                .catch(() => {
+                    console.log('error');
+                    flash('error generating link')
+                })
+            },
+
+            doCopy(message) {
+                this.$copyText(message).then(function (e) {
+                  flash('Copied')
+                  console.log(e)
+                }, function (e) {
+                  alert('Can not copy')
+                  console.log(e)
+                })
+            },
+            clientupdated() {
+                this.reset();
+                this.fetch();
+            }
         }
     }
 </script>
-
-<style scoped>
-
-</style>

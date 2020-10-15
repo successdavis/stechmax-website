@@ -69,40 +69,40 @@
 									<!----><!---->
 								</select>
 							</span> <!---->
-						</div> 
+						</div>
 						<div class="control">
 							<button class="button is-primary">
 								<span class="icon is-small"><i class="fas fa-arrow-up"></i></span>
 							</button>
 						</div>
 					</div>
-				</div> 
-				<!----> 
-				<div class="table-wrapper">
+				</div>
+				<!---->
+				<div class="table-wrapper has-mobile-cards">
 					<table class="table is-striped has-mobile-cards is-hoverable">
 						{{-- <thead>
 							<tr>
 								<th class="">
-									<div class="th-wrap"> 
+									<div class="th-wrap">
 										<span class="icon is-small" style="display: none;">
 											<i class="mdi mdi-arrow-up"></i>
 										</span>
 									</div>
 								</th>
 								<th class="is-current-sort is-sortable">
-									<div class="th-wrap">Title 
+									<div class="th-wrap">Title
 										<span class="icon is-small"><i class="fas fa-arrow-up"></i></span>
 									</div>
 								</th>
 								<th class="is-sortable">
-									<div class="th-wrap">Type 
+									<div class="th-wrap">Type
 										<span class="icon is-small" style="display: none;">
 											<i class="mdi mdi-arrow-up"></i>
 										</span>
 									</div>
 								</th>
 								<th class="is-sortable">
-									<div class="th-wrap">Duration 
+									<div class="th-wrap">Duration
 										<span class="icon is-small" style="display: none;">
 											<i class="mdi mdi-arrow-up"></i>
 										</span>
@@ -123,7 +123,7 @@
 									</div>
 								</th>
 								<th class="">
-									<div class="th-wrap"> 
+									<div class="th-wrap">
 										<span class="icon is-small" style="display: none;">
 											<i class="mdi mdi-arrow-up"></i>
 										</span>
@@ -134,7 +134,7 @@
 						<thead>
 				            <tr>
 				            	<th v-for="t_head in headers" class="is-current-sort is-sortable">
-									<div class="th-wrap"><span v-text="t_head.name"></span> 
+									<div class="th-wrap"><span v-text="t_head.name"></span>
 										<span v-if="t_head.name === 'Name'" class="icon is-small" @click.prevent="sortByColumn(t_head.sort)">
 											<i v-if="order === 'asc' " class="mdi mdi-arrow-up"></i>
 				                            <i v-else class="mdi mdi-arrow-down"></i>
@@ -161,21 +161,21 @@
 										</a>
 										<invoice-payments :modal="data.id + 'a'" :selectedinvoice="data"></invoice-payments>
 									</div>
-								</td> 
+								</td>
 				            </tr>
 				        </tbody>
 					</table>
-				</div> 
+				</div>
 				<div class="level">
 					<div class="level-left">
 						<div class="level-item">
 							<span>Total Invoices: <span v-text="dataSet.total"></span></span>
 						</div>
-					</div> 
+					</div>
 					<div class="level-right">
 						<div class="level-item">
 					        <paginator :dataSet="dataSet" @changed="fetch"></paginator>
-							
+
 						</div>
 					</div>
 				</div>

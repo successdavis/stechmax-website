@@ -45,6 +45,12 @@ import videojs from 'video.js'
 videojs.registerPlugin('videojs-playlist', videojsPlaylist);
 
 
+//Vue Clipboard
+import VueClipboard from 'vue-clipboard2'
+
+Vue.use(VueClipboard)
+
+
 import 'buefy/dist/buefy.css'
 
 Vue.use(Input)

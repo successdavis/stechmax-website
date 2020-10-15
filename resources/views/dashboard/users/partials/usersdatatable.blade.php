@@ -65,7 +65,7 @@
 						</div>
 					</div>
 					<!---->
-					<div class="table-wrapper">
+					<div class="table-wrapper has-mobile-cards">
 						<table class="table is-striped has-mobile-cards is-hoverable">
 							<thead>
 								<tr>

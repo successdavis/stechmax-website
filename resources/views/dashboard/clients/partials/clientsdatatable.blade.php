@@ -1,9 +1,9 @@
-<clientsdatatable inline-template>
+<clients-datatable inline-template>
 	<div class="card has-table has-mobile-sort-spaced">
 		<header class="card-header card-cen-v">
 			<p class="card-header-title">
 				<span class="icon"><i class="fas fa-users"></i></span>
-				<span> Clients Datatable</span>
+				<span> Clients Record Book</span>
 			</p>
 			<button type="button" class="button is-small align-sf-ct">
 				<span class="icon"><i class="mdi mdi-refresh default"></i></span>
@@ -15,9 +15,9 @@
 				<div class="level-left">
 					<div class="level-item">
 						<div class="buttons has-addons">
-							<button @click="sortByColumn('username')" class="button" :class="sorttab == 'all' ? 'is-active' : ''">All</button>
+							<button @click="sortByColumn('fullname')" class="button" :class="sorttab == 'all' ? 'is-active' : ''">All</button>
 							<button @click="sortByColumn('created_at', 'desc')" class="button" :class="sorttab == 'recent' ? 'is-active' : ''">Recent</button>
-							<button @click="addingClient = !addingClient" class="button is-primary">New Client</button>
+                            <new-client></new-client>
 						</div>
 					</div>
 				</div>
@@ -26,7 +26,7 @@
 						<form>
 							<div class="field has-addons">
 								<div class="control">
-									<input @keyUp="clientSearch" v-model="search" type="text" placeholder="Name | Phone | Email" class="input">
+									<input @keyUp="clientSearch" v-model="search" type="text" placeholder="Name | Phone" class="input">
 								</div>
 								<div class="control">
 									<button type="submit" class="button is-primary" :class="isLoading ? 'is-loading' : '' ">
@@ -39,7 +39,6 @@
 				</div>
 			</div>
 		</div>
-        <new-client v-if="addingClient"></new-client>
 		<div class="card-content">
 			<div>
 				<!---->
@@ -53,7 +52,6 @@
 										<option value="[object Object]">Name</option>
 										<option value="[object Object]">Gender</option>
 										<option value="[object Object]">Phone</option>
-										<option value="[object Object]">Alt Phone</option>
 										<option value="[object Object]">Email</option>
 										<!----><!---->
 									</select>
@@ -67,8 +65,8 @@
 						</div>
 					</div>
 					<!---->
-					<div class="table-wrapper">
-						<table class="table is-striped has-mobile-cards is-hoverable">
+					<div class="table-wrapper has-mobile-cards">
+						<table class="table has-mobile-cards is-hoverable">
 							<thead>
 								<tr>
 									<th class="">
@@ -76,6 +74,11 @@
 											<span class="icon is-small" style="display: none;">
 												<i class="mdi mdi-arrow-up"></i>
 											</span>
+										</div>
+									</th>
+									<th class="is-current-sort is-sortable">
+										<div class="th-wrap">Title
+											<span class="icon is-small"><i class="fas fa-arrow-up"></i></span>
 										</div>
 									</th>
 									<th class="is-current-sort is-sortable">
@@ -121,24 +124,53 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr draggable="false" class="" v-for="client in items">
+								<tr draggable="false" class="client" v-for="(client, index) in items" :key="client.id">
 									<td class="has-no-head-mobile is-image-cell">
-                                        <div class="image">
-                                            <client-passport :client="client"></client-passport>
-
-
-                                        </div>
+										<client-passport :client="client"></client-passport>
 									</td>
 									<td data-label="Name" class=""
-										v-text="client.fullname"
+										v-text="client.title "
+									></td>
+									<td data-label="Name" class=""
+										v-text="client.fullname "
 									></td>
 									<td data-label="Gender" v-text="client.gender" class=""></td>
 									<td data-label="Phone" v-text="client.phone" class=""></td>
 									<td data-label="Phone" v-text="client.alt_phone" class=""></td>
-									<td data-label="Phone" v-text="client.email" class=""></td>
-
-									<td class="is-actions-cell">
+									<td data-label="User_id" class="">
+										<small title="Sep 19, 2018" class="has-text-grey is-abbr-like"
+										v-text="client.email"></small>
+									</td>
+									<td class="is-actions-cell" style="padding-top: 0; min-width: 100px;">
 										<div class="buttons is-right">
+{{--                                            <span class="icon is-small pointer">--}}
+{{--                                                <i class="pointer mdi mdi-pencil"></i>--}}
+{{--                                            </span>--}}
+                                            <new-client :client="client" umode="edit" :modal="'edit' + index"></new-client>
+
+                                            <optionsbtn position="is-right">
+                                                <div>
+                                                    <table class="table is-hoverable">
+                                                        <tbody>
+                                                            <tr class="pointer" @click="deleteClient(client, index)">
+                                                                <td><i class="mdi mdi-trash-can"></i></td>
+                                                                <td>Delete</td>
+                                                            </tr>
+                                                            <tr class="pointer">
+                                                                <td><i class="mdi mdi-android-messages"></i></td>
+                                                                <td>Message</td>
+                                                            </tr>
+                                                            <tr class="pointer" @click="generatelink(client, index)">
+                                                                <td><i class="mdi mdi-file-link"></i></td>
+                                                                <td>Generate Link</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </optionsbtn>
+
+
+
 
 										</div>
 									</td>
@@ -150,7 +182,7 @@
 					<div class="level">
 						<div class="level-left">
 							<div class="level-item">
-								<span>Total Clients: <span v-text="total"></span></span>
+								<span>Total Users: <span v-text="total"></span></span>
 							</div>
 						</div>
 						<div class="level-right">
@@ -163,4 +195,4 @@
 			</div>
 		</div>
 	</div>
-</clientsdatatable>
+</clients-datatable>

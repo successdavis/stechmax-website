@@ -188,6 +188,7 @@ Route::post('api/client/{client}/image', 'ClientController@storePassport')->midd
 Route::delete('api/deleteclient/{client}', 'ClientController@destroy')->middleware('admin');
 Route::patch('api/updateclient/{client}', 'ClientController@update')->middleware('admin');
 Route::get('/clients', 'ClientController@index')->middleware('admin')->name('client.index');
+Route::get('/generateclienttoken/{client}', 'ClientController@generatetoken')->middleware('admin')->name('client.generatetoken');
 
 Route::get('/courses/{subject}/{course}/subscription', 'Payment\PaymentMethodController@index')->name('course_subscription.index')->middleware('auth', 'must-be-confirmed');
 Route::post('/courses/{subject}/{course}/subscription', 'Payment\PaymentMethodController@store')->name('course_subscription.store')->middleware('auth', 'must-be-confirmed');

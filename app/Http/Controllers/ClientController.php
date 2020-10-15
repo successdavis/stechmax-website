@@ -45,18 +45,22 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         request()->validate([
+            'title'         => 'required',
             'fullname'      => 'required',
             'gender'        => 'required',
-            'phone'         => 'required',
-            'email'         => 'email:rfc,dns|nullable',
+            'phone'         => 'required|min:11|max:11',
+            'alt_phone'     => 'nullable|min:11|max:11',
+            'email'         => 'email:rfc|nullable|unique:clients',
         ]);
 
         $client = new Client();
+        $client->title   = $request->title;
         $client->fullname   = $request->fullname;
         $client->gender     = $request->gender;
         $client->phone      = $request->phone;
-        $client->alt_phone  =  $request->alt_phone;
-        $client->email      =  $request->email;
+        $client->alt_phone  = $request->alt_phone;
+        $client->email      = $request->email;
+        $client->note      =  $request->note;
 
         $client->save();
 
@@ -97,13 +101,14 @@ class ClientController extends Controller
         request()->validate([
             'fullname'      => 'required',
             'gender'        => 'required',
-            'phone'         => 'required',
+            'phone'         => 'required|min:11|max:11',
+            'alt_phone'     => 'nullable|min:11|max:11',
         ]);
 
         $client->fullname   = $request->fullname;
         $client->gender     = $request->gender;
         $client->phone      = $request->phone;
-        $client->alt_phone  =  $request->alt_phone;
+        $client->alt_phone  = $request->alt_phone;
 
         $client->save();
 
@@ -138,5 +143,10 @@ class ClientController extends Controller
         }
 
         return response([], 204);
+    }
+
+    public function generatetoken(Client $client) {
+        $client->generateTestimonialToken();
+        return '/clienttestimonial/' . $client->testimonial_token;
     }
 }

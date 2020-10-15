@@ -8,8 +8,9 @@ use Faker\Generator as Faker;
 
 $factory->define(Client::class, function (Faker $faker) {
    return [
+       'title'          => 'Mr.',
        'fullname'       => $faker->name,
-       'gender'         => $faker->name('male'),
+       'gender'         => 'M',
        'phone'          => $faker->phoneNumber,
        'alt_phone'     => $faker->phoneNumber,
        'email'          => $faker->email,
