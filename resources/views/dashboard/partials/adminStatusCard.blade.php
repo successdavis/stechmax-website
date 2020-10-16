@@ -195,3 +195,26 @@
 		</div>
 	</div>
 </div>
+<div class="tile is-ancestor">
+
+{{--    Display list of recent messages --}}
+	<div class="tile is-parent">
+		<div class="card is-card-widget tile is-child">
+			<header class="card-header card-cen-v">
+				<p class="card-header-title">
+					<span class="icon"><i class="mdi mdi-email"></i></i></span>
+					<span>Messages</span>
+				</p>
+				<button type="button" class="button is-small align-sf-ct">
+					<span class="icon"><i class="fas fa-history"></i></span>
+				</button>
+			</header>
+			<div class="card-content" style="max-height: 400px; overflow-y: auto">
+                @foreach($messages as $message)
+                    <message :message="{{$message}}"></message>
+                @endforeach
+
+			</div>
+		</div>
+	</div>
+</div>

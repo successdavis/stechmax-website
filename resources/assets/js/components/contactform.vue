@@ -1,15 +1,15 @@
 <template>
     <div class="contact-form" id="contact-form">
-        <div v-if="sent">
+        <div v-if="sent" :class="sent ? '' : 'disappear' ">
             <div class="section">
-                <p class="title">Thank you. You will receive a call or mail from us shortly</p>
+                <p class="title">Thank you. We acknowledge receipt of your message You'll hear from us shortly</p>
             </div>
         </div>
-        <div v-else class="section contact-form_form">
+        <div :class="sent ? 'disappear' : '' "  class="section contact-form_form">
             <div class="field">
               <label class="label">Full Name</label>
               <div class="control">
-                <input v-model="form.fullname" class="input is-medium" type="text" placeholder="Text input">
+                <input v-model="form.fullname" class="input is-medium" type="text">
               </div>
               <p class="help-text" id="courseTitleHelpText" v-if="form.errors.has('fullname')" v-text="form.errors.get('fullname')"></p>
             </div>
@@ -95,5 +95,9 @@
     .contact-form_form {
         max-width: 50%;
         width: 100%;
+    }
+
+    .disappear {
+        opacity: 0;
     }
 </style>

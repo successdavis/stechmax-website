@@ -73,6 +73,7 @@ Vue.component('image-carousel', require('./components/carousel.vue').default);
 Vue.component('paystack-payment', require('./components/paystack.vue').default);
 Vue.component('clients-datatable', require('./pages/Clients.vue').default);
 Vue.component('optionsbtn', require('./components/optionsbtn.vue').default);
+Vue.component('message', require('./components/message.vue').default);
 
 
 const app = new Vue({

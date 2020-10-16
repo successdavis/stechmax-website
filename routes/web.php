@@ -157,6 +157,8 @@ Route::get('/profiles/{user}', 'ProfileController@show')->name('profile.show');
 Route::get('/profiles/{user}/notifications', 'UserNotificationController@index');
 Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotificationController@destroy');
 
+Route::patch('mark-message-as-read/{message}', 'MessageController@update')->middleware('admin');
+
 Route::get('/users/generatecmdcard/{user}', 'PdfController@index');
 Route::get('/users/activeusers', 'PdfController@activeusers')->middleware('admin')->name('permitcards');
 

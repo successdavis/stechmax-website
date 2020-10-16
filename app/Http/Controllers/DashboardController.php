@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Aloha\Twilio\Twilio;
 use App\Activity;
+use App\Message;
 use App\Subscription;
 use App\User;
 use App\payments;
@@ -36,9 +37,10 @@ class DashboardController extends Controller
         $experiences = auth()->user()->experience()->latest()->limit(10)->get();
         $mostRecentUsers = User::latest()->limit(10)->get();
         $adminActivities = Activity::adminFeed();
+        $messages = Message::latest()->get();
         return view(
             'dashboard.index',
-            compact('totalUsers','totalUsersWithSub','countActiveSub','monthlyTotalPay','yearTotalPay','experiences', 'mostRecentUsers', 'adminActivities')
+            compact('totalUsers','totalUsersWithSub','countActiveSub','monthlyTotalPay','yearTotalPay','experiences', 'mostRecentUsers', 'adminActivities', 'messages')
         );
     }
 }

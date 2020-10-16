@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Message;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -31,17 +32,19 @@ class MessageController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return void
+     * @return Message
      */
     public function store(Request $request)
     {
         request()->validate([
+            'fullname'   => 'required|string',
             'message'   => 'required|string',
             'phone'     => 'nullable|min:11|max:11',
             'email'         => 'email:rfc',
         ]);
 
         return Message::addMessage([
+            'fullname'      => $request->fullname,
             'message'       => $request->message,
             'phone'         => $request->phone,
             'email'         => $request->email,
@@ -75,11 +78,14 @@ class MessageController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Message  $message
-     * @return \Illuminate\Http\Response
+//     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Message $message)
     {
-        //
+        $message->read_at = Carbon::now();
+        $message->save();
+
+        return $message;
     }
 
     /**
