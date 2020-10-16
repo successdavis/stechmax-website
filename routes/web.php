@@ -219,6 +219,8 @@ Route::get('/build-a-website', 'StaticPageController@websiteDesign');
 
 Route::get('/paid/submit_details', 'PaymentController@create')->name('pay.submitDetails');
 
+Route::post('/send-a-message', 'MessageController@store')->name('message.stor');
+
 
 Route::get('/payment/callback', 'PaystackSubscriptionController@handleGatewayCallback');
 Route::get('/paid/{course}', 'PaymentController@paymentSuccessful');

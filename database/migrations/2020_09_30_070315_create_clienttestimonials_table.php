@@ -16,7 +16,9 @@ class CreateClienttestimonialsTable extends Migration
         Schema::create('clienttestimonials', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('testimonial');
-            $table->smallInteger('rate');
+            $table->text('suggestion');
+            $table->smallInteger('recommendation_rate');
+            $table->smallInteger('satisfaction_rate');
             $table->unsignedInteger('client_id');
             $table->timestamps();
         });

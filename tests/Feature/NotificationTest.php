@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Message;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,7 +19,7 @@ class NotificationTest extends TestCase
 
         $this->signIn();
     }
-    
+
     /** @test */
     public function a_notification_is_prepared_when_a_subscribe_thread_receives_a_new_reply_that_is_not_by_the_current_user()
     {
@@ -31,11 +32,11 @@ class NotificationTest extends TestCase
             'user_id' => auth()->id(),
             'body' => 'Some reply here'
         ]);
-        
-        // the user should not receie a notification  
+
+        // the user should not receie a notification
         $this->assertCount(0, auth()->user()->fresh()->notifications);
 
-        // but if this reply is added by somebody else 
+        // but if this reply is added by somebody else
         $thread->addReply([
             'user_id' => create('App\User')->id,
             'body' => 'Some reply here'
@@ -45,12 +46,33 @@ class NotificationTest extends TestCase
     }
 
     /** @test */
+    public function a_notification_is_prepared_only_for_all_admins_when_a_message_is_sent()
+    {
+        $this->signIn(factory('App\User')->states('administrator')->create());
+
+        $user = create('App\User');
+        // there should be zero notification for the user on this thread
+        $this->assertCount(0, auth()->user()->notifications);
+
+        Message::addMessage([
+            'message'       => 'hello world',
+            'phone'         => '09050635733',
+            'email'         => 'johndoe@gmail.com',
+        ]);
+
+        // the user should not receive a notification
+
+        $this->assertCount(1, auth()->user()->fresh()->notifications);
+        $this->assertCount(0, $user->fresh()->notifications);
+    }
+
+    /** @test */
     public function a_user_can_fetch_their_unread_notifications()
     {
         create(DatabaseNotification::class);
 
        $this->assertCount(
-            1, 
+            1,
             $this->getJson("/profiles/" . auth()->user()->username . "/notifications")->json());
     }
 

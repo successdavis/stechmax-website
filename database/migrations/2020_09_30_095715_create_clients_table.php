@@ -22,7 +22,7 @@ class CreateClientsTable extends Migration
             $table->string('image_path')->nullable();
             $table->string('alt_phone')->nullable();
             $table->string('gender');
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->string('testimonial_token', 25)->nullable()->unique();
             $table->timestamps();
         });

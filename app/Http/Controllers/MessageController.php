@@ -31,11 +31,21 @@ class MessageController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'message'   => 'required|string',
+            'phone'     => 'nullable|min:11|max:11',
+            'email'         => 'email:rfc',
+        ]);
+
+        return Message::addMessage([
+            'message'       => $request->message,
+            'phone'         => $request->phone,
+            'email'         => $request->email,
+        ]);
     }
 
     /**

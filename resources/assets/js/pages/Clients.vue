@@ -1,12 +1,11 @@
 <script>
     import InfiniteLoading from 'vue-infinite-loading';
     import _ from 'lodash';
-    import Client from '../components/client.vue';
     import NewClient from '../pages/NewClient.vue';
     import collection from '../mixins/collection';
     export default {
 
-        components: { Client, NewClient, InfiniteLoading},
+        components: {NewClient, InfiniteLoading},
 
         mixins: [collection],
 
@@ -107,7 +106,7 @@
                 })
                 .catch(() => {
                     console.log('error');
-                    flash('error generating link')
+                    flash('error generating link','failed')
                 })
             },
 

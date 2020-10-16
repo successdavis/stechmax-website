@@ -8,9 +8,9 @@
             <div class="dropdown-content">
                 <p class="dropdown-item" v-if="! notifications.length">No Notifications</p>
               <div class="dropdown-item" v-for="notification in notifications">
-                    <a :href="notification.data.link" 
-                        v-text="notification.data.message" 
-                        @click="markAsRead(notification)">        
+                    <a :href="notification.data.link"
+                        v-text="notification.data.message"
+                        @click="markAsRead(notification)">
                     </a>
               </div>
             </div>
@@ -22,14 +22,14 @@
 <script>
     export default {
         data() {
-            return { 
+            return {
                 isActive: false,
                 notifications: false
             }
         },
 
         created() {
-            axios.get("/profiles/" + window.App.user.email + "/notifications")
+            axios.get("/profiles/" + window.App.user.username + "/notifications")
                 .then(response => this.notifications = response.data);
         },
 
@@ -39,7 +39,7 @@
             },
             // "/profiles/{$user->email}/notifications/" . $user->unreadNotifications->first()->id
             markAsRead(notification) {
-                axios.delete('/profiles/' + window.App.user.email + '/notifications/' + notification.id)
+                axios.delete('/profiles/' + window.App.user.username + '/notifications/' + notification.id)
             }
         }
     }

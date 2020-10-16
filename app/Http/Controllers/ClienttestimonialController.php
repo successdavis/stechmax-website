@@ -34,13 +34,15 @@ class ClienttestimonialController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+//     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         request()->validate([
-           'rate'           => 'required',
-            'testimonial'   => 'required|spamfree',
+            'recommendation_rate'=> 'required',
+            'satisfaction_rate' => 'required',
+            'testimonial'       => 'required|spamfree',
+            'suggestion'        => 'nullable|spamfree',
         ]);
         try {
             $client = Client::where('testimonial_token', request('token'))
@@ -50,14 +52,25 @@ class ClienttestimonialController extends Controller
                 ->with('flash', 'Invalid URL.');
         }
 
-        return $client->addTestimony($request->testimonial, $request->rate);
+        $result = $client->addTestimony($request->testimonial, $request->rate);
+
+        if(request()->wantsJson()) {
+            return $result;
+        }
+
+        $client->deleteToken();
+        $thanks = 'Thanks';
+
+        session(['thanks' => $client->fullname . ', Thank you for your support']);
+//        return back()->with('flash', 'thank you');
+        return view('singlepages.clienttestimonial');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\clienttestimonial  $clienttestimonial
-     * @return \Illuminate\Http\Response
+//     * @return \Illuminate\Http\Response
      */
     public function show(clienttestimonial $clienttestimonial)
     {
@@ -69,7 +82,9 @@ class ClienttestimonialController extends Controller
                 ->with('flash', 'Invalid URL.');
         }
 
-        return view('singlepages.clienttestimonial');
+        $token = request('token');
+
+        return view('singlepages.clienttestimonial', compact('token'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Client extends Model
 {
@@ -23,10 +24,17 @@ class Client extends Model
         return true;
     }
 
+    public function deleteToken() {
+        $this->testimonial_token = '';
+        $this->save();
+    }
+
     public function addTestimony($testimony, $rate) {
-        $this->testimonials()->create([
-            'testimonial' => $testimony,
-            'rate' => $rate
+        return $this->testimonials()->create([
+            'testimonial'           => request('testimonial'),
+            'recommendation_rate'   => request('recommendation_rate'),
+            'satisfaction_rate'     => request('satisfaction_rate'),
+            'suggestion'            => request('suggestion'),
         ]);
     }
 
