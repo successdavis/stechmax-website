@@ -151,7 +151,7 @@
                 mode: this.umode,
                 processing: false,
                 error: '',
-                titles: ['Mr.', 'Dr.','Bar.','Mrs.','Miss','Master','Sir','Prof'],
+                titles: ['Mr.', 'Dr.','Bar.','Mrs.','Miss','Master','Sir','Prof','Rev.'],
                 form: new Form({
                     title: this.client ? this.client.title : '',
                     fullname: this.client ? this.client.fullname : '',

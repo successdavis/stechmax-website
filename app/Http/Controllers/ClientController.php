@@ -48,7 +48,7 @@ class ClientController extends Controller
             'title'         => 'required',
             'fullname'      => 'required',
             'gender'        => 'required',
-            'phone'         => 'required|min:11|max:11',
+            'phone'         => 'required|min:11|max:11|unique:clients',
             'alt_phone'     => 'nullable|min:11|max:11',
             'email'         => 'email:rfc|nullable|unique:clients',
         ]);

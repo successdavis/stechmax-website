@@ -92,10 +92,13 @@
         justify-content: center;
     }
 
-    .contact-form_form {
-        max-width: 50%;
-        width: 100%;
+    @media (min-width: 769px) {
+        .contact-form_form {
+            max-width: 50%;
+            width: 100%;
+        }
     }
+
 
     .disappear {
         opacity: 0;
