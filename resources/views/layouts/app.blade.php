@@ -1,5 +1,5 @@
 <?php
-    $displayMenu = isset($displayMenu) ? $displayMenu : false;  
+    $displayMenu = isset($displayMenu) ? $displayMenu : false;
     $pageTitle = isset($pageTitle) ? $pageTitle : 'Welcome Stechmax';
 ?>
 <!DOCTYPE html>
@@ -28,12 +28,17 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <script src="https://js.paystack.co/v1/inline.js"></script>
-    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
     <script>
         window.App = {!! json_encode([
             'csrfToken' => csrf_token(),
             'user' => Auth::user(),
-            'signedIn'  => Auth::check()      
+            'signedIn'  => Auth::check()
         ]) !!};
     </script>
     @yield('head')
