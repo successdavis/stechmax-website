@@ -9,7 +9,7 @@
 						<div class="control">
 						  <input class="input" type="text" placeholder="Required" v-model="RegForm.emailOrPhone" required>
 						  <p class="help" v-if="RegForm.errors.has('emailOrPhone')" v-text="RegForm.errors.get('emailOrPhone')"></p>
-						</div>	
+						</div>
 					</div>
 					<div class="field column is-4">
 						<label class="label">Surname</label>
@@ -25,7 +25,7 @@
 						<label class="label">Other Names</label>
 						  <input class="input" type="text" placeholder="Optional" v-model="RegForm.middlename">
 						  <p class="help" v-if="RegForm.errors.has('middlename')" v-text="RegForm.errors.get('middlename')"></p>
-						
+
 					</div>
 					<div class="field column is-6">
 						<label class="label">Gender</label>
@@ -96,15 +96,15 @@
                   Remember me
                 </label>
                             </div>
-                            <button :class="submitting ? 'is-loading' : '' " class="button is-block is-info is-large is-fullwidth">Login 
+                            <button :class="submitting ? 'is-loading' : '' " class="button is-block is-info is-large is-fullwidth">Login
                             	<i class="fa fa-sign-in" aria-hidden="true"></i>
                             </button>
                         </form>
                     </div>
                     <p class="has-text-grey has-text-centered">
                         <a @click="mode = 'register'">Sign Up</a> &nbsp;·&nbsp;
-                        <a href="../">Forgot Password</a> &nbsp;·&nbsp;
-                        <a href="../">Need Help?</a>
+                        <a href="/password/reset">Forgot Password</a> &nbsp;·&nbsp;
+                        <a href="/threads">Need Help?</a>
                     </p>
                 </div>
             </div>
@@ -196,6 +196,6 @@
 
 <style scoped>
 	field:not(:last-child) {
-	     margin-bottom: 0; 
+	     margin-bottom: 0;
 	}
 </style>

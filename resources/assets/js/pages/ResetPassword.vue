@@ -19,9 +19,9 @@
 	                            <input class="input" v-if="!phoneReset" type="email" placeholder="Email here" v-model="email" required>
 	                            <input class="input" :disabled="resetTokenSent" v-if="phoneReset" type="text" placeholder="Phone Number Here" maxlength="11" v-model="phone" required>
 
-	                            <button :disabled="resetTokenSent" type="submit" class="button medium" v-text="phoneReset ? 'Send Token' : 'Send Reset Link' ">
+	                            <button :disabled="resetTokenSent" type="submit" :class="submitting ? 'is-loading' : ''" class="button medium" v-text="phoneReset ? 'Send Token' : 'Send Reset Link' ">
 	                            </button>
-							      <span style="color: white">Already have an account? </span><a href="/login" class="login_link"> Login</a>
+<!--							      <span style="color: white">Already have an account? </span><a href="/login" class="login_link"> Login</a>-->
 		                    </form>
 
 		                    <form @submit.prevent="updatePassword" v-if="resetTokenSent">
@@ -48,7 +48,7 @@
 					<div class="column is-4 white mt-3 has-text-black">
 						<p class="has-text-black">A reset link will be send to your registered email address</p>
 						<p class="has-text-black" v-if="sent == 1">We have sent a reset link to your email, please check your inbox</p>
-						<p class="red-text has-text-black" v-if="sent == 2">You do not have an account with us please <a href="/register" class="login_link has-text-black">Register</a></p>
+						<p class="red-text" v-if="sent == 2">You do not have an account with us please <a href="/register" class="button has-text-black">Register</a></p>
 					</div>
 				</div>
 			</div>
@@ -102,6 +102,7 @@
 				.then(data => {
 					flash('Password Reset Link Sent Successfully')
 					this.sent = '1';
+					this.submitting = false;
 				})
 				.catch(error => {
 					this.errorMessage = error.message;
@@ -173,7 +174,7 @@
 		background-image: url(/../images/background_2.jpg);
 		background-size: cover;
 	    background-position: center;
-	    background-repeat: no-repeat; 
+	    background-repeat: no-repeat;
 	}
 
 	.help-text {
@@ -196,7 +197,7 @@
 	}
 	a:hover {
 		border-bottom: none;
-		
+
 	}
 
 	.login_link,
