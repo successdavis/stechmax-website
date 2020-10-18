@@ -17,7 +17,7 @@ trait Billable
         });
     }
 
-//  Get all invoices for this user only on a specified mode i.e. not all of the users invoices 
+//  Get all invoices for this user only on a specified mode i.e. not all of the users invoices
 //  but only the ones related to a specific course or other payments.
     public function InvoicesOnItemByUsers(user $user)
     {
@@ -25,14 +25,15 @@ trait Billable
     }
 
 //  to create invoice for a user in a particular module e.g. $course->createInvoice(1);
-    public function createInvoice($userId = null, $installmental = null, $charge = null)
+    public function createInvoice($userId = null, $installment = null, $charge = null)
     {
+
         return $this->invoices()->save(
             new Invoice([
                 'user_id' => $userId ?: auth()->id(),
                 'amount' => $this->amount + $charge,
                 'invoiceNo' => Invoice::generateInvoiceNo(),
-                'installmental' => $installmental ?: true,
+                'installmental' => $installment ?: true,
             ])
         );
     }

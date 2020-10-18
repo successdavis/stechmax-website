@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Fee;
 use App\Invoice;
 use App\Course;
 use App\User;
@@ -32,7 +33,7 @@ class InvoiceController extends Controller
         return InvoicesResource::collection($invoice);
     }
 
-// This method returns all the invoices not for datatable 
+// This method returns all the invoices not for datatable
 // so it does not need the ordery by and group sorting
     public function retrieveallinvoices(Request $request)
     {
@@ -41,11 +42,16 @@ class InvoiceController extends Controller
         return InvoicesResource::collection($invoices);
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        if ($request->payingfor !== 'Course') {
+            return $this->createFeeInvoice();
+        }
+
         $this->validate(request(), [
-            'course' => 'required|exists:courses,id',
-            'user' => 'required|exists:users,id',
+            'course'    => 'required|exists:courses,id',
+            'user'      => 'required|exists:users,id',
+            'payingfor'  => 'required|string',
         ]);
 
         try {
@@ -66,9 +72,29 @@ class InvoiceController extends Controller
             }
 
             return $invoice;
-            
+
         } catch (Exception $e) {
             return response('This user has an active subscription to this course.', 422);
         }
     }
+
+    public function createFeeInvoice() {
+        $this->validate(request(), [
+            'payingfor'  => 'required|string',
+            'user'      => 'required|exists:users,id',
+        ]);
+
+//        return error if payingfor doesnot exist in the db
+        abort_if(!Fee::where('item',request('payingfor'))->exists(),500,'payable not found');
+
+
+        $fee = Fee::where('item', request('payingfor'))->first();
+        $partpayment = request()->partpayment;
+        $user = User::find(request()->user);
+        
+
+        return $fee->createInvoice($user->id, $partpayment);
+
+    }
 }
+

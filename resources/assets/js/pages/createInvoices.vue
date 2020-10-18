@@ -1,6 +1,6 @@
 <template>
 	<form @submit.prevent="createInvoice" @change="errorMessage=''">
-		<transition 
+		<transition
 	        name="custom-classes-transition"
 	        enter-active-class="animated slideInDown"
 	        leave-active-class="animated slideOutUp"
@@ -10,7 +10,7 @@
 	  <div class="columns is-multiline">
 			<div class="column is-6">
 				<div class="field">
-				  <label class="label">Who is paying this Invoice?</label>
+				  <label class="label">Who is payingfor this Invoice?</label>
 				  <div class="control">
 				  	<div class="select is-fullwidth">
 					  <select class="is-fullwidth" v-model="Form.user" required>
@@ -23,18 +23,18 @@
 			</div>
 			<div class="column is-6">
 				<div class="field">
-				  <label class="label">Whats is the user paying for?</label>
+				  <label class="label">Whats is the user payingfor for?</label>
 				  <div class="control">
 				  	<div class="select is-fullwidth">
-					  <select v-model="paying" required class="is-fullwidth">
+					  <select v-model="Form.payingfor" required class="is-fullwidth">
 					    <option selected value="">Click to select a payment category</option>
-						<option v-for="item in PayingFor" :value="item" v-text="item"></option>
+						<option v-for="item in payable" :value="item" v-text="item"></option>
 					  </select>
 					</div>
 				  </div>
 				</div>
 			</div>
-	      	<div class="column is-6" v-if="paying == 'Course'">
+	      	<div class="column is-6" v-if="Form.payingfor === 'Course'">
 	      		<div class="field">
 			  		<label class="label">Select Course</label>
 					<div class="control">
@@ -48,7 +48,7 @@
 				</div>
 			</div>
 
-	      <div class="column is-6" v-if="paying == 'Other'">
+	      <div class="column is-6" v-if="Form.payingfor === 'Other'">
 	        <label>Amount
 	          <input type="number" placeholder="Type the Invoice Amount Here" required>
 	        </label>
@@ -67,7 +67,7 @@
 				</div>
 			</div>
 	      </div>
-	      <div class="column is-6" v-if="paying == 'Course'">
+	      <div class="column is-6" v-if="Form.payingfor === 'Course'">
 	      	<div class="field">
 		  		<label class="label">Should the user be subscribe to this course?</label>
 				<div class="control">
@@ -81,7 +81,7 @@
 				</div>
 			</div>
 	      </div>
-	      <div class="column is-6" v-if="paying == 'Course'">
+	      <div class="column is-6" v-if="Form.payingfor === 'Course'">
 			<div class="field">
 		  		<label class="label">Is the user taking classroom lectures?</label>
 				<div class="control">
@@ -98,10 +98,10 @@
 	  	</div>
     	<button class="medium button" :disabled="submitting">Submit</button>
 	</form>
-	
+
 </template>
 
-<script> 
+<script>
 	export default {
 		data () {
 			return {
@@ -111,15 +111,16 @@
                     partpayment: '',
                     subscribeToCourse: '',
                     classroom: '',
+                    payingfor: '',
                 }),
-                PayingFor: [
+                payable: [
                 	'Course',
-                	'Material',
+                	'Handout',
                 	'Certificate',
-                	'Classroom Fee',
+                	'Classroom',
+                    'Graduation Ceremony',
                 	'Other',
                 ],
-                paying: '',
                 submitting: false,
                 errorMessage: '',
                 Data: {
@@ -147,7 +148,7 @@
                     })
                 .catch(error => {
                 	this.errorMessage = error.message;
-                    flash('We were unable to process your form')
+                    flash('We were unable to process your form','failed')
                     this.submitting = false;
                 });
         	}
