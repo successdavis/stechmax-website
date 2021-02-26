@@ -8,11 +8,10 @@
     @include('layouts.subjects')
     @include('layouts.what')
 
-    @include('layouts.servicesoffered')
+    @include('layouts.servicesoffered')    
+    @include('layouts.testimonials')
 
     @include('layouts.program')
     @include('layouts.advertBanner')
-     <testimonial-carousels></testimonial-carousels>
-    @include('layouts.testimonials')
     @include('layouts.footer')
 @endsection
