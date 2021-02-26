@@ -10,7 +10,7 @@
                 </div>
               </div>
               <p class="block has-text-centered">{{$testimony->testimonial}}</p>
-              <h5 class="title is-5">{{$testimony->user->f_name . ' ' . $testimony->user->m_name }}</h5>
+              <h5 class="title is-5">{{ucwords($testimony->user->f_name . ' ' . $testimony->user->m_name )}}</h5>
             </span>
         @endforeach
       </image-carousel>
