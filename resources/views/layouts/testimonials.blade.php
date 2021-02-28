@@ -15,4 +15,5 @@
         @endforeach
       </image-carousel>
   </div>
+  </span>
 </section>

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Fee;
-use App\Invoice;
 use App\Course;
+use App\Fee;
+use App\Http\Resources\InvoicesResource;
+use App\Http\Resources\UserResource;
+use App\Invoice;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Resources\InvoicesResource;
 
 class InvoiceController extends Controller
 {

@@ -21,6 +21,7 @@ class UserResource extends JsonResource
 
         return [
             'id' => $this->id,
+            'name'              => ucwords($this->f_name . ' ' . $this->m_name . ' ' . $this->l_name),
             'f_name'            => $this->f_name,
             'l_name'            => $this->l_name,
             'm_name'            => $this->m_name,

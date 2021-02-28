@@ -6,8 +6,6 @@ window._ = require('lodash'); window.Popper = require('popper.js').default;
 
 const compiler = require('vue-template-compiler');
 
-window.Vue = require('vue');
-
 let authorizations = require('./authorizations');
 
 window.Vue.prototype.authorize = function (...params) {
@@ -34,7 +32,10 @@ import VModal from 'vue-js-modal';
 import Croppa from 'vue-croppa'
 import VueProgressBar from 'vue-progressbar'
 import VueVideoPlayer from 'vue-video-player'
-import { Input, Steps, Carousel, Switch, Dropdown } from 'buefy'
+import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
+
+Vue.use(Buefy)
 // import bulmaCalendar from 'bulma-calendar'
 
 import 'video.js/dist/video-js.css'
@@ -49,17 +50,6 @@ videojs.registerPlugin('videojs-playlist', videojsPlaylist);
 import VueClipboard from 'vue-clipboard2'
 
 Vue.use(VueClipboard)
-
-
-import 'buefy/dist/buefy.css'
-
-Vue.use(Input)
-Vue.use(Steps)
-Vue.use(Switch)
-Vue.use(Dropdown)
-Vue.use(Carousel)
-
-
 
 window.Form = Form;
 window.Event = new Vue();

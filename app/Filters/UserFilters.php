@@ -16,10 +16,12 @@ class UserFilters extends Filters
     protected function search($s)
     {
         $this->builder->getQuery()->orders = [];
-        return $this->builder->where('f_name', 'LIKE', '%' . $s . '%')
+        return $this->builder->where(function ($query) use ($s) {
+            $query->where('f_name', 'LIKE', '%' . $s . '%')
             ->orWhere('m_name', 'LIKE', '%' . $s . '%')
             ->orWhere('l_name', 'LIKE', '%' . $s . '%')
             ->orWhere('user_id', 'LIKE', '%' . $s . '%');
+        });
     }
 
 }

@@ -2,6 +2,6 @@
 
 @section('dashboardcontent')
     <div class="section">
-        <create-invoices :user="{{auth()->user()}}"></create-invoices>
+        <create-invoices></create-invoices>
     </div>
 @endsection
