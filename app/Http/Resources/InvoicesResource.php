@@ -25,6 +25,7 @@ class InvoicesResource extends JsonResource
             'billable' => $this->billable,
             'status' => $this->status(),
             'billedTo' => $this->owner,
+            'completed' => $this->completed,
         ];
     }
 }

@@ -37,7 +37,7 @@
 				<div class="column is-4"><strong>Amount Owed: </strong> 	&#8358;<p v-text="invoice.status"></p></div>
 			</div>
 	    </section>
-	    <section v-if="invoice" class="mt-3">
+	    <section v-if="canAddPayment" class="mt-3">
 	    	<div class="columns is-multiline">
 	    		<div class="column is-5">
 		    		<div class="field">
@@ -100,6 +100,7 @@
 			return {
 				idno: '',
 				invoice: '',
+				user: '',
 				Form: new Form({
 					invoice: '',
 					purpose: '',
@@ -114,7 +115,25 @@
 			}
 		},
 
+		computed: {
+			canAddPayment() {
+				if (!this.invoice || this.invoice.completed) {
+					return false;
+				}else {
+					return true;
+				}
+			}
+		},
+
         methods: {
+        	findUser() {
+				axios.get(`/findinvoice/${this.idno}`).then((response) => {
+        		  this.invoice = response.data.data;
+        		  this.Form.invoice = response.data.data.id
+        		}).catch((error) => {
+        		  flash('Unable to retrieve invoice','failed');
+        		})
+        	},
         	findInvoice() {
         		axios.get(`/findinvoice/${this.idno}`).then((response) => {
         		  this.invoice = response.data.data;
@@ -138,7 +157,7 @@
                     })
                 .catch(error => {
                 	this.errorMessage = error.message;
-                    flash(error.message,'failed')
+                    flash('We were unable to process your form','failed')
                     this.isLoading = false;
                 });
         	},

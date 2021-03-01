@@ -80,6 +80,10 @@ class PaymentController extends Controller
             $invoice = Invoice::find(request()->invoice);
             $oldPayment = payments::find(request()->paymentId);
 
+            if ($invoice->completed) {
+                abort(422, 'Sorry This invoice Can no longer recieve payment');
+            }
+
             if ($oldPayment->refundable === false) {
                 abort(422, 'Sorry! This invoice is not refundable');
             }
