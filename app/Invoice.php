@@ -23,6 +23,11 @@ class Invoice extends Model
         return $this->hasMany(payments::class);
     }
 
+    public function getRouteKeyName()
+    {
+        return 'invoiceNo';
+    }
+
     public function owner()
     {
         return $this->belongsTo(User::class, 'user_id');

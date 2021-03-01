@@ -97,5 +97,10 @@ class InvoiceController extends Controller
         return $fee->createInvoice($user->id, $partpayment);
 
     }
+
+    public function findInvoice(Invoice $invoice)
+    {
+        return new InvoicesResource($invoice);
+    }
 }
 

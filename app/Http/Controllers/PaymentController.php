@@ -12,6 +12,7 @@ use App\Http\Requests;
 use App\submittedpayments;
 use Illuminate\Http\Request;
 use App\Payments\CoursePayment;
+use App\Http\Resources\InvoicesResource;
 //use App\Http\Controllers\Controller;
 
 class PaymentController extends Controller
@@ -45,7 +46,7 @@ class PaymentController extends Controller
 
         try {
 
-            if ($amount >= $invoice->amountOwed()) {
+            if (str_replace('-', '', $amount) > $invoice->amountOwed()) {
                 abort(422, 'The amount you entered is greater than Invoice Amount Owed');
             }
 
@@ -60,7 +61,7 @@ class PaymentController extends Controller
                 'transaction_ref' => hexdec(uniqid())
             ]);
 
-            return $invoice;
+            return new InvoicesResource($invoice);
             
         } catch (Exception $e) {
             return response('This user has an active subscription to this course.', 422);
@@ -84,7 +85,7 @@ class PaymentController extends Controller
                 'transaction_ref' => hexdec(uniqid())
             ]);
 
-            return $invoice;
+            return new InvoicesResource($invoice);
             
         } catch (Exception $e) {
             return response('Sorry we were Unable to refund payment', 422);

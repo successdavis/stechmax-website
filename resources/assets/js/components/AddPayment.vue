@@ -1,24 +1,53 @@
 <template>
 	<div>
-		<form @submit.prevent="proccessPayment" @change="errorMessage=''" >
-			<p v-if="errorMessage" class="errorMessage" v-text="errorMessage"></p>
-
-		  	<div class="columns is-multiline">
-		    	<div class="column is-6">
+		<section>
+			<form @submit.prevent="findInvoice">
+				<label> Enter Invoice No./Student ID
+					<div class="columns">
+						<div class="column auto">
+							<input v-model="idno" class="input" type="text" placeholder="Enter Invoice Number or Student ID">
+						</div>
+						<div class="column is-2">
+							<button class="button is-fullwidth is-primary">Find</button>
+						</div>
+					</div>
+				</label>
+			</form>
+	    </section>
+	    <section v-if="invoice" class="bg-white mt-3" style="padding: 1em">
+	    	<div class="columns">
+	    		<center class="column is-3">
+	    			<figure class="image is-128x128">
+					  <img class="is-rounded" :src="invoice.billedTo.passport_path">
+					</figure>
+	    		</center>
+	    		<div class="column is-9">
+	    			<h2 class="title" v-text="invoice.billedTo.f_name + ' ' + invoice.billedTo.m_name"></h2>
+	    			<table>
+	    				<tr>
+	    					<th>ID No. :</th>
+	    					<td v-text="invoice.billedTo.user_id"></td>
+	    				</tr>
+	    			</table>
+	    		</div>
+	    	</div>
+	    	<div class="columns mt-3">
+				<h5 class="column is-6" v-text=" 'Date: ' + invoice.date "></h5>
+				<div class="column is-4"><strong>Invoice Amount: </strong>	&#8358;<p v-text="invoice.amount"></p></div>
+				<div class="column is-4"><strong>Amount Owed: </strong> 	&#8358;<p v-text="invoice.status"></p></div>
+			</div>
+	    </section>
+	    <section v-if="invoice" class="mt-3">
+	    	<div class="columns is-multiline">
+	    		<div class="column is-5">
 		    		<div class="field">
-			    		<label class="label">Select an Invoice?</label>
-			    		<div class="control">
-			    			<div class="select is-fullwidth">
-							  	<select v-model="selected" required @change="setFormInvoice">
-							  		<option selected value="">Click to select an Invoice</option>
-							    	<option v-for="invoice in Data.invoices" :value="invoice" v-text="invoice.invoiceNo + ' == ' + invoice.billedTo.f_name + ' ' + invoice.billedTo.l_name">
-							    	</option>
-							  	</select>
-							</div>
-					  	</div>
+				    	<label class="label">Amount to Pay?</label>
+				    	<div class="control">
+							<input class="input" type="number" min="0" name="amount" v-model="Form.amount">
+						</div>
 					</div>
 		      	</div>
-		    	<div class="column is-6">
+	    		<div class="column is-5">
 		    		<div class="field">	
 			        	<label class="label">Purpose of Payment?</label>
 			        	<div class="control">
@@ -26,65 +55,42 @@
 							  	<select v-model="Form.purpose" required>
 							  		<option selected value="">Click to select</option>
 							    	<option 
-							    	v-for="purpose in Data.Purpose" :value="purpose" 
+							    	v-for="purpose in Purpose" :value="purpose" 
 							    	v-text="purpose"></option>
 							  	</select>
 						  	</div>
 					  	</div>
 		    		</div>
 		      	</div>
-		    	<div class="column is-6" v-if="Form.purpose != 'Refund'">
-		    		<div class="field">
-				    	<label class="label">Whats the Amount?</label>
-				    	<div class="control">
-							<input class="input" type="number" min="0" name="amount" v-model="Form.amount">
-						</div>
-					</div>
+		      	<div class="column is-2">
+		      		<label>.</label>
+		      		<button @click.prevent="proccessPayment" class="medium button is-fullwidth is-primary" :disabled="isLoading">Add Payment</button>
 		      	</div>
-		       	<div class="column is-6" v-if="Form.purpose == 'Refund'">
-		       		<div class="field">
-			        	<label class="label">Select Payment to refund?</label>
-			        	<div class="control">
-			        		<div class="select">
-							  	<select v-model="RefundForm.paymentId" required>
-							  		<option selected value="">Click to select a payment to refund</option>
-							    	<option v-for="payment in selected.payments" :value="payment.id" v-text="payment.transaction_ref"></option>
-							  	</select>
-						  	</div>
-					  	</div>
-					</div>
-		    	</div>
-		    	<button class="medium button" :disabled="submitting">Add Payment</button>
-		  	</div>
-		</form>
-		<div class="grid-container mt-3" v-if="selected">
-			<div class="grid-x grid-padding-x">
-				<h5 class="cell medium-6" v-text=" 'Date: ' + selected.date "></h5>
-				<h4 class="cell medium-6" v-text=" 'Billed To: ' + selected.billedTo.f_name + ' ' + selected.billedTo.l_name "></h4>
-				<h4 class="cell" v-text=" 'Billed For: ' + selected.billable.title"></h4>
-				<div class="cell medium-4"><strong>InvoiceNo: </strong> <p v-text="selected.invoiceNo"></p></div>
-				<div class="cell medium-4"><strong>Invoice Amount: </strong><p v-text="selected.amount"></p></div>
-				<div class="cell medium-4"><strong>Amount Owed: </strong><p v-text="selected.status"></p></div>
-				<table class="table">
-			      <thead>
-			        <tr>
-			          	<th>Date</th>
-						<th>Transaction</th>
-						<th>Purpose</th>
-						<th>Amount Paid</th>
-			        </tr>
-			      </thead>
-			      <tbody>
-			        <tr v-for="payment in selected.payments">
-			          <td v-text="payment.date"></td>
-			          <td v-text="payment.ref"></td>
-			          <td v-text="payment.purpose"></td>
-			          <td v-text="payment.amount"></td>
-			        </tr>
-			      </tbody>
-			    </table>
-			</div>
-		</div>
+	    	</div>
+	    </section>
+	    <section v-if="invoice" class="mt-3">
+	    	<h2 class="title">Invoice Payments</h2>
+			<table class="table is-fullwidth">
+		      <thead>
+		        <tr>
+		          	<th>Date</th>
+					<th>Transaction</th>
+					<th>Purpose</th>
+					<th>Amount Paid</th>
+					<th>Action</th>
+		        </tr>
+		      </thead>
+		      <tbody>
+		        <tr v-for="(payment, index) in invoice.payments">
+		          	<td v-text="payment.date"></td>
+		          	<td v-text="payment.ref"></td>
+		          	<td v-text="payment.purpose"></td>
+		          	<td v-text="payment.amount"></td>
+		          	<td><button :class="isLoading ? 'is-loading' : '' " class="button is-danger" @click="refundPayment(payment.id)">Refund Bill</button></td>
+		        </tr>
+		      </tbody>
+		    </table>
+	    </section>
 	</div>
 </template>
 
@@ -92,73 +98,68 @@
 	export default {
 		data () {
 			return {
+				idno: '',
+				invoice: '',
 				Form: new Form({
 					invoice: '',
 					purpose: '',
 					amount: '',
 				}),
-				RefundForm: new Form({
-					invoice: '',
-					paymentId: '',
-				}),
 				errorMessage: "",
-				selected: "",
-				submitting: false,
-				Data: {
-					invoices: {},
-					Purpose: [
-						'Fees',
-						'Discount',
-						'Refund'
-					],
-				}
+				isLoading: false,
+				Purpose: [
+					'Invoice Fee',
+					'Discount',
+				],
 			}
 		},
 
-		created () {
-            axios.get('/api/invoices/getallinvoices')
-                .then(response => this.Data.invoices = response.data.data);
-        },
-
         methods: {
+        	findInvoice() {
+        		axios.get(`/findinvoice/${this.idno}`).then((response) => {
+        		  this.invoice = response.data.data;
+        		  this.Form.invoice = response.data.data.id
+        		}).catch((error) => {
+        		  flash('Unable to retrieve invoice','failed');
+        		})
+        	},
         	setFormInvoice() {
         		this.Form.invoice = this.selected.id;
         		this.RefundForm.invoice = this.selected.id;
         	},
 
         	proccessPayment() {
-        		if (this.Form.purpose != 'Refund') {
-	        		this.submitting = true
-	        		this.Form.post('/dashboard/payments/addpayment')
-	                    .then(data => {
-	                        // this.Form.reset();
-	                        flash('Payment Added Successfully');
-	                    	this.submitting = false;
-	                    	location.reload();
-	                    })
-	                .catch(error => {
-	                	this.errorMessage = error.message;
-	                    flash('We were unable to process your form')
-	                    this.submitting = false;
-	                });
-        		}else {
-        			this.submitting = true
-	        		this.RefundForm.post('/dashboard/payments/refundpayment')
-	                    .then(data => {
-	                        // this.Form.reset();
-	                        flash('Payment Successfully Refunded');
-	                    	this.submitting = false;
-	                    	location.reload();
-	                    })
-	                .catch(error => {
-	                	this.errorMessage = error.message;
-	                    flash('We were unable to process your form')
-	                    this.submitting = false;
-	                });
-        		}
+        		this.isLoading = true
+        		this.Form.post('/dashboard/payments/addpayment')
+                    .then(data => {
+                        this.invoice = data.data;
+                        flash('Payment Made Successfully');
+                    	this.isLoading = false;
+                    })
+                .catch(error => {
+                	this.errorMessage = error.message;
+                    flash(error.message,'failed')
+                    this.isLoading = false;
+                });
+        	},
+
+        	refundPayment(paymentid) {
+        		this.isLoading = true;
+        		axios.post('/dashboard/payments/refundpayment', {
+        		  paymentId: paymentid,
+        		  invoice: this.invoice.id
+        		}).then((response) => {
+        			this.invoice = response.data.data
+        		  	flash('Payment Successfully Refunded');
+                    this.isLoading = false;
+        		}).catch((error) => {
+        		    flash('We were unable to process your form', 'failed')
+                	this.errorMessage = error.message;
+                    this.isLoading = false;
+        		})
         	}
         }
-	}
+	};
 </script>
 
 <style scoped>
@@ -167,6 +168,5 @@
 	    color: white;
 	    padding: 1em;
 	    background: red;
-
 	}
 </style>

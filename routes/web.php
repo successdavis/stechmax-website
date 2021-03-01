@@ -96,6 +96,7 @@ Route::patch('/dashboard/{guardian}/updateguardian', 'GuardianController@update'
 
 Route::get('/dashboard/{user}/manageinvoices', 'InvoiceController@index')->middleware('admin')->name('manage_invoice.index');
 Route::get('/dashboard/{user}/createinvoice', 'InvoiceController@create')->middleware('admin')->name('manage_invoice.create');
+Route::get('/findinvoice/{invoice}', 'InvoiceController@findinvoice')->middleware('admin');
 
 Route::get('/dashboard/payments/addpayment', 'PaymentController@addpayment')->middleware('admin')->name('manage_invoice.addpayment');
 Route::post('/dashboard/payments/addpayment', 'PaymentController@savepayments')->middleware('admin')->name('manage_invoice.savepayments');
