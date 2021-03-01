@@ -81,12 +81,12 @@
 		        </tr>
 		      </thead>
 		      <tbody>
-		        <tr v-for="(payment, index) in invoice.payments">
+		        <tr v-for="(payment, index) in invoice.payments" :style="!payment.refundable ? 'background: #f3a9a9;' : '' ">
 		          	<td v-text="payment.date"></td>
 		          	<td v-text="payment.ref"></td>
 		          	<td v-text="payment.purpose"></td>
 		          	<td v-text="payment.amount"></td>
-		          	<td><button :class="isLoading ? 'is-loading' : '' " class="button is-danger" @click="refundPayment(payment.id)">Refund Bill</button></td>
+		          	<td v-if="payment.refundable"><button :class="isLoading ? 'is-loading' : '' " class="button is-danger" @click="refundPayment(payment.id)">Refund Bill</button></td>
 		        </tr>
 		      </tbody>
 		    </table>

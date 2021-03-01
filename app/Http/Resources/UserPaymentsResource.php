@@ -23,6 +23,7 @@ class UserPaymentsResource extends JsonResource
             'method' => $this->method,
             'purpose' => $this->purpose,
             'ref' => $this->transaction_ref,
+            'refundable' => $this->refundable,
         ];
     }
 }
