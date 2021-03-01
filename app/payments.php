@@ -11,6 +11,9 @@ class payments extends Model
     use RecordsActivity;
     protected $guarded = [];
     protected $activityPriority = 1;
+    protected $casts = [
+        'refundable' => 'boolean',
+    ];
 
     public function invoice()
     {

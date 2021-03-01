@@ -58,7 +58,8 @@ class PaymentController extends Controller
                 'amount' => $amount,
                 'method' => 'Admin',
                 'purpose' => $purpose,
-                'transaction_ref' => hexdec(uniqid())
+                'transaction_ref' => hexdec(uniqid()),
+                'refundable'      => true,
             ]);
 
             return new InvoicesResource($invoice);
@@ -74,16 +75,25 @@ class PaymentController extends Controller
             'paymentId' => 'required|exists:payments,id',
         ]);
 
+
         try {
             $invoice = Invoice::find(request()->invoice);
             $oldPayment = payments::find(request()->paymentId);
+
+            if ($oldPayment->refundable === false) {
+                abort(422, 'Sorry! This invoice is not refundable');
+            }
 
             $payment = $invoice->payments()->create([
                 'amount' => ltrim($oldPayment->amount, '-'),
                 'method' => 'Admin',
                 'purpose' => 'refund-' . $oldPayment->transaction_ref,
-                'transaction_ref' => hexdec(uniqid())
+                'transaction_ref' => hexdec(uniqid()),
+                'refundable'      => false,
             ]);
+
+            $oldPayment->refundable = false;
+            $oldPayment->save();
 
             return new InvoicesResource($invoice);
             
