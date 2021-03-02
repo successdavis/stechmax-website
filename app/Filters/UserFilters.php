@@ -11,7 +11,7 @@ class UserFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['search'];
+    protected $filters = ['search','idno'];
 
     protected function search($s)
     {
@@ -22,6 +22,11 @@ class UserFilters extends Filters
             ->orWhere('l_name', 'LIKE', '%' . $s . '%')
             ->orWhere('user_id', 'LIKE', '%' . $s . '%');
         });
+    }
+
+    protected function idno($idno)
+    {
+        return $this->builder->where('user_id',$idno);
     }
 
 }

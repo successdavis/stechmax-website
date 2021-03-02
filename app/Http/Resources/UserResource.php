@@ -2,8 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\User;
 use App\Course;
+use App\Http\Resources\InvoicesResource;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -38,6 +39,7 @@ class UserResource extends JsonResource
             'Date_Joined'       => Carbon::parse($this->created_at)->toDayDateTimeString(),
             'Guardian'          => $this->guardians,
             'courses'           => SubscriptionResource::collection($subscriptions),
+            'invoices'          => InvoicesResource::collection($this->invoices()->get()),
         ];
     }
 }

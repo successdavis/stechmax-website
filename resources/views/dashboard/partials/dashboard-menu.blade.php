@@ -91,15 +91,21 @@
               </a>
           </li>
           <li>
-            <a href="{{route('manage_invoice.index', ['user' => auth()->user()->username])}}" class="has-icon has-text-white">
-              <span class="icon"><i class="fas fa-receipt"></i></span>
-              <span class="menu-label-item">View Invoice</span>
+            <a href="{{route('manage_invoice.addpayment')}}" class="has-icon has-text-white">
+              <span class="icon"><i class="fas fa-money-bill-wave"></i></span>
+              <span class="menu-label-item">Manage Invoice</span>
             </a>
           </li>
           <li>
-            <a href="{{route('manage_invoice.addpayment')}}" class="has-icon has-text-white">
-              <span class="icon"><i class="fas fa-money-bill-wave"></i></span>
-              <span class="menu-label-item">Add Payment</span>
+            <a href="{{route('manage_invoice.index', ['user' => auth()->user()->username])}}" class="has-icon has-text-white">
+              <span class="icon"><i class="fas fa-receipt"></i></span>
+              <span class="menu-label-item">Invoices</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{route('manage_invoice.index', ['user' => auth()->user()->username])}}" class="has-icon has-text-white">
+              <span class="icon"><i class="fas fa-receipt"></i></span>
+              <span class="menu-label-item">Payments</span>
             </a>
           </li>
         </menu-dropdown>

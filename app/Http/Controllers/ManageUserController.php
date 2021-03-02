@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Filters\UserFilters;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\UserResourceInvoice;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -108,5 +109,11 @@ class ManageUserController extends Controller
         $users = User::all()->sortByDesc('points')->take(20);
 
         return view('dashboard.users.rankings', compact('users'));
+    }
+
+    public function findUserWithInvoices(Request $request)
+    {
+        $user = User::whereUser_id($request->user_id)->firstOrFail();
+        return new UserResourceInvoice($user);
     }
 }

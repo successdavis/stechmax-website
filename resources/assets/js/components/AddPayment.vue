@@ -1,36 +1,53 @@
 <template>
 	<div>
 		<section>
-			<form @submit.prevent="findInvoice">
+			<form @submit.prevent="checkValueAndFindInvoice">
 				<label> Enter Invoice No./Student ID
 					<div class="columns">
 						<div class="column auto">
 							<input v-model="idno" class="input" type="text" placeholder="Enter Invoice Number or Student ID">
 						</div>
 						<div class="column is-2">
-							<button class="button is-fullwidth is-primary">Find</button>
+							<button :class="isLoading ? 'is-loading' : '' " class="button is-fullwidth is-primary">Find</button>
 						</div>
 					</div>
 				</label>
 			</form>
 	    </section>
-	    <section v-if="invoice" class="bg-white mt-3" style="padding: 1em">
+	    <section v-if="user" class="bg-white mt-3" style="padding: 1em">
 	    	<div class="columns">
 	    		<center class="column is-3">
 	    			<figure class="image is-128x128">
-					  <img class="is-rounded" :src="invoice.billedTo.passport_path">
+					  <img class="is-rounded" :src="user.passport_path">
 					</figure>
 	    		</center>
 	    		<div class="column is-9">
-	    			<h2 class="title" v-text="invoice.billedTo.f_name + ' ' + invoice.billedTo.m_name"></h2>
+	    			<h2 class="title" v-text="user.f_name + ' ' + user.m_name"></h2>
 	    			<table>
 	    				<tr>
 	    					<th>ID No. :</th>
-	    					<td v-text="invoice.billedTo.user_id"></td>
+	    					<td v-text="user.user_id"></td>
 	    				</tr>
 	    			</table>
 	    		</div>
 	    	</div>
+	    	<div>
+	    		<table class="table is-fullwidth">
+	    			<tr v-for="userinvoice in user.invoices">
+	    				<td >
+	    					<span v-show="invoice.id === userinvoice.id">**</span>
+	    				</td>
+	    				<td>{{userinvoice.invoiceNo}}</td>
+	    				<td>{{userinvoice.date}}</td>
+	    				<td>{{userinvoice.amount}}</td>
+	    				<td>{{userinvoice.status}}</td>
+	    				<td><button class="button is-success" @click="invoice = userinvoice">Select</button></td>
+	    			</tr>
+	    		</table>
+	    		
+	    	</div>
+	    </section>
+	    <section v-if="invoice">
 	    	<div class="columns mt-3">
 				<h5 class="column is-6" v-text=" 'Date: ' + invoice.date "></h5>
 				<div class="column is-4"><strong>Invoice Amount: </strong>	&#8358;<p v-text="invoice.amount"></p></div>
@@ -126,20 +143,38 @@
 		},
 
         methods: {
+        	checkValueAndFindInvoice() {
+        		if (this.idno.length === 13) {
+        			this.findInvoice();
+        		}else if(this.idno.length === 16) {
+        			this.invoice = '';
+        			this.findUser();
+        		}
+        	},
         	findUser() {
-				axios.get(`/findinvoice/${this.idno}`).then((response) => {
-        		  this.invoice = response.data.data;
-        		  this.Form.invoice = response.data.data.id
+        		this.isLoading = true;
+        		axios.get('/finduserwithinvoices', {
+        		  params: {
+        		    user_id: this.idno,
+        		  },
+        		}).then((response) => {
+	        		this.isLoading = false;
+        		   	this.user = response.data.data;
         		}).catch((error) => {
-        		  flash('Unable to retrieve invoice','failed');
+	        		this.isLoading = false;
+        		  	flash('Sorry Unable to retrieve User','failed');
         		})
         	},
         	findInvoice() {
+	        		this.isLoading = true;
         		axios.get(`/findinvoice/${this.idno}`).then((response) => {
-        		  this.invoice = response.data.data;
-        		  this.Form.invoice = response.data.data.id
+        			this.isLoading = false;
+        		  	this.invoice = response.data.data;
+        		  	this.user = response.data.data.billedTo;
+        		  	this.Form.invoice = response.data.data.id
         		}).catch((error) => {
-        		  flash('Unable to retrieve invoice','failed');
+        			this.isLoading = false;
+        		  	flash('Unable to retrieve invoice','failed');
         		})
         	},
         	setFormInvoice() {
