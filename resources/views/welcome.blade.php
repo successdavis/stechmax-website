@@ -9,7 +9,7 @@
     @include('layouts.what')
 
     <!-- @include('layouts.servicesoffered')     -->
-    @include('layouts.testimonials')
+    <!-- @include('layouts.testimonials') -->
 
     @include('layouts.program')
     @include('layouts.advertBanner')
