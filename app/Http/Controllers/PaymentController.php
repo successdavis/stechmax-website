@@ -24,7 +24,7 @@ class PaymentController extends Controller
 
     public function index()
     {
-
+        // $payments = Payment::
     }
 
     public function addpayment()
@@ -65,7 +65,7 @@ class PaymentController extends Controller
             return new InvoicesResource($invoice);
             
         } catch (Exception $e) {
-            return response('This user has an active subscription to this course.', 422);
+            return response('An unexpected error occured (E10001).', 422);
         }
     }
 

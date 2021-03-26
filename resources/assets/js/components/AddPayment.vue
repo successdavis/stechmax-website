@@ -41,7 +41,7 @@
 	    				<td>{{userinvoice.date}}</td>
 	    				<td>{{userinvoice.amount}}</td>
 	    				<td>{{userinvoice.status}}</td>
-	    				<td><button class="button is-success" @click="invoice = userinvoice">Select</button></td>
+	    				<td><button class="button is-success" @click="selectInvoice(userinvoice)">Select</button></td>
 	    			</tr>
 	    		</table>
 	    		
@@ -143,6 +143,10 @@
 		},
 
         methods: {
+        	selectInvoice (invoice) {
+        		this.Form.invoice = invoice.id
+        		this.invoice = invoice
+        	},
         	checkValueAndFindInvoice() {
         		if (this.idno.length === 13) {
         			this.findInvoice();

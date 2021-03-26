@@ -103,7 +103,7 @@
             </a>
           </li>
           <li>
-            <a href="{{route('manage_invoice.index', ['user' => auth()->user()->username])}}" class="has-icon has-text-white">
+            <a href="{{route('payment.index')}}" class="has-icon has-text-white">
               <span class="icon"><i class="fas fa-receipt"></i></span>
               <span class="menu-label-item">Payments</span>
             </a>
