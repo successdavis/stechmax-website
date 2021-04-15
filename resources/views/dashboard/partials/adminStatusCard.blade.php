@@ -59,6 +59,7 @@
 			</div>
 		</div>
 	</div>
+	@can('review financial records')
 	<div class="tile is-parent">
 		<div class="card is-card-widget tile is-child">
 			<header class="card-header card-cen-v">
@@ -91,6 +92,9 @@
 			</div>
 		</div>
 	</div>
+	@endcan
+
+
 	<div class="tile is-parent">
 		<div class="card is-card-widget tile is-child">
 			<header class="card-header card-cen-v">

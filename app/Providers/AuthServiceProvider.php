@@ -18,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\User' => 'App\Policies\UserPolicy',
         'App\Video' => 'App\Policies\VideoPolicy',
         'App\Lecture' => 'App\Policies\LecturePolicy',
+        'App\payments' => 'App\Policies\PaymentPolicy',
     ];
 
     /**
@@ -29,8 +30,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::before(function($user){
-            if($user->isAdmin()) return true;
+        Gate::before(function ($user, $ability) {
+            return $user->hasRole('ceoe') ? true : null;
         });
     }
 }

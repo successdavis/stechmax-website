@@ -1,6 +1,7 @@
 <div class="has-text-centered has-text-white">
   <img src="{{auth()->user()->avatar_path}}" class="thumbnail--medium mt-2">
-  <p class="mb-reset has-text-centered has-text-white">Hello {{auth()->user()->f_name . ' ' . auth()->user()->l_name}}</p>
+  <p class="mb-reset has-text-centered has-text-white">Hello {{ Ucwords( auth()->user()->f_name) }}</p>
+  <p class="mb-reset has-text-centered has-text-white">{{ strtoupper (auth()->user()->getRoleNames() )}}</p>
   <div class="mb-2">{{auth()->user()->user_id}}</div>
   <div class="mb-2">
       <span class="thumbnail--icon dark-gray">
@@ -83,6 +84,8 @@
               </a>
           </li>
         </menu-dropdown>
+
+        @can('manage invoice')
         <menu-dropdown name="Cashier">
           <li>
               <a href="{{route('manage_invoice.create', ['user' => auth()->user()->username])}}" class="has-icon has-text-white">
@@ -102,13 +105,16 @@
               <span class="menu-label-item">Invoices</span>
             </a>
           </li>
+          @can('review financial records')
           <li>
             <a href="{{route('payment.index')}}" class="has-icon has-text-white">
               <span class="icon"><i class="fas fa-receipt"></i></span>
               <span class="menu-label-item">Payments</span>
             </a>
           </li>
+          @endcan
         </menu-dropdown>
+        @endcan
         <menu-dropdown name="Projects">
           <li>
             <a class="has-icon has-text-white">

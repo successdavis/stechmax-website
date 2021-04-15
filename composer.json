@@ -14,12 +14,13 @@
         "laravel/helpers": "^1.1",
         "laravel/legacy-factories": "^1.1",
         "laravel/tinker": "^2.5",
+        "laravel/ui": "^3.2",
         "league/flysystem-aws-s3-v3": "^1.0",
         "league/flysystem-cached-adapter": "~1.0",
-        "unicodeveloper/laravel-paystack": "1.0.6",
-        "laravel/ui": "^3.2",
         "pbmedia/laravel-ffmpeg": "^7.5.5",
-        "php-ffmpeg/php-ffmpeg": "^0.17.0"
+        "php-ffmpeg/php-ffmpeg": "^0.17.0",
+        "spatie/laravel-permission": "^4.0",
+        "unicodeveloper/laravel-paystack": "1.0.6"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
@@ -61,7 +62,8 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
-        ]
+        ],
+        "phpunit": "vendor/bin/phpunit"
     },
     "config": {
         "preferred-install": "dist",

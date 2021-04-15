@@ -13,10 +13,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     protected $with = ['guardians'];
 
@@ -193,8 +194,8 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        // return in_array($this->f_name, ['JohnDoe', 'JaneDoe']);
-        return $this->admin;
+        // return in_array($this->f_name, ['JohnDoe', 'JaneDoe']); 
+        return $this->roles->isNotEmpty();
     }
 
     public function retriveMyCourses()

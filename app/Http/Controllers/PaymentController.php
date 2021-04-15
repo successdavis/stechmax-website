@@ -69,12 +69,11 @@ class PaymentController extends Controller
         }
     }
 
-    public function refundPayment() {
+    public function refundPayment(Request $request) {
          $this->validate(request(), [
             'invoice' => 'required|exists:invoices,id',
             'paymentId' => 'required|exists:payments,id',
         ]);
-
 
         try {
             $invoice = Invoice::find(request()->invoice);
@@ -84,9 +83,7 @@ class PaymentController extends Controller
                 abort(422, 'Sorry This invoice Can no longer recieve payment');
             }
 
-            if ($oldPayment->refundable === false) {
-                abort(422, 'Sorry! This invoice is not refundable');
-            }
+            $this->authorize('refundPayment', new payments);
 
             $payment = $invoice->payments()->create([
                 'amount' => ltrim($oldPayment->amount, '-'),
