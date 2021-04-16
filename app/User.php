@@ -6,6 +6,7 @@ use App\Course;
 use App\Events\UserEarnedExperience;
 use App\Experience;
 use App\Http\Resources\CourseSubscriptionsResource;
+use App\Paygrade;
 use App\SmartSms\SmartSms;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -73,6 +74,37 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reply::class);
     }
+
+    public function department() {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function departmentHistory()
+    {
+        return $this->hasMany(DepartmentHistory::class);
+    }
+
+
+    public function jobtitle()
+    {
+        return $this->belongsTo(Jobtitle::class);
+    }
+
+    public function jobtitlehistory()
+    {
+        return $this->hasMany(JobTitleHistory::class, 'emp_id');
+    }
+
+    public function paygrade()
+    {
+        return $this->belongsTo(Paygrade::class);
+    }
+
+    public function paygradeHistory()
+    {
+        return $this->hasMany(PaygradeHistory::class);
+    }
+
 
     public function bestReplyCount()
     {

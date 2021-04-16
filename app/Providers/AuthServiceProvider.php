@@ -31,7 +31,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::before(function ($user, $ability) {
-            return $user->hasRole('ceoe') ? true : null;
+            return $user->hasRole('ceo') ? true : null;
         });
     }
 }
