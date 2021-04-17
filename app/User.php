@@ -2,11 +2,13 @@
 
 namespace App;
 
+use App\BankDetail;
 use App\Course;
 use App\Events\UserEarnedExperience;
 use App\Experience;
 use App\Http\Resources\CourseSubscriptionsResource;
 use App\Paygrade;
+use App\Payroll;
 use App\SmartSms\SmartSms;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -105,6 +107,15 @@ class User extends Authenticatable
         return $this->hasMany(PaygradeHistory::class);
     }
 
+    public function payrolls()
+    {
+        return $this->hasMany(Payroll::class, 'emp_id');
+    }
+
+    public function bankDetails()
+    {
+        return $this->hasMany(BankDetail::class, 'emp_id');
+    }
 
     public function bestReplyCount()
     {
