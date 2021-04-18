@@ -13,7 +13,7 @@ class DepartmentHistory extends Model
 
     public function employee()
     {
-        return $this->belongsTo(User::class, 'emp_id');
+        return $this->belongsTo(Employee::class);
     }
 
     public function paygrade()

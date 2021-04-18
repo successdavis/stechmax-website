@@ -4,6 +4,7 @@ namespace App;
 
 use App\BankDetail;
 use App\Course;
+use App\Employee;
 use App\Events\UserEarnedExperience;
 use App\Experience;
 use App\Http\Resources\CourseSubscriptionsResource;
@@ -21,7 +22,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles, Employee;
+    use Notifiable, HasRoles;
 
     protected $with = ['guardians'];
 
@@ -374,10 +375,13 @@ class User extends Authenticatable
         return !! $this->preacher;
     }
 
-    public function isEmployee()
+    public function employee()
     {
-        return isset($this->jobtitle_id);
+        return $this->hasOne(Employee::class);
     }
 
-
+    public function isEmployee()
+    {
+        return !$this->employee()->isEmpty();
+    }
 }

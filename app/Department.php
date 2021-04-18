@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\DepartmentHistory;
+use App\Employee;
+use App\Jobtitle;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +14,7 @@ class Department extends Model
 
     public function employee()
     {
-    	return $this->hasMany(User::class);
+    	return $this->hasMany(Employee::class);
     }
 
     public function departmentHistory($value='')

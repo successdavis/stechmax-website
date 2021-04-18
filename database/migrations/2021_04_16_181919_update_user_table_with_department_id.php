@@ -14,9 +14,7 @@ class UpdateUserTableWithDepartmentId extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedInteger('department_id')->nullable();
-            $table->unsignedInteger('jobtitle_id')->nullable();
-            $table->unsignedInteger('paygrade_id')->nullable();
+
         });
     }
 
