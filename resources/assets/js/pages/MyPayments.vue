@@ -59,7 +59,7 @@
 				}
 			);
 		}
-	}
+	};
 </script>
 <style scoped>
 	.flex-container {

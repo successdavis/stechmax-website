@@ -10,6 +10,7 @@ use App\Http\Resources\CourseSubscriptionsResource;
 use App\Paygrade;
 use App\Payroll;
 use App\SmartSms\SmartSms;
+use App\Traits\Employee;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -20,7 +21,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles;
+    use Notifiable, HasRoles, Employee;
 
     protected $with = ['guardians'];
 
@@ -75,46 +76,6 @@ class User extends Authenticatable
     public function replies()
     {
         return $this->hasMany(Reply::class);
-    }
-
-    public function department() {
-        return $this->belongsTo(Department::class);
-    }
-
-    public function departmentHistory()
-    {
-        return $this->hasMany(DepartmentHistory::class);
-    }
-
-
-    public function jobtitle()
-    {
-        return $this->belongsTo(Jobtitle::class);
-    }
-
-    public function jobtitlehistory()
-    {
-        return $this->hasMany(JobTitleHistory::class, 'emp_id');
-    }
-
-    public function paygrade()
-    {
-        return $this->belongsTo(Paygrade::class);
-    }
-
-    public function paygradeHistory()
-    {
-        return $this->hasMany(PaygradeHistory::class);
-    }
-
-    public function payrolls()
-    {
-        return $this->hasMany(Payroll::class, 'emp_id');
-    }
-
-    public function bankDetails()
-    {
-        return $this->hasMany(BankDetail::class, 'emp_id');
     }
 
     public function bestReplyCount()
@@ -412,4 +373,11 @@ class User extends Authenticatable
     {
         return !! $this->preacher;
     }
+
+    public function isEmployee()
+    {
+        return isset($this->jobtitle_id);
+    }
+
+
 }

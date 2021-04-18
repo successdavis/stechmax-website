@@ -29,6 +29,10 @@ Vue.component('account-confirmation', require('./pages/AccountConfirmation.vue')
 Vue.component('reset-passwords', require('./pages/ResetPassword.vue').default);
 Vue.component('billing', require('./pages/Billing.vue').default);
 Vue.component('courses-catalogue', require('./pages/CoursesCatalogue.vue').default);
+Vue.component('bank-detail', require('./pages/BankDetail.vue').default);
+
+Vue.component('test', require('./pages/Test.vue').default);
+
 
 Vue.component('study-room', require('./pages/StudyRoom.vue').default);
 

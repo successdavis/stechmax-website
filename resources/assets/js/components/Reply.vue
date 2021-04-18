@@ -1,10 +1,10 @@
 <template>
     <article :id="'reply-'+id" class="media">
-      <figure class="media-left">
-        <p class="image is-48x48">
-          <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
-        </p>
-      </figure>
+        <figure class="media-left">
+            <p class="image is-48x48">
+                <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
+            </p>
+        </figure>
       <div class="media-content" :class="isBest ? 'has-background-grey-lighter bestreply' : 'default'">
         <div class="content">
           <p>
@@ -44,52 +44,10 @@
                 </a> -->
               </div>
             </nav>
-
-            <!-- <div v-if="authorize('owns', reply)">
-                <button class="small button" @click="editing = true">Edit</button>
-            </div>
-            <button class="small button" @click="markBestReply" v-if="authorize('owns', reply.thread)">Best Reply</button>
-            <br> -->
-            <!-- <small><a>Like</a> · <a>Reply</a> · 3 hrs</small> -->
           </p>
         </div>
       </div>
     </article>
-
-
-   <!--  <div :id="'reply-'+id" class="card " :class="isBest ? 'green' : 'default'">
-        <div class="card-section">
-            <div class="grid-x grid-margin-x">
-                <div class="small-9 grid-container">
-                    <h6><a :href="'/profiles/'+reply.owner.email">
-                        {{reply.owner.f_name + " " + reply.owner.l_name}}
-                        {{$reply->owner->f_name . ' ' . $reply->owner->l_name}}
-                        </a>  said: {{reply.created_at}}...
-                    </h6>
-                </div>
-
-                <div class="small-3" v-if="signedIn" >
-                    <favorite :reply="reply"></favorite>
-                    <div v-if="authorize('owns', reply)">
-                        <button class="small button" @click="destroy"><i class="fas fa-trash"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div v-if="editing">
-                <form @submit="update">
-                    <textarea v-model="body" required></textarea>
-                    <button class="small button">Update</button>
-                    <button class="small button" @click="editing = false" type="button">Cancel</button>
-                </form>
-            </div>
-            <div v-else v-text="body"></div>
-                <div v-if="authorize('owns', reply)">
-                    <button class="small button" @click="editing = true">Edit</button>
-                </div>
-                <button class="small button" @click="markBestReply" v-if="authorize('owns', reply.thread)">Best Reply</button>
-        </div> -->
-    </div>
-
 </template>
 
 <script>

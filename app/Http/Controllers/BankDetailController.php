@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\bank_detail;
+use App\BankDetail;
+use App\User;
 use Illuminate\Http\Request;
 
 class BankDetailController extends Controller
@@ -12,9 +13,10 @@ class BankDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        //
+
+        return view('dashboard.payroll.bank');
     }
 
     /**
@@ -24,7 +26,7 @@ class BankDetailController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +37,29 @@ class BankDetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'bank_name'         => 'required|string',
+            'account_name'      => 'required|string',
+            'account_number'    => 'required|unique:bank_details',
+            'account_type'      =>  'required',
+        ]);
+
+        if (auth()->user()->hasAddedPaymentDetails()) {
+            $bankdetails = auth()->user()->getBankDetails();
+            $bankdetails->active = false;
+            $bankdetails->save();
+        }
+
+        $bankdetails = new BankDetail();
+        $bankdetails->bank_name         = $request->bank_name;
+        $bankdetails->account_name      = $request->account_name;
+        $bankdetails->account_number    = $request->account_number;
+        $bankdetails->account_type      = $request->account_type;
+        $bankdetails->emp_id            = auth()->user()->id;
+
+        $bankdetails->save();
+
+        return $bankdetails;
     }
 
     /**
@@ -44,9 +68,11 @@ class BankDetailController extends Controller
      * @param  \App\bank_detail  $bank_detail
      * @return \Illuminate\Http\Response
      */
-    public function show(bank_detail $bank_detail)
+    public function show(User $user, Request $request)
     {
-        //
+        $bankdetails = $user->getBankDetails();
+
+        return $bankdetails;
     }
 
     /**

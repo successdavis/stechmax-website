@@ -15,7 +15,7 @@ class BankDetail extends Model
         return $this->belongsTo(User::class, 'emp_id');
     }
 
-    public function ()
+    public function payroll()
     {
         return $this->hasMany(Payroll::class);
     }

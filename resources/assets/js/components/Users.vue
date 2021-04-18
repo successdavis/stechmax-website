@@ -83,7 +83,7 @@
                 this.sorttab = tab
             },
         }
-    }
+    };
 </script>
 
 <style scoped>
