@@ -2,8 +2,9 @@
 
 namespace App;
 
-use App\Jobtitle;
+use App\Employee;
 use App\PaygradeHistory;
+use App\Role;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,14 +12,14 @@ class Paygrade extends Model
 {
     use HasFactory;
 
-    public function jobtitle()
+    public function role()
     {
-        return $this->belongsTo(Jobtitle::class);
+        return $this->belongsTo(Role::class);
     }
 
-    public function users()
+    public function employee()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Employee::class);
     }
 
     public function pagradeHistory()

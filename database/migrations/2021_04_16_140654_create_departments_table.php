@@ -23,7 +23,6 @@ class CreateDepartmentsTable extends Migration
 
         Schema::create('department_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('employee_id');
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->timestamps();
@@ -32,7 +31,8 @@ class CreateDepartmentsTable extends Migration
               ->constrained()
               ->onDelete('cascade');
 
-            $table->foreign('employee_id')->references('id')->on('employees')
+            $table->foreignId('employee_id')
+              ->constrained()
               ->onDelete('cascade');
         });
     }

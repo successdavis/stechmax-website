@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<div></div>
+		<p class="has-text-info">Please review your information before submitting</p>
 		<form @submit.prevent="submit">
 			<div class="field">
 			  <label class="label">Bank Name</label>
@@ -56,20 +57,20 @@
 		},
 
 		created() {
-			axios.get(`employeebankdetails/${this.user.username}`).then((response) => {
+			axios.get(`employeebankdetails/${this.user.id}`).then((response) => {
 			  this.Bankform.bank_name = response.data.bank_name;
 			  this.Bankform.account_name = response.data.account_name;
 			  this.Bankform.account_number = response.data.account_number;
 			  this.Bankform.account_type = response.data.account_type;
 			}).catch((error) => {
-			  flash('something went wrong with fetching bank details');
+			  flash('something went wrong with fetching bank details','failed');
 			})
 		},
 
 		methods: {
 			submit() {
 				this.submitting = true;
-				this.Bankform.post('savebankdetails').then(data => {
+				this.Bankform.post(`savebankdetails/${this.user.id}`).then(data => {
 					flash('Account Details added');
 					this.submitting =  false;
 				}).catch(error => {

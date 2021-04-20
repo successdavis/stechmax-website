@@ -18,18 +18,17 @@ class CreatePayGradesTable extends Migration
             $table->string('name');
             $table->string('bonus')->nullable();
             $table->string('short_name');
-            $table->decimal('basic', 5,2);
+            $table->decimal('basic', 8,2);
             $table->string('dearness_bonus')->nullable();
             $table->timestamps();
 
-            $table->foreignId('jobtitle_id')
+            $table->foreignId('role_id')
               ->constrained()
               ->onDelete('cascade');
         });
 
         Schema::create('paygrade_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('emp_id');
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->timestamps();
@@ -38,8 +37,8 @@ class CreatePayGradesTable extends Migration
               ->constrained()
               ->onDelete('cascade');
 
-
-            $table->foreign('emp_id')->references('id')->on('users')
+            $table->foreignId('employee_id')
+              ->constrained()
               ->onDelete('cascade');
         });
     }

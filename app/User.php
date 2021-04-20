@@ -11,7 +11,6 @@ use App\Http\Resources\CourseSubscriptionsResource;
 use App\Paygrade;
 use App\Payroll;
 use App\SmartSms\SmartSms;
-use App\Traits\Employee;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -382,6 +381,6 @@ class User extends Authenticatable
 
     public function isEmployee()
     {
-        return !$this->employee()->isEmpty();
+        return $this->employee()->exists();
     }
 }

@@ -7,6 +7,7 @@ use App\Department;
 use App\DepartmentHistory;
 use App\JobTitleHistory;
 use App\Jobtitle;
+use App\Models\Role;
 use App\Paygrade;
 use App\PaygradeHistory;
 use App\Payroll;
@@ -22,6 +23,11 @@ class Employee extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getRouteKeyName()
+    {
+        return 'user_id';
+    }
+
     public function department() {
         return $this->belongsTo(Department::class);
     }
@@ -32,14 +38,14 @@ class Employee extends Model
     }
 
 
-    public function jobtitle()
+    public function role()
     {
-        return $this->belongsTo(Jobtitle::class);
+        return $this->belongsTo(Role::class);
     }
 
-    public function jobtitlehistory()
+    public function rolehistory()
     {
-        return $this->hasMany(JobTitleHistory::class, 'emp_id');
+        return $this->hasMany(Rolehistory::class);
     }
 
     public function paygrade()
@@ -56,10 +62,10 @@ class Employee extends Model
     {
         return $this->hasMany(Payroll::class, 'emp_id');
     }
-
+   
     public function bankDetails()
     {
-        return $this->hasMany(BankDetail::class, 'emp_id');
+        return $this->hasMany(BankDetail::class);
     }
 
     public function getBankDetails()
@@ -67,7 +73,7 @@ class Employee extends Model
         return $this->bankdetails()->where('active', 1)->first();
     }
 
-    public function getShortMaskAccout()
+    public function getMaskAccount()
     {
         return $this->hasAddedPaymentDetails() ? 
             '******' . substr(($this->getBankDetails()->account_number), -4) :
@@ -78,4 +84,6 @@ class Employee extends Model
     {
         return !$this->bankdetails->isempty();
     }
+
+   
 }

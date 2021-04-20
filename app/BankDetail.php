@@ -19,4 +19,6 @@ class BankDetail extends Model
     {
         return $this->hasMany(Payroll::class);
     }
+    
+
 }

@@ -235,6 +235,6 @@ Route::get('/settings/getSiteLogo', 'SiteController@getSiteLogo')->name('site.lo
 Route::get('/settings/getTemplateLogo', 'SiteController@getTemplateLogo')->name('site.templates');
 
 Route::get('/employee/{user}', 'EmployeeController@index')->name('employee.index');
-Route::post('/savebankdetails', 'BankDetailController@store')->name('bank.store');
+Route::post('/savebankdetails/{employee}', 'BankDetailController@store')->name('bank.store');
 Route::get('/bankdetails', 'BankDetailController@index')->name('bank.index');
-Route::get('/employeebankdetails/{user}', 'BankDetailController@show')->name('bank.show');
+Route::get('/employeebankdetails/{employee}', 'BankDetailController@show')->name('bank.show');

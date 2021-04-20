@@ -18,19 +18,14 @@ class CreatePayrollsTable extends Migration
             $table->integer('status');// 1 => Not paid 2 => paid => unresolved;
             $table->decimal('gross_salary');
             $table->decimal('net_salary');
-            $table->unsignedInteger('emp_id');
             $table->bigInteger('bank_details_id')->unsigned();
             $table->string('month'); // The for which this salary is for ;
             $table->string('year');
             $table->date('date_of_disbursement');
             $table->timestamps();
 
-
-            // $table->foreignId('bank_details_id')
-            //   ->constrained()
-            //   ->onDelete('set null');
-
-            $table->foreign('emp_id')->references('id')->on('users')
+            $table->foreignId('employee_id')
+              ->constrained()
               ->onDelete('cascade');
         });
     }

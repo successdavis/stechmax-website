@@ -1,8 +1,12 @@
 <div class="has-text-centered has-text-white">
   <img src="{{auth()->user()->avatar_path}}" class="thumbnail--medium mt-2">
   <p class="mb-reset has-text-centered has-text-white">Hello {{ Ucwords( auth()->user()->f_name) }}</p>
+  @if(!auth()->user()->isEmployee())
+    <div class="mb-2">{{auth()->user()->user_id}}</div>
+  @else
   <p class="mb-reset has-text-centered has-text-white">{{ strtoupper (auth()->user()->getRoleNames() )}}</p>
-  <div class="mb-2">{{auth()->user()->user_id}}</div>
+  <p class="is-small has-text-centered has-text-white">Dept. {{ ucwords (auth()->user()->employee->department->name )}}</p>
+  @endif
   <div class="mb-2">
       <span class="thumbnail--icon dark-gray">
         <a href="{{route('profile.show', ['user' => auth()->user()->username])}}">

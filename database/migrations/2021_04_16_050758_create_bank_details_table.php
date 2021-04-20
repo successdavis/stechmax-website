@@ -20,11 +20,10 @@ class CreateBankDetailsTable extends Migration
             $table->string('account_number');
             $table->string('account_type');
             $table->boolean('active')->default(true);
-            $table->date('date_disabled');
-            $table->unsignedInteger('emp_id');
+            $table->date('date_disabled')->nullable();
             $table->timestamps();
-
-            $table->foreign('emp_id')->references('id')->on('users')
+            $table->foreignId('employee_id')
+              ->constrained()
               ->onDelete('cascade');
         });
     }

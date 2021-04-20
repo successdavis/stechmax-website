@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BankDetail;
+use App\Employee;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -35,8 +36,9 @@ class BankDetailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Employee $employee, Request $request)
     {
+
         $request->validate([
             'bank_name'         => 'required|string',
             'account_name'      => 'required|string',
@@ -44,9 +46,9 @@ class BankDetailController extends Controller
             'account_type'      =>  'required',
         ]);
 
-        if (auth()->user()->hasAddedPaymentDetails()) {
-            $bankdetails = auth()->user()->getBankDetails();
-            $bankdetails->active = false;
+        if ($employee->hasAddedPaymentDetails()) {
+            $bankdetails            = $employee->getBankDetails();
+            $bankdetails->active    = false;
             $bankdetails->save();
         }
 
@@ -55,7 +57,7 @@ class BankDetailController extends Controller
         $bankdetails->account_name      = $request->account_name;
         $bankdetails->account_number    = $request->account_number;
         $bankdetails->account_type      = $request->account_type;
-        $bankdetails->emp_id            = auth()->user()->id;
+        $bankdetails->employee_id            = auth()->user()->id;
 
         $bankdetails->save();
 
@@ -68,9 +70,9 @@ class BankDetailController extends Controller
      * @param  \App\bank_detail  $bank_detail
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user, Request $request)
+    public function show(Employee $employee, Request $request)
     {
-        $bankdetails = $user->getBankDetails();
+        $bankdetails = $employee->getBankDetails();
 
         return $bankdetails;
     }

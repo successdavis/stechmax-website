@@ -50,7 +50,7 @@
 							<div class="level-item">
 								<div class="is-widget-label">
 									<h3 class="subtitle is-spaced"> Wire transfer to bank account </h3>
-									<p>{{auth()->user()->getShortMaskAccout()}}</p>
+									<p>{{auth()->user()->employee->getMaskAccount()}}</p>
 								</div>
 							</div>
 						</div>
