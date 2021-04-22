@@ -238,3 +238,4 @@ Route::get('/employee/{user}', 'EmployeeController@index')->name('employee.index
 Route::post('/savebankdetails/{employee}', 'BankDetailController@store')->name('bank.store');
 Route::get('/bankdetails', 'BankDetailController@index')->name('bank.index');
 Route::get('/employeebankdetails/{employee}', 'BankDetailController@show')->name('bank.show');
+Route::get('/paygrade/{employee}', 'PaygradeController@show')->name('bank.show');

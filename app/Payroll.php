@@ -19,4 +19,9 @@ class Payroll extends Model
     {
         return $this->belongsTo(BankDetail::class);
     }
+
+    public function balance()
+    {
+        return $this->where('status', 1)->sum('net_salary');
+    }
 }

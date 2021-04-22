@@ -21,7 +21,7 @@ class CreatePayrollsTable extends Migration
             $table->bigInteger('bank_details_id')->unsigned();
             $table->string('month'); // The for which this salary is for ;
             $table->string('year');
-            $table->date('date_of_disbursement');
+            $table->date('date_of_disbursement')->nullable();
             $table->timestamps();
 
             $table->foreignId('employee_id')

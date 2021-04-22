@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use App\PayGrade;
 use Illuminate\Http\Request;
 
 class PayGradeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -44,9 +50,9 @@ class PayGradeController extends Controller
      * @param  \App\PayGrade  $payGrade
      * @return \Illuminate\Http\Response
      */
-    public function show(PayGrade $payGrade)
+    public function show(Employee $employee, Request $request)
     {
-        //
+        
     }
 
     /**

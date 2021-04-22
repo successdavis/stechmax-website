@@ -25,7 +25,7 @@ class PayrollFactory extends Factory
             'status'        => 1,
             'gross_salary'  => 5000,
             'net_salary'    => 5000,
-            'emp_id'        => function () {
+            'employee_id'        => function () {
                 return factory('App\User')->create()->id;
             },
             'month'         => 'April',
