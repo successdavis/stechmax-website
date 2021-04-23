@@ -174,7 +174,7 @@ Route::get('/register/comfirm_email', 'Auth\RegisterConfirmationController@creat
 Route::post('/register/verifytoken', 'Auth\RegisterConfirmationController@verifytoken')->middleware('cannot-see-resend-link-page')->name('register.verifytoken');
 Route::post('/register/resendverifytoken', 'Auth\RegisterConfirmationController@resendverifytoken')->middleware('cannot-see-resend-link-page')->name('register.resendverifytoken');
 Route::post('/password/phonereset', 'Auth\RegisterConfirmationController@phoneReset')->name('password.phone.reset');
-Route::post('/password/resetUpdatePassword', 'Auth\RegisterConfirmationController@updatePassword')->name('password.update');
+Route::post('/password/resetUpdatePassword', 'Auth\RegisterConfirmationController@updatePassword')->name('password.reset.update');
 
 Route::post('/register/new_user', 'ManageUserController@store')->middleware('admin')->name('manage_user.store');
 
@@ -189,7 +189,7 @@ Route::post('api/users/{user}/passport', 'Api\UserAvatarController@storePassport
 
 
 Route::post('api/createclient', 'ClientController@store')->middleware('admin');
-Route::post('api/client/{client}/image', 'ClientController@storePassport')->middleware('admin')->name('passport');
+Route::post('api/client/{client}/image', 'ClientController@storePassport')->middleware('admin')->name('client.passport');
 Route::delete('api/deleteclient/{client}', 'ClientController@destroy')->middleware('admin');
 Route::patch('api/updateclient/{client}', 'ClientController@update')->middleware('admin');
 Route::get('/clients', 'ClientController@index')->middleware('admin')->name('client.index');
@@ -238,4 +238,4 @@ Route::get('/employee/{user}', 'EmployeeController@index')->name('employee.index
 Route::post('/savebankdetails/{employee}', 'BankDetailController@store')->name('bank.store');
 Route::get('/bankdetails', 'BankDetailController@index')->name('bank.index');
 Route::get('/employeebankdetails/{employee}', 'BankDetailController@show')->name('bank.show');
-Route::get('/paygrade/{employee}', 'PaygradeController@show')->name('bank.show');
+Route::get('/paygrade/{employee}', 'PaygradeController@show')->name('paygrade.show');
