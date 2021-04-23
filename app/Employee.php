@@ -92,7 +92,6 @@ class Employee extends Model
 
     public function thisMonthNetEarning()
     {
-        return;
         if ($this->payroll()->whereMonth('created_at', Carbon::now()->month)->exists()) {
             $paryroll = $this->payroll()
                 ->whereMonth('created_at', Carbon::now()->month)
@@ -105,7 +104,7 @@ class Employee extends Model
 
     public function thisMonthGrossEarning()
     {
-        return; 
+        
         if ($this->payroll()->whereMonth('created_at', Carbon::now()->month)->exists()) {
             $payroll = $this->payroll()
                 ->whereMonth('created_at', Carbon::now()->month)
@@ -121,16 +120,12 @@ class Employee extends Model
     {
         if (
             $this->payroll()
-            ->whereMonth('created_at', Carbon::now()
-                ->subMonth()
-                ->format('m'))
-                ->whereStatus(2)->exists()
+            ->whereStatus(2)->exists()
         ) {
             $payroll = $this->payroll()
-                ->whereMonth('created_at', Carbon::now()->subMonth()->format('m'))
-                ->whereStatus(2)
-                ->first(); 
-            return $payroll->net_salary;  
+                ->whereStatus(2)->latest()->first(); 
+
+            return $payroll->gross_salary;  
         }
 
         return 0;

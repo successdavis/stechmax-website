@@ -17,7 +17,10 @@ class EmployeeController extends Controller
     	$employee = Employee::where('user_id',auth()->user()->id)->first();
 
 		$balance = $employee->earningBalance();
+
+
     	$netEarning = $employee->thisMonthNetEarning();
+
     	$grossEarning = $employee->thisMonthGrossEarning();
     	$lastMonthPayroll = $employee->lastMonthEarning();
 

@@ -13,13 +13,13 @@
 						</div>
 						<div class="level is-mobile">
 							<div class="level-item">
-								<p class="title"><span>&#8358</span>{{number_format($netEarning)}}</p>
+								<p class="title"><span>&#8358</span>{{number_format($netEarning, 2)}}</p>
 							</div>
 						</div>
 					</div>
 					<footer class="card-footer">
 						<div class="card-footer-item">
-							<p class="subtitle">Gross Earning: <span>&#8358</span> {{number_format($grossEarning)}}</p>
+							<p class="subtitle">Gross Earning: <span>&#8358</span> {{number_format($grossEarning), 2}}</p>
 						</div>
 					</footer>
 				</div>
@@ -51,7 +51,7 @@
 						</div>
 						<div class="level is-mobile">
 							<div class="level-item has-widget-icon">
-								<p class="title"><span>&#8358</span>{{number_format($lastMonthPayroll)}}</p>
+								<p class="title"><span>&#8358</span>{{number_format($lastMonthPayroll, 2)}}</p>
 							</div>
 						</div>
 					</div>
@@ -124,11 +124,15 @@
 		<table class="table">
 			<tr>
 				<th>Basic Salary</th>
-				<td>{{auth()->user()->employee->paygrade->basic}}</td>
+				<td>{{number_format(auth()->user()->employee->paygrade->basic, 2)}}</td>
 			</tr>
 			<tr>
-				<th>Job title</th>
+				<th>Grade Level</th>
 				<td>{{auth()->user()->employee->paygrade->name}}</td>
+			</tr>
+			<tr>
+				<th>Job Title(s)</th>
+				<td>{{strtoupper (auth()->user()->getRoleNames())}}</td>
 			</tr>
 			<tr>
 				<th>Department</th>
