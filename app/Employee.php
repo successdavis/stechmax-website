@@ -123,11 +123,14 @@ class Employee extends Model
             $this->payroll()
             ->whereMonth('created_at', Carbon::now()
                 ->subMonth()
-                ->format('m'))->exists()
+                ->format('m'))
+                ->whereStatus(2)->exists()
         ) {
-            return $this->payroll()
+            $payroll = $this->payroll()
                 ->whereMonth('created_at', Carbon::now()->subMonth()->format('m'))
-                ->first();      
+                ->whereStatus(2)
+                ->first(); 
+            return $payroll;  
         }
 
         return 0;

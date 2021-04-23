@@ -51,7 +51,7 @@
 						</div>
 						<div class="level is-mobile">
 							<div class="level-item has-widget-icon">
-								<p class="title"><span>&#8358</span>{{number_format($lastMonthPayroll)}}</p>
+								<p class="title"><span>&#8358</span>{{number_format($lastMonthPayroll->net_salary)}}</p>
 							</div>
 						</div>
 					</div>
@@ -76,7 +76,7 @@
 							</div>
 							<div class="level-item">
 								<div class="is-widget-label">
-									<h3 class="subtitle is-spaced"> Students </h3>
+									<h3 class="subtitle is-spaced"></h3>
 									<h1 class="title"><div> </div></h1>
 								</div>
 							</div>
