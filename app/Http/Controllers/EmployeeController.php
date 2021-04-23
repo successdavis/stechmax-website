@@ -14,7 +14,7 @@ class EmployeeController extends Controller
     }
     public function index()
     {
-    	$employee = Employee::find(auth()->user()->id);
+    	$employee = Employee::where('user_id',auth()->user()->id);
 
 		$balance = $employee->earningBalance();
     	$netEarning = $employee->thisMonthNetEarning();
