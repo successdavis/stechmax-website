@@ -51,7 +51,7 @@
 						</div>
 						<div class="level is-mobile">
 							<div class="level-item has-widget-icon">
-								<p class="title"><span>&#8358</span>{{number_format($lastMonthPayroll->net_salary)}}</p>
+								<p class="title"><span>&#8358</span>{{number_format($lastMonthPayroll)}}</p>
 							</div>
 						</div>
 					</div>

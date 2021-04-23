@@ -130,7 +130,7 @@ class Employee extends Model
                 ->whereMonth('created_at', Carbon::now()->subMonth()->format('m'))
                 ->whereStatus(2)
                 ->first(); 
-            return $payroll;  
+            return $payroll->net_salary;  
         }
 
         return 0;
