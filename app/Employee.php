@@ -104,7 +104,7 @@ class Employee extends Model
 
     public function thisMonthGrossEarning()
     {
-        
+
         if ($this->payroll()->whereMonth('created_at', Carbon::now()->month)->exists()) {
             $payroll = $this->payroll()
                 ->whereMonth('created_at', Carbon::now()->month)
@@ -130,6 +130,11 @@ class Employee extends Model
 
         return 0;
         
+    }
+
+    public function transactions()
+    {
+        return $this->payroll()->whereStatus(2)->latest()->get();
     }
    
 }

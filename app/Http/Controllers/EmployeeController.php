@@ -17,7 +17,7 @@ class EmployeeController extends Controller
     	$employee = Employee::where('user_id',auth()->user()->id)->first();
 
 		$balance = $employee->earningBalance();
-
+        $transactions = $employee->transactions();
 
     	$netEarning = $employee->thisMonthNetEarning();
 
@@ -28,6 +28,6 @@ class EmployeeController extends Controller
     	// return $grossEarning;
     	// return $data;
 
-        return view('dashboard.payroll.index', compact(['balance','lastMonthPayroll','netEarning','grossEarning']));
+        return view('dashboard.payroll.index', compact(['balance','lastMonthPayroll','netEarning','grossEarning','transactions']));
     }
 }

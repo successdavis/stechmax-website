@@ -67,19 +67,14 @@
 							<h2 class="title mb-2">Transactions</h2>
 						</div>
 						<div class="level is-mobile">
-							<div class="level-item has-widget-icon">
-								<div class="is-widget-icon">
-									<span class="icon has-text-primary is-large">
-										<i class="mdi mdi" style="font-size: 5em"></i>
-									</span>
-								</div>
-							</div>
-							<div class="level-item">
-								<div class="is-widget-label">
-									<h3 class="subtitle is-spaced"></h3>
-									<h1 class="title"><div> </div></h1>
-								</div>
-							</div>
+							<table class="table">
+								@foreach($transactions as $transaction)
+									<tr>
+										<td>{{$transaction->created_at}}</td>
+										<td><span>&#8358</span> {{number_format($transaction->gross_salary, 2)}}</td>
+									</tr>
+								@endforeach
+							</table>
 						</div>
 					</div>
 					<footer class="card-footer">
