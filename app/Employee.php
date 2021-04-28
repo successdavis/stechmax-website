@@ -3,6 +3,7 @@
 namespace App;
 
 use App\BankDetail;
+use App\PayrollAdjustment;
 use App\Department;
 use App\DepartmentHistory;
 use App\Models\Role;
@@ -16,6 +17,10 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
+
+    protected $casts = [
+        'employment_date' => 'date'
+    ];
 
     public function user()
     {
@@ -60,6 +65,11 @@ class Employee extends Model
     public function payroll()
     {
         return $this->hasMany(Payroll::class);
+    }
+
+    public function payrollAdjustment()
+    {
+        return $this->hasMany(PayrollAdjustment::class);
     }
    
     public function bankDetails()
@@ -135,6 +145,12 @@ class Employee extends Model
     public function transactions()
     {
         return $this->payroll()->whereStatus(2)->latest()->get();
+    }
+
+    
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
     }
    
 }

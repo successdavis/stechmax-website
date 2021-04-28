@@ -234,8 +234,13 @@ Route::post('/paid/savedetails', 'PaymentController@store')->name('pay.saveDetai
 Route::get('/settings/getSiteLogo', 'SiteController@getSiteLogo')->name('site.logo');
 Route::get('/settings/getTemplateLogo', 'SiteController@getTemplateLogo')->name('site.templates');
 
+Route::get('/employeelist', 'EmployeeController@list')->name('employee.list');
+Route::get('/viewemployee/{employee}', 'EmployeeController@show')->name('employee.show');
+
 Route::get('/employee/{user}', 'EmployeeController@index')->name('employee.index');
 Route::post('/savebankdetails/{employee}', 'BankDetailController@store')->name('bank.store');
 Route::get('/bankdetails', 'BankDetailController@index')->name('bank.index');
 Route::get('/employeebankdetails/{employee}', 'BankDetailController@show')->name('bank.show');
 Route::get('/paygrade/{employee}', 'PaygradeController@show')->name('paygrade.show');
+
+Route::post('/adjustpayroll', 'PayrollAdjustmentController@store')->name('payrolladjustment.store');

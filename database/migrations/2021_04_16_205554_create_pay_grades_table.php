@@ -20,6 +20,7 @@ class CreatePayGradesTable extends Migration
             $table->string('short_name');
             $table->decimal('basic', 8,2);
             $table->string('dearness_bonus')->nullable();
+            $table->string('holiday_allowance')->nullable();
             $table->timestamps();
 
             $table->foreignId('role_id')

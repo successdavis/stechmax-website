@@ -119,7 +119,7 @@
 		<table class="table">
 			<tr>
 				<th>Basic Salary</th>
-				<td>{{number_format(auth()->user()->employee->paygrade->basic, 2)}}</td>
+				<td><span>&#8358</span> {{number_format(auth()->user()->employee->paygrade->basic, 2)}}</td>
 			</tr>
 			<tr>
 				<th>Grade Level</th>

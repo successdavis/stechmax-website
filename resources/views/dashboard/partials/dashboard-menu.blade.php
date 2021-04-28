@@ -151,6 +151,10 @@
           <span class="icon"><i class="fas fa-receipt"></i></span>
           <span class="menu-label-item">Clients</span>
         </a>
+        <li><a href="{{route('employee.list')}}" class="has-icon has-text-grey-lighter">
+          <span class="icon"><i class="fas fa-receipt"></i></span>
+          <span class="menu-label-item">Employees</span>
+        </a>
     </li>
     @endif
   </ul>
