@@ -23,12 +23,18 @@
                         <div class="field">
                           <label class="label">Amount</label>
                           <div class="control">
-                            <input class="input" v-model="adjustmentForm.description" type="number" min="1" step="any" />
+                            <input class="input" v-model="adjustmentForm.amount" type="number" step="any" />
                           </div>
                         </div>
                     </div>
                     <button class="button is-medium is-success">Adjust</button>
-                </form>                
+                </form>
+                <div v-show="employeeswithadjustmenterror.length != 0">
+                    <p>This Adjustment had been previously added for this employees</p>
+                    <ul>
+                        <li v-for="employee in employeeswithadjustmenterror" v-text="employee"></li>
+                    </ul>             
+                </div>
             </div>
         </modal>
         <b-table
@@ -87,6 +93,7 @@
                 ],
                 dataSet: false,
                 isLoading: '',
+                employeeswithadjustmenterror: [],
                 selectedAdjustment: '',
                 adjustments: {
                     Dearness_bonus: 1000,
@@ -97,6 +104,7 @@
                     description: '',
                     amount: '',
                     employees: [],
+                    isMore: true,
                 }),
                 infiniteId: +new Date(),
                 total: '',
@@ -122,6 +130,9 @@
                 if (value !== 'More') {
                     this.adjustmentForm.description = value
                     this.adjustmentForm.amount = this.adjustments[value]
+                    this.adjustmentForm.isMore = false
+                }else {
+                    this.adjustmentForm.isMore = true
                 }
             },
             checkedRows(value){
@@ -132,8 +143,9 @@
         methods: {
             makeAdjustment(){
                 this.adjustmentForm.post('adjustpayroll')
-                .then(() => {
+                .then((data) => {
                     flash('Success')
+                    this.employeeswithadjustmenterror = data
                 })
                 .catch(() => {
                     flash('Payroll Adjustment Failed', 'failed');

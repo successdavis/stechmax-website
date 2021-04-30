@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Employee;
 use App\PayrollAdjustment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PayrollAdjustmentController extends Controller
@@ -43,18 +44,38 @@ class PayrollAdjustmentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'description'   => 'required|string',
+            'amount'        => 'required',
+            'employees'     =>  'required|array',
+            'isMore'        => 'required|boolean'
+        ]);
+
+        
+        $amount = $request->isMore ? $request->amount : $this->adjustments[$request->description];
+
+        $adjustmentAlreadyExists = [];
+
         foreach ($request->employees as $employee) {
-            $dbemployee = Employee::findOrFail($employee['id']);
+            if(
+                PayrollAdjustment::whereMonth('created_at', Carbon::now()->month)
+                ->whereDescription($request->description)
+                ->where('employee_id', $employee['id'])->exists()
+            ){
+                $adjustmentAlreadyExists[] = $employee['name'];
+                continue;
+            }
+            $dbemployee = Employee::find($employee['id']);
 
             $adjustment = new payrollAdjustment();
-            $adjustment->employee_id        = $dbemployee->id;
+            $adjustment->employee_id    = $dbemployee->id;
             $adjustment->description    = $request->description;
-            $adjustment->amount         = $this->adjustments[$request->description];
+            $adjustment->amount         = $amount;
 
             $adjustment->save();
 
-            return $adjustment;
         }
+            return $adjustmentAlreadyExists;
     }
 
     /**
