@@ -24,7 +24,8 @@ class PaymentController extends Controller
 
     public function index()
     {
-        // $payments = Payment::
+        $payments = payments::feed();
+        return view('dashboard/payments/paymenthistory', compact('payments'));
     }
 
     public function addpayment()

@@ -148,9 +148,10 @@
         		this.invoice = invoice
         	},
         	checkValueAndFindInvoice() {
-        		if (this.idno.length === 13) {
+        		console.log();
+        		if (this.idno.search(/[-]/g) !== -1) {
         			this.findInvoice();
-        		}else if(this.idno.length === 16) {
+        		}else{
         			this.invoice = '';
         			this.findUser();
         		}

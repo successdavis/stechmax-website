@@ -35,4 +35,14 @@ class payments extends Model
         return $newAmount = number_format(str_replace('-', '', $amount),2);
     }
 
+    static public function feed()
+    {
+        return self::latest()->with('invoice')
+            ->take(100)
+            ->get()
+            ->groupBy(function ($payment) {
+                return $payment->created_at->format('Y-m-d');
+            });
+    }
+
 }

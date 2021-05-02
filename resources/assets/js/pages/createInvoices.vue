@@ -146,7 +146,7 @@
 				selected:'',
 				per_page: '200',
 				search: '',
-				order: 'asc',
+				order: 'desc',
 				Form: new Form({
                     course: '',
                     user: '',
