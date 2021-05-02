@@ -41,15 +41,13 @@ class Payroll extends Model
             if ($employee->payroll()->whereMonth('created_at', Carbon::now()->month)->exists()) {
                 continue;
             }
-
-            $grossRevenue   = $employee->generateGrossRevenue();
-            $netRevenue     = $employee->generateNetRevenue();
-
+            
             $payroll = new self;
-            $payroll->gross_salary      = $grossRevenue;
-            $payroll->net_salary        = $grossRevenue - $netRevenue;
+            $payroll->gross_salary      = $employee->generateGrossRevenue();
+            $payroll->net_salary        = $employee->generateNetRevenue();
             $payroll->bank_details_id   = $employee->hasAddedPaymentDetails() ? $employee->getBankDetails()->id : null;
             $payroll->employee_id       = $employee->id;
+            $payroll->status            = 1;
 
             $payroll->save();
         }
