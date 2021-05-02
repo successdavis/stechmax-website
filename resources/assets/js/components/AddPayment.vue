@@ -79,6 +79,21 @@
 					  	</div>
 		    		</div>
 		      	</div>
+	    		<div class="column is-5">
+		    		<div class="field">	
+			        	<label class="label">Method of Payment?</label>
+			        	<div class="control">
+				        	<div class="select is-fullwidth">
+							  	<select v-model="Form.method" required>
+							  		<option selected value="">Click to select</option>
+							    	<option>CASH</option>
+							    	<option>TRANSFER</option>
+							    	<option>DEPOSIT</option>
+							  	</select>
+						  	</div>
+					  	</div>
+		    		</div>
+		      	</div>
 		      	<div class="column is-2">
 		      		<label>.</label>
 		      		<button @click.prevent="proccessPayment" class="medium button is-fullwidth is-primary" :disabled="isLoading">Add Payment</button>
@@ -122,6 +137,7 @@
 					invoice: '',
 					purpose: '',
 					amount: '',
+					method: '',
 				}),
 				errorMessage: "",
 				isLoading: false,
@@ -129,6 +145,14 @@
 					'Invoice Fee',
 					'Discount',
 				],
+			}
+		},
+
+		created() {
+			if (localStorage.getItem('invoiceNo') !== null) {
+				this.idno = localStorage.getItem('invoiceNo');
+				this.findInvoice();
+				localStorage.removeItem('invoiceNo');
 			}
 		},
 

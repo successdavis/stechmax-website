@@ -21,8 +21,7 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\CloseInvoiceIfNeccessary',
         ],
         'App\Events\SystemNoAssigned' => [
-            'App\Listeners\EmailSystemNumber',
-            'App\Listeners\MessageSystemNumber',
+
         ],
         'App\Events\UserSubscribedToCourse' => [
             'App\Listeners\OnUserSubscribedToCourse',

@@ -39,11 +39,13 @@ class PaymentController extends Controller
             'invoice' => 'required|exists:invoices,id',
             'amount' => 'required|min:0',
             'purpose' => 'required',
+            'method' => 'required|string',
         ]);
 
         $invoice = Invoice::find(request()->invoice);
         $amount = '-' . request()->amount . '00';
         $purpose = request()->purpose;
+        $method = request()->method;
 
         try {
 
@@ -57,7 +59,7 @@ class PaymentController extends Controller
 
             $payment = $invoice->payments()->create([
                 'amount' => $amount,
-                'method' => 'Admin',
+                'method' => $method,
                 'purpose' => $purpose,
                 'transaction_ref' => hexdec(uniqid()),
                 'refundable'      => true,
