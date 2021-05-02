@@ -21,6 +21,16 @@
                             </div>
                         </div>
                         <div class="field">
+                            <label>Type</label>
+                            <div class="select is-fullwidth control">
+                                <select class="is-fullwidth" v-model="adjustmentForm.type">
+                                    <option value="" selected>Pick One</option>
+                                    <option value="Credit">Credit</option>
+                                    <option value="Deduction">Deduction</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="field">
                           <label class="label">Amount</label>
                           <div class="control">
                             <input class="input" v-model="adjustmentForm.amount" type="number" step="any" />
@@ -103,6 +113,7 @@
                 adjustmentForm: new Form({
                     description: '',
                     amount: '',
+                    type: '',
                     employees: [],
                     isMore: true,
                 }),

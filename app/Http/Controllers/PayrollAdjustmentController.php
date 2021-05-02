@@ -16,43 +16,35 @@ class PayrollAdjustmentController extends Controller
      */
 
     protected $adjustments = [
-        'Dearness_bonus'      => '1000',
-        'Bonus'               => '500',
-        'Holiday_allowance'   => '1500',
+        'Dearness_bonus'      => ['amount' => '1000', 'type'=> 'Credit'],
+        'Bonus'               => ['amount' => '500', 'type'=> 'Credit'],
+        'Holiday_allowance'   => ['amount' => '1500', 'type'=> 'Credit'],
     ];
+    protected $type = 'deduction';
 
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
             'description'   => 'required|string',
             'amount'        => 'required',
             'employees'     =>  'required|array',
+            'type'          =>  'nullable|string',
             'isMore'        => 'required|boolean'
         ]);
 
-        
-        $amount = $request->isMore ? $request->amount : $this->adjustments[$request->description];
+        if ($request->isMore) {
+            $amount = $request->amount ;
+            $type   = $request->type ;
+        }else {
+            $amount =  $this->adjustments[$request->description]['amount'];
+            $type   =  $this->adjustments[$request->description]['type'];
+        }
 
         $adjustmentAlreadyExists = [];
 
@@ -71,6 +63,7 @@ class PayrollAdjustmentController extends Controller
             $adjustment->employee_id    = $dbemployee->id;
             $adjustment->description    = $request->description;
             $adjustment->amount         = $amount;
+            $adjustment->type           = $type;
 
             $adjustment->save();
 

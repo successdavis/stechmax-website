@@ -17,6 +17,7 @@ class CreatePayrollAdjustmentsTable extends Migration
             $table->id();
             $table->string('description');
             $table->decimal('amount', 8,2);
+            $table->string('type');
             $table->timestamps();
 
             $table->foreignId('employee_id')

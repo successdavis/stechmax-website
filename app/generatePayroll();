@@ -1,0 +1,17 @@
+generatePayroll();
+
+get all employees from the db and their paygrade
+
+get the total amount from adjustments for each employee
+
+add total adjustment to employee paygrade basic
+
+create a payroll record and get a handle of the payroll id
+
+update all adjustment for the user with the payroll id just created.
+
+    protected $adjustments = {
+        Dearness_bonus      : {amount: '1000', type: 'Credit'},
+        Bonus             : {amount: '500', type: 'Credit'},
+        Holiday_allowance : {amount: '1500', type: 'Credit'},
+    }; 

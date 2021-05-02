@@ -152,5 +152,31 @@ class Employee extends Model
     {
         return $filters->apply($query);
     }
+
+    public function monthlyTotalCreditAdjustments()
+    {
+        return $this->PayrollAdjustment()->whereType('credit')->whereMonth('created_at', Carbon::now()->month)->sum('amount');
+    }
+
+    public function monthlyTotalDeductionAdjustments()
+    {
+        return $this->PayrollAdjustment()->whereType('deduction')->whereMonth('created_at', Carbon::now()->month)->sum('amount');
+    }
+
+    public function generateGrossRevenue()
+    {
+        $adjustment = $this->monthlyTotalCreditAdjustments();
+        $basic = $this->paygrade->basic;
+
+        return $adjustment + $basic;
+    }
+
+    public function generateNetRevenue()
+    {
+        $grossRevenue       = $this->generateGrossRevenue();
+        $totalDeductions    = $this->monthlyTotalDeductionAdjustments();
+
+        return $grossRevenue - $totalDeductions;
+    }
    
 }

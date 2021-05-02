@@ -15,10 +15,10 @@ class CreatePayrollsTable extends Migration
     {
         Schema::create('payrolls', function (Blueprint $table) {
             $table->id();
-            $table->integer('status');// 1 => Not paid 2 => paid => unresolved;
+            $table->integer('status')->default(1);// 1 => Not paid 2 => paid => unresolved;
             $table->decimal('gross_salary');
             $table->decimal('net_salary');
-            $table->bigInteger('bank_details_id')->unsigned();
+            $table->bigInteger('bank_details_id')->unsigned()->nullable();
             $table->date('date_of_disbursement')->nullable();
             $table->timestamps();
 
