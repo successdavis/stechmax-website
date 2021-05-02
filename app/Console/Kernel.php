@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\deactivateSubscription::class
+        \App\Console\Commands\deactivateSubscription::class,
+        \App\Console\Commands\generateMonthlyPayroll::class
     ];
 
     /**
@@ -26,6 +27,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('stechmax:deactivate-due-subscription')
                  ->daily();
+      $schedule->command('stechmax:generate-payroll')
+                 ->monthlyOn(16, '15:00');;
     }
 
     /**
