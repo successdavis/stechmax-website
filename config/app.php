@@ -161,8 +161,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
-        ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
         App\Providers\AchievementServiceProvider::class,
+        Vimeo\Laravel\VimeoServiceProvider::class
 
 
     ],
@@ -215,7 +215,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class
+        'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class,
+        'Vimeo' => Vimeo\Laravel\Facades\Vimeo::class
     ],
 
 ];

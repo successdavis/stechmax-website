@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Paystack;
-use App\Type;
 use App\Course;
-use App\Subject;
-use App\Http\Resources\CourseResource;
-use Illuminate\Http\Request;
 use App\Filters\CourseFilters;
+use App\Http\Resources\CourseResource;
+use App\Subject;
+use App\Type;
+use Illuminate\Http\Request;
+use Paystack;
+use Vimeo\Laravel\Facades\Vimeo;
 
 class CourseController extends Controller
 {

@@ -20,7 +20,9 @@
         "pbmedia/laravel-ffmpeg": "^7.5.5",
         "php-ffmpeg/php-ffmpeg": "^0.17.0",
         "spatie/laravel-permission": "^4.0",
-        "unicodeveloper/laravel-paystack": "1.0.6"
+        "unicodeveloper/laravel-paystack": "1.0.6",
+        "vimeo/laravel": "^5.6",
+        "vimeo/vimeo-api": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

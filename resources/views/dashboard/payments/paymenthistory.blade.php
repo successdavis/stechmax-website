@@ -15,7 +15,7 @@
         			</tr>
 		        	@foreach($payment as $transaction)
 			        		<tr>
-			        			<td>{{str_replace('-', ' ', $transaction->amount)}}</td>
+			        			<td>{{str_replace('-', ' ', $transaction->amount / 100)}}</td>
 			        			<td>{{$transaction->purpose}}</td>
 			        			<td>{{ucwords ($transaction->invoice->owner->f_name . ' ' . $transaction->invoice->owner->f_name)}}</td>
 			        			<td>{{$transaction->method}}</td>

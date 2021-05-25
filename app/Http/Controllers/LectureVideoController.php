@@ -14,19 +14,21 @@ use Illuminate\Support\Facades\Storage;
 
 class LectureVideoController extends Controller
 {
+    protected $vimeo;
+
+    public function __construct(VimeoManager $vimeo)
+    {
+        $this->vimeo = $vimeo;
+    }
+
     public function store(StoreVideoRequest $request, Lecture $lecture)
     {
+        dd(request()->all());
+        
         $ext = $request->video->getClientOriginalExtension();
         $name = $lecture->slug.'.'.$ext;
         $path = $request->video->storeAs('lectures', $name, 's3');
 
-        $lectureUpdate = $lecture->update([
-            'disk'                  => 's3',
-            'original_video_name'   => $request->video->getClientOriginalName(),
-            'video_path'            => $path,
-            'title'                 => $lecture->title,
-        ]);
- 
         // ConvertVideoForStreaming::dispatch($lecture);
  
         return response(200);

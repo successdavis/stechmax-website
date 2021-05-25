@@ -25,6 +25,9 @@ Route::delete('api/{lecture}/deletevideo', 'LectureVideoController@destroy')->mi
 Route::patch('api/{lecture}/updatevideo', 'LectureVideoController@update')->middleware(['auth', 'admin']);
 Route::get('studyroom/{course}/getplaylist', 'LectureVideoController@playlist')->middleware(['auth', 'admin']);
 
+Route::get('/api/{course}/lessonvideourl', 'ClassroomController@nextVideo')->middleware('must-be-confirmed');
+
+
 
 Route::post('api/course/{course}/promovideo', 'PromoVideoController@store');
 // Route::post('api/{lecture}/attachvideo', 'VideoController@store');
@@ -217,8 +220,6 @@ Route::get('testimonials/{course}', 'TestimonialsController@coursetestimonial');
 Route::get('/testimonials', 'TestimonialsController@index');
 Route::get('/clienttestimonial/{token}', 'ClienttestimonialController@show');
 Route::post('/clienttestimonial/{token}', 'ClienttestimonialController@store');
-
-Route::get('/api/{course}/lessonvideourl', 'ClassroomController@nextVideo')->middleware('must-be-confirmed');
 
 Route::get('/build-a-website', 'StaticPageController@websiteDesign');
 

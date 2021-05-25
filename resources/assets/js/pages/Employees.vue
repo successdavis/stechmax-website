@@ -51,10 +51,9 @@
             :data="data"
             :columns="columns"
             :checked-rows.sync="checkedRows"
-            :is-row-checkable="(row) => row.id !== 3 && row.id !== 4"
             checkable
             :checkbox-position="checkboxPosition">
-
+            
             <template #bottom-left>
                 <b>Total checked</b>: {{ checkedRows.length }}
             </template>
