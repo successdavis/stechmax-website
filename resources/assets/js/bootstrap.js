@@ -33,7 +33,7 @@ import Croppa from 'vue-croppa'
 import VueProgressBar from 'vue-progressbar'
 import VueVideoPlayer from 'vue-video-player'
 import Buefy from 'buefy'
-import 'buefy/dist/buefy.css'
+import 'buefy/dist/buefy.css' 
 
 Vue.use(Buefy)
 // import bulmaCalendar from 'bulma-calendar'

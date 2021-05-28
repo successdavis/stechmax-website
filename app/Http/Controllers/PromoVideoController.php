@@ -5,27 +5,15 @@ namespace App\Http\Controllers;
 use App\Course;
 use FFMpeg;
 use Illuminate\Http\Request;
+use Vimeo\Laravel\VimeoManager;
 
 class PromoVideoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    protected $vimeo;
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function __construct(VimeoManager $vimeo)
     {
-        //
+        $this->vimeo = $vimeo;
     }
 
     /**
@@ -45,13 +33,18 @@ class PromoVideoController extends Controller
         ]);
 
         $ext = $request->video->getClientOriginalExtension();
-        $name = $course->slug.'.'.$ext;
+        $name = $course->slug .'.'.$ext;
 
         $course->update([
-            'video_path' => request()->file('video')->storeAs('promovideo', $name, 'public')
+            'video_path' => $this->vimeo->upload(request()->file('video'), [
+                'name' => $name,
+                'privacy' => [
+                    'view' => 'anybody'
+                ],
+            ])
         ]);
         
-        return response($course->video_path, 204);
+        return response($course->video_path, 204, []);
     }
 
     /**

@@ -2,10 +2,10 @@
 	<div class="mt-2"> 
         <p>Course Video Details</p>     
         <div class="columns">
-            <div class="column is-8 thumbnail">
-            	<vid-player :playerdata="playerdata"></vid-player>
+            <div class="column is-8">
+				<div id="myVideo"></div>
             </div>
-            <div class="column grid-container">
+            <div class="column grid-container"> 
                 <p>Important guidelines: </p>
                 File must be in Mp4 format
                 <form method="POST" enctype="multipart/form-data" @submit.prevent="persist">
@@ -18,26 +18,38 @@
 </template>
 
 <script>
+	import Player from '@vimeo/player'
 	export default {
+		components: {Player},
         props: ['course'],
 	    data() {
 	    	return {
-	    		player: '',
-	    		playerdata: {
-	                source: this.course.video_path,
-	                autoplay: false,
-	                playlist: [{
-                		sources: [{
-                			src: this.course.video_path,
-		                    type: 'video/mp4'
-                		}],
-                		poster: this.course.thumbnail_path,
-                	}],
+	    		height: 640,
+                source: this.course.video_path,
+	    		options: {
+	    			id: this.course.video_path,
+	                autoplay: true,
 	            },
+	            player: false
 	    	}
 	    },
 
+	    mounted() {
+	    	this.install()
+	    },
+
 	    methods: {
+	    	install() {
+		      this.player = new Player( 'myVideo' , {
+		          id: this.source,
+		          width: 1920,
+		          height: 1080,
+		          background: 'black',
+		      })
+		      .on("ended", function() {
+		            console.log('video ended!')
+		        })
+		    },
 	        persist(e) {
 		        	Event.$emit('paused');
 

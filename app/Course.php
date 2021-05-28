@@ -54,15 +54,15 @@ class Course extends Model
         return $this->path();
     }
 
-    public function getVideoPathAttribute($videoPath)
-    {
-        if ($videoPath) {
-            return asset('storage/' . $videoPath);
-        }else {
-            return asset('storage/promovideo/default.mp4');
-            // return null;
-        }
-    }
+    // public function getVideoPathAttribute($videoPath)
+    // {
+    //     if ($videoPath) {
+    //         return asset('storage/' . $videoPath);
+    //     }else {
+    //         return asset('storage/promovideo/default.mp4');
+         // return null;
+    //     }
+    // }
 
 
     public function getThumbnailPathAttribute($course) {

@@ -105,7 +105,7 @@
     import CourseThumbnail from './CourseThumbnail.vue'
     export default {
         components: {
-            CourseThumbnail
+            CourseThumbnail,
         },
         props: ['course', 'path'],
         data () {

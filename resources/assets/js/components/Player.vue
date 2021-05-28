@@ -1,22 +1,6 @@
 <template>
     <div v-if="playerOptions.sources[0].src" class="relative-body showNavigation">
-        <video-player  class="video-player-box"
-             ref="videoPlayer"
-             :options="playerOptions"
-             :playsinline="true"
-             customEventName="customstatechangedeventname"
-             @play="onPlayerPlay($event)"
-             @pause="onPlayerPause($event)"
-             @ended="onPlayerEnded($event)"
-             @timeupdate="onPlayerTimeupdate($event)"
-
-             @statechanged="playerStateChanged($event)"
-             @ready="playerReadied">
-        </video-player>
-        <div class="player_navigations">
-            <div class="btn_design player_prev" @click="prevVideo">Previous</div>
-            <div class="btn_design player_next" @click="nextVideo">Next</div>
-        </div>
+        
     </div>    
 </template>
 
