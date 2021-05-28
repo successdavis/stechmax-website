@@ -3,7 +3,7 @@
         <p>Course Video Details</p>     
         <div class="columns">
             <div class="column is-8">
-				<div id="myVideo"></div>
+				<vimeo-player :videoid="source"></vimeo-player>
             </div>
             <div class="column grid-container"> 
                 <p>Important guidelines: </p>
@@ -18,9 +18,7 @@
 </template>
 
 <script>
-	import Player from '@vimeo/player'
 	export default {
-		components: {Player},
         props: ['course'],
 	    data() {
 	    	return {
@@ -33,23 +31,7 @@
 	            player: false
 	    	}
 	    },
-
-	    mounted() {
-	    	this.install()
-	    },
-
 	    methods: {
-	    	install() {
-		      this.player = new Player( 'myVideo' , {
-		          id: this.source,
-		          width: 1920,
-		          height: 1080,
-		          background: 'black',
-		      })
-		      .on("ended", function() {
-		            console.log('video ended!')
-		        })
-		    },
 	        persist(e) {
 		        	Event.$emit('paused');
 
