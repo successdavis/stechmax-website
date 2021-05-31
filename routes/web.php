@@ -245,3 +245,5 @@ Route::get('/employeebankdetails/{employee}', 'BankDetailController@show')->name
 Route::get('/paygrade/{employee}', 'PaygradeController@show')->name('paygrade.show');
 
 Route::post('/adjustpayroll', 'PayrollAdjustmentController@store')->name('payrolladjustment.store');
+
+Route::post('/vimeofolderid/{course}', 'VimeoFolderController@coursefolder')->name('coursefolder');

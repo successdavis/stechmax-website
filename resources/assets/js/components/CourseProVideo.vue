@@ -9,10 +9,11 @@
                 <p>Important guidelines: </p>
                 File must be in Mp4 format
                 <form method="POST" enctype="multipart/form-data" @submit.prevent="persist">
-		            <label for="video" class="button small">Update Video</label>
+		            <label for="video" :class="isLoading ? 'is-loading' : ''" class="button small">Update Video</label>
 			        <input @change="persist" type="file" id="video" class="show-for-sr" accept="video/*">
                 </form>
             </div>
+        	<b-loading :is-full-page="false" v-model="isLoading" :can-cancel="true"></b-loading>
         </div>
     </div>
 </template>
@@ -22,6 +23,7 @@
         props: ['course'],
 	    data() {
 	    	return {
+	    		isLoading: false,
 	    		height: 640,
                 source: this.course.video_path,
 	    		options: {
@@ -35,6 +37,8 @@
 	        persist(e) {
 		        	Event.$emit('paused');
 
+		        	this.isLoading = true;
+
 		        	if(! e.target.files.length) return;
 	                let video = e.target.files[0];
 
@@ -45,10 +49,12 @@
 	                axios.post(`/api/course/${this.course.slug}/promovideo`, data)
                     .then(data => {
                     	flash('Video Uploaded Successfully!');
- 						location.reload();
+ 						// location.reload();
+			        	this.isLoading = false;
                     })
                     .catch(error => {
-                    	flash('There are some errors with the video you provided','failed');
+			        	this.isLoading = false;
+                    	flash('Something went wrong, check you network & video format','failed');
                     });
 	        },
 	    }

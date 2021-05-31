@@ -31,20 +31,11 @@ import Form from './utilities/Form';
 import VModal from 'vue-js-modal';
 import Croppa from 'vue-croppa'
 import VueProgressBar from 'vue-progressbar'
-import VueVideoPlayer from 'vue-video-player'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css' 
 
 Vue.use(Buefy)
 // import bulmaCalendar from 'bulma-calendar'
-
-import 'video.js/dist/video-js.css'
-
-import videojsPlaylist from 'videojs-playlist'
-import videojs from 'video.js'
-
-videojs.registerPlugin('videojs-playlist', videojsPlaylist);
-
 
 //Vue Clipboard
 import VueClipboard from 'vue-clipboard2'
@@ -64,12 +55,6 @@ Vue.use(VueProgressBar, {
   failedColor: 'red',
   height: '10px'
 });
-
-
-Vue.use(VueVideoPlayer, /* {
-  options: global default options,
-  events: global videojs events
-} */)
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that

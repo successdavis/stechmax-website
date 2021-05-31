@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVideoRequest;
-use App\Jobs\ConvertVideoForStreaming;
 use App\Lecture;
 use App\Video;
-use FFMpeg\FFProbe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-// use Pbmedia\LaravelFFMpeg\FFMpegFacade as FFMpeg;
+use Vimeo\Laravel\VimeoManager;
+
 
 
 class LectureVideoController extends Controller
@@ -23,15 +22,58 @@ class LectureVideoController extends Controller
 
     public function store(StoreVideoRequest $request, Lecture $lecture)
     {
-        dd(request()->all());
-        
-        $ext = $request->video->getClientOriginalExtension();
-        $name = $lecture->slug.'.'.$ext;
-        $path = $request->video->storeAs('lectures', $name, 's3');
+        if (! auth()->user()->isAdmin()) {
+            abort(403,'You do not have access to carry out this request');
+        }
 
-        // ConvertVideoForStreaming::dispatch($lecture);
- 
-        return response(200);
+        $request->validate([
+            'video' => 'required|mimetypes:video/avi,video/mpeg,video/mp4,video/quicktime'
+        ]);
+
+        $ext = $request->video->getClientOriginalExtension();
+        $name = $lecture->slug .'.'.$ext;
+
+        $videoUri = $this->vimeo->upload(request()->file('video'), [
+                "name"  => $name,
+                "privacy" => [ 
+                    "view" => "nobody",
+                    "comments" => "nobody",
+                    "embed" => "whitelist",
+                ],
+            ]);
+
+        $videoUriArray = explode('/', $videoUri);
+
+        $videoId = $videoUriArray[2];
+
+        $lecture->update([
+            'video_path' => $videoId
+        ]);
+
+        $this->moveVideoToCourseFolder($lecture->section->course->vimeoFolderId, $videoId);
+
+        $this->whitelistVideo($videoId);
+
+        return response(['message' => 'Lecture Upload Successful'], 204, []);
+    }
+
+    public function whitelistVideo($videoId)
+    {
+        $url = '/videos/'. $videoId . 
+            '/privacy/domains/' . env('SITE_URL', null);
+
+        return $result = $this->vimeo->request(
+            $url,[],'PUT'
+        );
+    }
+
+    public function moveVideoToCourseFolder($folderId, $videoId)
+    {
+        return $result = $this->vimeo->request(
+            '/me/projects/'
+            .$folderId
+            .'/videos/'. $videoId,[], 'PUT'
+        );
     }
 
     public function update(Request $request, Lecture $lecture)

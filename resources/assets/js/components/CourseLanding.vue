@@ -6,6 +6,10 @@
               Course landing Page
             </p>
             <a href="#" class="card-header-icon" aria-label="more options">
+                <div class="pr-2">
+                    <button v-show="folderid === null" :class="isLoading ? 'is-loading' : ''" class="button is-success" @click="createafolder">CREATE A VIDEO FOLDER</button>
+                </div>
+                <p class="pr-2" v-text="'Folder Id: ' + folderid"><span>v-model="folderid" > </span></p>
                 <button class="button" :disabled="!save" @click="persist">Save</button>
             </a>
           </header>
@@ -110,9 +114,11 @@
         props: ['course', 'path'],
         data () {
             return {
+                isLoading: false,
                 save: false,
                 difficulties: [],
                 subjects: [],
+                folderid: this.course.vimeoFolderId,
                 Form: new Form({
                     title: this.course.title,
                     description: this.course.description,
@@ -142,7 +148,25 @@
                     }
                 );
             },
+            createafolder () {
+                this.isLoading = true;
+              this.Form.post(`/vimeofolderid/${this.course.slug}`)
+                .then(data => {
+                        flash('Your folder has been created');
+                        this.folderid = data;
+                        this.isLoading = false;
+                    }
+                ).catch((error) => {
+                    flash(error.message,'failed');
+                    this.isLoading = false;
+                })
+            },
         }
-    }
+    };
 
 </script>
+<style>
+    .pr-2 {
+        padding-right: 1em;
+    }
+</style>

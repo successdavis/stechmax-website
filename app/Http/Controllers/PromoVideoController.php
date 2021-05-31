@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Course;
-use FFMpeg;
 use Illuminate\Http\Request;
 use Vimeo\Laravel\VimeoManager;
+use Vimeo\Vimeo;
 
 class PromoVideoController extends Controller
 {
