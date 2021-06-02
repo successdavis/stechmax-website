@@ -3,7 +3,7 @@
 		<div class="" v-if="playVideo" class="coursevideoplayer">
 			<button class="button small play-back-btn" @click="playVideo = false">Close Video</button>
 			<div class="grid-container">
-            	<vid-player :playerdata="playerdata"></vid-player>
+				<vimeo-player :videoid="source"></vimeo-player>
 			</div>
         </div>
 	    <div class="container path-info" v-if="! playVideo">
@@ -64,8 +64,8 @@
 	    data() {
 	    	return {
 	    		playVideo: false,
-	    		playerdata: {
 	                source: this.course.video_path,
+	    		playerdata: {
 	                autoplay: true,
 	                playlist: [{
                 		sources: [{

@@ -8,6 +8,6 @@
 	@include("courses.partials._courseStreamer")
 	@include("courses.partials._tabs")
 	
-	@include('layouts.footer')
+	<!-- @include('layouts.footer') -->
 @endsection
 

@@ -35,13 +35,19 @@ class PromoVideoController extends Controller
         $ext = $request->video->getClientOriginalExtension();
         $name = $course->slug .'.'.$ext;
 
-        $course->update([
-            'video_path' => $this->vimeo->upload(request()->file('video'), [
+        $videourl = $this->vimeo->upload(request()->file('video'), [
                 'name' => $name,
                 'privacy' => [
                     'view' => 'anybody'
                 ],
-            ])
+            ]);
+
+        $videourl = explode('/',$videourl);
+
+        $videoid = $videourl[2];
+
+        $course->update([
+            'video_path' => $videoid,
         ]);
         
         return response($course->video_path, 204, []);
