@@ -5,35 +5,36 @@
     import Player from '@vimeo/player'
     export default {
         components: {Player},
-        props: ['videoid'],
+        props: ['videoid','autoplay'],
         data() {
             return {
-                height: 640,
                 source: this.videoid,
-                player: false
+                player: false,
+                auto: this.autoplay,
+                testcomponent: '',
             }
         },
 
         mounted() {
-            this.install()
+            this.install();
         },
 
         methods: {
             install() {
               this.player = new Player( 'myVideo' , {
                   id: this.source,
-                  width: 1920,
+                  width: 640,
                   background: false,
                   autoPlay: false,
                   controls: true,
                   responsive: true,
                   speed: true,
                   title: true,
+                  autoplay: this.auto,
 
+              }).on('ended', () => {
+                this.$emit('videoend');
               })
-              .on("ended", function() {
-                    console.log('video ended!')
-                })
             },
         }
     }

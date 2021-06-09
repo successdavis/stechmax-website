@@ -31,6 +31,7 @@ Vue.component('billing', require('./pages/Billing.vue').default);
 Vue.component('courses-catalogue', require('./pages/CoursesCatalogue.vue').default);
 Vue.component('bank-detail', require('./pages/BankDetail.vue').default);
 Vue.component('employees-datatable', require('./pages/Employees.vue').default);
+Vue.component('episode', require('./pages/Episode.vue').default);
 
 Vue.component('test', require('./pages/Test.vue').default);
 

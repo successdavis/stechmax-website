@@ -51,15 +51,18 @@ class Lecture extends Model
     {
         return $this->belongsTo(Section::class);
     }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
     
 
     public function getVideoUrl()
     {
         if ($this->hasVideo) {
-        	return Storage::disk('s3')->url($this->video_path);
+        	return $this->video_path;
         }
-
-        // return response('Sorry! This lecture has no associate video', 422);
     }
 
     public function getVideoUrlAttribute()
@@ -80,5 +83,28 @@ class Lecture extends Model
     public function isBilled()
     {
         return !! $this->billable;
+    }
+
+    public function nextLectureUrl()
+    {
+        $nextlecture = self::orderby('id')->where('id', '>', $this->id)->where('section_id', $this->section_id)->first();
+
+        if ($nextlecture) {
+            return '/'. $this->course->slug . '/episode/' . $nextlecture->slug;
+        }
+
+        return null;
+    }
+
+    public function prevLectureUrl()
+    {
+        $prevlecture = self::orderby('id')->where('id', '<', $this->id)->where('section_id', $this->section_id)->first();
+
+        if($prevlecture) {
+            return '/'. $this->course->slug . '/episode/' . $prevlecture->slug;
+        }
+
+        return null;
+
     }
 }

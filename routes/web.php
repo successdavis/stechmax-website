@@ -210,7 +210,7 @@ Route::post('/courses/{subject}/{course}/paystack', 'PaystackSubscriptionControl
 
 Route::post('/courses/{subject}/{course}/paystackpart', 'PaystackSubscriptionController@makePartPayment')->name('paystack.makePartPayment');
 
-Route::get('/studyroom/{course}', 'StudyRoomController@index')->middleware('must-be-subscribed')->name('studyroom.index');
+Route::get('/{course}/episode/{lecture}', 'LectureController@show');
 
 Route::get('/pricing', 'BusinessController@index')->name('pricing.index');
 Route::post('/business/{business}/thumbnail', 'BusinessController@thumbnail')->name('pricing.thumbnail');

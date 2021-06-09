@@ -1,8 +1,9 @@
 <?php
 
 namespace App;
-use Paystack;
+use App\Lecture;
 use Illuminate\Database\Eloquent\Model;
+use Paystack;
 
 class Course extends Model
 {
@@ -76,6 +77,11 @@ class Course extends Model
     public function coporatetraining()
     {
         return $this->belongsToMany('App\coporatetraining');
+    }
+
+    public function lectures()
+    {
+        return $this->hasMany(Lecture::class);
     }
 
     public function publish()

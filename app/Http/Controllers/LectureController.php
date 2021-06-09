@@ -45,7 +45,8 @@ class LectureController extends Controller
 
         $lecture = Lecture::addLecture([
             'title' => request('title'),
-            'section_id' => $section->id
+            'section_id' => $section->id,
+            'course_id' => $section->course->id,
         ], $section);
 
         return $lecture;
@@ -57,16 +58,20 @@ class LectureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Lecture $lecture)
+    public function show(Course $course, Lecture $lecture)
     {
         $course = $lecture->section->course;
-        $this->authorize('view', $lecture); 
 
-        if (!empty($lecture->video()->get())) {
-            return $lecture->getVideoUrl();
+        // $this->authorize('view', $lecture);
+
+        $nextepisode = $lecture->nextLectureUrl();
+        $prevepisode = $lecture->prevLectureUrl();
+
+        if ($lecture->hasVideo()) {
+            return view('courses/lecture/index', compact('lecture','nextepisode','prevepisode'));
         }
 
-        abort(403, 'This lesson has no associate video');
+        return back()->withFlash('This lesson has no associate video','failed');
     }
 
     /**

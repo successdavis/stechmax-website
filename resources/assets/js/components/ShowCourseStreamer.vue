@@ -3,7 +3,7 @@
 		<div class="" v-if="playVideo" class="coursevideoplayer">
 			<button class="button small play-back-btn" @click="playVideo = false">Close Video</button>
 			<div class="grid-container">
-				<vimeo-player :videoid="source"></vimeo-player>
+				<vimeo-player :videoid="source" :autoplay="true"></vimeo-player>
 			</div>
         </div>
 	    <div class="container path-info" v-if="! playVideo">
@@ -18,8 +18,8 @@
 <!-- 	            <div class="columns mb-2">
                     <div style="color: black;" class="column" v-for="learn in learns" v-text="learn.body"></div>
 	            </div>  -->
-	            <div v-if="course.isSubscribedBy">
-		            <a :href="'/studyroom/' + course.slug" class="button medium">Enter Study Room</a>
+	            <div >
+		            <a :href="'/course.slug/episodes'" class="button medium">Enter Study Room</a>
 	            </div>
 	            <div v-if="! course.isSubscribedBy">
 	            	<div class="columns is-mobile">
@@ -65,15 +65,8 @@
 	    	return {
 	    		playVideo: false,
 	                source: this.course.video_path,
-	    		playerdata: {
+	    		playeroptions: {
 	                autoplay: true,
-	                playlist: [{
-                		sources: [{
-                			src: this.course.video_path,
-		                    type: 'video/mp4'
-                		}],
-                		poster: this.course.thumbnail_path,
-                	}],
 	            },
 	    	}
 	    },

@@ -65,9 +65,19 @@ class CourseController extends Controller
             'difficulty_id' => 'required|exists:difficulties,id'
         ]);
 
-        $course = Course::create(request()->all());
+        $course = new Course;
+        $course->title          = $request->title;
+        $course->duration       = $request->duration;
+        $course->description    = $request->description;
+        $course->sypnosis       = $request->sypnosis;
+        $course->subject_id     = $request->subject_id;
+        $course->type_id        = $request->type_id;
+        $course->difficulty_id  = $request->difficulty_id;
+        $course->user_id        = auth()->user()->id;
 
-        $course->createPlanOnPaystack();
+        $course->save();
+
+        // $course->createPlanOnPaystack();
 
         // $path = $course->path();
 
