@@ -18,23 +18,35 @@
 <!-- 	            <div class="columns mb-2">
                     <div style="color: black;" class="column" v-for="learn in learns" v-text="learn.body"></div>
 	            </div>  -->
-	            <div >
-		            <a :href="'/course.slug/episodes'" class="button medium">Enter Study Room</a>
+	            <div v-if="course.isSubscribedBy">
+		            <a :href="'/course.slug/episodes'" class="button medium">Watch Episodes</a>
 	            </div>
 	            <div v-if="! course.isSubscribedBy">
-	            	<div class="columns is-mobile">
+	            	<div class="columns is-mobile" v-if="course.available_online">
 	            		<div class="column is-6" title="Sorry! Not available for online training yet">
 	            			<!-- Add this href attribute to button if online training is allowed -->
 	            			<!-- :href="course_path + '/subscription?class=false'" -->
 	            			<a disabled  class="button is-link is-rounded is-fullwidth">Study Series Online</a>
+	            			<span class="is-size-7 has-text-black">Online Training Only</span>
+
 	            		</div>
 	            		<div class="column is-6">
 		                    <div class="has-text-warning is-size-4">&#8358;<span v-text="amount"></span></div>
 	            		</div>
 	            	</div>
-	            	<div class="columns is-mobile">
-	            		<div class="column is-6">
+	            	<div class="columns is-mobile" v-if="course.available_offline">
+	            		<div class="column is-6" >
 	            			<a :href="course_path + '/subscription?class=true'" class="button is-link is-rounded is-fullwidth">Study Series Offline</a>
+	            			<span class="is-size-7 has-text-black">Online + Classroom Training</span>
+	            		</div>
+	            		<div class="column is-6">
+		                    <div class="has-text-warning is-size-4">&#8358;<span v-text="classroomamount"></span></div>
+	            		</div>
+	            	</div>
+	            	<div class="columns is-mobile" v-if="course.available_lifetime">
+	            		<div class="column is-6">
+	            			<a :href="course_path + '/subscription?class=true'" class="button is-link is-rounded is-fullwidth">One off purchase</a>
+	            			<span class="is-size-7 has-text-black">Online Lifetime Access</span>
 	            		</div>
 	            		<div class="column is-6">
 		                    <div class="has-text-warning is-size-4">&#8358;<span v-text="classroomamount"></span></div>
