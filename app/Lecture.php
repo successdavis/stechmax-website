@@ -34,7 +34,7 @@ class Lecture extends Model
 
     public function path()
     {
-        return '/api/' . $this->slug ;
+        return '/'. $this->course->slug . '/episode/' . $this->slug;
     }
 
     public function getPathAttribute()

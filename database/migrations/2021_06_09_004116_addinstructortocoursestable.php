@@ -14,7 +14,7 @@ class Addinstructortocoursestable extends Migration
     public function up()
     {
         Schema::table('courses', function (Blueprint $table) {
-            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('employee_id')->nullable();
         });
     }
 

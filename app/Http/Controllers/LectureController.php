@@ -67,8 +67,10 @@ class LectureController extends Controller
         $nextepisode = $lecture->nextLectureUrl();
         $prevepisode = $lecture->prevLectureUrl();
 
+       $sections = $course->sections;
+
         if ($lecture->hasVideo()) {
-            return view('courses/lecture/index', compact('lecture','nextepisode','prevepisode'));
+            return view('courses/lecture/index', compact('lecture','nextepisode','prevepisode','course','sections'));
         }
 
         return back()->withFlash('This lesson has no associate video','failed');
@@ -128,5 +130,15 @@ class LectureController extends Controller
     public function destroy(Lecture $lecture)
     {
         $lecture->delete();
+    }
+
+    public function savenote(Lecture $lecture, Request $request)
+    {
+        request()->validate([
+            'lecturenote'   => 'required'
+        ]);
+
+        $lecture->notes = $request->lecturenote;
+        $lecture->save();
     }
 }

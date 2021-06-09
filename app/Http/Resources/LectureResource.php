@@ -18,6 +18,7 @@ class LectureResource extends JsonResource
             'id'        => $this->id,
             'title'     => $this->title,
             'slug'      => $this->slug,
+            'notes'      => $this->notes,
             'has_video' => $this->hasVideo(),
         ];
     }

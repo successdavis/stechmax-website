@@ -32,6 +32,23 @@
                     <input @change="attachVideo" type="file" id="video" accept="video/*">
                 </form>
             </span>
+            <a @click="$modal.show(modal)"><i class="mdi mdi-notebook-edit"></i><span>Notes</span></a>
+            <modal :name="modal" 
+            height="auto" draggable=".window-header" class="scroll" :clickToClose="clickToClose" :scrollable="scrollable" :adaptive="adaptive" :resizable="resizable">
+                <div class="window-header" style="padding: 0 1em;">LECTURE NOTE</div>
+                <hr>
+                <div class="section" >
+                    <textarea v-model="lecturenote" class="textarea"></textarea>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <button @click="$modal.hide(modal)" class="button is-fullwidth is-danger">Cancel</button>
+                    </div>
+                    <div class="column">
+                        <button @click="savenote" class="button is-fullwidth is-success">Save</button>
+                    </div>
+                </div>
+            </modal>
         </div>
     </div>
 </template>
@@ -41,6 +58,13 @@
 
         data () {
             return {
+                adaptive: true,
+                resizable: true,
+                scrollable: true,
+                lecturenote: this.lecture.notes,
+                clickToClose: false,
+                modal: this.lecture.slug,
+                shownotes: false,
                 editing: false,
                 hasVideo: this.lecture.has_video,
                 id: this.lecture.id,
@@ -89,6 +113,17 @@
             cancel () {
                 this.Form.reset();
                 this.editing = false;
+            },
+
+            savenote () {
+                axios.post(`/api/${this.lecture.slug}/savenote`, {
+                  lecturenote: this.lecturenote,
+                }).then((response) => {
+                  flash('Note saved')
+                }).catch((error) => {
+                    flash('Unable to save note', 'failed')
+                    console.error(error);
+                });
             }
         }
     }

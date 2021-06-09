@@ -73,7 +73,7 @@ class CourseController extends Controller
         $course->subject_id     = $request->subject_id;
         $course->type_id        = $request->type_id;
         $course->difficulty_id  = $request->difficulty_id;
-        $course->user_id        = auth()->user()->id;
+        $course->employee_id        = auth()->user()->id;
 
         $course->save();
 

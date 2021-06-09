@@ -17,19 +17,18 @@
 			        </figure>
 			      </div>
 			      <div class="media-content">
-			        <p class="title is-4">John Smith</p>
-			        <p class="subtitle is-6">@johnsmith</p>
+			        <p class="title is-4">{{ucfirst($course->teacher->user->f_name) . ' ' . ucfirst($course->teacher->user->l_name)}}</p>
+			        <p class="subtitle is-6">Your Teacher</p>
 			      </div>
 			    </div>
 
 			    <div class="content">
-			      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-			      Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-			      <a href="#">#css</a> <a href="#">#responsive</a>
-			      <br>
-			      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+			      {{$lecture->notes}}
 			    </div>
 			  </div>
+			</div>
+			<div>
+            @include("courses.partials._coursetableofcontent")
 			</div>
 		</div>
 	</div>

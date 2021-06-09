@@ -63,6 +63,7 @@ Route::get('manage/{section}/lectures', 'LectureController@index')->middleware([
 Route::put('manage/{section}/lectures', 'LectureController@reOrderLectures')->middleware(['admin']);
 Route::patch('manage/{lecture}/lecture', 'LectureController@update')->middleware(['admin']);
 Route::delete('manage/{lecture}/lecture', 'LectureController@destroy')->middleware(['admin']);
+Route::post('api/{lecture}/savenote', 'LectureController@savenote')->middleware(['auth', 'admin']);
 
 Route::get('lectures/{lecture}', 'LectureController@show')->name('lecture.show');
 

@@ -27,6 +27,11 @@ class Employee extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function Courses()
+    {
+        return $this->hasMany(Course::class);
+    }
+
     public function getRouteKeyName()
     {
         return 'user_id';

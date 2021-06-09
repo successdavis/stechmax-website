@@ -46,7 +46,7 @@ window.Form = Form;
 window.Event = new Vue();
 
 Vue.use(PortalVue);
-Vue.use(VModal,{dynamicDefault: { draggable: true, resizable: true }});
+Vue.use(VModal,{dynamicDefault: { draggable: true, resizable: true,  dialog: true }});
 // Vue.use(videojsPlaylist);
 // Vue.use(playlistMaker);
 Vue.use(Croppa);
