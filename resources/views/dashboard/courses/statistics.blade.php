@@ -19,7 +19,7 @@
 							<div class="level-item">
 								<div class="is-widget-label">
 									<h3 class="subtitle is-spaced"> Active Subscribers </h3>
-									<h1 class="title"><div> {{$total}}</div></h1>
+									<h1 class="title"><div> {{$activeSubscribers}}</div></h1>
 								</div>
 							</div>
 							<div class="level-item has-widget-icon">

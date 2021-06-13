@@ -9,8 +9,8 @@ class CourseStatisticsController extends Controller
 {
     public function index(Course $course)
     {
-        $subscribers = $course->subscriptions;
-        $monthTotal = $course->subscriptions->count();
+        $subscribers        = $course->subscriptions;
+        $activeSubscribers  = $course->subscriptions->where('active')->count();
         $total = $course->subscriptions->count();
         $totalEarning = 0;
         foreach ($subscribers as $subscriber) {
@@ -19,8 +19,8 @@ class CourseStatisticsController extends Controller
 
         return view('dashboard.courses.statistics', compact([
             'displayMenu' => true,
+            'activeSubscribers',
             'subscribers',
-            'monthTotal',
             'total',
             'totalEarning'
         ]));
