@@ -127,4 +127,9 @@ class Subscription extends Model
     {
         return self::where('active', true)->count();
     }
+
+    public function platform()
+    {
+        return $this->class ? 'Classroom' : 'Online';
+    }
 }

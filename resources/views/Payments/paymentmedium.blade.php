@@ -12,7 +12,15 @@
             </div>
         @endif
           <div class="section">
-            <h4 class="is-size-3 has-text-centered">You have choosed to study {{$course->title}} at our ICT Centre </h4>
+            <h4 class="is-size-3 has-text-centered">You have choosed to study {{$course->title}}
+
+              @if($class===true)
+                online and at our ICT Centre.
+              @else
+                online only.
+              @endif
+
+            </h4>
             <p class="has-text-centered">Just one more step to go, Please choose your method of payment,</p>
             @if ($class === true)
               <p class="is-size-3 has-text-centered">

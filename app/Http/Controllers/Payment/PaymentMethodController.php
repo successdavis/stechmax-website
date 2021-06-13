@@ -13,6 +13,7 @@ class PaymentMethodController extends Controller
     public function index(Subject $subject, Course $course)
     {
         $class = filter_var(request()->class, FILTER_VALIDATE_BOOLEAN);
+
         return view('payments.paymentmedium', compact('course', 'class'));
     }
 

@@ -29,9 +29,10 @@ trait Subscriber
             $subscription = $this->subscriptions()->save(
                     new Subscription([
                         'user_id'       => $userId ?: auth()->id(),
-                        'duration'      => $this->duration,
+                        'duration'      => $class === 'true' ? $this->duration : '4',
                         'invoice_id'    => $invoice_id,
                         'class'         => $class === 'true' ? true : false,  
+                        'recursive'     => $class === 'true' ?: false,
                     ])
             );
             if ($class) {

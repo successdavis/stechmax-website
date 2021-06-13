@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class CoursesController extends Controller
 {
-     public function index ()
+    public function index ()
     {
         return view('dashboard.courses.index', [
             'displayMenu' => true

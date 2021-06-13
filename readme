@@ -1,0 +1,9 @@
+Loop through all courses and subscribe
+
+Basic duration for online courses is One Month//
+
+auto renew is turn off by default for all classroom classes
+
+Each month find all subscriptions with recursive set to false attempt to renew subscription by extending duration, if attempt fails, deactivate subscription.
+
+Allow the user to choose if he/she wants auto renew

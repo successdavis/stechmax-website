@@ -10,8 +10,8 @@
 	            <a :href="'/courses/' + subject.slug" class="mb-3 tiny-button" v-text="subject.slug"></a>
 	            <a :href="'/courses/'" class="mb-3 tiny-button" v-text="type"></a>
 
-	            <div class="course__play--btn" :style="{backgroundImage: `url(${course.thumbnail_path})`}">
-	                <i class="fas fa-play" @click="togglePlay"></i>
+	            <div @click="togglePlay" class="course__play--btn" :style="{backgroundImage: `url(${course.thumbnail_path})`}">
+	                <i class="fas fa-play"></i> 
 	            </div>
 	            <h3 class="is-size-4-mobile mt-1 is-size-3 course__streamer--title" v-text="course.title"></h3>
 	            <p class="mb-3 course-desc has-text-centered" v-text="course.sypnosis"></p>
@@ -26,7 +26,7 @@
 	            		<div class="column is-6" title="Sorry! Not available for online training yet">
 	            			<!-- Add this href attribute to button if online training is allowed -->
 	            			<!-- :href="course_path + '/subscription?class=false'" -->
-	            			<a disabled  class="button is-link is-rounded is-fullwidth">Study Series Online</a>
+	            			<a :href="course_path + '/subscription'" class="button is-link is-rounded is-fullwidth">Study Series Online</a>
 	            			<span class="is-size-7 has-text-black">Online Training Only</span>
 
 	            		</div>

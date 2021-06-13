@@ -75,6 +75,8 @@ Route::get('/dashboard/{course}/manage', 'CourseController@edit')->middleware('a
 Route::get('/dashboard/{course}/publish', 'CourseController@publish')->middleware('admin')->name('courses.publish');
 Route::get('/dashboard/{course}/unpublish', 'CourseController@unPublish')->middleware('admin')->name('courses.unPublish');
 
+Route::get('/dashboard/{course}/statistics', 'CourseStatisticsController@index')->middleware('admin')->name('courses.unPublish');
+
 Route::get('/dashboard/users', 'ManageUserController@index')->middleware('admin')->name('manage_user.index');
 Route::get('/finduserwithinvoices', 'ManageUserController@findUserWithInvoices')->middleware('admin');
 Route::get('/dashboard/users/datatable', 'ManageUserController@getUsersForDataTable')->middleware('admin')->name('manage_user.datatables');

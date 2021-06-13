@@ -60,9 +60,6 @@ class PaystackSubscriptionController extends Controller
         $responds = json_decode($result, true);
 
         return redirect($responds['data']['authorization_url']);
-
-
-
     }
 
     public function makePartPayment(Subject $subject, Course $course, Request $request)
@@ -120,7 +117,13 @@ class PaystackSubscriptionController extends Controller
 
         $invoice->recordPayment($paymentDetails['data']);
 
-        $course->createSubscription('', $invoice->id, $class = $paymentDetails['data']['metadata']['class']);
+        if ($course->type === 2) {
+            foreach ($course->childrenCourses as $course) {
+                $course->createSubscription('', $invoice->id, $class = $class);
+            }
+        }
+
+        $course->createSubscription('', $invoice->id, $class = $class);
 
         return redirect('/paid/' . $course->slug)
         ->with('flash', 'Payment Successful');

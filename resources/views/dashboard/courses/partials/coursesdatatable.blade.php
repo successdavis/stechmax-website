@@ -157,6 +157,11 @@
 												<i class="mdi mdi-folder-edit-outline"></i>
 											</span>
 										</a>
+										<a title="Edit course" :href="'/dashboard/' + course.slug + '/statistics'" type="button" class="button is-small is-danger">
+											<span class="icon is-small">
+												<i class="mdi mdi-account-group"></i>
+											</span>
+										</a>
 									</div>
 								</td>
 							</tr>
