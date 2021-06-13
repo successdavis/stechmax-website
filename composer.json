@@ -9,7 +9,7 @@
         "aloha/twilio": "^4.0",
         "barryvdh/laravel-dompdf": "^0.8.5",
         "fideloper/proxy": "^4.4",
-        "guzzlehttp/guzzle": "^7.0.1",
+        "guzzlehttp/guzzle": "^7.3.0",
         "laravel/framework": "^8.12",
         "laravel/helpers": "^1.1",
         "laravel/legacy-factories": "^1.1",

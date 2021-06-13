@@ -7,4 +7,5 @@
     :course_path="{{json_encode($course->path())}}"
     :type="{{json_encode($course->type->name)}}"
     :videourl="{{json_encode($course->videopath)}}"
+    :lecture_path="{{json_encode($course->firstLectureUrl())}}"
 ></course-streamer>

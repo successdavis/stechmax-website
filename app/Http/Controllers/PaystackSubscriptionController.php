@@ -19,13 +19,15 @@ class PaystackSubscriptionController extends Controller
 
         $class = filter_var(request()->class, FILTER_VALIDATE_BOOLEAN);
 
+        $reference_num = rand(10*45, 100*98);
+
         $data = [
             "amount" => $class ? $course->getAmountWithClassroom(false) : $course->amount,
-            "reference" => Paystack::genTranxRef(),
-            "key" => config('paystack.secretKey'),
+            "key" => getenv('PAYSTACK_SECRET_KEY'),
             "email" => auth()->user()->email ? auth()->user()->email : 'support@stechmax.com',
             "first_name" => auth()->user()->f_name,
             "last_name" => auth()->user()->l_name,
+            "callback_url" => 'http://stechmax-website.test/payment/callback',
             "metadata" => [
                 'course_id' => $course->id,
                 'purpose' => 'Course Subscription',
@@ -34,12 +36,38 @@ class PaystackSubscriptionController extends Controller
             ],
         ];
 
-        return Paystack::getAuthorizationUrl($data)->redirectNow();
+        $url = "https://api.paystack.co/transaction/initialize";
+
+        $fields_string = http_build_query($data);
+
+        $ch = curl_init();
+
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch,CURLOPT_URL, $url);
+        curl_setopt($ch,CURLOPT_POST, true);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Authorization: Bearer " . getenv('PAYSTACK_SECRET_KEY'),
+            "Cache-Control: no-cache",
+        ));
+
+          //So that curl_exec returns the contents of the cURL; rather than echoing it
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
+
+        //execute post
+        $result = curl_exec($ch);
+
+        $responds = json_decode($result, true);
+
+        return redirect($responds['data']['authorization_url']);
+
+
+
     }
 
     public function makePartPayment(Subject $subject, Course $course, Request $request)
     {
-            
+
         $request->validate([
             'class'     => 'required|boolean'
         ]);
@@ -65,9 +93,15 @@ class PaystackSubscriptionController extends Controller
         return Paystack::getAuthorizationUrl($data)->redirectNow();
     }
 
-    public function handleGatewayCallback()
+    public function handleGatewayCallback(Request $request)
     {
-        $paymentDetails = Paystack::getPaymentData();
+        $paymentDetails = $this->verifyTransaction($request->reference);
+
+        if (!$paymentDetails) {
+            abort(400, 'Invalid Transaction');
+        }
+
+        $paymentDetails = $paymentDetails;
         $course = Course::findOrFail($paymentDetails['data']['metadata']['course_id']);   
         request()->user()->updatePaystackId($paymentDetails['data']['customer']['customer_code']);
 
@@ -89,6 +123,43 @@ class PaystackSubscriptionController extends Controller
         $course->createSubscription('', $invoice->id, $class = $paymentDetails['data']['metadata']['class']);
 
         return redirect('/paid/' . $course->slug)
-            ->with('flash', 'Payment Successful');
+        ->with('flash', 'Payment Successful');
+    }
+
+    public function verifyTransaction($reference)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.paystack.co/transaction/verify/" . $reference,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+              "Authorization: Bearer " . getenv('PAYSTACK_SECRET_KEY'),
+              "Cache-Control: no-cache",
+          ),
+        ));
+
+        $response = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
+
+        $data = json_decode($response, true);
+
+        if ($err) {
+            abort('Something unexpected happened', '500');
+        } else {
+            if (isset($data['data'])) {
+                if ($data['data']['status'] === "success") {
+                    return $data;
+                }
+                return false;
+            }
+            return false;
+        }
     }
 }

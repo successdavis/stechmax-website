@@ -8,7 +8,6 @@ use Paystack;
 class Course extends Model
 {
     protected $guarded = [];
-//    protected $appends = ['path'];
 
     use Billable;
     use Subscriber;
@@ -276,5 +275,15 @@ class Course extends Model
         return $this->update([
             'partpayment' => true,
         ]);
+    }
+
+    public function firstLectureUrl()
+    {
+        $lecture = $this->lectures->first->get();
+
+        if ($lecture) {
+            return $lecture->path;
+        }
+        return '';
     }
 }

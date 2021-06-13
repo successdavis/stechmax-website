@@ -19,7 +19,7 @@
                     <div style="color: black;" class="column" v-for="learn in learns" v-text="learn.body"></div>
 	            </div>  -->
 	            <div v-if="course.isSubscribedBy">
-		            <a :href="'/course.slug/episodes'" class="button medium">Watch Episodes</a>
+		            <a :href="lecture_path" class="button medium">Watch Episodes</a>
 	            </div>
 	            <div v-if="! course.isSubscribedBy">
 	            	<div class="columns is-mobile" v-if="course.available_online">
@@ -67,6 +67,7 @@
 			subject: Object,
 			learns: Array,
 			course_path: String,
+			lecture_path: String,
 			type: String,
 			videourl: String,
 			amount: Number,
