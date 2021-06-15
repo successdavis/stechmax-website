@@ -23,13 +23,15 @@ trait Subscriber
     }
 
     //    to create subscription for a user in a particular module e.g. $course->createSubscription(1);
-    public function createSubscription($userId = null, $invoice_id = null, $class = null)
+    public function createSubscription($userId = null, $invoice_id = null, $class = null, $duration = null)
     {
+        $duration = $duration ? $duration : $this->duration;
+
         if (! $this->hasActiveSubscription()){
             $subscription = $this->subscriptions()->save(
                     new Subscription([
                         'user_id'       => $userId ?: auth()->id(),
-                        'duration'      => $class === 'true' ? $this->duration : '4',
+                        'duration'      => $duration,
                         'invoice_id'    => $invoice_id,
                         'class'         => $class === 'true' ? true : false,  
                         'recursive'     => $class === 'true' ?: false,

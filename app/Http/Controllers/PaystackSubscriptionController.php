@@ -6,7 +6,7 @@ use App\Course;
 use App\DebitCardDetails;
 use App\Invoice;
 use App\Subject;
-use App\siteconfig;
+use App\Fee;
 use App\Traits\Paystack;
 use Illuminate\Http\Request;
 
@@ -79,8 +79,11 @@ class PaystackSubscriptionController extends Controller
 
         $responds = $this->makePaystackRequest($url, $fields_string);
 
-        if ($responds['data']['status'] === 'success') {
-            $this->createSubscription($class, $course, $responds);
+
+        if ($class) {
+            $this->createClassroomSubscription($course, $responds);
+        }else {
+            $this->createOnlineSubscription($course, $responds);
         }
 
         return redirect('/paid/' . $course->slug)
@@ -104,7 +107,11 @@ class PaystackSubscriptionController extends Controller
 
         $class = $paymentDetails['data']['metadata']['class'] === 'true'? true: false;
 
-        $this->createSubscription($class, $course, $paymentDetails);
+        if ($class) {
+            $this->createClassroomSubscription($course, $paymentDetails);
+        }else {
+            $this->createOnlineSubscription($course, $paymentDetails);
+        }
 
         return redirect('/paid/' . $course->slug)
         ->with('flash', 'Payment Successful');
@@ -123,23 +130,33 @@ class PaystackSubscriptionController extends Controller
         return $card;
     }
 
-    public function createSubscription($class, $course, $paymentDetails)
+    public function createClassroomSubscription($course, $paymentDetails)
     {
-        if ($class) {
-            $classCharge = siteconfig::getclassroomfee();
-            $invoice = $course->createInvoice('','', $classCharge);
-        }else {
-            $invoice = $course->createInvoice();
-        }
+        $classCharge = Fee::getclassroomfee();
+        $invoice = $course->createInvoice('','', $classCharge);
 
         $invoice->recordPayment($paymentDetails['data']);
 
-        if ($course->type === 2) {
-            foreach ($course->childrenCourses as $course) {
-                $course->createSubscription('', $invoice->id, $class = $class);
+        if (strtolower($course->type->name) === "track") {
+            foreach ($course->childrenCourses as $childCourse) {
+                $childCourse->createSubscription('', $invoice->id, $class = true, $course->duration);
             }
         }
 
-        return $course->createSubscription('', $invoice->id, $class = $class);
+        return $course->createSubscription('', $invoice->id, $class = true);
+    }
+
+    public function createOnlineSubscription($course, $paymentDetails)
+    {
+        $invoice = $course->createInvoice('','');
+        $invoice->recordPayment($paymentDetails['data']);
+
+        if (strtolower($course->type->name) === "track") {
+            foreach ($course->childrenCourses as $childCourse) {
+                $childCourse->createSubscription('', $invoice->id, $class = false, 4);
+            }
+        }
+
+        return $course->createSubscription('', $invoice->id, $class = false, 4);
     }
 }
