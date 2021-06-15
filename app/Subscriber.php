@@ -68,9 +68,19 @@ trait Subscriber
     // check if this course is subscribe by this user.
     public function isSubscribedBy(User $user)
     {
-        return $this->subscriptions()
+        if (
+            $this->subscriptions()
             ->where(['user_id' => $user->id, 'active' => true])
-            ->exists();
+            ->exists()
+        ) {return true;}
+        $activeParentCourses = $this->parentCourse()->get()->map(function($course) use($user){
+            return $course->subscriptions()->where(['user_id' => $user->id, 'active' => true])->pluck('id');
+        });
+
+        if ($activeParentCourses->isNotEmpty()) {
+            return true;
+        }
+        return false;
     }
 
     public function getIsSubscribedByAttribute()

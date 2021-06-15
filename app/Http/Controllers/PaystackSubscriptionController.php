@@ -137,11 +137,11 @@ class PaystackSubscriptionController extends Controller
 
         $invoice->recordPayment($paymentDetails['data']);
 
-        if (strtolower($course->type->name) === "track") {
-            foreach ($course->childrenCourses as $childCourse) {
-                $childCourse->createSubscription('', $invoice->id, $class = true, $course->duration);
-            }
-        }
+        // if (strtolower($course->type->name) === "track") {
+        //     foreach ($course->childrenCourses as $childCourse) {
+        //         $childCourse->createSubscription('', $invoice->id, $class = true, $course->duration);
+        //     }
+        // }
 
         return $course->createSubscription('', $invoice->id, $class = true);
     }
@@ -151,11 +151,11 @@ class PaystackSubscriptionController extends Controller
         $invoice = $course->createInvoice('','');
         $invoice->recordPayment($paymentDetails['data']);
 
-        if (strtolower($course->type->name) === "track") {
-            foreach ($course->childrenCourses as $childCourse) {
-                $childCourse->createSubscription('', $invoice->id, $class = false, 4);
-            }
-        }
+        // if (strtolower($course->type->name) === "track") {
+        //     foreach ($course->childrenCourses as $childCourse) {
+        //         $childCourse->createSubscription('', $invoice->id, $class = false, 4);
+        //     }
+        // }
 
         return $course->createSubscription('', $invoice->id, $class = false, 4);
     }

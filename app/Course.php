@@ -128,7 +128,7 @@ class Course extends Model
 
     public function parentCourse()
     {
-        return $this->belongsToMany('App\Course', 'track_courses','course_id','track_id')->withPivot('order');
+        return $this->belongsToMany('App\Course', 'course_tracks','course_id','track_id')->withPivot('order');
     }
 
     public function attachCourseToTrack($course)
