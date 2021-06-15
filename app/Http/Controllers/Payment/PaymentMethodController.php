@@ -14,7 +14,9 @@ class PaymentMethodController extends Controller
     {
         $class = filter_var(request()->class, FILTER_VALIDATE_BOOLEAN);
 
-        return view('payments.paymentmedium', compact('course', 'class'));
+        $debitCards = auth()->user()->debitCards()->get();
+
+        return view('payments.paymentmedium', compact('course', 'class','debitCards'));
     }
 
 

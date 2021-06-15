@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\DebitCardDetails;
 use App\Invoice;
 use App\Subject;
 use App\siteconfig;
@@ -62,6 +63,63 @@ class PaystackSubscriptionController extends Controller
         return redirect($responds['data']['authorization_url']);
     }
 
+    public function chargeWithDebitCard(Subject $subject, Course $course, Request $request)
+    {
+        $request->validate([
+            'class'     => 'required|boolean',
+            'signature' => 'required|exists:debit_card_details,signature',
+        ]);
+
+        $class = filter_var(request()->class, FILTER_VALIDATE_BOOLEAN);
+
+        $reference_num = rand(10*45, 100*98);
+
+        $card = DebitCardDetails::whereSignature($request->signature)->first();
+
+        $data = [
+            "amount" => $class ? $course->getAmountWithClassroom(false) : $course->amount,
+            "authorization_code" => $card->authorization_code,
+            "email" => auth()->user()->email ? auth()->user()->email : 'support@stechmax.com',
+            "metadata" => [
+                'course_id' => $course->id,
+                'purpose' => 'Course Subscription',
+                'method' => 'Paystack',
+                'class' => $class,
+            ],
+        ];
+
+        $url = "https://api.paystack.co/transaction/charge_authorization";
+
+        $fields_string = http_build_query($data);
+
+        $ch = curl_init();
+
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch,CURLOPT_URL, $url);
+        curl_setopt($ch,CURLOPT_POST, true);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Authorization: Bearer " . getenv('PAYSTACK_SECRET_KEY'),
+            "Cache-Control: no-cache",
+        ));
+
+          //So that curl_exec returns the contents of the cURL; rather than echoing it
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
+
+        //execute post
+        $result = curl_exec($ch);
+
+        $responds = json_decode($result, true);
+
+        if ($responds['data']['status'] === 'success') {
+            $this->createSubscription($class, $course, $responds);
+        }
+
+        return redirect('/paid/' . $course->slug)
+            ->with('flash', 'Payment Successful');
+
+    }
+
     public function makePartPayment(Subject $subject, Course $course, Request $request)
     {
 
@@ -94,6 +152,8 @@ class PaystackSubscriptionController extends Controller
     {
         $paymentDetails = $this->verifyTransaction($request->reference);
 
+        $card = $this->saveCardDetails($paymentDetails['data']['authorization']);
+
         if (!$paymentDetails) {
             abort(400, 'Invalid Transaction');
         }
@@ -104,26 +164,7 @@ class PaystackSubscriptionController extends Controller
 
         $class = $paymentDetails['data']['metadata']['class'] === 'true'? true: false;
 
-        if (!isset($paymentDetails['data']['metadata']['invoice_id'])) {
-            if ($class) {
-                $classCharge = siteconfig::getclassroomfee();
-                $invoice = $course->createInvoice('','', $classCharge);
-            }else {
-                $invoice = $course->createInvoice();
-            }
-        }else {
-            $invoice = Invoice::findOrFail($paymentDetails['data']['metadata']['invoice_id']);
-        }
-
-        $invoice->recordPayment($paymentDetails['data']);
-
-        if ($course->type === 2) {
-            foreach ($course->childrenCourses as $course) {
-                $course->createSubscription('', $invoice->id, $class = $class);
-            }
-        }
-
-        $course->createSubscription('', $invoice->id, $class = $class);
+        $this->createSubscription($class, $course, $paymentDetails);
 
         return redirect('/paid/' . $course->slug)
         ->with('flash', 'Payment Successful');
@@ -164,5 +205,38 @@ class PaystackSubscriptionController extends Controller
             }
             return false;
         }
+    }
+
+    public function saveCardDetails($cardDetails)
+    {
+
+        if (DebitCardDetails::findCard($cardDetails['signature'])->get()->isEmpty()) {
+            $card = DebitCardDetails::saveCardDetails($cardDetails);
+
+            return $card;
+        }
+        
+        $card = DebitCardDetails::findCard($cardDetails['signature']);
+        return $card;
+    }
+
+    public function createSubscription($class, $course, $paymentDetails)
+    {
+        if ($class) {
+            $classCharge = siteconfig::getclassroomfee();
+            $invoice = $course->createInvoice('','', $classCharge);
+        }else {
+            $invoice = $course->createInvoice();
+        }
+
+        $invoice->recordPayment($paymentDetails['data']);
+
+        if ($course->type === 2) {
+            foreach ($course->childrenCourses as $course) {
+                $course->createSubscription('', $invoice->id, $class = $class);
+            }
+        }
+
+        return $course->createSubscription('', $invoice->id, $class = $class);
     }
 }

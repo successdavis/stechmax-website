@@ -41,14 +41,29 @@
               <p>Click button below to pay using your credit card with paystack</p>
                 <div class="mb-2">
 
+                  @if($debitCards->isNotEmpty())
+                  <form method="post" action="{{$course->path()}}/paystackwithcard">
+                      @csrf
+                    <div class="select">
+                      <select name="signature">
+                          @foreach($debitCards as $card)
+                          <option  value="{{$card->signature}}">{{$card->bank . ' - ' . $card->last4}}</option>
+                          @endforeach
+                      </select>
+                    </div>
+                    <input type="hidden" name="class" value="{!!$class ? 1 : 0!!}" >
+                    <button type="submit" class="button is-primary">PAY WITH SELECTED CARD</button>
+                  </form>
 
+                  @else
                   <form method="post" action="{{$course->path()}}/paystack">
                       @csrf
                       <input type="hidden" name="class" value="{!!$class ? 1 : 0!!}" >
                       <button type="submit" class="small button">
-                        <img src="{{asset('/images/paystack.png')}}">
+                        CLICK HERE TO PAY
                       </button>
                   </form>
+                  @endif
                 </div>
 {{--  --}}
                 {{-- Check if course support part payment then display --}}

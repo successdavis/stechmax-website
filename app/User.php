@@ -93,6 +93,11 @@ class User extends Authenticatable
         return $this->hasMany(Experience::class);
     }
 
+    public function debitCards()
+    {
+        return $this->hasMany(DebitCardDetails::class);
+    }
+
     public function assignId()
     {
         $this->update([
