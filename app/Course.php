@@ -286,4 +286,10 @@ class Course extends Model
         }
         return '';
     }
+
+    public function hasActiveSubscription($userId = null)
+    {
+        $userId = $userId ? $userId : auth()->id();
+        return $this->subscriptions()->where(['user_id' => $userId, 'active' => true])->exists();
+    }
 }

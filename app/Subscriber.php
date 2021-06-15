@@ -25,7 +25,7 @@ trait Subscriber
     //    to create subscription for a user in a particular module e.g. $course->createSubscription(1);
     public function createSubscription($userId = null, $invoice_id = null, $class = null)
     {
-        if (! $this->subscriptions()->where(['user_id' => auth()->id(), 'active' => true])->exists()){
+        if (! $this->hasActiveSubscription()){
             $subscription = $this->subscriptions()->save(
                     new Subscription([
                         'user_id'       => $userId ?: auth()->id(),

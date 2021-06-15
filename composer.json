@@ -17,7 +17,6 @@
         "laravel/ui": "^3.2",
         "league/flysystem-cached-adapter": "~1.0",
         "spatie/laravel-permission": "^4.0",
-        "unicodeveloper/laravel-paystack": "1.0.6",
         "vimeo/laravel": "^5.6",
         "vimeo/vimeo-api": "^3.0"
     },
