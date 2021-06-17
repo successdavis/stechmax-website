@@ -33,8 +33,8 @@ trait Subscriber
                         'user_id'       => $userId ?: auth()->id(),
                         'duration'      => $duration,
                         'invoice_id'    => $invoice_id,
-                        'class'         => $class === 'true' ? true : false,  
-                        'recursive'     => $class === 'true' ?: false,
+                        'class'         => $class,  
+                        'recurring'     => $class === true ? false : true,
                     ])
             );
             if ($class) {

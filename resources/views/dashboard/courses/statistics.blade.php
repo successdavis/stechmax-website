@@ -38,7 +38,7 @@
 					<header class="card-header card-cen-v">
 						<p class="card-header-title">
 							<span class="icon"><i class="fas fa-code-branch"></i></i></span>
-							<span>Total Amount Generated</span>
+							<span>All Time Earning</span>
 						</p>
 						<button type="button" class="button is-small align-sf-ct">
 							<span class="icon"><i class="fas fa-history"></i></span>
@@ -78,7 +78,7 @@
 				<td>{{ucwords($subscriber->owner->f_name . ' ' . $subscriber->owner->l_name)}}</td>
 				<td>{{ucwords($subscriber->owner->user_id)}}</td>
 				<td>{{$subscriber->platform()}}</td>
-				<td>{{$subscriber->status()}}</td>
+				<td>@if($subscriber->status()) active @else inactive @endif</td>
 				<td>{{$subscriber->endsAt}}</td>
 			</tr>
 			@endforeach
