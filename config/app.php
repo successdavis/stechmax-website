@@ -160,7 +160,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Unicodeveloper\Paystack\PaystackServiceProvider::class,
         App\Providers\AchievementServiceProvider::class,
         Vimeo\Laravel\VimeoServiceProvider::class
 
@@ -213,9 +212,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class,
         'Vimeo' => Vimeo\Laravel\Facades\Vimeo::class
     ],
 
