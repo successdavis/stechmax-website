@@ -3,15 +3,21 @@
 namespace App;
 
 use App\Events\SystemNoAssigned;
-use App\Mail\UnableToSetSystemNumber;
-use App\User;
 use App\Invoice;
+use App\Mail\BillingFailedNotification;
+use App\Mail\BillingNotification;
+use App\Mail\SubscriptionRenewNotification;
+use App\Mail\UnableToSetSystemNumber;
+use App\Traits\Paystack;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 
 class Subscription extends Model
 {
+    use Paystack;
+
     protected $guarded = [];
     protected $appends = ['durationSpent'];
 
@@ -67,11 +73,92 @@ class Subscription extends Model
     {
         $activeSubscriptions = static::activeSubscriptions()->get();
         foreach ($activeSubscriptions as $subscription) {
-            if ((new self)->durationSpent($subscription) >= $subscription->duration) {
+            if ($subscription->durationSpentInDays() > $subscription->durationInDays()) {
                 $subscription->deactivate();
             }
         }
         return true;
+    }
+
+    static public function sendBillingNotificatoinMail()
+    {
+        $activeSubscriptions = static::activeSubscriptions()->where('recurring', true)->get();
+        foreach ($activeSubscriptions as $subscription) {
+            if ($subscription->durationInDays() - $subscription->durationSpentInDays() === 6) {
+                Mail::to($subscription->owner)->send(new BillingNotification($subscription, $subscription->owner, $subscription->subscriber));
+            }
+        }
+        return true;
+    }
+
+    static public function chargeRecurringSubscriptions()
+    {
+        $activeSubscriptions = static::activeSubscriptions()->where('recurring', true)->get();
+        foreach ($activeSubscriptions as $subscription) {
+            if ($subscription->subscriptionDaysLeft() == 3 || $subscription->subscriptionDaysLeft() <=1 ) {
+                $subscription->chargeRenewFee();
+            }
+        }
+        return true;
+    }
+
+    public function subscriptionDaysLeft()
+    {
+        return $this->durationInDays() - $this->durationSpentInDays();
+    }
+
+    public function chargeRenewFee()
+    {
+        $reference_num = rand(10*45, 100*98);
+        $card = $this->owner->debitCards()->latest()->first();
+
+        $data = [
+            "amount" => $this->subscriber->amount,
+            "authorization_code" => $card->authorization_code,
+            "email" => $this->owner->email,
+            "metadata" => [
+                'purpose' => 'Subscription Renewal',
+                'method' => 'DebitCard - ' . $card->authorization_code,
+            ],
+        ];
+
+        $url = "https://api.paystack.co/transaction/charge_authorization";
+
+        $fields_string = http_build_query($data);
+
+        $responds = $this->makePaystackRequest($url, $fields_string);
+        if (isset($responds['data'])) {
+            if ($responds['data']['status'] === 'success') {
+
+                $this->invoice->recordPayment($responds['data']);
+
+                $this->extendDuration();
+
+                Mail::to($this->owner)->send(new SubscriptionRenewNotification($this, $this->owner, $this->subscriber));
+                return true;
+            }
+            Mail::to($this->owner)->send(new BillingFailedNotification($this, $this->owner, $this->subscriber));
+        }
+    }
+
+
+
+    public function extendDuration()
+    {
+        $this->duration += 4;
+        $this->save();
+
+        return true;
+    }
+
+    public function durationSpentInDays()
+    {
+        return $this->created_at->diffInDays();
+    }
+
+    public function durationInDays()
+    {
+        return $this->duration * 7;
     }
 
     public function durationSpent($subscription = null)

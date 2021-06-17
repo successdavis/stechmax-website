@@ -14,7 +14,7 @@ class UpdateSubscriptionsTableWithRecursive extends Migration
     public function up()
     {
         Schema::table('subscriptions', function(Blueprint $table) {
-            $table->boolean('recursive')->default(true);
+            $table->boolean('recurring')->default(true);
         });
     }
 
