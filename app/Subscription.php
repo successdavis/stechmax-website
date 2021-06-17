@@ -80,11 +80,11 @@ class Subscription extends Model
         return true;
     }
 
-    static public function sendBillingNotificatoinMail()
+    static public function sendBillingNotificationMail()
     {
         $activeSubscriptions = static::activeSubscriptions()->where('recurring', true)->get();
         foreach ($activeSubscriptions as $subscription) {
-            if ($subscription->durationInDays() - $subscription->durationSpentInDays() === 6) {
+            if ($subscription->subscriptionDaysLeft() === 6) {
                 Mail::to($subscription->owner)->send(new BillingNotification($subscription, $subscription->owner, $subscription->subscriber));
             }
         }
@@ -95,7 +95,7 @@ class Subscription extends Model
     {
         $activeSubscriptions = static::activeSubscriptions()->where('recurring', true)->get();
         foreach ($activeSubscriptions as $subscription) {
-            if ($subscription->subscriptionDaysLeft() == 3 || $subscription->subscriptionDaysLeft() <=1 ) {
+            if ($subscription->subscriptionDaysLeft() === 3 || $subscription->subscriptionDaysLeft() <=1 ) {
                 $subscription->chargeRenewFee();
             }
         }
