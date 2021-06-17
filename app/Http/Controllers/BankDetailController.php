@@ -61,7 +61,7 @@ class BankDetailController extends Controller
         $bankdetails->account_name      = $request->account_name;
         $bankdetails->account_number    = $request->account_number;
         $bankdetails->account_type      = $request->account_type;
-        $bankdetails->employee_id            = auth()->user()->id;
+        $bankdetails->employee_id       = auth()->user()->id;
 
         $bankdetails->save();
 

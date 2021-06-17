@@ -67,6 +67,8 @@ class PayrollAdjustmentController extends Controller
 
             $adjustment->save();
 
+            return $adjustment;
+
         }
             return $adjustmentAlreadyExists;
     }
