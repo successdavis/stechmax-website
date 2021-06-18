@@ -10,14 +10,14 @@ class CourseStatisticsController extends Controller
     public function index(Course $course)
     {
         $subscribers        = $course->subscriptions()->orderBy('active','desc')->get();
-        $activeSubscribers  = $course->subscriptions()->where('active')->count();
+        $activeSubscribers  = $course->subscriptions()->where('active', true)->count();
         $total = $course->subscriptions->count();
         $totalEarning = 0;
         foreach ($subscribers as $subscriber) {
-            $totalEarning += $subscriber->invoice->amount;
+            $totalEarning += $subscriber->invoice->totalPayments();
         }
 
-        $totalEarning = $totalEarning / 100;
+        $totalEarning = str_replace('-','', $totalEarning / 100);
 
         return view('dashboard.courses.statistics', compact([
             'displayMenu' => true,
