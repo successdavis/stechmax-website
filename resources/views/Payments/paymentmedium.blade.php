@@ -36,9 +36,9 @@
 
           <div class="columns is-multiline">
             <div class="column is-6">
-              <div class="is-size-3">(1) Method 1: Paystack</div>
+              <div class="is-size-3">(1) Method 1: Pay with your MasterCard/Verve Card</div>
 {{--  --}}
-              <p>Click button below to pay using your credit card with paystack</p>
+              <p>Click button below to make payment using your Debit Card (Master or Visa Card)</p>
                 <div class="mb-2">
 
                   @if($debitCards->isNotEmpty())
