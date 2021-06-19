@@ -20,7 +20,7 @@ class PaymentMethodController extends Controller
 
         $debitCards = auth()->user()->debitCards()->get();
 
-        return view('payments.paymentmedium', compact('course', 'class','debitCards'));
+        return view('Payments.paymentmedium', compact('course', 'class','debitCards'));
     }
 
 
