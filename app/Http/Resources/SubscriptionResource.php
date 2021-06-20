@@ -21,6 +21,7 @@ class SubscriptionResource extends JsonResource
             'subscribtionEndAt' => Carbon::parse($this->created_at->addWeeks($this->duration))->toDayDateTimeString(),
             'class' => $this->isSubscribeToClass(),
             'course' => $this->subscriber,
+            'path' => $this->subscriber->path(),
         ];
     }
 }
