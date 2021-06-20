@@ -24,13 +24,14 @@ class PaystackSubscriptionController extends Controller
 
         $reference_num = rand(10*45, 100*98);
 
+
         $data = [
             "amount" => $class ? $course->getAmountWithClassroom(false) : $course->amount,
             "key" => getenv('PAYSTACK_SECRET_KEY'),
             "email" => auth()->user()->email ? auth()->user()->email : 'support@stechmax.com',
             "first_name" => auth()->user()->f_name,
             "last_name" => auth()->user()->l_name,
-            "callback_url" => '/payment/callback',
+            "callback_url" => getenv('DOMAIN_NAME') . '/payment/callback',
             "metadata" => [
                 'course_id' => $course->id,
                 'purpose' => 'Course Subscription',
