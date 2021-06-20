@@ -30,7 +30,7 @@ class PaystackSubscriptionController extends Controller
             "email" => auth()->user()->email ? auth()->user()->email : 'support@stechmax.com',
             "first_name" => auth()->user()->f_name,
             "last_name" => auth()->user()->l_name,
-            "callback_url" => 'http://stechmax-website.test/payment/callback',
+            "callback_url" => '/payment/callback',
             "metadata" => [
                 'course_id' => $course->id,
                 'purpose' => 'Course Subscription',

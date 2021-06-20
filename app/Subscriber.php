@@ -73,13 +73,15 @@ trait Subscriber
             ->where(['user_id' => $user->id, 'active' => true])
             ->exists()
         ) {return true;}
+
         $activeParentCourses = $this->parentCourse()->get()->map(function($course) use($user){
             return $course->subscriptions()->where(['user_id' => $user->id, 'active' => true])->pluck('id');
         });
 
-        if ($activeParentCourses->isNotEmpty()) {
+        if ($activeParentCourses->flatten()->isNotEmpty()) {
             return true;
         }
+
         return false;
     }
 
