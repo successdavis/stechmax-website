@@ -19,7 +19,7 @@ class UserSubscribedCoursesController extends Controller
 
     public function getDataForDataTable(User $user)
     {
-        $subscriptions = $user->subscriptions()->get();
+        $subscriptions = $user->subscriptions()->orderBy('active','desc')->get();
     	return SubscriptionResource::collection($subscriptions);
     	// return CourseSubscriptionsResource::collection($subscriptions);
     }
