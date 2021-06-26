@@ -251,3 +251,6 @@ Route::get('/paygrade/{employee}', 'PaygradeController@show')->name('paygrade.sh
 Route::post('/adjustpayroll', 'PayrollAdjustmentController@store')->name('payrolladjustment.store');
 
 Route::post('/vimeofolderid/{course}', 'VimeoFolderController@coursefolder')->name('coursefolder');
+
+Route::get('/newsletter', 'NewsletterController@index')->name('newsletter.index');
+Route::get('/getnewsletterrecievers', 'NewsletterController@recievers')->name('newsletter.recievers');

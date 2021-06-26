@@ -127,6 +127,14 @@
           @endcan
         </menu-dropdown>
         @endcan
+
+        <li><a href="{{route('newsletter.index')}}" class="has-icon has-text-grey-lighter">
+          <span class="icon"><i class="fas fa-receipt"></i></span>
+          <span class="menu-label-item">News Letter</span>
+        </a>
+        </li>
+
+
         <menu-dropdown name="Projects">
           <li>
             <a class="has-icon has-text-white">
