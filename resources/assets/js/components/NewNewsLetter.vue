@@ -46,6 +46,10 @@
 					                icon="label"
 					                placeholder="Find a sender"
 					                @typing="getData">
+
+					                <template #empty>
+					                    There are no items
+					                </template>
 					            </b-taginput>
 					        </b-field>
 						</div>

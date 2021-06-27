@@ -3,7 +3,7 @@
         <button v-if="mode == 'create'" @click="$modal.show(modal)" class="button">New Client</button>
         <span v-if="mode == 'edit' " @click="$modal.show(modal)" class="icon is-small pointer"><i class="pointer mdi mdi-pencil"></i></span>
 
-        <modal :name="modal" height="auto" draggable=".window-header" class="scroll">
+        <modal :name="modal" height="auto" draggable=".window-header" :clickToClose="false" :adaptive="true" :scrollable="true">
                 <div class="new-client-header pd">
                      <h4>Create New Client </h4>
                 </div>
@@ -108,6 +108,13 @@
                       </div>
                     </div>
 
+                    <div class="field mb-1">
+                      <div v-if="mode === 'edit'">
+                        <tags :model_id="client.id" model_type="Client"></tags>
+                      </div>                      
+                    </div>
+
+
                     <div class="field is-horizontal">
                       <div class="field-label mt-reset pt-reset is-flex flex-center">
                         <!-- Left empty for spacing -->
@@ -132,7 +139,9 @@
 </template>
 
 <script>
+  import tags from '../components/tags';
     export default {
+        components: {tags},
         props: {
             umode: {
                 default: 'create'
