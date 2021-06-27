@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Traits\Taggable;
+use App\Taggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,5 +12,9 @@ class Tag extends Model
 
     public function taggable() {
         return $this->hasMany(Taggable::class);
+    }
+
+    public function clients() {
+        return $this->taggable()->where('taggable_type','App\Client');
     }
 }

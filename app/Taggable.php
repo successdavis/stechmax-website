@@ -12,7 +12,7 @@ class Taggable extends Model
 
     protected $guarded = [];
 
-    public function dispatcher () {
+    public function taggable () {
         return $this->morphTo();
     }
 

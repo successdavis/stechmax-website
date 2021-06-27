@@ -6,6 +6,7 @@ use App\Client;
 use App\Employee;
 use App\Mail\NewsletterFromStechmax;
 use App\Newsletter;
+use App\Tag;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class NewsletterDispatcherController extends Controller
 {
     private $sendTo;
     private $newsletter;
+    private $name;
 
     public function __construct(Request $request) {
         $request->validate([
@@ -71,6 +73,8 @@ class NewsletterDispatcherController extends Controller
             },  request()->tags)
         );
 
+        $this->name = 'fullname';
+        
         return $this->sendMail($clients);
     }
 
@@ -86,6 +90,21 @@ class NewsletterDispatcherController extends Controller
         return $this->sendMail($employees);
     }
 
+    public function tag() {
+
+        $syncs = Tag::find(
+            array_map(function($tag) {
+                return $tag['id'];
+            },  request()->tags)
+        )->map(function($tag){ return $tag->clients()->get();})->flatten();
+
+        $clients = $syncs->map(function($s){ return $s->taggable ;})->unique();
+
+        $this->name = 'fullname';
+
+        return $this->sendMail($clients, 'fullname');
+    }
+
     public function sendMail($targets) {
         foreach($targets as $user) {
             $newsletter = $user->news()->create([
@@ -93,10 +112,11 @@ class NewsletterDispatcherController extends Controller
                 'sent_at'       => Carbon::now(),
             ]);
 
+            $name = $this->name;
 
             Mail::to($user)
                 ->cc('support@stechmax.com')
-                ->send(new NewsletterFromStechmax($user->f_name, request()->body, request()->subject));
+                ->send(new NewsletterFromStechmax($this->name ? $user->$name : $user->f_name, request()->body, request()->subject));
 
             $newsletter->status = true;
             $newsletter->save();
