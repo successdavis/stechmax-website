@@ -19,7 +19,7 @@ class CreateNewslettersTable extends Migration
             $table->string('purpose');
             $table->string('type');
             $table->string('title');
-            $table->boolean('status');
+            $table->datetime('schedule')->nullable();
             $table->timestamps();
         });
 
@@ -29,7 +29,7 @@ class CreateNewslettersTable extends Migration
             $table->unsignedInteger('dispatcher_id');
             $table->string('dispatcher_type');
             $table->datetime('sent_at')->nullable();
-            $table->boolean('status');
+            $table->boolean('status')->false();
             $table->timestamps();
         });
     }

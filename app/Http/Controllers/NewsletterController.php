@@ -51,7 +51,14 @@ class NewsletterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tags'          => 'required|array',
+            'sendTo'        => 'required|string',
+            'body'          => 'required|string',
+            'category'      => 'required|string',
+            'subject'       => 'required|string',
+        ]);
+
     }
 
     /**

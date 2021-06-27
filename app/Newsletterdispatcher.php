@@ -10,6 +10,8 @@ class Newsletterdispatcher extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['newsletter_id'];
+
     public function dispatcher () {
         return $this->morphTo();
     }
