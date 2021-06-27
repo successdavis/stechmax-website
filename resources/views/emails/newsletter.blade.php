@@ -2,7 +2,7 @@
 
 Hello! {{$name}}
 
- {{$body}}
+ <p>{{$body}}</p>
 
 Thanks,<br>
 {{ config('app.name') }}

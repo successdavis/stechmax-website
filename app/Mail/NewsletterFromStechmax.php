@@ -23,10 +23,9 @@ class NewsletterFromStechmax extends Mailable
      */
     public function __construct($name, $body, $subject)
     {
-        return $this->name      = $name;
-        return $this->body      = $body;
-        return $this->subject   = $subject;
-        
+         $this->name      = $name;
+         $this->body      = $body;
+         $this->subject   = $subject; 
     }
 
     /**
@@ -36,7 +35,6 @@ class NewsletterFromStechmax extends Mailable
      */
     public function build()
     {
-
         return $this->subject($this->subject)
             ->markdown('emails.newsletter');
     }
