@@ -18,7 +18,7 @@ class TagController extends Controller
             'search' => 'required|string',
         ]);
 
-        $result = Tag::where('tag', 'LIKE', '%' . $request->search . '%')->latest()->limit(10)->get();
+        $result = Tag::where('tag', 'LIKE', '%' . $request->search . '%')->latest()->limit(20)->get();
 
         return $result;
     }
@@ -41,7 +41,30 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'tag'       => 'required',
+            'model_id'  => 'required|integer',
+            'model_type'=> 'required'
+        ]);
         
+        $class = 'App\\' .$request->model_type;
+
+        $model = $class::whereId($request->model_id)->first();
+
+        if (is_array($request->tag)) {
+
+            if ($model->tags()->where('tag_id', $request->tag['id'])->exists()) {
+                return true;
+            }
+
+            return $model->tags()->create(['tag_id' => $request->tag['id']]);
+        }
+
+        $tag = new Tag;
+        $tag->tag = $request->tag;
+        $tag->save();
+
+        return $model->tags()->create(['tag_id' => $tag->id]);
     }
 
     /**

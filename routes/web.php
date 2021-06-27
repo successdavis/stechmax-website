@@ -257,3 +257,4 @@ Route::get('/getnewsletterrecievers', 'NewsletterController@recievers')->name('n
 Route::post('/sendnewsletter', 'NewsletterDispatcherController@store')->name('newsletter.store');
 
 Route::get('/tags', 'TagController@index');
+Route::post('/addtag', 'TagController@store');

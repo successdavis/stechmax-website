@@ -10,11 +10,13 @@ class Taggable extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function dispatcher () {
         return $this->morphTo();
     }
 
-    public function tag() {
+    public function tags() {
         return $this->belongsTo(Tag::class);
     }
 }

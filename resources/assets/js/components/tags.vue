@@ -10,6 +10,7 @@
                 field="tag"
                 icon="label"
                 placeholder="Add a tag"
+                @add="addTag"
                 @typing="getTags">
             </b-taginput>
         </b-field>
@@ -52,8 +53,20 @@
                 }).then((response) => {
                   this.data = response.data;
                 }).catch((error) => {
-                  flash('something went wrong','failed')
+                  console.log('something went wrong')
                 })
+	        },
+
+	        addTag(tag) {
+	        	axios.post('/addtag', {
+	        	  tag: tag,
+	        	  model_id: this.model_id,
+	        	  model_type: this.model_type,
+	        	}).then((response) => {
+	        	  console.log('tag added')
+	        	}).catch((error) => {
+	        	  console.error(error);
+	        	})
 	        }
 	    }
     }
