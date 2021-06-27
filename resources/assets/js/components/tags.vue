@@ -11,6 +11,7 @@
                 icon="label"
                 placeholder="Add a tag"
                 @add="addTag"
+                @remove="removeTag"
                 @typing="getTags">
             </b-taginput>
         </b-field>
@@ -41,6 +42,19 @@
 			}
 		},
 
+		mounted() {
+			axios.get('getsynctags', {
+			  params: {
+			    model_id: this.model_id,
+			    model_type: this.model_type,
+			  },
+			}).then((response) => {
+			  this.tags = response.data;
+			}).catch((error) => {
+			  console.error(error);
+			})
+		},
+
         methods: {
         	getTags(text) {
         		if (text.length < 2) {
@@ -64,6 +78,18 @@
 	        	  model_type: this.model_type,
 	        	}).then((response) => {
 	        	  console.log('tag added')
+	        	}).catch((error) => {
+	        	  console.error(error);
+	        	})
+	        },
+
+	        removeTag(tag) {
+	        	axios.post('/detachtag', {
+        			tag: tag,
+	        	  	model_id: this.model_id,
+	        	  	model_type: this.model_type,
+	        	}).then((response) => {
+	        	  this.tags.splice(indexOf(tag), 1);
 	        	}).catch((error) => {
 	        	  console.error(error);
 	        	})

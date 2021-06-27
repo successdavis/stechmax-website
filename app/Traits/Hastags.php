@@ -11,4 +11,12 @@ trait Hastags
     {
         return $this->morphMany(Taggable::class, 'taggable');
     }
+
+    public function getAssociatedTags() {
+        return $this->tags->map(
+            function($tag){ 
+                return $tag->tag;
+            }
+        );
+    }
 }

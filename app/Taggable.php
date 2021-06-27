@@ -16,7 +16,7 @@ class Taggable extends Model
         return $this->morphTo();
     }
 
-    public function tags() {
+    public function tag() {
         return $this->belongsTo(Tag::class);
     }
 }

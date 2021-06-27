@@ -258,3 +258,5 @@ Route::post('/sendnewsletter', 'NewsletterDispatcherController@store')->name('ne
 
 Route::get('/tags', 'TagController@index');
 Route::post('/addtag', 'TagController@store');
+Route::get('/getsynctags', 'SyncTagsController@index');
+Route::post('/detachtag', 'SyncTagsController@delete');
