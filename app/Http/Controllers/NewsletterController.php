@@ -10,8 +10,10 @@ use App\Filters\NewsletterFilters;
 use App\Filters\UserFilters;
 use App\Http\Resources\ClientResourceSearch;
 use App\Http\Resources\EmployeeResourceSearch;
+use App\Http\Resources\TagResourceSearch;
 use App\Http\Resources\UserResourceSearch;
 use App\Newsletter;
+use App\Tag;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -51,7 +53,14 @@ class NewsletterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tags'          => 'required|array',
+            'sendTo'        => 'required|string',
+            'body'          => 'required|string',
+            'category'      => 'required|string',
+            'subject'       => 'required|string',
+        ]);
+
     }
 
     /**
@@ -132,11 +141,10 @@ class NewsletterController extends Controller
         }
 
         if ($request->sendTo === "tag") {
-            // $filters = new EmployeeFilters($request);
-            // $query = Employee::filter($filters);
+            
+            $tags = Tag::where('tag', 'LIKE', '%' . $request->search . '%')->latest()->limit(20)->get();
 
-            // return $query->get();
-            return [];
+            return TagResourceSearch::collection($tags);
         }
 
     }

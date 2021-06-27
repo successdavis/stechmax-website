@@ -3,13 +3,13 @@
 namespace App;
 
 use App\BankDetail;
-use App\PayrollAdjustment;
 use App\Department;
 use App\DepartmentHistory;
 use App\Models\Role;
 use App\Paygrade;
 use App\PaygradeHistory;
 use App\Payroll;
+use App\PayrollAdjustment;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

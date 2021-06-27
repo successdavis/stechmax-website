@@ -2,11 +2,12 @@
 	<div>
 		<button class="button" @click="$modal.show('newNewsLetter')">New Newsletter</button>
 
-        <modal name="newNewsLetter" height="auto" draggable=".window-header">
+        <modal name="newNewsLetter" height="auto" draggable=".window-header" :clickToClose="false" :adaptive="true" :scrollable="true">
         	<div class="section">
 	    			<div class="field">
 							<div class="select is-primary">
-							  <select v-model="sendTo">
+
+							  <select v-model="Form.sendTo">
 							    <option value="">Send To</option>
 							    <option value="user">User</option>
 							    <option value="client">Client</option>
@@ -17,7 +18,7 @@
 							</div>
 
 							<div class="select is-primary">
-							  <select>
+							  <select v-model="Form.category">
 							    <option value="">Category</option>
 							    <option value="promotion">Promotion</option>
 							    <option value="followup">Followup</option>
@@ -30,10 +31,15 @@
 							</div>
 						</div>
 						<div class="field">
-		        			<b-field label="To">
+							<div class="control">
+								<input class="input" v-model="Form.subject" type="text" placeholder="Subject">
+							</div>
+						</div>
+						<div class="field">
+		        			<b-field label="">
 					            <b-taginput
-					                v-model="tags"
-					                :data="data"
+					                v-model="Form.tags"
+					                :data="filteredData"
 					                autocomplete
 					                :allow-new="allowNew"
 					                :open-on-focus="openOnFocus"
@@ -41,11 +47,18 @@
 					                icon="label"
 					                placeholder="Find a sender"
 					                @typing="getData">
+					                <template #empty>
+					                    There are no items
+					                </template>
 					            </b-taginput>
 					        </b-field>
 						</div>
 						<div class="field">
-			        		<textarea class="textarea" rows="12"></textarea>
+			        		<textarea v-model="Form.body" class="textarea" rows="12"></textarea>
+						</div>
+						<div class="footer">
+							<button class="button" @click="sendNewsLetter">Send Newsletter</button>							
+							<button class="button is-danger" @click="$modal.show('newNewsLetter')">Cancel</button>							
 						</div>
         	</div>
         </modal>
@@ -57,27 +70,52 @@
 export default {
 	data () {
 		return {
-		 	sendTo: '',
       data: '',
       isSelectOnly: false,
-      tags: [],
       allowNew: false,
-      openOnFocus: false
+      openOnFocus: false,
+      Form: new Form({
+	      tags: [],
+			 	sendTo: '',
+      	body: '',
+      	category: '',
+      	subject: '',
+      })
     }
+	},
+
+	computed: {
+		filteredData () {
+			if (this.data) {
+				return this.data.filter((el) => { 
+					return !this.Form.tags.map((sel) => { return sel.id }).includes(el.id) 
+				})
+			}
+		}
 	},
 
 	methods: {
         getData(text) {
             axios.get('/getnewsletterrecievers', {
               params: {
-                sendTo: this.sendTo,
+                sendTo: this.Form.sendTo,
                 search: text,
               },
             }).then((response) => {
               this.data = response.data.data;
             }).catch((error) => {
-              flash('Unable to retrieve data at this moment')
+              flash('Unable to retrieve data at this moment','failed')
             })
+        },
+
+        sendNewsLetter() {
+        	this.Form.post('/sendnewsletter')
+        	.then((data) => {
+        		flash('Newsletter Dispatched');
+        	})
+        	.catch((e) => {
+        		flash(e.message, 'failed');
+        	})
         }
     }
 }

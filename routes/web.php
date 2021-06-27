@@ -254,3 +254,9 @@ Route::post('/vimeofolderid/{course}', 'VimeoFolderController@coursefolder')->na
 
 Route::get('/newsletter', 'NewsletterController@index')->name('newsletter.index');
 Route::get('/getnewsletterrecievers', 'NewsletterController@recievers')->name('newsletter.recievers');
+Route::post('/sendnewsletter', 'NewsletterDispatcherController@store')->name('newsletter.store');
+
+Route::get('/tags', 'TagController@index');
+Route::post('/addtag', 'TagController@store');
+Route::get('/getsynctags', 'SyncTagsController@index');
+Route::post('/detachtag', 'SyncTagsController@delete');

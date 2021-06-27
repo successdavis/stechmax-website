@@ -11,6 +11,7 @@ use App\Http\Resources\CourseSubscriptionsResource;
 use App\Paygrade;
 use App\Payroll;
 use App\SmartSms\SmartSms;
+use App\Traits\NewsDispatcher;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,7 +22,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles;
+    use Notifiable, HasRoles, NewsDispatcher;
 
     protected $with = ['guardians'];
 

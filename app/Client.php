@@ -2,11 +2,15 @@
 
 namespace App;
 
+use App\Traits\Hastags;
+use App\Traits\NewsDispatcher;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class Client extends Model
 {
+    use NewsDispatcher, Hastags;
+
     protected $fillable = ['image_path'];
     public function testimonials() {
         return $this->hasMany(clienttestimonial::class);
