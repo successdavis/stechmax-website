@@ -34,7 +34,7 @@ class BankDetailPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the user  can create models.
      *
      * @param  \App\User  $user
      * @return mixed

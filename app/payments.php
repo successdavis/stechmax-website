@@ -45,4 +45,15 @@ class payments extends Model
             });
     }
 
+    static public function incomeStatementFeed()
+    {
+        return self::whereYear('created_at', Carbon::now()->year)->orderBy('created_at','desc')->get()
+            ->groupBy(function($payment) {
+                return $payment->created_at->format('m');
+            })->map(
+                function($p){return $p->sum('amount');}
+            );
+
+    }
+
 }

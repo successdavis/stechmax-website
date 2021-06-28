@@ -70,7 +70,7 @@
 					<span><b>&#8358;{{$yearTotalPay}} this Year</b></span>
 				</p>
 				<button type="button" class="button is-small align-sf-ct">
-					<span class="icon"><i class="fas fa-history"></i></span>
+					<span class="icon"><a href="/dashboard/monthlytotalrevenue"><i class="fas fa-history"></i></a></span>
 				</button>
 			</header>
 			<div class="card-content">

@@ -99,6 +99,8 @@ Route::get('/dashboard/{user}/mypayments', 'UserPaymentsController@index')->name
 Route::get('/dashboard/{user}/getuserpayments', 'UserPaymentsController@getDataForDataTable')->name('mypayments.datatable');
 Route::get('/dashboard/paymentshistory', 'PaymentController@index')->name('payment.index');
 
+Route::get('/dashboard/monthlytotalrevenue', 'IncomeStatementController@index')->name('payment.index');
+
 Route::post('/dashboard/{user}/createguardian', 'GuardianController@store')->name('guardian.store');
 Route::patch('/dashboard/{guardian}/updateguardian', 'GuardianController@update')->name('guardian.update');
 

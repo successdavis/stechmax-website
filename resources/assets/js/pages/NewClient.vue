@@ -125,7 +125,7 @@
                             <button :class="processing ? 'is-loading' : '' " @click="createUser" class="button is-primary">
                               Save
                             </button>
-                            <button @click="$modal.hide('newClient')" class="button is-primary is-outlined">
+                            <button @click="$modal.hide(modal)" class="button is-primary is-outlined">
                               Cancel
                             </button>
                           </div>

@@ -7,7 +7,7 @@
 	    			<div class="field">
 							<div class="select is-primary">
 
-							  <select v-model="Form.sendTo">
+							  <select @change="reset" v-model="Form.sendTo">
 							    <option value="">Send To</option>
 							    <option value="user">User</option>
 							    <option value="client">Client</option>
@@ -58,7 +58,7 @@
 						</div>
 						<div class="footer">
 							<button class="button" @click="sendNewsLetter">Send Newsletter</button>							
-							<button class="button is-danger" @click="$modal.show('newNewsLetter')">Cancel</button>							
+							<button class="button is-danger" @click="$modal.hide('newNewsLetter')">Cancel</button>							
 						</div>
         	</div>
         </modal>
@@ -116,6 +116,12 @@ export default {
         	.catch((e) => {
         		flash(e.message, 'failed');
         	})
+        },
+
+        reset() {
+        	this.Form.tags = [];
+
+        	console.log(this.Form.tags);
         }
     }
 }
