@@ -57,8 +57,8 @@
 			        		<textarea v-model="Form.body" class="textarea" rows="12"></textarea>
 						</div>
 						<div class="footer">
-							<button class="button" @click="sendNewsLetter">Send Newsletter</button>							
-							<button class="button is-danger" @click="$modal.hide('newNewsLetter')">Cancel</button>							
+							<button class="button" @click="sendNewsLetter" :class="processing ? 'is-loading' : '' ">Send Newsletter</button>							
+							<button v-show="!processing" class="button is-danger" @click="$modal.hide('newNewsLetter')">Cancel</button>							
 						</div>
         	</div>
         </modal>
@@ -71,6 +71,7 @@ export default {
 	data () {
 		return {
       data: '',
+      processing: false,
       isSelectOnly: false,
       allowNew: false,
       openOnFocus: false,
@@ -109,11 +110,15 @@ export default {
         },
 
         sendNewsLetter() {
+        	this.processing = true;
         	this.Form.post('/sendnewsletter')
         	.then((data) => {
+	        	this.processing = false;
         		flash('Newsletter Dispatched');
+
         	})
         	.catch((e) => {
+	        	this.processing = false;
         		flash(e.message, 'failed');
         	})
         },
