@@ -98,11 +98,13 @@ class NewsletterDispatcherController extends Controller
             },  request()->tags)
         )->map(function($tag){ return $tag->clients()->get();})->flatten();
 
-        $clients = $syncs->map(function($s){ return $s->taggable ;})->unique();
+        $clients = $syncs->map(function($s){ return $s->taggable()->whereNotNull('email')->get();})->unique();
 
         $this->name = 'fullname';
 
-        return $this->sendMail($clients, 'fullname');
+        if ($clients->isNotEmpty()) {
+            return $this->sendMail($clients->flatten(), 'fullname');
+        }
     }
 
     public function sendMail($targets) {

@@ -121,21 +121,21 @@ class NewsletterController extends Controller
 
         if ($request->sendTo === "user") {
             $filters = new UserFilters($request);
-            $query = User::filter($filters);
+            $query = User::filter($filters)->whereNotNull ('email');
 
             return UserResourceSearch::collection($query->get());
         }
 
         if ($request->sendTo === "client") {
             $filters = new ClientFilters($request);
-            $query = Client::filter($filters);
+            $query = Client::filter($filters)->whereNotNull ('email');
 
             return ClientResourceSearch::collection($query->get());
         }
 
         if ($request->sendTo === "employee") {
             $filters = new EmployeeFilters($request);
-            $query = Employee::filter($filters);
+            $query = Employee::filter($filters)->whereNotNull ('email');
 
             return EmployeeResourceSearch::collection($query->get());
         }
