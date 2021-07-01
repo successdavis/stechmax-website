@@ -18,11 +18,18 @@
                     @endforeach
                 </div>
                 <hr>
-
                 <div>
                     <h5 class="is-size-5 mb-2"><strong>Course Description</strong></h5>
                     <p class="double-line-height">{!! nl2br($course->description) !!}</p>
                 </div>
+                @guest
+                <div class="mt-3" id="registration-login">
+                    <h2 class="has-text-centered is-size-4">We dont want to be strangers, lets get to know you first </h2>
+                    <div>
+                        <site-registration registerroute="{{$course->path}}" loginroute="{{$course->path}}" mode="register"></site-registration>
+                    </div>
+                </div>
+                @endguest
             </div>
                 <div class="column is-3">
                     <div class="is-size-5 mb-2"><strong>Course Content</strong></div>

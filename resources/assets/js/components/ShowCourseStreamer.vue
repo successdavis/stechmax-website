@@ -23,10 +23,10 @@
 	            </div>
 	            <div v-if="! course.isSubscribedBy">
 	            	<div class="columns is-mobile" v-if="course.available_online">
-	            		<div class="column is-6" title="Sorry! Not available for online training yet">
+	            		<div class="column is-6" title="Register for online training">
 	            			<!-- Add this href attribute to button if online training is allowed -->
 	            			<!-- :href="course_path + '/subscription?class=false'" -->
-	            			<a :href="course_path + '/subscription'" class="button is-link is-rounded is-fullwidth">Study Series Online</a>
+	            			<a :href="signedIn ? course_path + '/subscription' : '#registration-login' " class="button is-link is-rounded is-fullwidth">Study Series Online</a>
 	            			<span class="is-size-7 has-text-black">Online Training Only</span>
 
 	            		</div>
@@ -36,14 +36,14 @@
 	            	</div>
 	            	<div class="columns is-mobile" v-if="course.available_offline">
 	            		<div class="column is-6" >
-	            			<a :href="course_path + '/subscription?class=true'" class="button is-link is-rounded is-fullwidth">Study Series Offline</a>
+	            			<a :href="signedIn ? course_path + '/subscription?class=true' : '#registration-login' " class="button is-link is-rounded is-fullwidth">Study Series Offline</a>
 	            			<span class="is-size-7 has-text-black">Online + Classroom Training</span>
 	            		</div>
 	            		<div class="column is-6">
 		                    <div class="has-text-warning is-size-4">&#8358;<span v-text="classroomamount"></span></div>
 	            		</div>
 	            	</div>
-	            	<div class="columns is-mobile" v-if="course.available_lifetime">
+<!-- 	            	<div class="columns is-mobile" v-if="course.available_lifetime">
 	            		<div class="column is-6">
 	            			<a :href="course_path + '/subscription?class=true'" class="button is-link is-rounded is-fullwidth">One off purchase</a>
 	            			<span class="is-size-7 has-text-black">Online Lifetime Access</span>
@@ -51,7 +51,7 @@
 	            		<div class="column is-6">
 		                    <div class="has-text-warning is-size-4">&#8358;<span v-text="classroomamount"></span></div>
 	            		</div>
-	            	</div>
+	            	</div> -->
 	            </div>
 	            <!-- <login-register></login-register> -->
 	    </div>
@@ -71,17 +71,22 @@
 			type: String,
 			videourl: String,
 			amount: Number,
-			classroomamount: Number
+			classroomamount: Number,
 		},
 
 	    data() {
 	    	return {
+	    		signedIn: false,
 	    		playVideo: false,
 	                source: this.course.video_path,
 	    		playeroptions: {
 	                autoplay: true,
 	            },
 	    	}
+	    },
+
+	    mounted() {
+	    	this.signedIn = window.App.signedIn;
 	    },
 
 	    methods: {

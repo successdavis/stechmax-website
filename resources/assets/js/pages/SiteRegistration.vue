@@ -1,14 +1,15 @@
 <template>
 	<div class="mt-2">
-		<div class="register_section" v-if="mode == 'register'">
+		<div class="register_section" v-if="interfaceMode == 'register'">
 			<form @submit.prevent="generateRecaptcha" @keydown="RegForm.errors.clear()">
 			    <h3 class="has-text-centered is-size-4 mb-2">Create an Account</h3>
 			    <div class="columns is-multiline">
 					<div class="field column is-12">
-						<label class="label">Email or Phone</label>
+						<label class="label">Email</label>
 						<div class="control">
-						  <input class="input" type="text" placeholder="Required" v-model="RegForm.emailOrPhone" required>
-						  <p class="help" v-if="RegForm.errors.has('emailOrPhone')" v-text="RegForm.errors.get('emailOrPhone')"></p>
+						  <input class="input" type="text" placeholder="Required" v-model="RegForm.email" required>
+						  <p class="help" v-if="RegForm.errors.has('email')" v-text="RegForm.errors.get('email')"></p>
+						  <p class="help" v-if="!RegForm.errors.has('email')">NB: We no longer phone registration system</p>
 						</div>
 					</div>
 					<div class="field column is-4">
@@ -23,7 +24,7 @@
 					</div>
 					<div class="field column is-4">
 						<label class="label">Other Names</label>
-						  <input class="input" type="text" placeholder="Optional" v-model="RegForm.middlename">
+						  <input name="lastname" class="input" type="text" placeholder="Optional" v-model="RegForm.middlename">
 						  <p class="help" v-if="RegForm.errors.has('middlename')" v-text="RegForm.errors.get('middlename')"></p>
 
 					</div>
@@ -50,25 +51,39 @@
 					<div class="field column is-6">
 						<label class="label">Password</label>
 						<div class="control">
-						  <input class="input" type="password" placeholder="Required" v-model="RegForm.password" required>
-						  <p class="help" v-if="RegForm.errors.has('password')" v-text="RegForm.errors.get('password')"></p>
+							<b-field>
+					            <b-input type="password"
+					            	v-model="RegForm.password"
+					                placeholder="Required"
+					                password-reveal>
+					            </b-input>
+					        </b-field>
+						  	<p class="help" v-if="RegForm.errors.has('password')" v-text="RegForm.errors.get('password')"></p>
 						</div>
+
 					</div>
 					<div class="field column is-6">
 						<label class="label">Confirm Password</label>
 						<div class="control">
-						  <input class="input" type="password" placeholder="Re-type password here" v-model="RegForm.password_confirmation" required>
+							<b-field>
+					            <b-input type="password"
+					            	v-model="RegForm.password_confirmation"
+					                placeholder="Retype password"
+					                password-reveal>
+					            </b-input>
+					        </b-field>
 						  <p class="help-text" v-if="RegForm.errors.has('password_confirmation')" v-text="RegForm.errors.get('password_confirmation')"></p>
 						</div>
+
 					</div>
 				</div>
 				<div class="">
 				  <button :disabled="submitting == true" type="submit" :class="submitting ? 'is-loading' : '' " class="button is-success is-outlined is-medium is-fullwidth">Submit</button> <br>
-				  <span>Already have an account? </span><a class="login_link" @click="mode = 'login'"> Login</a>
+				  <span>Already have an account? </span><a class="login_link" @click="interfaceMode = 'login'"> Login</a>
 				</div>
 			</form>
 		</div>
-		<div class="login_section" v-if="mode == 'login'">
+		<div class="login_section" v-if="interfaceMode == 'login'">
             <div class="container has-text-centered">
                 <div class="column is-offset-4">
                     <h3 class="title has-text-black">Login</h3>
@@ -102,7 +117,7 @@
                         </form>
                     </div>
                     <p class="has-text-grey has-text-centered">
-                        <a @click="mode = 'register'">Sign Up</a> &nbsp;·&nbsp;
+                        <a @click="interfaceMode = 'register'">Sign Up</a> &nbsp;·&nbsp;
                         <a href="/password/reset">Forgot Password</a> &nbsp;·&nbsp;
                         <a href="/threads">Need Help?</a>
                     </p>
@@ -117,14 +132,14 @@
 		props: ['loginroute', 'registerroute', 'mode'],
 		data () {
 			return {
-				mode: this.mode,
+				interfaceMode: this.mode,
 				errorMessage: '',
 				submitting: '',
 				logo:'',
 				templatelogo:'',
 				template:'',
 				RegForm: new Form ({
-					emailOrPhone:'',
+					email:'',
 					surname:'',
 					lastname:'',
 					middlename: '',
@@ -149,7 +164,7 @@
 				.then(data => {
 					flash("Registration Successful")
 					this.$Progress.finish()
-					window.location.href = "/register/comfirm_email";
+					window.location.href = this.registerroute ? this.registerroute : "/register/comfirm_email";
 				})
 				.catch(error => {
 					this.errorMessage = error.message;

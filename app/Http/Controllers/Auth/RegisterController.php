@@ -55,7 +55,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'emailOrPhone' => 'required|unique:users,email|emailorphone',
+            'email' => 'required|unique:users,email|email',
             'surname' => 'required|string|max:50|min:3',
             'lastname' => 'required|string|max:50|min:3',
             'middlename' => 'string|max:50',
@@ -90,15 +90,16 @@ class RegisterController extends Controller
             'dob' => $data['dateofbirth'],
             'username' => $username,
             'gender' => $data['gender'],
-            'confirmation_token' => str_limit(md5($data['emailOrPhone'] . str_random()), 25, ''),
+            'confirmation_token' => str_limit(md5($data['email'] . str_random()), 25, ''),
             'password' => Hash::make($data['password']),
+            'email' => $data['email'],
         ];
 
-        if (ctype_digit($data['emailOrPhone'])) {
-            $storeData['phone'] = $data['emailOrPhone'];
-        }else {
-            $storeData['email'] = $data['emailOrPhone'];
-        };
+        // if (ctype_digit($data['email'])) {
+        //     $storeData['phone'] = $data['email'];
+        // }else {
+        //     $storeData['email'] = $data['email'];
+        // };
 
         return User::create($storeData);
     }
@@ -117,6 +118,6 @@ class RegisterController extends Controller
             return redirect($this->redirectPath());
         };
 
-        $user->smartSendToken();
+        // $user->smartSendToken();
     }
 }
