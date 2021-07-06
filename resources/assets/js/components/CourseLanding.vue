@@ -95,6 +95,15 @@
                             </div>
                             <p class="help is-danger" id="durationHelpText" v-if="Form.errors.has('amount')" v-text="Form.errors.get('amount')"></p>
                         </div>
+                        <div class="column is-4">
+                            <div class="field">
+                                <label>Discount %</label>
+                                <div class="control">
+                                   <input type="number" class="input" v-model="Form.discountamount" placeholder="Discount? Enter here" required>
+                                </div>
+                            </div>
+                            <p class="help is-danger" id="durationHelpText" v-if="Form.errors.has('discountamount')" v-text="Form.errors.get('discountamount')"></p>
+                        </div>
                     </div>
                 </form>
                 <CourseThumbnail :data="course" :path="path"></CourseThumbnail>
@@ -126,13 +135,14 @@
                     subject_id: this.course.subject_id,
                     sypnosis: this.course.sypnosis,
                     duration: this.course.duration,
-                    amount: this.course.amount
+                    amount: this.course.amount / 100,
+                    discountamount: this.course.discount_percentage
                 }),
             }
         },
 
         created () {
-            axios.get('/api/courses')
+            axios.get('/api/subjects')
                 .then(response => this.subjects = response.data);
 
              axios.get('/api/difficulties')

@@ -29,7 +29,7 @@ class CourseResource extends JsonResource
             'type' => $this->type->name,
             'difficulty' => $this->difficulty->level,
             'amount' => $this->getAmount(),
-            'discount_price' => $this->getDiscountPrice(),
+            'discount_price' => $this->getDiscountAmount(),
             'available_online' => $this->available_online,
             'available_offline' => $this->available_offline,
             'available_lifetime' => $this->available_lifetime,

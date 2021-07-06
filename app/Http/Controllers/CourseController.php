@@ -133,17 +133,29 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Course $course)
+    public function update(Request $request, Course $course)
     {
-        $course->update(request()->validate([
-            'title' => 'required|spamfree',
-            'description' => 'required|spamfree',
-            'duration' => 'required',
-            'subject_id' => 'required',
-            'amount' => 'required|integer',
-            'sypnosis' => 'required|spamfree',
-            'difficulty_id' => 'required'
-        ]));
+        request()->validate([
+            'title'             => 'required|spamfree',
+            'description'       => 'required|spamfree',
+            'duration'          => 'required',
+            'subject_id'        => 'required',
+            'amount'            => 'required|integer',
+            'discountamount'    => 'nullable|integer',
+            'sypnosis'          => 'required|spamfree',
+            'difficulty_id'     => 'required'
+        ]);
+
+        $course->update([
+            'title'                 => $request->title,
+            'description'           => $request->description,
+            'duration'              => $request->duration,
+            'subject_id'            => $request->subject_id,
+            'amount'                => $request->amount . '00',
+            'discount_percentage'   => $request->discountamount,
+            'sypnosis'              => $request->sypnosis,
+            'difficulty_id'         => $request->difficulty_id
+        ]);
     }
 
     public function publish(Course $course)
