@@ -9,6 +9,18 @@
 			<span>Refresh</span>
 		</button>
 	</header>
+	<div class="section">
+		<form>
+
+			<div class="field">
+			  <div class="control is-large">
+					<input v-model="Form.discount" class="input" type="number" name="discount">
+			  </div>
+			</div>
+
+			<button type="submit" class="button is-primary" @click.prevent="applydiscount">Apply Discount</button>
+		</form>
+	</div>
 	<div class="notification is-card-toolbar">
 		<div class="level">
 			<div class="level-left">
@@ -60,6 +72,7 @@
 									<option value="[object Object]">Type</option>
 									<option value="[object Object]">Duration</option>
 									<option value="[object Object]">Fee</option>
+									<option value="[object Object]">Discount</option>
 									<option value="[object Object]">Status</option>
 									<!----><!---->
 								</select>
@@ -111,6 +124,13 @@
 									</div>
 								</th>
 								<th class="is-sortable">
+									<div class="th-wrap">Discount%
+										<span class="icon is-small" style="display: none;">
+											<i class="mdi mdi-arrow-up"></i>
+										</span>
+									</div>
+								</th>
+								<th class="is-sortable">
 									<div class="th-wrap">Status
 										<span class="icon is-small" style="display: none;">
 											<i class="mdi mdi-arrow-up"></i>
@@ -141,6 +161,7 @@
 								<td data-label="Type" v-text="course.type" class=""></td>
 								<td data-label="Duration" v-text="course.duration + ' weeks'" class=""></td>
 								<td data-label="Fee" v-text="course.amount" class=""></td>
+								<td data-label="Fee" v-text="course.discount" class=""></td>
 								<td data-label="Status" class="">
 									<small title="Sep 19, 2018" class="has-text-grey is-abbr-like"
 									v-text="course.published"></small>

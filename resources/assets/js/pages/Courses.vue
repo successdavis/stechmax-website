@@ -24,6 +24,9 @@
                 order: 'asc',
                 subjects: [],
                 subject: '',
+                Form : new Form({
+                    discount: '',
+                })
             };
         },
 
@@ -37,7 +40,7 @@
         },
 
         methods: {
-              fetch($state) {
+            fetch($state) {
                 axios.get(`${location.pathname}/datatable`, {
                     params: {
                         page: this.page,
@@ -60,6 +63,17 @@
                         $state.complete();
                     }
                 });
+            },
+
+            applydiscount () {
+                this.Form.post('/applydiscount')
+                .then ((data)=> {
+                    flash('Discount applied to all courses');
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    flash('An error was encountered','failed');
+                })
             },
 
             userSearch: _.debounce(function(page) {

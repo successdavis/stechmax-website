@@ -262,3 +262,5 @@ Route::get('/tags', 'TagController@index');
 Route::post('/addtag', 'TagController@store');
 Route::get('/getsynctags', 'SyncTagsController@index');
 Route::post('/detachtag', 'SyncTagsController@delete');
+
+Route::post('/applydiscount', 'DiscountController@store');
