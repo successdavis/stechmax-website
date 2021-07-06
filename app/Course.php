@@ -246,6 +246,20 @@ class Course extends Model
         return $format ? number_format($amount / 100, 2) : $amount;
     }
 
+
+    public function getDiscountAmount($format = true)
+    {
+        
+        $discountInDecimal = $this->discount_percentage / 100;
+
+        $percent = $discountInDecimal * $this->amount;
+
+
+        $amount = $this->amount - $percent;
+
+        return $format ? number_format($amount / 100, 2) : $amount;
+    }
+
     public function getAmount()
     {
         return number_format($this->amount / 100,2);
@@ -256,6 +270,15 @@ class Course extends Model
         $classroomfee = $this->classroomfee();
 
         $amount = $this->amount + $classroomfee;
+
+        return $format ? number_format($amount / 100, 2) : $amount;
+    }
+
+    public function getDiscountAmountWithClassroom($format = true)
+    {
+        $classroomfee = $this->classroomfee();
+
+        $amount = $this->getDiscountAmount(false) + $classroomfee;
 
         return $format ? number_format($amount / 100, 2) : $amount;
     }

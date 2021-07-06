@@ -1,7 +1,9 @@
 <course-streamer 
     :course="{{$course}}" 
     amount="{{$course->getAmount()}}" 
+    discountamount="{{$course->getDiscountAmount()}}" 
     classroomamount="{{$course->getAmountWithClassroom()}}" 
+    discountclassroomamount="{{$course->getDiscountAmountWithClassroom()}}" 
     :subject="{{$course->subject}}" 
     :learns="{{$course->learns()->limit(3)->get()}}" 
     :course_path="{{json_encode($course->path())}}"

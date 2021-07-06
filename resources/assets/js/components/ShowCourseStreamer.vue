@@ -30,8 +30,9 @@
 	            			<span class="is-size-7 has-text-black">Online Training Only</span>
 
 	            		</div>
-	            		<div class="column is-6">
-		                    <div class="has-text-warning is-size-4">&#8358;<span v-text="amount"></span></div>
+	            		<div class="column has-text-warning is-6 course-pricing">
+		                    <span v-if="shouldShowAmount" class=" is-size-6">&#8358;<del v-text="amount"></del> <span>&#47;</span></span>
+		                    <span class=" is-size-6">&#8358;<span v-text="discountamount"></span> <sup v-if="shouldShowAmount"> -{{course.discount_percentage}}%</sup></span>
 	            		</div>
 	            	</div>
 	            	<div class="columns is-mobile" v-if="course.available_offline">
@@ -39,8 +40,10 @@
 	            			<a :href="signedIn ? course_path + '/subscription?class=true' : '#registration-login' " class="button is-link is-rounded is-fullwidth">Study Series Offline</a>
 	            			<span class="is-size-7 has-text-black">Online + Classroom Training</span>
 	            		</div>
-	            		<div class="column is-6">
-		                    <div class="has-text-warning is-size-4">&#8358;<span v-text="classroomamount"></span></div>
+	            		<div class="column is-6 has-text-warning course-pricing">
+		                    <span v-if="shouldShowAmount" class=" is-size-6">&#8358;<del v-text="classroomamount"></del> <span>&#47;</span></span>
+		                    <span class=" is-size-6">&#8358;<span v-text="discountclassroomamount"></span> <sup v-if="shouldShowAmount"> -{{course.discount_percentage}}%</sup></span>
+
 	            		</div>
 	            	</div>
 <!-- 	            	<div class="columns is-mobile" v-if="course.available_lifetime">
@@ -71,7 +74,9 @@
 			type: String,
 			videourl: String,
 			amount: Number,
+			discountamount: Number,
 			classroomamount: Number,
+			discountclassroomamount: Number,
 		},
 
 	    data() {
@@ -82,6 +87,12 @@
 	    		playeroptions: {
 	                autoplay: true,
 	            },
+	    	}
+	    },
+
+	    computed: {
+	    	shouldShowAmount() {
+	    		return this.course.discount_percentage > 0;
 	    	}
 	    },
 
@@ -115,5 +126,22 @@
 
 	.play-back-btn:hover {
 	    padding-left: 2.5em;
+	}
+
+	sup {
+		background: red;
+	    width: 50px;
+	    display: inline-block;
+	    color: wheat;
+	    font-weight: 600;
+	}
+
+	@media screen and (min-width: 769px), print
+	{
+		.column.course-pricing span {
+		    color: black;
+		    font-size: x-large;
+
+		}
 	}
 </style>

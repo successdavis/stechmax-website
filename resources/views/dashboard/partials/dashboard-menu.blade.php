@@ -128,11 +128,13 @@
           </menu-dropdown>
         @endcan
 
-        <li><a href="{{route('newsletter.index')}}" class="has-icon has-text-grey-lighter">
-          <span class="icon"><i class="fas fa-receipt"></i></span>
-          <span class="menu-label-item">News Letter</span>
-        </a>
-        </li>
+        @can('manage invoice')
+          <li><a href="{{route('newsletter.index')}}" class="has-icon has-text-grey-lighter">
+            <span class="icon"><i class="fas fa-receipt"></i></span>
+            <span class="menu-label-item">News Letter</span>
+          </a>
+          </li>
+        @can('manage invoice')
 
 
         <menu-dropdown name="Projects">
@@ -159,10 +161,12 @@
           <span class="icon"><i class="fas fa-receipt"></i></span>
           <span class="menu-label-item">Clients</span>
         </a>
+        @can('manage invoice')
         <li><a href="{{route('employee.list')}}" class="has-icon has-text-grey-lighter">
           <span class="icon"><i class="fas fa-receipt"></i></span>
           <span class="menu-label-item">Employees</span>
         </a>
+        @endcan
     </li>
     @endif
   </ul>
