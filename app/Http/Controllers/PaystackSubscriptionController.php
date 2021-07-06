@@ -26,7 +26,7 @@ class PaystackSubscriptionController extends Controller
 
 
         $data = [
-            "amount" => $class ? $course->getAmountWithClassroom(false) : $course->amount,
+            "amount" => $class ? $course->getDiscountAmountWithClassroom(false) : $course->getDiscountAmount(false),
             "key" => getenv('PAYSTACK_SECRET_KEY'),
             "email" => auth()->user()->email ? auth()->user()->email : 'support@stechmax.com',
             "first_name" => auth()->user()->f_name,
@@ -63,7 +63,7 @@ class PaystackSubscriptionController extends Controller
         $card = DebitCardDetails::whereSignature($request->signature)->first();
 
         $data = [
-            "amount" => $class ? $course->getAmountWithClassroom(false) : $course->amount,
+            "amount" => $class ? $course->getDiscountAmountWithClassroom(false) : $course->getDiscountAmount(false),
             "authorization_code" => $card->authorization_code,
             "email" => auth()->user()->email ? auth()->user()->email : 'support@stechmax.com',
             "metadata" => [

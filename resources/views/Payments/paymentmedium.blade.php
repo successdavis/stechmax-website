@@ -25,11 +25,11 @@
             @if ($class === true)
               <p class="is-size-3 has-text-centered">
                 Amount Payable &#8358; 
-                {{$course->getAmountWithClassroom()}} 
+                {{$course->getDiscountAmountWithClassroom()}} 
               </p>
             @else
               <p class="is-size-3 has-text-centered">
-                Amount Payable &#8358; {{$course->getAmount()}} 
+                Amount Payable &#8358; {{$course->getDiscountAmount()}} 
               </p>
             @endif
           </div>
@@ -59,7 +59,7 @@
                   <form method="post" action="{{$course->path()}}/paystack">
                       @csrf
                       <input type="hidden" name="class" value="{!!$class ? 1 : 0!!}" >
-                      <button type="submit" class="small button">
+                      <button type="submit" class="small large button is-success">
                         CLICK HERE TO PAY
                       </button>
                   </form>

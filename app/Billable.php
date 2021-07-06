@@ -31,7 +31,7 @@ trait Billable
         return $this->invoices()->save(
             new Invoice([
                 'user_id' => $userId ?: auth()->id(),
-                'amount' => $this->amount + $charge,
+                'amount' => $this->getDiscountAmount(false) + $charge,
                 'invoiceNo' => Invoice::generateInvoiceNo(),
                 'installmental' => $installment ?: true,
             ])

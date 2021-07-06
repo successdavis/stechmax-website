@@ -67,107 +67,115 @@
       <p class="menu-label">
         ADMIN CONTROL
       </p>
-        <menu-dropdown name="Course Management">
-          <li><a href="{{route('courses.create')}}" class="has-icon has-text-white">
-                <span class="icon"><i class="fas fa-video"></i></span>
-                <span class="menu-label-item">Create Course</span>
-              </a>
-          </li>
-          <li><a href="{{route('courses.index')}}" class="has-icon has-text-white">
-                <span class="icon"><i class="fas fa-pen-alt"></i></span>
-                <span class="menu-label-item">All Courses</span>
-              </a>
-          </li>
-        </menu-dropdown>
-        <menu-dropdown name="Users">
-          <li><a href="{{route('manage_user.index')}}" class="has-icon has-text-white">
-                  <span class="icon"><i class="fas fa-users"></i></span>
-                  <span class="menu-label-item">View all Users</span>
-              </a>
-          </li>
-          <li><a href="{{route('permitcards')}}" target="_blank" class="has-icon has-text-white">
-                <span class="icon"><i class="fas fa-id-card-alt"></i></span>
-                <span class="menu-label-item">Active PMT Cards</span>
-              </a>
-          </li>
-          <li><a href="{{route('user_rankings')}}" class="has-icon has-text-white">
-                <span class="icon"><i class="fas fa-id-card-alt"></i></span>
-                <span class="menu-label-item">Rankings</span>
-              </a>
-          </li>
-        </menu-dropdown>
-
-        @can('manage invoice')
-          <menu-dropdown name="Cashier">
-            <li>
-                <a href="{{route('manage_invoice.create', ['user' => auth()->user()->username])}}" class="has-icon has-text-white">
-                  <span class="icon"><i class="far fa-credit-card"></i></span>
-                  <span class="menu-label-item">Create Invoice</span>
-                </a>
-            </li>
-            <li>
-              <a href="{{route('manage_invoice.addpayment')}}" class="has-icon has-text-white">
-                <span class="icon"><i class="fas fa-money-bill-wave"></i></span>
-                <span class="menu-label-item">Manage Invoice</span>
-              </a>
-            </li>
-            <li>
-              <a href="{{route('manage_invoice.index', ['user' => auth()->user()->username])}}" class="has-icon has-text-white">
-                <span class="icon"><i class="fas fa-receipt"></i></span>
-                <span class="menu-label-item">Invoices</span>
-              </a>
-            </li>
-            @can('review financial records')
-            <li>
-              <a href="{{route('payment.index')}}" class="has-icon has-text-white">
-                <span class="icon"><i class="fas fa-receipt"></i></span>
-                <span class="menu-label-item">Payments</span>
-              </a>
-            </li>
-            @endcan
-          </menu-dropdown>
-        @endcan
-
-        @can('manage invoice')
-          <li><a href="{{route('newsletter.index')}}" class="has-icon has-text-grey-lighter">
-            <span class="icon"><i class="fas fa-receipt"></i></span>
-            <span class="menu-label-item">News Letter</span>
+      <menu-dropdown name="Course Management">
+        <li>
+          <a href="{{route('courses.create')}}" class="has-icon has-text-white">
+              <span class="icon"><i class="fas fa-video"></i></span>
+              <span class="menu-label-item">Create Course</span>
           </a>
-          </li>
-        @can('manage invoice')
+        </li>
+        <li>
+          <a href="{{route('courses.index')}}" class="has-icon has-text-white">
+              <span class="icon"><i class="fas fa-pen-alt"></i></span>
+              <span class="menu-label-item">All Courses</span>
+          </a>
+        </li>
+      </menu-dropdown>
 
+      <menu-dropdown name="Users">
+        <li>
+          <a href="{{route('manage_user.index')}}" class="has-icon has-text-white">
+                <span class="icon"><i class="fas fa-users"></i></span>
+                <span class="menu-label-item">View all Users</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{route('permitcards')}}" target="_blank" class="has-icon has-text-white">
+              <span class="icon"><i class="fas fa-id-card-alt"></i></span>
+              <span class="menu-label-item">Active PMT Cards</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{route('user_rankings')}}" class="has-icon has-text-white">
+              <span class="icon"><i class="fas fa-id-card-alt"></i></span>
+              <span class="menu-label-item">Rankings</span>
+          </a>
+        </li>
+      </menu-dropdown>
 
-        <menu-dropdown name="Projects">
+      @can('manage invoice')
+        <menu-dropdown name="Cashier">
           <li>
-            <a class="has-icon has-text-white">
-              <span class="icon"><i class="fab fa-servicestack"></i></span>
-              <span class="menu-label-item">Submit Project</span>
+              <a href="{{route('manage_invoice.create', ['user' => auth()->user()->username])}}" class="has-icon has-text-white">
+                <span class="icon"><i class="far fa-credit-card"></i></span>
+                <span class="menu-label-item">Create Invoice</span>
+              </a>
+          </li>
+          <li>
+            <a href="{{route('manage_invoice.addpayment')}}" class="has-icon has-text-white">
+              <span class="icon"><i class="fas fa-money-bill-wave"></i></span>
+              <span class="menu-label-item">Manage Invoice</span>
             </a>
           </li>
           <li>
-            <a class="has-icon has-text-white">
-              <span class="icon"><i class="fas fa-project-diagram"></i></span>
-              <span class="menu-label-item">Pending Projects</span>
+            <a href="{{route('manage_invoice.index', ['user' => auth()->user()->username])}}" class="has-icon has-text-white">
+              <span class="icon"><i class="fas fa-receipt"></i></span>
+              <span class="menu-label-item">Invoices</span>
             </a>
           </li>
+          @can('review financial records')
           <li>
-            <a class="has-icon has-text-white">
-              <span class="icon"><i class="fas fa-tasks"></i></span>
-              <span class="menu-label-item">Completed Project</span>
+            <a href="{{route('payment.index')}}" class="has-icon has-text-white">
+              <span class="icon"><i class="fas fa-receipt"></i></span>
+              <span class="menu-label-item">Payments</span>
             </a>
           </li>
+          @endcan
         </menu-dropdown>
-        <li><a href="{{route('client.index')}}" class="has-icon has-text-grey-lighter">
-          <span class="icon"><i class="fas fa-receipt"></i></span>
+      @endcan
+
+      <li>
+        <a href="{{route('newsletter.index')}}" class="has-icon has-text-grey-lighter">
+          <span class="icon"><i class="mdi mdi-email"></i></span>
+          <span class="menu-label-item">News Letter</span>
+        </a>
+      </li>
+
+
+      @can('manage invoice')
+      <menu-dropdown name="Projects">
+        <li>
+          <a class="has-icon has-text-white">
+            <span class="icon"><i class="fab fa-servicestack"></i></span>
+            <span class="menu-label-item">Submit Project</span>
+          </a>
+        </li>
+        <li>
+          <a class="has-icon has-text-white">
+            <span class="icon"><i class="fas fa-project-diagram"></i></span>
+            <span class="menu-label-item">Pending Projects</span>
+          </a>
+        </li>
+        <li>
+          <a class="has-icon has-text-white">
+            <span class="icon"><i class="fas fa-tasks"></i></span>
+            <span class="menu-label-item">Completed Project</span>
+          </a>
+        </li>
+      </menu-dropdown>
+      <li>
+        <a href="{{route('client.index')}}" class="has-icon has-text-grey-lighter">
+          <span class="icon"><i class="mdi mdi-"></i></span>
           <span class="menu-label-item">Clients</span>
         </a>
-        @can('manage invoice')
-        <li><a href="{{route('employee.list')}}" class="has-icon has-text-grey-lighter">
+      </li>
+      <li>
+        <a href="{{route('employee.list')}}" class="has-icon has-text-grey-lighter">
           <span class="icon"><i class="fas fa-receipt"></i></span>
           <span class="menu-label-item">Employees</span>
         </a>
-        @endcan
-    </li>
+      </li>
+      @endcan
     @endif
   </ul>
 </aside>
