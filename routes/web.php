@@ -248,9 +248,15 @@ Route::get('/employee/{user}', 'EmployeeController@index')->name('employee.index
 Route::post('/savebankdetails/{employee}', 'BankDetailController@store')->name('bank.store');
 Route::get('/bankdetails', 'BankDetailController@index')->name('bank.index');
 Route::get('/employeebankdetails/{employee}', 'BankDetailController@show')->name('bank.show');
+
 Route::get('/paygrade/{employee}', 'PaygradeController@show')->name('paygrade.show');
 
 Route::post('/adjustpayroll', 'PayrollAdjustmentController@store')->name('payrolladjustment.store');
+
+Route::get('/unpaidpayroll/{employee}', 'PayrollController@index')->name('employee.show');
+
+
+Route::post('/payroll/{payroll}/markaspaid', 'PayrollStatusController@markAsPaid')->name('employee.show');
 
 Route::post('/vimeofolderid/{course}', 'VimeoFolderController@coursefolder')->name('coursefolder');
 
@@ -264,3 +270,6 @@ Route::get('/getsynctags', 'SyncTagsController@index');
 Route::post('/detachtag', 'SyncTagsController@delete');
 
 Route::post('/applydiscount', 'DiscountController@store');
+Route::get('/childcomputereducation', 'ChildComputerEducationController@index');
+Route::get('/childcomputereducation-errolment', 'ChildComputerEducationController@payment');
+Route::get('/childeducationpayment/callback', 'ChildComputerEducationController@store');

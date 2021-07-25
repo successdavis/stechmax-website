@@ -9,7 +9,7 @@
 						<div class="control">
 						  <input class="input" type="text" placeholder="Required" v-model="RegForm.email" required>
 						  <p class="help" v-if="RegForm.errors.has('email')" v-text="RegForm.errors.get('email')"></p>
-						  <p class="help" v-if="!RegForm.errors.has('email')">NB: We no longer phone registration system</p>
+						  <p class="help" v-if="!RegForm.errors.has('email')">NB: Support for Phone registration system has been removed</p>
 						</div>
 					</div>
 					<div class="field column is-4">

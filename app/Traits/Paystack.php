@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 
 trait Paystack
 {
-   public function makePaystackRequest($url, $fields_string)
+   public function makePaystackRequest($url = "https://api.paystack.co/transaction/initialize", $fields_string)
    {
         $ch = curl_init();
 

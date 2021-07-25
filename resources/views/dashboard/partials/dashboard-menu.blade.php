@@ -49,11 +49,11 @@
       </a>
     </li>
     @if(!auth()->user()->isEmployee())
-    <li><a href="{{route('billing.home')}}" class="has-icon has-text-grey-lighter">
-          <span class="icon"><i class="fas fa-receipt"></i></span>
-          <span class="menu-label-item">Billing</span>
-        </a>
-    </li>
+      <li><a href="{{route('billing.home')}}" class="has-icon has-text-grey-lighter">
+            <span class="icon"><i class="fas fa-receipt"></i></span>
+            <span class="menu-label-item">Billing</span>
+          </a>
+      </li>
     @else
       <li><a href="{{route('employee.index', ['user' => auth()->user()->username])}}" class="has-icon has-text-grey-lighter">
           <span class="icon"><i class="fas fa-receipt"></i></span>

@@ -28,7 +28,7 @@
 				<div class="card is-card-widget tile is-child ">			
 					<div class="card-content">
 						<div class="">
-							<h2 class="subtitle mb-2">Balance</h2>
+							<h2 class="subtitle mb-2">Unpaid Balance</h2>
 						</div>
 						<div class="level is-mobile">
 							<div class="level-item has-widget-icon">
@@ -64,13 +64,13 @@
 				<div class="card is-card-widget tile is-child ">			
 					<div class="card-content">
 						<div class="">
-							<h2 class="title mb-2">Transactions</h2>
+							<h2 class="title mb-2">Payment History</h2>
 						</div>
 						<div class="level is-mobile">
 							<table class="table">
 								@foreach($transactions as $transaction)
 									<tr>
-										<td>{{$transaction->created_at}}</td>
+										<td>{{$transaction->created_at->format('M d Y')}}</td>
 										<td><span>&#8358</span> {{number_format($transaction->gross_salary, 2)}}</td>
 									</tr>
 								@endforeach

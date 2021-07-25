@@ -5,6 +5,7 @@
 @section('content')
     <home-streamer></home-streamer>
     @include('layouts.homepage-hero')
+    @include('layouts.childeducation-hero')
     @include('layouts.subjects')
     @include('layouts.what')
 

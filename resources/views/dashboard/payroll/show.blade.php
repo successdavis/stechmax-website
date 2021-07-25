@@ -96,10 +96,12 @@
 							<div class="level-item">
 								<div class="is-widget-label">
 									<h3 class="subtitle is-spaced"> Wire transfer to bank account </h3>
-									<p>{{$bankdetails->account_number}}</p>
-									<p>{{$bankdetails->bank_name}}</p>
-									<p>{{$bankdetails->account_name}}</p>
-									<p>{{$bankdetails->account_type}}</p>
+									@if($bankdetails)
+										<p>{{$bankdetails->account_number}}</p>
+										<p>{{$bankdetails->bank_name}}</p>
+										<p>{{$bankdetails->account_name}}</p>
+										<p>{{$bankdetails->account_type}}</p>
+									@endif
 								</div>
 							</div>
 						</div>
@@ -109,24 +111,33 @@
 
 		</div>
 
-		<table class="table">
-			<tr>
-				<th>Basic Salary</th>
-				<td><span>&#8358</span> {{number_format($employee->paygrade->basic, 2)}}</td>
-			</tr>
-			<tr>
-				<th>Grade Level</th>
-				<td>{{$employee->paygrade->name}}</td>
-			</tr>
-			<tr>
-				<th>Job Title(s)</th>
-				<td>{{$employee->user->getRoleNames()}}</td>
-			</tr>
-			<tr>
-				<th>Department</th>
-				<td>{{$employee->department->name}}</td>
-			</tr>
-		</table>
+		<div class="columns">
+			<div class="column">
+				<table class="table">
+					<tr>
+						<th>Basic Salary</th>
+						<td><span>&#8358</span> {{number_format($employee->paygrade->basic, 2)}}</td>
+					</tr>
+					<tr>
+						<th>Grade Level</th>
+						<td>{{$employee->paygrade->name}}</td>
+					</tr>
+					<tr>
+						<th>Job Title(s)</th>
+						<td>{{$employee->user->getRoleNames()}}</td>
+					</tr>
+					<tr>
+						<th>Department</th>
+						<td>{{$employee->department->name}}</td>
+					</tr>
+				</table>				
+			</div>
+			<div class="column">
+				<h3>Unpaid Payrolls</h3>
+				<unpaid-payrolls :employee="{{$employee}}"></unpaid-payrolls>
+			</div>
+		</div>
+
 		<!-- <a class="button is-medium is-info" href="/paygrade/{{auth()->user()->id}}">Paygrade</a> -->
     </div>
 </div>

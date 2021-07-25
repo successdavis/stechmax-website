@@ -47,17 +47,52 @@
                 </div>
             </div>
         </modal>
-        <b-table
+
+
+        <b-table 
             :data="data"
-            :columns="columns"
             :checked-rows.sync="checkedRows"
             checkable
             :checkbox-position="checkboxPosition">
-            
-            <template #bottom-left>
-                <b>Total checked</b>: {{ checkedRows.length }}
+
+            <template slot-scope="props">
+                <b-table-column field="name" label="Name" width="40" sortable numeric>
+                    {{ props.row.name }}
+                </b-table-column>
+
+                <b-table-column field="paygrade" label="Paygrade" sortable>
+                    {{ props.row.paygrade }}
+                </b-table-column>
+
+                <b-table-column field="basic" label="Basic Salary" sortable>
+                    {{ props.row.basic }}
+                </b-table-column>
+
+                <b-table-column field="balance" label="Unpaid Balance" sortable>
+                    {{ props.row.balance }}
+                </b-table-column>
+
+                <b-table-column field="date_employed" label="Date Employed" sortable>
+                    {{ props.row.date_employed }}
+                </b-table-column>
+
+                <b-table-column field="years" label="Years with us" sortable>
+                    {{ props.row.years }}
+                </b-table-column>
+
+                <b-table-column field="gender" label="Gender">
+                    <b-icon
+                        pack="fa"
+                        :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
+                    </b-icon>
+                    {{ props.row.gender }}
+                </b-table-column>
+                <b-table-column field="gender" label="Action">
+                    <a :href="'/viewemployee/' + props.row.id" class="button small is-info">View</a>
+                </b-table-column>
             </template>
         </b-table>
+
     </div>
 </template>
 

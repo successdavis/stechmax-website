@@ -40,6 +40,7 @@ Vue.component('test', require('./pages/Test.vue').default);
 
 Vue.component('study-room', require('./pages/StudyRoom.vue').default);
 
+Vue.component('unpaid-payrolls', require('./components/UnpaidPayrolls.vue').default);
 Vue.component('invoice-payments', require('./components/ViewInvoicePayments.vue').default);
 Vue.component('add-payment', require('./components/AddPayment.vue').default);
 Vue.component('user-add-payment', require('./components/UserAddPayment.vue').default);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use App\Payroll;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,9 @@ class PayrollController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Employee $employee)
     {
-        //
+        return $employee->Payroll()->whereStatus('1')->get();
     }
 
     /**

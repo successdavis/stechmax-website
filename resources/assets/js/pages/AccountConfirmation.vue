@@ -13,7 +13,7 @@
 						<div v-if="user.email && user.confirmed === false">
 					        <p>Please click on the link sent to your email address to confirm your account</p>
 					        <p class="center-text">Haven't received the confirmation email yet?</p> 
-					        <button class="button" @click="resendConfirmLink">Resend Email</button>
+					        <button class="button is-success" :class="isLoading ? 'is-loading' : '' " @click="resendConfirmLink">Resend Email</button>
 				        </div>
 
 						<!-- Display If the user has a phone and its not yet confirmed -->
@@ -44,6 +44,7 @@
 		props: ['user'],
 		data () {
 			return {
+				isLoading: false,
 				email: this.user.email,
 				token: '',
 				logo: '',
@@ -62,9 +63,13 @@
 
 		methods: {
 			resendConfirmLink() {
+				this.isLoading = true;
 				axios.post('/register/resend')
-				.then (
-					flash('Confirmation Link Resent')
+				.then (() => {
+						flash('Confirmation Link Resent')
+						this.isLoading = false
+					
+					}
 				)
 			},
 

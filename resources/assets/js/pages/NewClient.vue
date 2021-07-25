@@ -101,21 +101,20 @@
                       <div class="field-body">
                         <div class="field">
                           <div class="control">
-                            <textarea class="textarea" v-model="form.note" placeholder="Explain how we can help you"></textarea>
+                            <textarea class="textarea" v-model="form.note" placeholder="Add any extra info Here"></textarea>
                           </div>
                         </div>
                         <p class="help-text" id="courseTitleHelpText" v-if="form.errors.has('note')" v-text="form.errors.get('note')"></p>
                       </div>
                     </div>
 
-                    <div class="field mb-1">
-                      <div v-if="mode === 'edit'">
+                    <div class="field mb-3">
+                      <div v-if="mode === 'edit'" class="mb-3">
                         <tags :model_id="client.id" model_type="Client"></tags>
                       </div>                      
                     </div>
 
-
-                    <div class="field is-horizontal">
+                    <div class="field is-horizontal mb-3">
                       <div class="field-label mt-reset pt-reset is-flex flex-center">
                         <!-- Left empty for spacing -->
                       </div>

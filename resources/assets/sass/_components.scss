@@ -140,6 +140,38 @@ ul#off-canvas_panel-links {
     }
 }
 
+.child-education-program {
+    height: 100%;
+}
+
+.child-education-overlay {
+    display: none;
+}
+
+@media (max-width: 769px) {
+    .child-education-program {
+        background: url(/images/stechmax-child-computer-education.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: right;
+        height: 300px;
+        padding: 0; 
+        position: relative;
+    }
+
+    .child-education-overlay {
+        top: 0;
+        width: 100%;
+        z-index: 1;
+        display: block;
+        height: 100%;
+        background: rgba(0,0,0,.6);
+        position: absolute;
+    }
+
+
+}
+
 .course_registration label {
     font-weight: bolder;
     color: #888;
