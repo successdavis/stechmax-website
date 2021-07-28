@@ -27,7 +27,7 @@
       <div class="column">
         <section class="content">
           <h2 class="is-size-4">What is Early Child Computer Education?</h2>
-          <p>Is it good for children to start using computers from an early age? Yes, the world has become heavily reliant on computers, and there are advantages to exposing children to computers. studies have shown that children who use computers from an early age have several advantages which include: Boost Problem-solving Skills, Introduces educational skills, Develop Literacy and Numeracy Skills, Prepares children for future computer use, Increases self-esteem and self-confidence, Stimulates language comprehension, Improves long-term memory and manual dexterity, Success Techmax Early Child Digital Skills focuses on training a child in the core and basic use of Computers and other tech-related tools. The program prepares your child to stay fit with the evolving technology. We have put in place all necessary tools to help a child learn with ease and faster which include the use of a projector, Not more than two students per computer system, One-on-One Training, Educational Games, Focus on Details, Planned Curriculum, Effective Lessons, and Certification. Quality learning requires a safe, friendly environment, qualified and motivated teachers, and instruction in languages students can understand. It also requires that learning outcomes be monitored and feedback into instruction.
+          <p>Is it good for children to start using computers from an early age? Yes, the world has become heavily reliant on computers, and there are advantages to exposing children to computers. studies have shown that children who use computers from an early age have several advantages which include: boost problem-solving skills, introduces educational skills, develop literacy and numeracy skills, prepares children for future computer use, increases self-esteem and self-confidence, stimulates language comprehension, improves long-term memory and manual dexterity. Success Techmax Early Child Digital Skills focuses on training a child in the core and basic use of Computers and other tech-related tools. The program prepares your child to stay fit with the evolving technology. We have put in place all necessary tools to help a child learn faster and with ease. They include the use of a projector, Not more than two students per computer system, One-on-One Training, Educational Games, Focus on Details, Planned Curriculum, Effective Lessons, and Certification. Quality learning requires a safe, friendly environment, qualified and motivated teachers, and instruction in languages students can understand. It also requires that learning outcomes be monitored and feed from instruction received for better services.
 
 </p>
         </section>
@@ -37,8 +37,8 @@
         </section>
         <section class="content">
           <h2 class="is-size-4">How the program works</h2>
-          <p><strong>After School Training</strong>: Classess are hold after school by 3:30pm - 5:30pm daily.</p>
-          <p><strong>Holiday Training</strong>: Classess are hold during holidays by 8:30am - 1:00pm Daily</p>
+          <p><strong>After School Training</strong>: Classess are held after school from 3:30pm - 5:30pm daily.</p>
+          <p><strong>Holiday Training</strong>: Classess are held during holidays from 8:30am - 1:00pm Daily</p>
         </section>
       </div>
     </div>
@@ -76,7 +76,7 @@
             <li>Certification</li>
             <li>Effective Lessons</li>
             <li>Planned Curriculum</li>
-            <li>One Student One Computer System</li>
+            <li>One Student, One Computer System.</li>
             <li>Focus on Details </li>
             <li>One-on-One Training with Student</li>
             <li>Educational Games</li>
