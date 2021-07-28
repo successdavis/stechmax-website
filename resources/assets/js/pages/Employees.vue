@@ -88,7 +88,7 @@
                     {{ props.row.gender }}
                 </b-table-column>
                 <b-table-column field="gender" label="Action">
-                    <a :href="'/viewemployee/' + props.row.id" class="button small is-info">View</a>
+                    <a :href="'/viewemployee/' + props.row.user_id" class="button small is-info">View</a>
                 </b-table-column>
             </template>
         </b-table>
