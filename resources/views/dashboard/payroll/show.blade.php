@@ -70,7 +70,7 @@
 							<table class="table">
 								@foreach($transactions as $transaction)
 									<tr>
-										<td>{{$transaction->created_at}}</td>
+										<td>{{$transaction->updated_at->format('M d Y')}}</td>
 										<td><span>&#8358</span> {{number_format($transaction->gross_salary, 2)}}</td>
 									</tr>
 								@endforeach
