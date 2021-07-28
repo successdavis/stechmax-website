@@ -46,7 +46,7 @@ class BankDetailController extends Controller
         $request->validate([
             'bank_name'         => 'required|string',
             'account_name'      => 'required|string',
-            'account_number'    => 'required|unique:bank_details',
+            'account_number'    => 'required|unique:bank_details|min:10|max:10',
             'account_type'      =>  'required',
         ]);
 
@@ -61,7 +61,7 @@ class BankDetailController extends Controller
         $bankdetails->account_name      = $request->account_name;
         $bankdetails->account_number    = $request->account_number;
         $bankdetails->account_type      = $request->account_type;
-        $bankdetails->employee_id       = auth()->user()->id;
+        $bankdetails->employee_id       = $employee->id;
 
         $bankdetails->save();
 
