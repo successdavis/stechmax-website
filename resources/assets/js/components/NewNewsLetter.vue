@@ -29,13 +29,19 @@
 							    <option value="sales">Sales</option>
 							  </select>
 							</div>
+							<span>
+								<label class="checkbox">
+								  <input type="checkbox" v-model="Form.sendtoall">
+								  Send to All
+								</label>
+							</span>
 						</div>
 						<div class="field">
 							<div class="control">
-								<input class="input" v-model="Form.subject" type="text" placeholder="Subject">
+								<input class="input is-rounded" v-model="Form.subject" type="text" placeholder="Subject">
 							</div>
 						</div>
-						<div class="field">
+						<div class="field" v-show="Form.sendtoall === false">
 		        			<b-field label="">
 					            <b-taginput
 					                v-model="Form.tags"
@@ -81,6 +87,7 @@ export default {
       	body: '',
       	category: '',
       	subject: '',
+      	sendtoall: false,
       })
     }
 	},

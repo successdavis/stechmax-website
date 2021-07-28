@@ -22,7 +22,7 @@ class NewsletterDispatcherController extends Controller
 
     public function __construct(Request $request) {
         $request->validate([
-            'tags'          => 'required|array',
+            'tags'          => 'required_if:sendtoall,false|array',
             'sendTo'        => 'required|string',
             'body'          => 'required|string',
             'category'      => 'required|string',
@@ -34,6 +34,7 @@ class NewsletterDispatcherController extends Controller
 
     public function store(Request $request)
     {
+
         $sendTo = $request->sendTo;
 
         $newsletter = new Newsletter();
@@ -56,11 +57,17 @@ class NewsletterDispatcherController extends Controller
 
     public function user() {
 
-        $users = User::find(
-            array_map(function($tag) {
-                return $tag['id'];
-            },  request()->tags)
-        );
+        if (request()->sendtoall === true) {
+            $users = User::whereNotNull('email')->get();
+        }else {
+            $users = User::find(
+                array_map(function($tag) {
+                    return $tag['id'];
+                },  request()->tags)
+            );
+        }
+
+        dd($users);
 
         return $this->sendMail($users);
 
