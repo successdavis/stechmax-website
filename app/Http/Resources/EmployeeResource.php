@@ -17,7 +17,7 @@ class EmployeeResource extends JsonResource
         return [
             'id'          => $this->id,
             'name'          => $this->user->f_name . ' ' . $this->user->l_name,
-            'user_id'          => $this->user->user_id,
+            'user_id'          => $this->user_id,
             'paygrade'      => $this->paygrade->name,
             'basic'         => number_format($this->paygrade->basic,2),
             'balance'       => $this->earningBalance(),
