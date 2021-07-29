@@ -45,7 +45,6 @@ class Payroll extends Model
             $payroll = new self;
             $payroll->gross_salary      = $employee->generateGrossRevenue();
             $payroll->net_salary        = $employee->generateNetRevenue();
-            $payroll->bank_details_id   = $employee->hasAddedPaymentDetails() ? $employee->getBankDetails()->id : null;
             $payroll->employee_id       = $employee->id;
             $payroll->status            = 1;
 

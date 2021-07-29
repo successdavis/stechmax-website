@@ -55,8 +55,9 @@ import moment from 'moment'
 				.then((response) => {
 					flash('Payroll Cleared')
 					this.payrolls.splice(index, 1)
-				}).catch((error) => {
-				  flash('something went wrong');
+				}).catch(error => {
+					console.log(error.message)
+				  flash(error, 'failed');
 				})
 			}
 		}

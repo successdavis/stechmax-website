@@ -9,9 +9,16 @@ use Illuminate\Http\Request;
 
 class PayrollStatusController extends Controller
 {
+    // Update payroll status to paid and associate the current bank details to the payroll
     public function markAsPaid(Payroll $payroll) {
-        $payroll->status = 2;
-        $payroll->updated_at = Carbon::now();
+
+        if ($payroll->employee->hasAddedPaymentDetails() === false) {
+            abort(424, 'Employee does not have an account number');
+        }
+
+        $payroll->status            = 2;
+        $payroll->updated_at        = Carbon::now();
+        $payroll->bank_details_id   = $payroll->employee->getBankDetails()->id;
         $payroll->save();
 
         return true;

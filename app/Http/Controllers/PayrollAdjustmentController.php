@@ -22,6 +22,8 @@ class PayrollAdjustmentController extends Controller
     ];
     protected $type = 'deduction';
 
+    protected $adjustmentBounceDate = 29; // Once this date passes, adjustment can no longer be added
+
     public function index()
     {
         //
@@ -38,6 +40,17 @@ class PayrollAdjustmentController extends Controller
             'isMore'        => 'required|boolean'
         ]);
 
+        // Check if we are still within adjustment period
+        $dt = intval(Carbon::now()->format('d'));
+        if ($dt >= $this->adjustmentBounceDate) {
+            return response('You have passed the adjustment period for this month, try again next month', 400);
+        }
+
+        // Check if there is an unpaid payroll for this month
+        // Add the adjustment and link it to the payroll
+
+
+        // If it is a costume adjustment that is not known, get the price and amount
         if ($request->isMore) {
             $amount = $request->amount ;
             $type   = $request->type ;
@@ -48,6 +61,7 @@ class PayrollAdjustmentController extends Controller
 
         $adjustmentAlreadyExists = [];
 
+
         foreach ($request->employees as $employee) {
             if(
                 PayrollAdjustment::whereMonth('created_at', Carbon::now()->month)
@@ -57,6 +71,7 @@ class PayrollAdjustmentController extends Controller
                 $adjustmentAlreadyExists[] = $employee['name'];
                 continue;
             }
+
             $dbemployee = Employee::find($employee['id']);
 
             $adjustment = new payrollAdjustment();
@@ -65,6 +80,7 @@ class PayrollAdjustmentController extends Controller
             $adjustment->amount         = $amount;
             $adjustment->type           = $type;
 
+            
             $adjustment->save();
 
             return $adjustment;
