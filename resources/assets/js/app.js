@@ -36,6 +36,7 @@ Vue.component('newsletter', require('./pages/NewsLetter.vue').default);
 Vue.component('newnewsletter', require('./components/NewNewsLetter.vue').default);
 
 Vue.component('user-permissions', require('./components/UserPermissions.vue').default);
+Vue.component('user-position', require('./components/UserPosition.vue').default);
 
 Vue.component('test', require('./pages/Test.vue').default);
 

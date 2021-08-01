@@ -130,7 +130,8 @@
 						<th>Department</th>
 						<td>{{$employee->department->name}}</td>
 					</tr>
-				</table>				
+				</table>
+				<user-position :user="{{$employee->user}}"></user-position>
 			</div>
 			<div class="column">
 				<h3>Unpaid Payrolls</h3>

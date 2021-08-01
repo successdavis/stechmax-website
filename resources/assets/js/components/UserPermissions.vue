@@ -11,7 +11,7 @@
                 </b-table-column>
 
                 <b-table-column field="gender" label="Action">
-                    <a @click="revokePermission(props.row)" class="button small is-danger">Revoke Permission</a>
+                    <a @click="revokePermission(props.row)" class="button is-small is-danger">Revoke Permission</a>
                 </b-table-column>
             </template>
         </b-table>
@@ -28,7 +28,7 @@
 		                </b-table-column>
 
 		                <b-table-column field="gender" label="Action">
-		                    <a @click="givePermission(props.row)" class="button small is-info">Give Permission</a>
+		                    <a @click="givePermission(props.row)" class="button is-small is-info">Give Permission</a>
 		                </b-table-column>
 		            </template>
 		        </b-table>
