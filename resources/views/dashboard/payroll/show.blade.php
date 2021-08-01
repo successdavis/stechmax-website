@@ -138,7 +138,7 @@
 			</div>
 		</div>
 
-		<!-- <a class="button is-medium is-info" href="/paygrade/{{auth()->user()->id}}">Paygrade</a> -->
+		<user-permissions :user="{{$employee->user}}"></user-permissions>
     </div>
 </div>
 @endsection

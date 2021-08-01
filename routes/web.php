@@ -273,3 +273,9 @@ Route::post('/applydiscount', 'DiscountController@store');
 Route::get('/childcomputereducation', 'ChildComputerEducationController@index');
 Route::get('/childcomputereducation-errolment', 'ChildComputerEducationController@payment');
 Route::get('/childeducationpayment/callback', 'ChildComputerEducationController@store');
+
+
+Route::get('/userpermissions/{user}', 'UserPermissionController@show');
+Route::get('/permissions', 'UserPermissionController@index');
+Route::post('/givepermission/{permission}/{user}', 'UserPermissionController@store');
+Route::post('/revokepermission/{permission}/{user}', 'UserPermissionController@delete');

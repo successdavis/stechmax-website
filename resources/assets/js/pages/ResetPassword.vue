@@ -14,7 +14,7 @@
 				        		<p class="has-text-black" v-if="!phoneReset">Please provide your email address here</p>
 				        		<p class="has-text-black" v-if="phoneReset">Please provide your Phone Number here</p>
 
-								<input :disabled="resetTokenSent" id="checkbox1" type="checkbox" v-model="phoneReset"><label class="has-text-black" for="checkbox1">Use Phone Number Instead</label>
+								<!-- <input :disabled="resetTokenSent" id="checkbox1" type="checkbox" v-model="phoneReset"><label class="has-text-black" for="checkbox1">Use Phone Number Instead</label> -->
 
 	                            <input class="input" v-if="!phoneReset" type="email" placeholder="Email here" v-model="email" required>
 	                            <input class="input" :disabled="resetTokenSent" v-if="phoneReset" type="text" placeholder="Phone Number Here" maxlength="11" v-model="phone" required>

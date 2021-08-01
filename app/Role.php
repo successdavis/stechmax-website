@@ -33,3 +33,6 @@ class Role extends Role
         return $this->hasMany(Paygrade::class);
     }
 }
+
+// This class only extends the actual Role class from Spatie, allowing other classes to interact with roles. 
+// $user->roles is invalid instead you must access user roles using spatie methods user->getRoleNames()
