@@ -131,7 +131,7 @@
 						<td>{{$employee->department->name}}</td>
 					</tr>
 				</table>
-				<user-position :user="{{$employee->user}}"></user-position>
+				<user-position :employee="{{$employee}}"></user-position>
 			</div>
 			<div class="column">
 				<h3>Unpaid Payrolls</h3>

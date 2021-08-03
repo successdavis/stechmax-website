@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Employee;
+use App\JobTitle;
 use App\PayGrade;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class PayGradeController extends Controller
 {
@@ -18,9 +20,11 @@ class PayGradeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(JobTitle $jobtitle)
     {
-        //
+        $paygrades = $jobtitle->paygrades;
+
+        return $paygrades;
     }
 
     /**

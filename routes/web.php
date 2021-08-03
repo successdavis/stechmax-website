@@ -279,3 +279,8 @@ Route::get('/userpermissions/{user}', 'UserPermissionController@show');
 Route::get('/permissions', 'UserPermissionController@index');
 Route::post('/givepermission/{permission}/{user}', 'UserPermissionController@store');
 Route::post('/revokepermission/{permission}/{user}', 'UserPermissionController@delete');
+
+
+Route::get('/departments', 'DepartmentController@index');
+Route::get('/{jobtitle}/paygrades', 'PaygradeController@index');
+Route::post('/{employee}/adjustposition', 'UserPositionController@store');

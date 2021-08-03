@@ -5,7 +5,6 @@ namespace App;
 use App\BankDetail;
 use App\Department;
 use App\DepartmentHistory;
-use App\Models\Role;
 use App\Paygrade;
 use App\PaygradeHistory;
 use App\Payroll;
@@ -44,12 +43,6 @@ class Employee extends Model
     public function departmentHistory()
     {
         return $this->hasMany(DepartmentHistory::class);
-    }
-
-
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
     }
 
     public function rolehistory()
@@ -183,5 +176,4 @@ class Employee extends Model
 
         return $grossRevenue - $totalDeductions;
     }
-   
 }

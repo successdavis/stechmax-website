@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Employee;
-use App\Role;
+use App\JobTitle;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +14,7 @@ class RoleHistory extends Model
 
     public function role()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(JobTitle::class);
     }
 
     public function employee()

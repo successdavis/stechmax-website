@@ -7,33 +7,34 @@
 				<form>
 					<div class="control">
 					  <div class="select is-fullwidth mb-2">
-					    <select>
-					      <option>Department</option>
-					      <option>With options</option>
+					    <select v-model="Form.department">
+					      <option selected disabled value="">Select a Department</option>
+					      <option v-for="department in departments" :value="department">{{department.name}}</option>
 					    </select>
 					  </div>
 					</div>
 
 					<div class="control">
 					  <div class="select is-fullwidth mb-2">
-					    <select>
-					      <option>Job Title (Roles)</option>
-					      <option>With options</option>
+					    <select v-model="Form.role" @change="getPaygrades">
+					      <option selected disabled="true" value="">Select a Job Title (Roles)</option>
+					      <option value="">None</option>
+					      <option v-for="role in roles" :value="role">{{role.name}}</option>
 					    </select>
 					  </div>
 					</div>
 
 					<div class="control">
 					  <div class="select is-fullwidth mb-2">
-					    <select>
-					      <option>Paygrade (Level)</option>
-					      <option>With options</option>
+					    <select v-model="Form.paygrade">
+					      <option value="">Paygrade (Level)</option>
+					      <option v-for="paygrade in paygrades" :value="paygrade">{{paygrade.name}}</option>
 					    </select>
 					  </div>
 					</div>
 				</form>
 
-				<button class="button is-primary">Adjust Position</button>
+				<button :class="isLoading ? 'is-loading' : '' " class="button is-primary" @click="adjustPosition">Adjust Position</button>
 			</div>
 		</modal>
 	</div>
@@ -42,22 +43,26 @@
 
 <script>
 	export default {
-		props: ['user'],
+		props: ['employee'],
 
 		data () {
 			return {
-				permissions: [],
-				userpermissions: [],
+				isLoading: false,
+				departments: [],
+				paygrades: [],
+
+				Form: new Form({
+					department: '',
+					role: '',
+					paygrade: '',
+				}),
 			}
 		},
 
 		computed: {
-			unsyncpermissions () {
-				if (this.permissions) {
-					return this.permissions.filter((el) => { 
-						return !this.userpermissions.map((sel) => { return sel.id }).includes(el.id) 
-					})
-				}
+
+			roles () {
+				return this.Form.department.roles;
 			}
 		},
 
@@ -68,33 +73,28 @@
 			}).catch((error) => {
 			  flash('System was unable to retrieve departments');
 			})
-
-			axios.get('/permissions')
-			.then((response) => {
-			  this.permissions = response.data;
-			}).catch((error) => {
-			  console.error(error);
-			})
 		},
 
 		methods: {
-			givePermission(row){
-				axios.post(`/givepermission/${row.id}/${this.user.username}`)
+			getPaygrades (role) {
+				axios.get(`/${this.Form.role.id}/paygrades`)
 				.then((response) => {
-				  flash('Permission granded');
-				  this.userpermissions.push(row)
+				  this.paygrades = response.data;
 				}).catch((error) => {
-				  flash('System Error', 'error');
+				  console.error(error);
 				})
 			},
 
-			revokePermission(row) {
-				axios.post(`/revokepermission/${row.id}/${this.user.username}`)
+			adjustPosition () {
+				this.isLoading = true;
+				this.Form.post(`/${this.employee.user_id}/adjustposition`)
 				.then((response) => {
-				  flash('Permission removed from user')
-				  this.userpermissions.splice(row, 1)
-				}).catch((error) => {
-				  flash('Something went wrong','failed')
+					flash('Position Updated')
+					this.isLoading = false;
+				})
+				.catch((error) => {
+					flash('Something went wrong, contact support', 'failed')
+					this.isLoading = false;
 				})
 			}
 		}

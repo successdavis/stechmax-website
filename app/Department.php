@@ -4,7 +4,7 @@ namespace App;
 
 use App\DepartmentHistory;
 use App\Employee;
-use App\Role;
+use App\JobTitle;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,6 +24,6 @@ class Department extends Model
 
     public function roles()
     {
-        $this->hasMany(Role::class);
+        return $this->hasMany(JobTitle::class);
     }
 }
