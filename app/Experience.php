@@ -18,4 +18,5 @@ class Experience extends Model
     {
         return $this->points;
     }
+
 }

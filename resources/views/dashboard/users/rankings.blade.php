@@ -3,25 +3,24 @@
 @section('dashboardcontent')
 	<div class="container">
 		<div class="section">
-			<h2 class="has-text-centered is-size-4 mb-2">Top 20 Students</h2>
-			<table class="table is-fullwidth">
-				<thead>
-					<tr>
-						<th>Pos</th>
+			<h2 class="has-text-centered is-size-4 mb-2">Students Ranking by Top Student</h2>
+
+        		<table class="table is-fullwidth">
+        			<tr>
 						<th>Name</th>
-						<th>Points</th>
-					</tr>
-				</thead>
-				<tbody>	
-					@foreach ($users as $user)
-						<tr>	
-							<td>{{$loop->iteration}}</td>
+						<th>Pos</th>
+						<th>Total Points</th>
+						<th>This Week</th>
+        			</tr>
+		        	@foreach($users as $user)
+		        		<tr>
 							<td>{{$user->f_name . ' ' . $user->m_name}}</td>
-							<td>{{$user->points}}</td>
-						</tr>
-					@endforeach
-				</tbody>
-			</table>
+							<td>{{$loop->iteration}}</td>
+							<td>{{$user->total_points}}</td>
+							<td>{{$user->weekExpTotal()}}</td>
+		        		</tr>
+		        	@endforeach
+	        	</table>
 		</div>
 	</div>
 @endsection

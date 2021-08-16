@@ -94,6 +94,12 @@ class User extends Authenticatable
         return $this->hasMany(Experience::class);
     }
 
+    public function weekExpTotal() {
+        Carbon::setWeekStartsAt(Carbon::SUNDAY);
+        Carbon::setWeekEndsAt(Carbon::SATURDAY);
+        return $this->experience()->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->sum('points');
+    }
+
     public function debitCards()
     {
         return $this->hasMany(DebitCardDetails::class);

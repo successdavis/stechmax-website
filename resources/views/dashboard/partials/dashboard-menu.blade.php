@@ -61,6 +61,18 @@
         </a>
       </li>
     @endif
+        <li>
+          <a href="{{route('batch_rankings')}}" class="has-icon has-text-white">
+              <span class="icon"><i class="fas fa-id-card-alt"></i></span>
+              <span class="menu-label-item">Batch Rankings </span>
+          </a>
+        </li>
+        <li>
+          <a href="{{route('rankings')}}" class="has-icon has-text-white">
+              <span class="icon"><i class="fas fa-id-card-alt"></i></span>
+              <span class="menu-label-item">Rankings </span>
+          </a>
+        </li>
 
 
     @if (Auth::user()->isAdmin())
@@ -93,12 +105,6 @@
           <a href="{{route('permitcards')}}" target="_blank" class="has-icon has-text-white">
               <span class="icon"><i class="fas fa-id-card-alt"></i></span>
               <span class="menu-label-item">Active PMT Cards</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{route('user_rankings')}}" class="has-icon has-text-white">
-              <span class="icon"><i class="fas fa-id-card-alt"></i></span>
-              <span class="menu-label-item">Rankings</span>
           </a>
         </li>
       </menu-dropdown>

@@ -18,6 +18,12 @@ class ManageUserController extends Controller
         ]);
     }
 
+    public function findUserWithInvoices(Request $request)
+    {
+        $user = User::whereUser_id($request->user_id)->firstOrFail();
+        return new UserResourceInvoice($user);
+    }
+
     public function store()
     {
         $this->validate(request(), [
@@ -102,18 +108,5 @@ class ManageUserController extends Controller
 
 
         return UserResource::collection($user);
-    }
-
-    public function rankusers()
-    {
-        $users = User::all()->sortByDesc('points')->take(20);
-
-        return view('dashboard.users.rankings', compact('users'));
-    }
-
-    public function findUserWithInvoices(Request $request)
-    {
-        $user = User::whereUser_id($request->user_id)->firstOrFail();
-        return new UserResourceInvoice($user);
     }
 }
