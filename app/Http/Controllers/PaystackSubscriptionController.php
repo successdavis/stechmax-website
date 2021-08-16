@@ -17,7 +17,7 @@ class PaystackSubscriptionController extends Controller
     public function makeFullPayment(Subject $subject, Course $course, Request $request)
     {
         $request->validate([
-            'class'     => 'required|boolean'
+            'class'     => 'required'
         ]);
 
         $class = filter_var(request()->class, FILTER_VALIDATE_BOOLEAN);

@@ -25,7 +25,12 @@ class ChildComputerEducationController extends Controller
     ];
 
     public function index() {
-        return view('dedicatedpages.childcomputereducation');
+
+        $course = Course::find(80);
+
+        $childrenCourses = $course->childrenCourses()->orderBy('order')->get();
+
+        return view('dedicatedpages.childcomputereducation', compact('childrenCourses'));
     }
 
     public function payment(Request $request) {

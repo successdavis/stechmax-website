@@ -114,14 +114,27 @@
           
           @else
             <div class="mb-2">
-              <h2 class="has-text-centered is-size-3 title">Subscription Plan</h2>
+                <h2 class="has-text-centered is-size-3 title">Subscription Plan</h2>
               <div class="columns has-text-centered">
+
+              @foreach($childrenCourses as $course)
                 <div class="column is-primary has-background-light">
-                  <h3 class="is-size-3"><span>&#x20A6;</span>N5,000</h3>
-                  <p class="has-text-centered is-size-4">1 Month</p>
-                  <a href="/childcomputereducation-errolment?duration=1" class="button has-background-success is-large">Enroll Now</a>
+                  <h3 class="is-size-3"><span>&#x20A6;</span>{{$course->getDiscountAmount()}}</h3>
+                  <p class="has-text-centered is-size-4">{{$course->duration}} Weeks</p>
+                  <!-- <a href="{{$course->path()}}/paystack" class="button has-background-success is-large">Enroll Now</a> -->
+
+
+                  <form method="post" action="{{$course->path()}}/paystack">
+                      @csrf
+                      <input type="hidden" name="class" value="true" >
+                      <button type="submit" class="small is-large button is-success">
+                        Enroll Now
+                      </button>
+                  </form>
+
                 </div>
-                <div class="column has-background-info">
+              @endforeach
+                <!-- <div class="column has-background-info">
                   <h3 class="is-size-3 has-text-white"><span>&#x20A6;</span>N12,000</h3>
                   <p class="has-text-centered is-size-4 has-text-white">3 Month</p>
                   <a href="/childcomputereducation-errolment?duration=3" class="button has-background-white is-large">Enroll Now</a>
@@ -130,9 +143,11 @@
                   <h3 class="is-size-3"><span>&#x20A6;</span>N18,000</h3>
                   <p class="has-text-centered is-size-4">6 Month</p>
                   <a href="/childcomputereducation-errolment?duration=6" class="button has-background-info is-large has-text-white">Enroll Now</a>
-                </div>
+                </div> -->
               </div>
             </div>
+
+
               <div class="is-size-3">(2) Method 2: Bank Deposit/Transfer</div>
                 <p><strong>Account Name:</strong> Ikong Simon David</p>
                 <p><strong>Account Number:</strong> 0799592449</p>

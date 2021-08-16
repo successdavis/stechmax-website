@@ -19,7 +19,7 @@ class HomepageController extends Controller
     {
         $type = \App\Type::find(4);
         
-        $programs = !empty($type) ? $type->courses()->get() : [];
+        $programs = !empty($type) ? $type->courses()->whereShowcase(true)->get() : [];
         $testimonials = Testimonial::where('approve', true)->limit(25)->get();
         // $streamerCourses = Course::inRandomOrder()->whereType_id('2')->get()->take('3');
 
