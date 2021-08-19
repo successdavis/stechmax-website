@@ -100,7 +100,7 @@
 		      	</div>
 	    	</div>
 	    </section>
-	    <section v-if="invoice" class="mt-3">
+	    <section v-if="invoice" class="mt-3" id="test">
 	    	<h2 class="title">Invoice Payments</h2>
 			<table class="table is-fullwidth">
 		      <thead>
@@ -119,6 +119,7 @@
 		          	<td v-text="payment.purpose"></td>
 		          	<td v-text="payment.amount"></td>
 		          	<td v-if="payment.refundable"><button :class="isLoading ? 'is-loading' : '' " class="button is-danger" @click="refundPayment(payment.id)">Refund Bill</button></td>
+		          	<td><a @click.prevent="printReciept(payment.id)" title="Print Reciept" :class="isLoading ? 'is-loading' : '' " class="button is-success">PR</a></td>
 		        </tr>
 		      </tbody>
 		    </table>
@@ -127,10 +128,12 @@
 </template>
 
 <script>
+import print from 'print-js'
+
 	export default {
 		data () {
 			return {
-				idno: '',
+				idno: 'STM-2021-0003',
 				invoice: '',
 				user: '',
 				Form: new Form({
@@ -240,6 +243,11 @@
                 	this.errorMessage = error.message;
                     this.isLoading = false;
         		})
+        	},
+
+        	printReciept(payment) {
+
+	        		printJS(`/payment-receipt/${payment}`);
         	}
         }
 	};

@@ -285,3 +285,4 @@ Route::post('/revokepermission/{permission}/{user}', 'UserPermissionController@d
 Route::get('/departments', 'DepartmentController@index');
 Route::get('/{jobtitle}/paygrades', 'PaygradeController@index');
 Route::post('/{employee}/adjustposition', 'UserPositionController@store');
+Route::get('/payment-receipt/{payment}', 'PaymentRecieptController@index');

@@ -33,6 +33,7 @@
     "flickity": "^2.2.2",
     "moment": "^2.29.1",
     "portal-vue": "^1.5.1",
+    "print-js": "^1.6.0",
     "vue-clipboard2": "^0.3.1",
     "vue-croppa": "^1.3.8",
     "vue-infinite-loading": "^2.4.5",
