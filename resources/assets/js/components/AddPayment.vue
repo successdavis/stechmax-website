@@ -119,7 +119,7 @@
 		          	<td v-text="payment.purpose"></td>
 		          	<td v-text="payment.amount"></td>
 		          	<td v-if="payment.refundable"><button :class="isLoading ? 'is-loading' : '' " class="button is-danger" @click="refundPayment(payment.id)">Refund Bill</button></td>
-		          	<td><a @click.prevent="printReciept(payment.id)" title="Print Reciept" :class="isLoading ? 'is-loading' : '' " class="button is-success">PR</a></td>
+		          	<td><a @click.prevent="printReciept(payment.id)" title="Print Reciept" :class="isLoading ? 'is-loading' : '' " class="button is-success"><span class="fa fa-print "></span></a></td>
 		        </tr>
 		      </tbody>
 		    </table>
@@ -133,7 +133,7 @@ import print from 'print-js'
 	export default {
 		data () {
 			return {
-				idno: 'STM-2021-0003',
+				idno: '',
 				invoice: '',
 				user: '',
 				Form: new Form({
