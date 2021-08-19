@@ -98,7 +98,7 @@ Route::get('/dashboard/rankings', 'RankingController@rankings')->name('rankings'
 
 Route::get('/dashboard/{user}/mypayments', 'UserPaymentsController@index')->name('mypayments.index');
 Route::get('/dashboard/{user}/getuserpayments', 'UserPaymentsController@getDataForDataTable')->name('mypayments.datatable');
-Route::get('/dashboard/paymentshistory', 'PaymentController@index')->name('payment.index');
+Route::get('/dashboard/paymentshistory', 'PaymentController@index')->name('payment.paymenthistory');
 
 Route::get('/dashboard/monthlytotalrevenue', 'IncomeStatementController@index')->name('payment.index');
 
@@ -213,7 +213,7 @@ Route::post('coporate/registration', 'CoporatetrainingController@store');
 Route::get('coporate/registration', 'CoporatetrainingController@index');
 
 Route::post('/courses/{subject}/{course}/paystack', 'PaystackSubscriptionController@makeFullPayment')->name('paystack.makeFullPayment');
-Route::post('/courses/{subject}/{course}/paystackwithcard', 'PaystackSubscriptionController@chargeWithDebitCard')->name('paystack.makeFullPayment');
+Route::post('/courses/{subject}/{course}/paystackwithcard', 'PaystackSubscriptionController@chargeWithDebitCard')->name('paystack.paywithcard');
 
 Route::post('/courses/{subject}/{course}/paystackpart', 'PaystackSubscriptionController@makePartPayment')->name('paystack.makePartPayment');
 
@@ -254,10 +254,10 @@ Route::get('/paygrade/{employee}', 'PaygradeController@show')->name('paygrade.sh
 
 Route::post('/adjustpayroll', 'PayrollAdjustmentController@store')->name('payrolladjustment.store');
 
-Route::get('/unpaidpayroll/{employee}', 'PayrollController@index')->name('employee.show');
+Route::get('/unpaidpayroll/{employee}', 'PayrollController@index')->name('unpaidpayroll');
 
 
-Route::post('/payroll/{payroll}/markaspaid', 'PayrollStatusController@markAsPaid')->name('employee.show');
+Route::post('/payroll/{payroll}/markaspaid', 'PayrollStatusController@markAsPaid')->name('markpayrollpaid');
 
 Route::post('/vimeofolderid/{course}', 'VimeoFolderController@coursefolder')->name('coursefolder');
 
