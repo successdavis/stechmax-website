@@ -17,6 +17,7 @@
 			        		<tr>
 			        			<td>{{str_replace('-', ' ', $transaction->amount / 100)}}</td>
 			        			<td>{{$transaction->purpose}}</td>
+			        			<td>{{ucwords ($transaction->invoice->owner->f_name . ' ' . $transaction->invoice->owner->f_name)}}</td>
 			        			<td>{{$transaction->method}}</td>
 			        			<td>{{$transaction->transaction_ref}}</td>
 			        		</tr>
