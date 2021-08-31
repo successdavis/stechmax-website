@@ -131,9 +131,9 @@
           </li>
           @can('review financial records')
           <li>
-            <a href="{{route('payment.index')}}" class="has-icon has-text-white">
+            <a href="{{route('payment.paymenthistory')}}" class="has-icon has-text-white">
               <span class="icon"><i class="fas fa-receipt"></i></span>
-              <span class="menu-label-item">Payments</span>
+              <span class="menu-label-item">Payment History</span>
             </a>
           </li>
           @endcan
