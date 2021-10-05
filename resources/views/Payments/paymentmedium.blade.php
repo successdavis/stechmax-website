@@ -55,15 +55,14 @@
                     <button type="submit" class="button is-primary">PAY WITH SELECTED CARD</button>
                   </form>
 
-                  @else
+                  @endif
                   <form method="post" action="{{$course->path()}}/paystack">
                       @csrf
                       <input type="hidden" name="class" value="{!!$class ? 1 : 0!!}" >
                       <button type="submit" class="small large button is-success">
-                        CLICK HERE TO PAY
+                        PAY WITH NEW CARD
                       </button>
                   </form>
-                  @endif
                 </div>
 {{--  --}}
                 {{-- Check if course support part payment then display --}}
