@@ -5,14 +5,15 @@
 @section('content')
     <home-streamer></home-streamer>
     @include('layouts.homepage-hero')
+    @include('layouts.program')
     @include('layouts.childeducation-hero')
+    
     @include('layouts.subjects')
     @include('layouts.what')
 
     <!-- @include('layouts.servicesoffered')     -->
     <!-- @include('layouts.testimonials') -->
 
-    @include('layouts.program')
     @include('layouts.advertBanner')
     @include('layouts.footer')
 @endsection

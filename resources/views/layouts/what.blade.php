@@ -1,8 +1,7 @@
 <div class="container">
   <div class="section is-size-6">
     <div class="has-text-centered ">
-      <h2 class="text-center is-size-3">1,622 STUDENTS CAN'T BE WRONG</h2>
-      <h4 class="text-center mb-3 is-size-4">Here is why you too should choose S-Techmax</h4>
+      <h4 class="text-center mb-3 is-size-3">Here is why you too should choose S-Techmax</h4>
     </div>
     <div class="columns">
         <div class="column">

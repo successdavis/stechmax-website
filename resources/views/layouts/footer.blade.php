@@ -41,7 +41,7 @@
                       </figure>
                       <div class="media-content">
                         <div class="content">
-                            09050635733 | 09076846791 | 09078082348
+                            09078082348 | 09076846791
                         </div>
                       </div>
                     </article>
