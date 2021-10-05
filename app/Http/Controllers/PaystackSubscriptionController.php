@@ -47,8 +47,6 @@ class PaystackSubscriptionController extends Controller
 
         $responds = $this->makePaystackRequest($url, $fields_string);
 
-        dd($responds);
-
         return redirect($responds['data']['authorization_url']);
     }
 
