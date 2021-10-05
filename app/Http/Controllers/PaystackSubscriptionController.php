@@ -83,6 +83,9 @@ class PaystackSubscriptionController extends Controller
 
         $responds = $this->makePaystackRequest($url, $fields_string);
 
+        if (!isset($responds['data']['status']) || $responds['data']['status'] !== 'success') {
+            abort(400, 'Invalid Transaction');
+        }
 
         if ($class) {
             $this->createClassroomSubscription($course, $responds);
