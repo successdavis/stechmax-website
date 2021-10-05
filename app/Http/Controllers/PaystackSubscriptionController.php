@@ -40,6 +40,8 @@ class PaystackSubscriptionController extends Controller
             ],
         ];
 
+        dd($data);
+
         $url = "https://api.paystack.co/transaction/initialize";
 
         $fields_string = http_build_query($data);
@@ -61,6 +63,8 @@ class PaystackSubscriptionController extends Controller
         $reference_num = rand(10*45, 100*98);
 
         $card = DebitCardDetails::whereSignature($request->signature)->first();
+
+
 
         $data = [
             "amount" => $class ? $course->getDiscountAmountWithClassroom(false) : $course->getDiscountAmount(false),

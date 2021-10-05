@@ -213,6 +213,7 @@ Route::post('coporate/registration', 'CoporatetrainingController@store');
 Route::get('coporate/registration', 'CoporatetrainingController@index');
 
 Route::post('/courses/{subject}/{course}/paystack', 'PaystackSubscriptionController@makeFullPayment')->name('paystack.makeFullPayment');
+
 Route::post('/courses/{subject}/{course}/paystackwithcard', 'PaystackSubscriptionController@chargeWithDebitCard')->name('paystack.paywithcard');
 
 Route::post('/courses/{subject}/{course}/paystackpart', 'PaystackSubscriptionController@makePartPayment')->name('paystack.makePartPayment');

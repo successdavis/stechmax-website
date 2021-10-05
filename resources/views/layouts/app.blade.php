@@ -43,16 +43,16 @@
     </script>
     @yield('head')
 </head>
-<body>
-<div id="app">
+<body style="width: 100%; overflow-x: hidden;">
     <div id="app">
-        <vue-progress-bar></vue-progress-bar>
-        @include('layouts.navbar')
-        @yield('content')
-        <flash message="{{ session('flash') }}"></flash>
-        {{-- @include('layouts.footer') --}}
+        <div id="app">
+            <vue-progress-bar></vue-progress-bar>
+            @include('layouts.navbar')
+            @yield('content')
+            <flash message="{{ session('flash') }}"></flash>
+            {{-- @include('layouts.footer') --}}
+        </div>
     </div>
-</div>
 </body>
 
 <!-- Scripts -->

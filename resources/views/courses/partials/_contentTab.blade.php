@@ -34,13 +34,7 @@
                 <div class="column is-3">
                     <div class="is-size-5 mb-2"><strong>Course Content</strong></div>
                     <div>
-                        @auth
-                            @include("courses.partials._coursetableofcontent")
-                        @endauth
-
-                        @guest
-                            Please sign in to view table of content
-                        @endguest
+                        @include("courses.partials._coursetableofcontent")
                     </div>
                 </div>
         </div>
