@@ -58,7 +58,7 @@
                       </div>
                     </article>
                     <div class="section">
-                        <button class="button is-large is-info is-rounded">Message Us!</button>
+                        <a href="#message" class="button is-large is-info is-rounded">Message Us!</a>
                     </div>
                 </div>
                 <div class="column is-2">

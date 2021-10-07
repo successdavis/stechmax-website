@@ -15,5 +15,7 @@
     <!-- @include('layouts.testimonials') -->
 
     @include('layouts.advertBanner')
+    <h3 id="message" class="has-text-centered is-size-3">Talk to us</h3>
+    <contactform></contactform>
     @include('layouts.footer')
 @endsection

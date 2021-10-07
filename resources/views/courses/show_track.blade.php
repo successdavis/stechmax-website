@@ -16,7 +16,7 @@
             </div>
             <div class="grid-x">
                 <div class="medium-6 cell">
-                    <h3 class="inline">&#8358;{{$course->getAmount()}} </h3>
+                    <h3 class="inline">&#8358;{{$course->getTrackAmount()}} </h3>
                 </div>
                 <div class="medium-6 cell">
                     <a class="medium button" href="{{$course->path()}}/subscription?class=false">Study Series Online</a>

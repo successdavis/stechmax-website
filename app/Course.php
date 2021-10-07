@@ -252,12 +252,20 @@ class Course extends Model
         
         $discountInDecimal = $this->discount_percentage / 100;
 
-        $percent = $discountInDecimal * $this->amount;
+        
+        $amount = $this->amount;
+
+        if ($this->type_id === 2) {
+            $amount = $this->getTrackAmount();
+        }
 
 
-        $amount = $this->amount - $percent;
+        $percentageAmount = $discountInDecimal * $amount;
 
-        return $format ? number_format($amount / 100, 2) : $amount;
+
+        $newAmount = $amount - $percentageAmount;
+
+        return $format ? number_format($newAmount / 100, 2) : $newAmount;
     }
 
     public function getAmount()
@@ -314,5 +322,15 @@ class Course extends Model
     {
         $userId = $userId ? $userId : auth()->id();
         return $this->subscriptions()->where(['user_id' => $userId, 'active' => true])->exists();
+    }
+
+    public function getTrackAmount() {
+        
+        $percentageDiscount = 10;
+        $amount = $this->childrencourses()->sum('amount');
+
+        $percentageAmount = $percentageDiscount / 100 * $amount;
+
+        return $amount - $percentageAmount;
     }
 }
