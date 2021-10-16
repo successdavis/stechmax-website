@@ -88,9 +88,19 @@
 
                         <div class="column is-4">
                             <div class="field">
-                                <label>Course Fee</label>
+                                <label>Course Online Fee</label>
                                 <div class="control">
                                    <input type="number" class="input" v-model="Form.amount" placeholder="What is the cost fee for this course" required>
+                                </div>
+                            </div>
+                            <p class="help is-danger" id="durationHelpText" v-if="Form.errors.has('amount')" v-text="Form.errors.get('amount')"></p>
+                        </div>
+
+                        <div class="column is-4">
+                            <div class="field">
+                                <label>Course Classroom Fee</label>
+                                <div class="control">
+                                   <input type="number" class="input" v-model="Form.class_amount" placeholder="What is the cost fee for this course" required>
                                 </div>
                             </div>
                             <p class="help is-danger" id="durationHelpText" v-if="Form.errors.has('amount')" v-text="Form.errors.get('amount')"></p>
@@ -136,6 +146,7 @@
                     sypnosis: this.course.sypnosis,
                     duration: this.course.duration,
                     amount: this.course.amount / 100,
+                    class_amount: this.course.class_amount / 100,
                     discountamount: this.course.discount_percentage
                 }),
             }

@@ -141,10 +141,12 @@ class CourseController extends Controller
             'duration'          => 'required',
             'subject_id'        => 'required',
             'amount'            => 'required|integer',
+            'class_amount'            => 'required|integer',
             'discountamount'    => 'nullable|integer',
             'sypnosis'          => 'required|spamfree',
             'difficulty_id'     => 'required'
         ]);
+
 
         $course->update([
             'title'                 => $request->title,
@@ -152,6 +154,7 @@ class CourseController extends Controller
             'duration'              => $request->duration,
             'subject_id'            => $request->subject_id,
             'amount'                => $request->amount . '00',
+            'class_amount'          => $request->class_amount . '00',
             'discount_percentage'   => $request->discountamount,
             'sypnosis'              => $request->sypnosis,
             'difficulty_id'         => $request->difficulty_id

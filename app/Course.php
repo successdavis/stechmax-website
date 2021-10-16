@@ -247,54 +247,51 @@ class Course extends Model
     }
 
 
-    public function getDiscountAmount($format = true)
-    {
-        
+
+
+
+    public function calculateDiscount($amount) {
+
         $discountInDecimal = $this->discount_percentage / 100;
-
-        
-        $amount = $this->amount;
-
-        if ($this->type_id === 2) {
-            $amount = $this->getTrackAmount();
-        }
-
 
         $percentageAmount = $discountInDecimal * $amount;
 
-
-        $newAmount = $amount - $percentageAmount;
-
-        return $format ? number_format($newAmount / 100, 2) : $newAmount;
+        return $newAmount = $amount - $percentageAmount;
     }
 
-    public function getAmount()
+
+    public function getAmount($format = true)
     {
-        return number_format($this->amount / 100,2);
+        $amount = $this->type_id === 2 ? $this->getTrackAmount() : $this->amount;
+
+        return $format ? number_format($amount / 100,2) : $amount;
     }
 
-    public function getAmountWithClassroom($format = true)
+    public function getDiscountAmount($format = true)
     {
-        $classroomfee = $this->classroomfee();
+        $amount = $this->getAmount(false);
 
-        $amount = $this->amount + $classroomfee;
+        $discountedAmount = $this->calculateDiscount($amount);
+
+        return $format ? number_format($discountedAmount / 100, 2) : $discountedAmount;
+    }
+
+    public function getClassAmount($format = true)
+    {
+        $amount = $this->type_id === 2 ? $this->getTrackClassAmount() : $this->class_amount;
 
         return $format ? number_format($amount / 100, 2) : $amount;
     }
 
-    public function getDiscountAmountWithClassroom($format = true)
+    public function getClassAmountDiscount($format = true)
     {
-        $classroomfee = $this->classroomfee();
+        $amount = $this->getClassAmount(false);
 
-        $amount = $this->getDiscountAmount(false) + $classroomfee;
+        $discountedAmount = $this->calculateDiscount($amount);
 
-        return $format ? number_format($amount / 100, 2) : $amount;
+        return $format ? number_format($discountedAmount / 100, 2) : $discountedAmount;
     }
 
-    public function classroomfee()
-    {
-        return Fee::getClassroomFee() * $this->duration;
-    }
 
     public function supportPartPayment()
     {
@@ -324,10 +321,23 @@ class Course extends Model
         return $this->subscriptions()->where(['user_id' => $userId, 'active' => true])->exists();
     }
 
+
+    // Get the amount for track courses (online study)
     public function getTrackAmount() {
         
         $percentageDiscount = 10;
         $amount = $this->childrencourses()->sum('amount');
+
+        $percentageAmount = $percentageDiscount / 100 * $amount;
+
+        return $amount - $percentageAmount;
+    }
+
+    // Get the amount for track courses (classroom study)
+    public function getTrackClassAmount() {
+        
+        $percentageDiscount = 10;
+        $amount = $this->childrencourses()->sum('class_amount');
 
         $percentageAmount = $percentageDiscount / 100 * $amount;
 
