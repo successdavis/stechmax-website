@@ -8,13 +8,15 @@
                   <p> 
                      <span>&#8358;  <strike>{{$course->getAmount()}}</strike></span> 
                      <span class="is-size-5">&#8358;  {{$course->getDiscountAmount()}}</span>
-                     <span style="padding: .4em; background: #90EE90; color: white;">{{$course->discount_percentage}}% off</span>
+                     <span style="padding: .4em; background: #90EE90; color: white;">{{$course->discount_percentage}}% OFF</span>
                   </p>
                </div>
 
                <div class="mb-3">
                   <h4 class="program-headlines">Course Price (Classroom)</h4>
-                  <p>  &#8358;  {{$course->getClassAmountDiscount()}}</p>
+                     <span>&#8358;  <strike>{{$course->getClassAmount()}}</strike></span> 
+                     <span class="is-size-5">&#8358;  {{$course->getClassAmountDiscount()}}</span>
+                     <span style="padding: .4em; background: #90EE90; color: white;">{{$course->discount_percentage}}% OFF</span>
                </div>
 
                <div class="mb-3">
