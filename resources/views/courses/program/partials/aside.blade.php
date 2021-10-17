@@ -4,7 +4,7 @@
                   <p>{{ucfirst($course->type->name)}}</p>
                </div>
                <div class="mb-3">
-                  <h4 class="program-headlines">Course Price</h4>
+                  <h4 class="program-headlines">Course Price (Online Training Only)</h4>
                   <p> 
                      <span>&#8358;  <strike>{{$course->getAmount()}}</strike></span> 
                      <span class="is-size-5">&#8358;  {{$course->getDiscountAmount()}}</span>
@@ -13,10 +13,13 @@
                </div>
 
                <div class="mb-3">
-                  <h4 class="program-headlines">Course Price (Classroom)</h4>
+                  <h4 class="program-headlines">Course Price (Classroom + Online Training)</h4>
                      <span>&#8358;  <strike>{{$course->getClassAmount()}}</strike></span> 
                      <span class="is-size-5">&#8358;  {{$course->getClassAmountDiscount()}}</span>
-                     <span style="padding: .4em; background: #90EE90; color: white;">{{$course->discount_percentage}}% OFF</span>
+                     @if($course->discount_percentage > 0)
+                        <span style="padding: .4em; background: #90EE90; color: white;">{{$course->discount_percentage}}% OFF</span>
+
+                     @endif
                </div>
 
                <div class="mb-3">
