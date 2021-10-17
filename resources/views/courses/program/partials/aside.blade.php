@@ -29,7 +29,7 @@
 
                <div class="mb-3">
                   <h4 class="program-headlines">Duration</h4>
-                  <p>{{$course->duration . ' Months'}}</p>
+                  <p>{{$course->duration . ' Weeks'}}</p>
                </div>
 
                <div class="mb-3">
