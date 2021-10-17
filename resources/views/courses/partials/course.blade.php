@@ -25,7 +25,15 @@
         </div>
       </div>
       <footer class="card-footer">
-        <a href="#" class="card-footer-item">&#8358;<span v-text="course.amount"></span></a>
+        <a :href="course.path" class="card-footer-item" v-if="course.discount_amount !== '0.00' ">
+            &#8358;<span v-text="course.discount_amount "></span> 
+
+              <span class="is-size-7 " style="color: #90EE90;"> {{" "}}. @{{course.discount}}% OFF</span>
+
+        </a>
+        <a :href="course.path" class="card-footer-item" v-else>
+            <span>&#8358; 0 FREE</span>
+        </a>
         <a :href="course.path" class="card-footer-item">View</a>
       </footer>
     </div>
