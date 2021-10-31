@@ -8,7 +8,7 @@
     @include('layouts.program')
     @include('layouts.childeducation-hero')
     
-    @include('layouts.subjects')
+    @include('layouts.subjects') 
     @include('layouts.what')
 
     <!-- @include('layouts.servicesoffered')     -->
