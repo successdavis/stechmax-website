@@ -3,6 +3,8 @@
 Route::get('/', 'HomepageController@index')->name('homepage.index');
 
 
+Route::get('/learning', 'LearningHomepageController@index')->name('homepage.index');
+
 Auth::routes();
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
@@ -219,9 +221,6 @@ Route::post('/courses/{subject}/{course}/paystackwithcard', 'PaystackSubscriptio
 Route::post('/courses/{subject}/{course}/paystackpart', 'PaystackSubscriptionController@makePartPayment')->name('paystack.makePartPayment');
 
 Route::get('/{course}/episode/{lecture}', 'LectureController@show');
-
-Route::get('/pricing', 'BusinessController@index')->name('pricing.index');
-Route::post('/business/{business}/thumbnail', 'BusinessController@thumbnail')->name('pricing.thumbnail');
 
 Route::post('newtestimonial/{course}', 'TestimonialsController@store');
 Route::get('testimonials/{course}', 'TestimonialsController@coursetestimonial');

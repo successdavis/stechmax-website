@@ -61,24 +61,15 @@
                         <a href="#message" class="button is-large is-info is-rounded">Message Us!</a>
                     </div>
                 </div>
-                <div class="column is-2">
+                <div class="column is-3">
                     <h2 class="is-size-4">Sitemap</h2>
                     <li><a href="/threads">Community</a></li>
                     <li><a href="/courses">All Courses</a></li>
                     <li><a href="/build-a-website">Build a website</a></li>
-                    <li><a href="/pricing">Service & Pricing</a></li>
-                </div>
-                <div class="column is-2">
-                    <h2 class="is-size-4">Helpful Links</h2>
-                    <li><a href="">About us</a></li>
-                    <li><a href="">Showcase</a></li>
-                    <li><a href="">Team</a></li>
                 </div>
                 <div class="column is-3">
-                    <h2 class="is-size-4">Quick Links</h2>
+                    <h2 class="is-size-4">Helpful Links</h2>
                     <li><a href="/coporate/registration">Apply Coporate Training</a></li>
-                    <li><a href="">Learn WebDesign</a></li>
-                    <li><a href="">Learn VideoEditing</a></li>
                 </div>
             </div>
         </div>
