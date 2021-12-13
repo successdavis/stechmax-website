@@ -38,7 +38,7 @@ class Payroll extends Model
 
         foreach ($employees as $employee) {
 
-            if ($employee->payroll()->whereMonth('created_at', Carbon::now()->month)->exists()) {
+            if ($employee->payroll()->whereMonth('created_at', Carbon::now()->month)->exists() || $employee->status === false) {
                 continue;
             }
             

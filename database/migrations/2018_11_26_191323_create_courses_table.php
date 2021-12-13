@@ -18,8 +18,8 @@ class CreateCoursesTable extends Migration
             $table->string('title')->unique();
             $table->string('difficulty_id')->nullable();
             $table->integer('duration');
-            $table->unsignedInteger('subject_id')->index(); // 1 Course 2 Track 3 Practice 4 Program
-            $table->unsignedInteger('type_id')->index();
+            $table->unsignedInteger('subject_id')->index(); 
+            $table->unsignedInteger('type_id')->index(); // 1 Course 2 Track 3 Practice 4 Program
             $table->unsignedInteger('amount')->nullable();
             $table->text('description');
             $table->text('sypnosis');
