@@ -18,7 +18,8 @@ class Employee extends Model
     use HasFactory;
 
     protected $casts = [
-        'employment_date' => 'date'
+        'employment_date' => 'date',
+        'status' => 'boolean'
     ];
 
     public function user()
