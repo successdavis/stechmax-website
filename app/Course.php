@@ -325,6 +325,7 @@ class Course extends Model
     // Get the amount for track courses (online study)
     public function getTrackAmount() {
         
+        // this variable holds the default discount for all track courses
         $percentageDiscount = 10;
         $amount = $this->childrencourses()->sum('amount');
 
@@ -336,7 +337,9 @@ class Course extends Model
     // Get the amount for track courses (classroom study)
     public function getTrackClassAmount() {
         
+        // this variable holds the default discount for all track courses
         $percentageDiscount = 10;
+
         $amount = $this->childrencourses()->sum('class_amount');
 
         $percentageAmount = $percentageDiscount / 100 * $amount;

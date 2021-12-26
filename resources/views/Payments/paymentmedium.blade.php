@@ -25,7 +25,7 @@
             @if ($class === true)
               <p class="is-size-3 has-text-centered">
                 Amount Payable &#8358; 
-                {{$course->getDiscountAmountWithClassroom()}} 
+                {{$course->getClassAmountDiscount()}} 
               </p>
             @else
               <p class="is-size-3 has-text-centered">
