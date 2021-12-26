@@ -8,46 +8,21 @@
 					<div class="column is-8 text-align-left mt-3">
 						<div class="section">
 							<!-- ============ -->
-							<h3 class="pageTitle mb-2 has-text-black is-size-4">Password Reset...</h3>
+							<h3 class="pageTitle mb-2 has-text-white is-size-4">Password Reset...</h3>
 							<form method="POST" @submit.prevent="resetPassword">
 
-				        		<p class="has-text-black" v-if="!phoneReset">Please provide your email address here</p>
-				        		<p class="has-text-black" v-if="phoneReset">Please provide your Phone Number here</p>
+				        		<p class="has-text-white">Please provide your email address here</p>
 
-								<!-- <input :disabled="resetTokenSent" id="checkbox1" type="checkbox" v-model="phoneReset"><label class="has-text-black" for="checkbox1">Use Phone Number Instead</label> -->
+	                            <input class="input" type="email" placeholder="Enter Your Email here" v-model="email" required>
 
-	                            <input class="input" v-if="!phoneReset" type="email" placeholder="Email here" v-model="email" required>
-	                            <input class="input" :disabled="resetTokenSent" v-if="phoneReset" type="text" placeholder="Phone Number Here" maxlength="11" v-model="phone" required>
-
-	                            <button :disabled="resetTokenSent" type="submit" :class="submitting ? 'is-loading' : ''" class="button medium" v-text="phoneReset ? 'Send Token' : 'Send Reset Link' ">
+	                            <button :disabled="resetTokenSent" type="submit" :class="submitting ? 'is-loading' : ''" class="button medium" v-text="'Send Reset Link'">
 	                            </button>
-<!--							      <span style="color: white">Already have an account? </span><a href="/login" class="login_link"> Login</a>-->
-		                    </form>
-
-		                    <form @submit.prevent="updatePassword" v-if="resetTokenSent">
-		                    	<label>Enter Token
-						          <input type="text" placeholder v-model="Form.token" required>
-						          <p class="help-text" v-if="Form.errors.has('token')" v-text="Form.errors.get('token')"></p>
-						        </label>
-
-		                    	<label>New Password
-						          <input type="text" placeholder="Required" v-model="Form.password" required>
-						          <p class="help-text" v-if="Form.errors.has('password')" v-text="Form.errors.get('password')"></p>
-						        </label>
-
-		                    	<label>Re-enter New Password
-						          <input type="text" placeholder="Required" v-model="Form.password_confirmation" required>
-						          <p class="help-text" v-if="Form.errors.has('password_confirmation')" v-text="Form.errors.get('password_confirmation')"></p>
-						        </label>
-
-						        <button type="submit" class="button medium">Reset Password</button>
-							    <span style="color: white">Already have an account? </span><a href="/login" class="login_link"> Login</a>
 		                    </form>
 						</div>
 					</div>
 					<div class="column is-4 white mt-3 has-text-black">
-						<p class="has-text-black">A reset link will be send to your registered email address</p>
-						<p class="has-text-black" v-if="sent == 1">We have sent a reset link to your email, please check your inbox</p>
+						<p class="has-text-white">A reset link will be send to your registered email address</p>
+						<p class="has-text-white" v-if="sent == 1">We have sent a reset link to your email, please check your inbox</p>
 						<p class="red-text" v-if="sent == 2">You do not have an account with us please <a href="/register" class="button has-text-black">Register</a></p>
 					</div>
 				</div>
