@@ -143,7 +143,7 @@ class Employee extends Model
 
     public function transactions()
     {
-        return $this->payroll()->whereStatus(2)->orderBy('updated_at','desc')->get();
+        return $this->payroll()->whereStatus(2)->orderBy('updated_at','desc')->limit(5)->get();
     }
 
     
