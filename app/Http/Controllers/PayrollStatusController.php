@@ -16,9 +16,10 @@ class PayrollStatusController extends Controller
             abort(424, 'Employee does not have an account number');
         }
 
-        $payroll->status            = 2;
-        $payroll->updated_at        = Carbon::now();
-        $payroll->bank_details_id   = $payroll->employee->getBankDetails()->id;
+        $payroll->status                = 2;
+        $payroll->updated_at            = Carbon::now();
+        $payroll->date_of_disbursement  = Carbon::now();
+        $payroll->bank_details_id       = $payroll->employee->getBankDetails()->id;
         $payroll->save();
 
         return true;
