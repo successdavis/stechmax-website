@@ -83,11 +83,10 @@
                 <b-table-column field="gender" label="Gender">
                     <b-icon
                         pack="fa"
-                        :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
+                        :icon="props.row.gender === 'M' ? 'mars' : 'venus'">
                     </b-icon>
-                    {{ props.row.gender }}
                 </b-table-column>
-                <b-table-column field="gender" label="Action">
+                <b-table-column field="actions" label="Action">
                     <a :href="'/viewemployee/' + props.row.user_id" class="button small is-info">View</a>
                 </b-table-column>
             </template>

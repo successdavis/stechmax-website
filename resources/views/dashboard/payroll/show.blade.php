@@ -68,10 +68,16 @@
 						</div>
 						<div class="level is-mobile">
 							<table class="table">
+								<tr>
+									<th>Date</th>
+									<th>Amount</th>
+									<th>Sal. Month</th>
+								</tr>
 								@foreach($transactions as $transaction)
 									<tr>
 										<td>{{$transaction->updated_at->format('M d Y')}}</td>
 										<td><span>&#8358</span> {{number_format($transaction->gross_salary, 2)}}</td>
+										<td>{{$transaction->created_at->format('M Y')}}</td>
 									</tr>
 								@endforeach
 							</table>

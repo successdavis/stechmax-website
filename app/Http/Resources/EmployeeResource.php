@@ -20,9 +20,10 @@ class EmployeeResource extends JsonResource
             'user_id'          => $this->user_id,
             'paygrade'      => $this->paygrade->name,
             'basic'         => number_format($this->paygrade->basic,2),
-            'balance'       => $this->earningBalance(),
+            'balance'       => $this->earningBalance() . '.00',
             'date_employed' => $this->employment_date->toDateString(),
             'years' =>      $this->employment_date->diffForHumans(),
+            'gender' =>      $this->user->gender,
         ];
     }
 }
