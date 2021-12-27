@@ -144,7 +144,9 @@ class CourseController extends Controller
             'class_amount'            => 'required|integer',
             'discountamount'    => 'nullable|integer',
             'sypnosis'          => 'required|spamfree',
-            'difficulty_id'     => 'required'
+            'difficulty_id'     => 'required',
+            'available_online'     => 'required|boolean',
+            'available_offline'     => 'required|boolean'
         ]);
 
 
@@ -157,7 +159,9 @@ class CourseController extends Controller
             'class_amount'          => $request->class_amount . '00',
             'discount_percentage'   => $request->discountamount,
             'sypnosis'              => $request->sypnosis,
-            'difficulty_id'         => $request->difficulty_id
+            'difficulty_id'         => $request->difficulty_id,
+            'available_online'      => $request->available_online,
+            'available_offline'     => $request->available_offline,
         ]);
     }
 

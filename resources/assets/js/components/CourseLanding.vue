@@ -10,7 +10,7 @@
                     <button v-show="folderid === null" :class="isLoading ? 'is-loading' : ''" class="button is-success" @click="createafolder">CREATE A VIDEO FOLDER</button>
                 </div>
                 <p class="pr-2" v-text="'Folder Id: ' + folderid"><span>v-model="folderid" > </span></p>
-                <button class="button" :disabled="!save" @click="persist">Save</button>
+                <button class="button" :class="save ? 'is-success' : '' " :disabled="!save" @click="persist">Save</button>
             </a>
           </header>
           <div class="card-content">
@@ -114,6 +114,24 @@
                             </div>
                             <p class="help is-danger" id="durationHelpText" v-if="Form.errors.has('discountamount')" v-text="Form.errors.get('discountamount')"></p>
                         </div>
+                        <div class="column">
+                            <div class="field">
+                                <label>Availability</label>
+                                <div class="control">
+                                   <label class="checkbox">
+                                      <input type="checkbox" v-model="Form.available_online">
+                                      Online
+                                    </label>
+                                   <label class="checkbox">
+                                      <input type="checkbox" v-model="Form.available_offline">
+                                      Classroom
+                                    </label>
+                                </div>
+                            </div>
+
+                            <p class="help is-danger" id="durationHelpText" v-if="Form.errors.has('available_offline')" v-text="Form.errors.get('available_offline')"></p>
+                            <p class="help is-danger" id="durationHelpText" v-if="Form.errors.has('available_online')" v-text="Form.errors.get('available_online')"></p>
+                        </div>
                     </div>
                 </form>
                 <CourseThumbnail :data="course" :path="path"></CourseThumbnail>
@@ -147,7 +165,9 @@
                     duration: this.course.duration,
                     amount: this.course.amount / 100,
                     class_amount: this.course.class_amount / 100,
-                    discountamount: this.course.discount_percentage
+                    discountamount: this.course.discount_percentage,
+                    available_offline: this.course.available_offline,
+                    available_online: this.course.available_online,
                 }),
             }
         },
