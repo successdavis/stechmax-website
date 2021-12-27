@@ -112,7 +112,8 @@ class PaystackSubscriptionController extends Controller
         $course = Course::findOrFail($paymentDetails['data']['metadata']['course_id']);   
         request()->user()->updatePaystackId($paymentDetails['data']['customer']['customer_code']);
 
-        $class = $paymentDetails['data']['metadata']['class'] === 'true'? true: false;
+        $class = boolval($paymentDetails['data']['metadata']['class']);
+
 
         if ($class) {
             $this->createClassroomSubscription($course, $paymentDetails);
@@ -139,8 +140,7 @@ class PaystackSubscriptionController extends Controller
 
     public function createClassroomSubscription($course, $paymentDetails)
     {
-        $classCharge = Fee::getclassroomfee();
-        $invoice = $course->createInvoice('','', $classCharge);
+        $invoice = $course->createInvoice('','','',$course->getClassAmountDiscount(false));
 
         $invoice->recordPayment($paymentDetails['data']);
 
