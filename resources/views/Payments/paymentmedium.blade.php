@@ -93,7 +93,7 @@
                 <br>
                 <h3 class="is-size-4">After payment please do one of the following:</h3>
                 <div>a. snap and send your evidence of payment to support@stechmax.com</div>
-                <div>b. Text depositor name, payment date, amount paid to 09050635633</div>
+                <div>b. Text depositor name, payment date, amount paid to 09032378855</div>
                 <div>c. Click 
                   <a href="{{ route('pay.submitDetails') }}">here to supply payment details</a>
                 </div>

@@ -13,6 +13,7 @@ use App\submittedpayments;
 use Illuminate\Http\Request;
 use App\Payments\CoursePayment;
 use App\Http\Resources\InvoicesResource;
+use App\Message;
 //use App\Http\Controllers\Controller;
 
 class PaymentController extends Controller
@@ -121,6 +122,13 @@ class PaymentController extends Controller
         ]);
 
         $paidDetails = submittedpayments::create(request()->all());
+
+        Message::addMessage([
+            'fullname'      => auth()->user()->f_name . ' ' . auth()->user()->l_name,
+            'message'       => 'I made a payment of ' . $request->amount . ' to your account. For the course' . $request->course . '                  payment made on the' . $request->transaction_date,
+            'phone'         => auth()->user()->phone,
+            'email'         => auth()->user()->email,
+        ]);
 
         return back()->with('flash', 'Your payment details was submitted Successful');
     }
